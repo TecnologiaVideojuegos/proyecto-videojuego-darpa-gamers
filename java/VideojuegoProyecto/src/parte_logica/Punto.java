@@ -14,6 +14,13 @@ public class Punto {
     private float x;   
     private float y;
 
+    /**
+     * Constructor de la clase Punto
+     * 
+     * @param x representa el eje x en el mapa
+     * @param y representa el eje y en el mapa
+     *
+     */
     public Punto(float x, float y) {
         this.x = x;
         this.y = y;
