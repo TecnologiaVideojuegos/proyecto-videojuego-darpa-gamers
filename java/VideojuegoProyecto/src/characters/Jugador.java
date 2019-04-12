@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package parte_logica;
+package characters;
 
+import characters.Ente;
 import org.newdawn.slick.Input;
+import materials.Inventario;
+import location.Punto;
+import imagen.Sprite;
 
 /**
  *
