@@ -108,35 +108,4 @@ public class Ente {
         this.hp = hp;
     }
 
-    /**
-     * Desplaza el personaje hacia abajo
-     *
-     */
-    public void moverAbajo(){
-        this.getPunto().setY(this.getPunto().getY()+this.getVelocidad());
-    }
-    
-    /**
-     * Desplaza el personaje hacia arriba
-     *
-     */
-    public void moverArriba(){
-        this.getPunto().setY(this.getPunto().getY()-this.getVelocidad());
-    }
-    
-    /**
-     * Desplaza el personaje hacia la derecha
-     *
-     */
-    public void moverDrcha(){
-        this.getPunto().setX(this.getPunto().getX()+this.getVelocidad());
-    }
-     
-    /**
-     * Desplaza el personaje hacia la izquierda
-     *
-     */
-    public void moverIzq(){
-        this.getPunto().setX(this.getPunto().getX()-this.getVelocidad());
-    }
 }

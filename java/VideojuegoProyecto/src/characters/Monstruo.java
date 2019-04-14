@@ -50,28 +50,5 @@ public class Monstruo extends Ente{
     public void setComportamiento(String comportamiento) {
         this.comportamiento = comportamiento;
     }
-
-    /**
-     * Realiza un movimiento al azar en caso de ser pasivo u de bajo nivel
-     *
-     * 
-     */
-    public void realizarMovimiento(){
-        Random rand = new Random();
-        switch(rand.nextInt(4)){
-            case 0:
-                super.moverArriba();
-                break;
-            case 1:
-                super.moverAbajo();
-                break;
-            case 2:
-                super.moverDrcha();
-                break;
-            case 3:
-                super.moverIzq();
-                break;
-        }
-    } 
     
 }

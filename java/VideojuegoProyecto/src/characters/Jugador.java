@@ -75,29 +75,6 @@ public class Jugador extends Ente{
         this.experiencia = experiencia;
     }
     
-    /**
-     * Set the value of experiencia
-     *
-     * @param entrada variable donde controla las pulsaciones de tecla
-     */
-    public void controlDeTeclado(Input entrada){
-        if(entrada.isKeyDown(Input.KEY_LEFT)){
-            super.moverIzq();
-        }
-        if(entrada.isKeyDown(Input.KEY_RIGHT)){
-            super.moverDrcha();
-        }
-        if(entrada.isKeyDown(Input.KEY_UP)){
-            super.moverArriba();
-        }
-        if(entrada.isKeyDown(Input.KEY_DOWN)){
-            super.moverAbajo();
-        }
-        if(entrada.isKeyDown(Input.KEY_I)){
-            this.getInventario().mostrarInventario();
-        }
-    }
-    
     public void anadirExperiencia(int exp){
         this.setExperiencia(this.getExperiencia()+exp);
     }
