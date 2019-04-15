@@ -75,11 +75,50 @@ public class Jugador extends Ente{
         this.experiencia = experiencia;
     }
     
+    /**
+     * Get the value of jugador
+     *
+     * @return the value of nivelJugador
+     */
+    public int getNivelJugador() {
+        return nivelJugador;
+    }
+
+    /**
+     * Get the value of nivelMapa
+     *
+     * @return the value of nivelMapa
+     */
+    public int getNivelMapa() {
+        return nivelMapa;
+    }
+
+    /**
+     * Get the value of escenario
+     *
+     * @return the value of escenario
+     */
+    public int getEscenario() {
+        return escenario;
+    }
+    
     public void anadirExperiencia(int exp){
         this.setExperiencia(this.getExperiencia()+exp);
     }
     
     public void subirNivelJugador(){
         this.nivelJugador++;
+    }
+    
+    public void avanzarEscenario(){
+        this.escenario++;
+    }
+    
+    public void retrocederEscenario(){
+        this.escenario--;
+    }
+    
+    public void avanzarMapa(){
+        this.nivelMapa++;
     }
 }
