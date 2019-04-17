@@ -9,7 +9,7 @@ import location.Punto;
 import imagen.Sprite;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class Ente {
