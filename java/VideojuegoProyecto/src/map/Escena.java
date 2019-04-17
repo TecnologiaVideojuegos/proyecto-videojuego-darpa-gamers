@@ -8,6 +8,7 @@ package map;
 
 import java.util.ArrayList;
 import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
@@ -16,10 +17,13 @@ import org.newdawn.slick.tiled.TiledMap;
  */
 public class Escena {
     
-    private ArrayList<TiledMap> mapa_escena; 
-    private ArrayList<Polygon> mapa_colisiones;
+    private TiledMap mapa_escena; 
+    private Polygon area_entrada;  //polígono para entrar a la escena se situará como lugar donde el personaje hará respawn
+    private Polygon area_salida;   //polígono para salir de la escena
+    private Polygon mapa_colisiones; //polígono que limita el mapa
+    private ArrayList<Polygon> mapa_objetos;  //arraylist de polígonos que establece los elementos del mapa 
 
-    public Escena(ArrayList<TiledMap> mapa_escena, ArrayList<Polygon> mapa_colisiones) {
+    public Escena(TiledMap mapa_escena,Polygon mapa_colisiones) {
         this.mapa_escena = mapa_escena;
         this.mapa_colisiones = mapa_colisiones;
     }
@@ -29,7 +33,7 @@ public class Escena {
      *
      * @return the value of mapa_colisiones
      */
-    public ArrayList<Polygon> getMapa_colisiones() {
+    public Polygon getMapa_colisiones() {
         return mapa_colisiones;
     }
 
@@ -38,10 +42,21 @@ public class Escena {
      *
      * @return the value of mapa_escena
      */
-    public ArrayList<TiledMap> getMapa_escena() {
+    public TiledMap getMapa_escena() {
         return mapa_escena;
     }
 
+    /**
+     * Indica si se ha colisionado con algún objeto
+     *
+     * @param lado lado por el cuál se puede producir la colisión
+     * @return true en caso de clisión, false en caso de no haber
+     */
+    public boolean colisionConObjetos(Shape lado){
+        if(lado.intersects(mapa_colisiones)){
+            return true;
+        }       
+        return false;
+    }
     
-
 }
