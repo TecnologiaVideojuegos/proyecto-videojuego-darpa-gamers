@@ -6,7 +6,7 @@
 package materials;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class Inventario {
