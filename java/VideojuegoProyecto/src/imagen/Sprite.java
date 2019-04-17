@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class Sprite {

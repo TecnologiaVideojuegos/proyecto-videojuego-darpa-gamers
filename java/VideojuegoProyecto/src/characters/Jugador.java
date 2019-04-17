@@ -5,14 +5,12 @@
  */
 package characters;
 
-import characters.Ente;
-import org.newdawn.slick.Input;
 import materials.Inventario;
 import location.Punto;
 import imagen.Sprite;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class Jugador extends Ente{

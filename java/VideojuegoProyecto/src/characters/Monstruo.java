@@ -5,13 +5,11 @@
  */
 package characters;
 
-import characters.Ente;
-import java.util.Random;
 import location.Punto;
 import imagen.Sprite;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class Monstruo extends Ente{
