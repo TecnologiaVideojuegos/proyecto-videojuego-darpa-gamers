@@ -5,14 +5,14 @@
  */
 package loop_game;
 
-import map.*;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class MainGame extends StateBasedGame{

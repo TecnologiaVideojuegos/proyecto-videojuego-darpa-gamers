@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
- *
+ * @version 0.0.10
  * @author Senapi Aroal
  */
 public class Escena {
