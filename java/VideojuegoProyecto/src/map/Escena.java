@@ -50,7 +50,7 @@ public class Escena {
      * Indica si se ha colisionado con algún objeto
      *
      * @param lado lado por el cuál se puede producir la colisión
-     * @return true en caso de clisión, false en caso de no haber
+     * @return true en caso de colisión, false en caso de no haber
      */
     public boolean colisionConObjetos(Shape lado){
         if(lado.intersects(mapa_colisiones)){
@@ -59,4 +59,23 @@ public class Escena {
         return false;
     }
     
+    /**
+     * Indica si se ha colisionado con el objeto de salida
+     *
+     * @param lado lado por el cuál se puede producir la colisión
+     * @return true en caso de colisión, false en caso de no haber
+     */
+    public boolean colisionSalida(Shape lado){
+        return lado.intersects(area_salida);
+    }
+    
+    /**
+     * Indica si se ha colisionado con el objeto de entrada
+     *
+     * @param lado lado por el cuál se puede producir la colisión
+     * @return true en caso de colisión, false en caso de no haber
+     */
+    public boolean colisionEntrada(Shape lado){
+        return lado.intersects(area_entrada);
+    }
 }
