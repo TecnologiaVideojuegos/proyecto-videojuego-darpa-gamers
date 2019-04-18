@@ -27,6 +27,16 @@ public class Punto {
     }
 
     /**
+     * Constructor de la clase Punto por defecto
+     * 
+     *
+     */
+    public Punto(){
+        this.x = 0.0f;
+        this.y = 0.0f;
+    }
+    
+    /**
      * Get the value of x
      *
      * @return the value of x
