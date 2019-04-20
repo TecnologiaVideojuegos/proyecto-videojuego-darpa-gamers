@@ -17,15 +17,18 @@ import org.newdawn.slick.tiled.TiledMap;
  */
 public class Escena {
     
-    private TiledMap mapa_escena; 
-    private Polygon area_entrada;  //polígono para entrar a la escena se situará como lugar donde el personaje hará respawn
-    private Polygon area_salida;   //polígono para salir de la escena
-    private Polygon mapa_colisiones; //polígono que limita el mapa
-    private ArrayList<Polygon> mapa_objetos;  //arraylist de polígonos que establece los elementos del mapa 
+    private final TiledMap mapa_escena; 
+    private final Polygon area_entrada;  //polígono para entrar a la escena se situará como lugar donde el personaje hará respawn
+    private final Polygon area_salida;   //polígono para salir de la escena
+    private final Polygon mapa_colision; //polígono que limita el mapa
+    private final ArrayList<Polygon> mapa_objetos;  //arraylist de polígonos que establece los elementos del mapa 
 
-    public Escena(TiledMap mapa_escena,Polygon mapa_colisiones) {
+    public Escena(TiledMap mapa_escena,Polygon mapa_colision,ArrayList<Polygon> mapa_objetos,Polygon area_entrada,Polygon area_salida) {
         this.mapa_escena = mapa_escena;
-        this.mapa_colisiones = mapa_colisiones;
+        this.mapa_colision = mapa_colision;
+        this.area_entrada = area_entrada;
+        this.area_salida = area_salida;
+        this.mapa_objetos = mapa_objetos;
     }
 
     /**
@@ -33,8 +36,8 @@ public class Escena {
      *
      * @return the value of mapa_colisiones
      */
-    public Polygon getMapa_colisiones() {
-        return mapa_colisiones;
+    public Polygon getMapa_colision() {
+        return mapa_colision;
     }
 
     /**
@@ -47,15 +50,48 @@ public class Escena {
     }
 
     /**
+     * Get the value of area_entrada
+     *
+     * @return the value of area_entrada
+     */
+    public Polygon getArea_entrada() {
+        return area_entrada;
+    }
+
+    /**
+     * Get the value of area_salida
+     *
+     * @return the value of area_salida
+     */
+    public Polygon getArea_salida() {
+        return area_salida;
+    }
+
+    /**
+     * Get the value of mapa_objetos
+     *
+     * @return the value of mapa_objetos
+     */
+    public ArrayList<Polygon> getMapa_objetos() {
+        return mapa_objetos;
+    }
+
+    
+    /**
      * Indica si se ha colisionado con algún objeto
      *
      * @param lado lado por el cuál se puede producir la colisión
      * @return true en caso de colisión, false en caso de no haber
      */
     public boolean colisionConObjetos(Shape lado){
-        if(lado.intersects(mapa_colisiones)){
+        if(lado.intersects(mapa_colision)){
             return true;
-        }       
+        }      
+        for(int i = 0;i<mapa_objetos.size();i++){
+            if(lado.intersects(mapa_objetos.get(i))){
+                return true;
+            }
+        }
         return false;
     }
     
