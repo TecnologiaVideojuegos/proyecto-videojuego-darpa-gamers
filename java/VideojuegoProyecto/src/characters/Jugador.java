@@ -7,7 +7,7 @@ package characters;
 
 import materials.Inventario;
 import location.Punto;
-import imagen.Sprite;
+import imagen.SpriteDinamica;
 
 /**
  * @version 0.0.10
@@ -30,7 +30,7 @@ public class Jugador extends Ente{
      * @param velocidad velocidad a la que se mueve el ente
      * 
      */    
-    public Jugador(int hp, Punto punto, Sprite sprite, float velocidad){
+    public Jugador(int hp, Punto punto, SpriteDinamica sprite, float velocidad){
         super(hp, punto, sprite, velocidad);
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado

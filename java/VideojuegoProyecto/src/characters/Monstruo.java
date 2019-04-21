@@ -6,7 +6,7 @@
 package characters;
 
 import location.Punto;
-import imagen.Sprite;
+import imagen.SpriteDinamica;
 
 /**
  * @version 0.0.10
@@ -26,7 +26,7 @@ public class Monstruo extends Ente{
      * @param  comportamiento establece el comportamiento del monstruo
      * 
      */
-    public Monstruo(int hp, Punto punto, Sprite sprite, float velocidad, String comportamiento) {
+    public Monstruo(int hp, Punto punto, SpriteDinamica sprite, float velocidad, String comportamiento) {
         super(hp, punto, sprite, velocidad);
         this.comportamiento = comportamiento;
     }

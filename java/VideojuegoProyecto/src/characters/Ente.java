@@ -6,7 +6,7 @@
 package characters;
 
 import location.Punto;
-import imagen.Sprite;
+import imagen.SpriteDinamica;
 
 /**
  * @version 0.0.10
@@ -16,7 +16,7 @@ public class Ente {
     
     private int hp;
     private Punto punto;
-    private Sprite sprite;
+    private SpriteDinamica sprite;
     private float velocidad;
 
     /**
@@ -28,7 +28,7 @@ public class Ente {
      * @param velocidad velocidad a la que se mueve el ente
      *
      */
-    public Ente(int hp, Punto punto, Sprite sprite, float velocidad) {
+    public Ente(int hp, Punto punto, SpriteDinamica sprite, float velocidad) {
         this.hp = hp;
         this.punto = punto;
         this.sprite = sprite;
@@ -59,7 +59,7 @@ public class Ente {
      *
      * @return the value of sprite
      */
-    public Sprite getSprite() {
+    public SpriteDinamica getSpriteDinamica() {
         return sprite;
     }
 
@@ -68,7 +68,7 @@ public class Ente {
      *
      * @param sprite new value of sprite
      */
-    public void setSprite(Sprite sprite) {
+    public void setSpriteDinamica(SpriteDinamica sprite) {
         this.sprite = sprite;
     }
 
