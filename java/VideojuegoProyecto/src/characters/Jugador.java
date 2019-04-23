@@ -8,7 +8,6 @@ package characters;
 import data_level.DatosNivel;
 import materials.Inventario;
 import location.Punto;
-import imagen.SpriteDinamica;
 import java.util.ArrayList;
 import map.Escena;
 import org.newdawn.slick.Input;
