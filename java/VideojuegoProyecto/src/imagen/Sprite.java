@@ -5,81 +5,76 @@
  */
 package imagen;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+import location.Punto;
+import org.newdawn.slick.*;
 
 /**
- * @version 0.0.10
+ *
  * @author Senapi Aroal
  */
-public class Sprite {
+public class Sprite extends Image{
     
-    private final Animation anim;   
-    private final String url;
-    private final int width;
-    private final int height; 
-    private final SpriteSheet sprite;
-
+    private Punto posicion;
+    
     /**
      * Constructor de la clase Sprite
      * 
-     * @param url ruta donde se encuentra la imagen a cargar
-     * @param width tamaño en anchura de la imagen a cargar
-     * @param height tamaño en altura de la imagen a cargar
-     *
+     * @param ruta url de donde se encuentra la imagen
+     * @param posicion posición del sprite
+     * @throws SlickException tratar excepción sobre el url
      */
-    public Sprite(String url, int width, int height) throws SlickException{
-        this.url = url;
-        this.width = width;
-        this.height = height;
-        this.sprite = new SpriteSheet(url,width,height);
-        this.anim = new Animation(sprite,100);
-    }
-
-    /**
-     * Get the value of sprite
-     *
-     * @return the value of sprite
-     */
-    public SpriteSheet getSprite() {
-        return sprite;
-    }
-   
-    /**
-     * Get the value of width
-     *
-     * @return the value of width
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * Get the value of height
-     *
-     * @return the value of height
-     */
-    public int getHeight() {
-        return height;
-    }
-   
-    /**
-     * Get the value of url
-     *
-     * @return the value of url
-     */
-    public String getUrl() {
-        return url;
+    public Sprite(String ruta,Punto posicion) throws SlickException{
+        super(ruta);
+        this.posicion = posicion;
     }
     
     /**
-     * Get the value of anim
-     *
-     * @return the value of anim
+     * Constructor de la clase Sprite
+     * 
+     * @param ruta url de donde se encuentra la imagen
+     * @param x posición del sprite en el eje x
+     * @param y posición del sprite en el eje y
+     * @throws SlickException tratar excepción sobre el url
      */
-    public Animation getAnim() {
-        return anim;
+    public Sprite(String ruta,float x,float y) throws SlickException{
+        super(ruta);
+        this.posicion = new Punto(x,y);
+    }
+    
+    /**
+     * Get the value of posicion
+     *
+     * @return the value of posicion
+     */
+    public Punto getPosicion() {
+        return posicion;
     }
 
+    /**
+     * Set the value of posicion
+     *
+     * @param posicion new value of posicion
+     */
+    public void setPosicion(Punto posicion) {
+        this.posicion = posicion;
+    }   
+    
+    /**
+     * Set the value of posicion
+     * 
+     * @param x valor en eje x
+     * @param y valor en eje y
+     */
+    public void setPosicion(float x,float y){
+        this.posicion = new Punto(x,y);
+    }
+    
+    /**
+     * método que dibuja el sprite especificando la posición
+     * 
+     */
+    @Override
+    public void draw(){
+        super.draw(posicion.getX(),posicion.getY());
+    }
 }
