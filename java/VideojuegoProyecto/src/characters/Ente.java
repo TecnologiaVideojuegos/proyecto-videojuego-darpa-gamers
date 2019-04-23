@@ -6,7 +6,6 @@
 package characters;
 
 import location.Punto;
-import imagen.SpriteDinamica;
 import org.newdawn.slick.SpriteSheet;
 
 /**
