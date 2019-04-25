@@ -9,7 +9,7 @@ import location.Punto;
 import org.newdawn.slick.SpriteSheet;
 
 /**
- * @version 0.0.10
+ *
  * @author Senapi Aroal
  */
 public class Ente {
@@ -18,6 +18,7 @@ public class Ente {
     private Punto punto;
     private SpriteSheet sprite;
     private float velocidad;
+    int direccion;
 
     /**
      * Constructor de la clase Ente
@@ -26,16 +27,19 @@ public class Ente {
      * @param punto lugar del mapa donde se posiciona
      * @param sprite imagen del ente
      * @param velocidad velocidad a la que se mueve el ente
+     * @param direccion direccion 0,1,2,3 corresponde a donde mira el ente
      *
      */
-    public Ente(int hp, Punto punto, SpriteSheet sprite, float velocidad) {
+    public Ente(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion) {
         this.hp = hp;
         this.punto = punto;
         this.sprite = sprite;
         this.velocidad = velocidad;
+        this.direccion = direccion;
     }
 
-   
+    
+    
     /**
      * Get the value of velocidad
      *
@@ -68,7 +72,7 @@ public class Ente {
      *
      * @param sprite new value of sprite
      */
-    public void setSpriteSheet(SpriteSheet sprite) {
+        public void setSpriteSheet(SpriteSheet sprite) {
         this.sprite = sprite;
     }
 
@@ -108,4 +112,35 @@ public class Ente {
         this.hp = hp;
     }
 
+    /**
+     * Desplaza el personaje hacia abajo
+     *
+     */
+    public void moverAbajo(){
+        this.getPunto().setY(this.getPunto().getY()+this.getVelocidad());
+    }
+    
+    /**
+     * Desplaza el personaje hacia arriba
+     *
+     */
+    public void moverArriba(){
+        this.getPunto().setY(this.getPunto().getY()-this.getVelocidad());
+    }
+    
+    /**
+     * Desplaza el personaje hacia la derecha
+     *
+     */
+    public void moverDrcha(){
+        this.getPunto().setX(this.getPunto().getX()+this.getVelocidad());
+    }
+     
+    /**
+     * Desplaza el personaje hacia la izquierda
+     *
+     */
+    public void moverIzq(){
+        this.getPunto().setX(this.getPunto().getX()-this.getVelocidad());
+    }
 }

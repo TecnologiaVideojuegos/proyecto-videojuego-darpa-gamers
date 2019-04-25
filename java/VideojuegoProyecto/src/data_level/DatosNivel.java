@@ -43,11 +43,12 @@ public class DatosNivel {
     private final int[] numObjetos;
     
     /**
-     * Constructor de la clase DatosNivel
+     * Constructor de la clase Punto
      * 
-     * @param numEscenas número de escenas que posee él nivel que llama a la clase
-     * @param numObjetos array donde contiene la cantidad de objetos que tiene cada escena dentro de ese nivel
-     */  
+     * @param numEscenas numero de escenas que tiene el nivel que invoca a esta clase
+     * @param numObjetos array de objetos que indica la cantidad que tiene cada escena
+     * 
+     */
     public DatosNivel(int numEscenas,int[] numObjetos){
         this.numEscenas = numEscenas;
         mapas = new float[numEscenas][];
@@ -58,6 +59,63 @@ public class DatosNivel {
         this.salidas = new Punto[numEscenas];
         this.inicio = new Punto();
         this.mapa_objetos = new ArrayList<>();
+    }
+    
+    /**
+     * Carga todos los datos referidos al nivel 1
+     * 
+     */
+    public void datosNivel1(){
+        //Datos de los mapas
+        float[] mapaTest = {224,192,256,192,256,224,352,224,480,224,480,160,448,128,448,64,544,64,544,96,576,96,576,64,608,64,608,160,544,160,544,256,512,256,512,448,576,448,576,416,608,416,608,448,672,448,672,416,736,416,736,384,864,384,864,416,928,416,928,448,960,448,960,480,992,480,992,576,928,576,928,640,672,640,672,576,576,576,576,544,544,544,544,512,448,512,448,448,480,448,480,256,224,256};
+        float[] mapaTest2 = {160,320,224,320,224,288,352,288,352,320,384,320,384,256,416,256,416,160,352,160,352,32,384,32,384,64,480,64,480,32,512,32,512,160,448,160,448,256,480,256,480,320,512,320,512,384,448,384,448,480,480,480,480,608,352,608,352,512,384,512,384,480,416,480,416,384,224,384,224,352,160,352};
+        float[] mapaTest3 = {192,288,288,288,288,192,640,192,640,256,672,256,672,288,704,288,704,320,672,320,672,352,640,352,640,448,384,448,384,384,288,384,288,320,192,320};
+        float[][] datosMapa = {mapaTest,mapaTest2,mapaTest3}; //se guardan los puntos del mapa
+        for(int i = 0;i<numEscenas;i++){
+            mapas[i] = datosMapa[i];
+        } 
+        
+        //Datos de los puntos de respawn al entrar en la escena o punto
+        Punto[] entrada = {new Punto(230,200),new Punto(233,292)};
+        inicio = entrada[0];
+        for(int i = 0;i<(numEscenas-1);i++){
+            entradas[i] = entrada[i];
+        }
+        
+        //Datos de los puntos de respawn al salir de la escena o punto donde aparecerá en la siguiente escena
+        Punto[] salida = {new Punto(280,300),new Punto(233,292)};
+        for(int i = 0;i<(numEscenas-1);i++){
+            salidas[i] = salida[i];
+        }
+        
+        //Datos de los polígonos de entrada
+        float[] poligonoEntrada = {968,480,1064,480,1064,576,968,576}; //se almacena los polígonos para acceder al siguiente escenario
+        float[] otro = {423,553,439,553,439,565,423,565};
+        float[] mehaa = {0,0,0,0};
+        float[][] datosEntrada = {poligonoEntrada,otro,mehaa}; //se guardan los puntos de entrada
+        for(int i = 0;i<numEscenas;i++){
+            poligonosDeEntrada[i] = datosEntrada[i];
+        }
+        
+        //Datos de los polígonos de salida
+        float[] poligonoSalida = {192,320,192,352,180,352,180,320};
+        float[] meh = {192,288,224,288,224,320,192,320};   
+        float[] meha = {0,0,0,0};
+        float[][] datosSalida = {meha,poligonoSalida,meh}; //se guardan los puntos de salida
+        for(int i = 0;i<numEscenas;i++){
+            poligonosDeSalida[i] = datosSalida[i];
+        }
+        
+        //Datos de los objetos del nivel
+        float[] piano = {768,480,864,480,864,576,768,576};
+        float[] pupitre = {120,50,140,50,120,80,140,20};
+        float [][] objetos = {piano,pupitre};
+        for(int i=0;i<numEscenas;i++){
+            mapa_objetos.add((new ArrayList<>()));//añadimos tantos arrayList como numEscenas haya (inicialmente están vacíos).
+            for(int a = 0;a<numObjetos[i];a++){
+                mapa_objetos.get(i).add((new Polygon(objetos[a])));
+            }
+        }
     }
     
     /**
@@ -148,4 +206,5 @@ public class DatosNivel {
     public Punto getSalidas(int index) {
         return salidas[index];
     }   
+    
 }

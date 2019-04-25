@@ -6,9 +6,10 @@
 package characters;
 
 import data_level.DatosNivel;
+import graphic.Hud;
+import java.util.ArrayList;
 import materials.Inventario;
 import location.Punto;
-import java.util.ArrayList;
 import map.Escena;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -17,16 +18,13 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * @version 0.1.10
+ *
  * @author Senapi Aroal
  */
 public class Jugador extends Ente{
-
+    
     //Variables que representan la hitbox del personaje
-    private final Rectangle PersUp;
-    private final Rectangle PersDown;
-    private final Rectangle PersL;
-    private final Rectangle PersR;
+    private Rectangle PersUp,PersDown,PersL,PersR;
     
     //Variable que representa la experiencia que tiene el personaje
     private int experiencia;
@@ -46,6 +44,12 @@ public class Jugador extends Ente{
     //Variable que guarda la imagen del personaje
     private final SpriteSheet img;
     
+    //Variable que guarda el hud del jugador
+    private final Hud hud;
+    
+    //Cantidad con el que empieza el jugador
+    private int municion;
+    
     /**
      * Constructor de la clase Jugador
      * 
@@ -56,8 +60,8 @@ public class Jugador extends Ente{
      * @throws org.newdawn.slick.SlickException posibles exceptiones por la carga de la imagen
      * 
      */    
-    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad) throws SlickException{
-        super(hp, punto, sprite, velocidad);
+    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion) throws SlickException{
+        super(hp, punto, sprite, velocidad,direccion);
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
         this.nivelMapa = 1; //inicializado
@@ -67,8 +71,53 @@ public class Jugador extends Ente{
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+16),12,1);
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
+        this.hud = new Hud();
+        this.municion = 50;
     }
 
+    /**
+     * Get the value of hud
+     *
+     * @return the value of hud
+     */
+    public Hud getHud() {
+        return hud;
+    }
+    
+    /**
+     * Get the value of municion
+     *
+     * @return the value of municion
+     */
+    public int getMunicion() {
+        return municion;
+    }
+
+    /**
+     * Set the value of municion
+     *
+     * @param municion new value of municion
+     */
+    public void setMunicion(int municion) {
+        this.municion = municion;
+    }
+    
+    /**
+     * Añade tanta munición como se especifica en el parámetro
+     * 
+     * @param municion cantidad añadida
+     */
+    public void addMunicion(int municion){
+        this.municion+=municion;
+    }
+   
+    /**
+     * Decrementa en uno la mmunición cuando se usa
+     * 
+     */
+    public void decrementarMunicion(){
+        this.municion--;
+    }
     /**
      * Get the value of inventario
      *
@@ -275,6 +324,7 @@ public class Jugador extends Ente{
      * Guarda la posición del personaje en la escena antes de cambiar a la siguiente
      *
      * @param escenas ArrayList de Escena para averiguar en qué escena estamos
+     * 
      * @return devuelve el punto donde se quedó antes de cambiar de escena
      */
     public Punto guardarPosEntrada(ArrayList<Escena> escenas){
@@ -295,6 +345,7 @@ public class Jugador extends Ente{
      * Guarda la posición del personaje en la escena antes de cambiar a la anterior
      *
      * @param escenas ArrayList de Escena para averiguar en qué escena estamos
+     * 
      * @return devuelve el punto donde se quedó antes de cambiar de escena
      */
     public Punto guardarPosSalida(ArrayList<Escena> escenas){
@@ -312,16 +363,6 @@ public class Jugador extends Ente{
     }
     
     /**
-     * Comprueba si colisiona con el último polígono 
-     *
-     * @param escenas obtiene el último polígono adquirido en el escenario
-     * @return devuelve un booleano indicando si colisiona o no
-     */
-    public boolean comprobarUltimoPoligono(ArrayList<Escena> escenas){
-        return ((escenas.get(this.getEscenario()).colisionEntrada(this.getPersL())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersR())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersUp())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersDown())));       
-    }
-    
-    /**
      * Avanza al siguiente estado del juego (siguiente nivel)
      *
      * @param game necesario para acceder al siguiente nivel
@@ -333,5 +374,19 @@ public class Jugador extends Ente{
             this.avanzarMapa();
             game.enterState(this.getNivelMapa());
         }
+    }
+    
+    /**
+     * Comprueba si colisiona con el último polígono 
+     *
+     * @param escenas obtiene el último polígono adquirido en el escenario
+     * @return devuelve un booleano indicando si colisiona o no
+     */
+    public boolean comprobarUltimoPoligono(ArrayList<Escena> escenas){
+        return ((escenas.get(this.getEscenario()).colisionEntrada(this.getPersL())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersR())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersUp())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersDown())));       
+    }
+    
+    public void dispararFlecha(){
+        
     }
 }

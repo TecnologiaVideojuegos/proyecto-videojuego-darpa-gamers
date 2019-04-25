@@ -14,7 +14,7 @@ public class Vector {
     //Datos de los puntos
     private Punto destino;   
     private Punto origen;
-
+    
     /**
      * Constructor de la clase Vector
      * 
@@ -26,6 +26,9 @@ public class Vector {
         this.destino = destino;
     }
     
+    public Vector(Punto destino){
+        this(new Punto(0,0),destino);
+    }
     /**
      * Get the value of origen
      *
@@ -91,4 +94,5 @@ public class Vector {
         double y = (double) this.getY();
         return (float) Math.sqrt(x*x + y*y);
     }
+    
 }

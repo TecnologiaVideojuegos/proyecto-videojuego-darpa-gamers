@@ -5,14 +5,14 @@
  */
 package loop_game;
 
-
+import map.*;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * @version 0.0.10
+ *
  * @author Senapi Aroal
  */
 public class MainGame extends StateBasedGame{
@@ -22,14 +22,14 @@ public class MainGame extends StateBasedGame{
         super("Shiawase Story");
         contenedor = new AppGameContainer(this);
         contenedor.setDisplayMode(1024,868,false);
-        contenedor.setShowFPS(false);
+        contenedor.setShowFPS(true);
         contenedor.start();
     }
     
     
     @Override
     public void initStatesList(GameContainer container) throws SlickException {
-           //aquí se irá poniendo en orden el menú de inicio y el orden de los niveles
+           this.addState(new Nivel1());
     }
    
     /**

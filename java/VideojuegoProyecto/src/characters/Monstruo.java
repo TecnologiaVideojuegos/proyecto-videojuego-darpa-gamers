@@ -5,11 +5,12 @@
  */
 package characters;
 
+import java.util.Random;
 import location.Punto;
 import org.newdawn.slick.SpriteSheet;
 
 /**
- * @version 0.0.10
+ *
  * @author Senapi Aroal
  */
 public class Monstruo extends Ente{
@@ -26,8 +27,8 @@ public class Monstruo extends Ente{
      * @param  comportamiento establece el comportamiento del monstruo
      * 
      */
-    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad, String comportamiento) {
-        super(hp, punto, sprite, velocidad);
+    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion, String comportamiento) {
+        super(hp, punto, sprite, velocidad,direccion);
         this.comportamiento = comportamiento;
     }
 
@@ -48,5 +49,28 @@ public class Monstruo extends Ente{
     public void setComportamiento(String comportamiento) {
         this.comportamiento = comportamiento;
     }
+
+    /**
+     * Realiza un movimiento al azar en caso de ser pasivo u de bajo nivel
+     *
+     * 
+     */
+    public void realizarMovimiento(){
+        Random rand = new Random();
+        switch(rand.nextInt(4)){
+            case 0:
+                super.moverArriba();
+                break;
+            case 1:
+                super.moverAbajo();
+                break;
+            case 2:
+                super.moverDrcha();
+                break;
+            case 3:
+                super.moverIzq();
+                break;
+        }
+    } 
     
 }

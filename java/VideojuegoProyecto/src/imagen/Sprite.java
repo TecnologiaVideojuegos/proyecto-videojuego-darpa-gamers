@@ -14,7 +14,7 @@ import org.newdawn.slick.*;
  */
 public class Sprite extends Image{
     
-    private Punto posicion;
+    protected Punto posicion;
     
     /**
      * Constructor de la clase Sprite
