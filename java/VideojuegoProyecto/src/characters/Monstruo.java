@@ -8,6 +8,7 @@ package characters;
 import java.util.Random;
 import location.Punto;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.geom.Circle;
 
 /**
  *
@@ -16,6 +17,7 @@ import org.newdawn.slick.SpriteSheet;
 public class Monstruo extends Ente{
     
     private String comportamiento;
+    private Circle rango;
 
     /**
      * Constructor de la clase Monstruo
@@ -24,14 +26,35 @@ public class Monstruo extends Ente{
      * @param punto lugar del mapa donde se posiciona
      * @param sprite imagen del ente
      * @param velocidad velocidad a la que se mueve el ente
+     * @param direccion
+     * @param rango
      * @param  comportamiento establece el comportamiento del monstruo
      * 
      */
-    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion, String comportamiento) {
+    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento) {
         super(hp, punto, sprite, velocidad,direccion);
         this.comportamiento = comportamiento;
+        this.rango = new Circle(punto.getX(),punto.getY(),rango); //creamos el rango que tendrá el monstruo
     }
 
+    /**
+     * Get the value of rango
+     *
+     * @return the value of rango
+     */
+    public Circle getRango() {
+        return rango;
+    }
+
+    /**
+     * Set the value of rango
+     *
+     * @param rango new value of rango
+     */
+    public void setRango(Circle rango) {
+        this.rango = rango;
+    }
+    
     /**
      * Get the value of comportamiento
      *
@@ -51,26 +74,25 @@ public class Monstruo extends Ente{
     }
 
     /**
-     * Realiza un movimiento al azar en caso de ser pasivo u de bajo nivel
+     * Realiza un movimiento al azar en caso de ser pasivo o de bajo nivel
      *
      * 
      */
-    public void realizarMovimiento(){
-        Random rand = new Random();
-        switch(rand.nextInt(4)){
-            case 0:
-                super.moverArriba();
-                break;
-            case 1:
-                super.moverAbajo();
-                break;
-            case 2:
-                super.moverDrcha();
-                break;
-            case 3:
-                super.moverIzq();
-                break;
-        }
+    public void realizarMovimiento(Jugador j){
+        this.detectarJugador(j);
+        Random rand = new Random();       
     } 
     
+    /**
+     * Se encarga de detectar si está al alcance del jugador
+     *
+     * 
+     */
+    public void detectarJugador(Jugador j){
+        if(rango.intersects(j.getPersDown()) || rango.intersects(j.getPersL()) || rango.intersects(j.getPersR()) || rango.intersects(j.getPersUp())){
+            this.setComportamiento("Hostil");
+        }else{
+            this.setComportamiento("Pasivo");
+        }
+    }
 }
