@@ -57,7 +57,7 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
            j = new Jugador(100,datos.getRespawn(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50);
-           enemigo = new Monstruo(100,new Punto(480,110),new SpriteSheet("./res/flecha.png",24,22),VELOCIDAD,0,100,"Pasivo");
+           enemigo = new Monstruo(100,new Punto(480,110),new SpriteSheet("./res/flecha.png",24,22),150,0,100,"Pasivo");
            j.getHud().iniciarJugador();
            for(int i = 0;i<numEscenas;i++){ 
                Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i));
@@ -77,9 +77,12 @@ public class Nivel1 extends BasicGameState{
         g.draw(escenas.get(j.getEscenario()).getArea_entrada());
         g.draw(escenas.get(j.getEscenario()).getArea_salida());
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());*/
-        g.draw(enemigo.getPoligono());
         g.draw(enemigo.getRango());
         j.getArco().getFlecha().draw(g);
+        g.draw(enemigo.getPersL());
+        g.draw(enemigo.getPersR());
+        g.draw(enemigo.getPersUp());
+        g.draw(enemigo.getPersDown());
         g.draw(j.getPersL());
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
@@ -95,8 +98,9 @@ public class Nivel1 extends BasicGameState{
         j.controlDeTeclado(delta,entrada,escenas);
         j.controlDeProyectil(entrada, container,escenas.get(j.getEscenario()), delta);
         j.comprobarLimite(escenas,datos);
-        if(enemigo.getRango().intersects(j.getPersUp())){
-            enemigo.move(delta,j.getPunto().getX(),j.getPunto().getY());
+        enemigo.realizarMovimiento(j,escenas.get(j.getEscenario()),delta,reloj);
+        if(reloj >2000){
+            reloj = 0;
         }
     }
     

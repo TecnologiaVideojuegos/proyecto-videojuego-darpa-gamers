@@ -6,6 +6,7 @@
 package characters;
 
 import location.*;
+import map.Escena;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.*;
 
@@ -17,8 +18,8 @@ public class Monstruo extends Ente{
     
     private String comportamiento;
     private Circle rango;
-    private Shape poligono;
-    private Vector movimiento;
+    private Vector movimiento;    
+    private final Rectangle PersUp,PersDown,PersL,PersR;
 
     /**
      * Constructor de la clase Monstruo
@@ -34,32 +35,57 @@ public class Monstruo extends Ente{
      */
     public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento) {
         super(hp, punto, sprite, velocidad,direccion);
+        this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
+        this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+16),12,1);
+        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
+        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
         try{
-            this.poligono = new Rectangle(punto.getX(),punto.getY(),sprite.getHeight(),sprite.getWidth());
             this.movimiento = new Vector(new Punto(0,0));
             this.comportamiento = comportamiento;
             this.rango = new Circle(punto.getX()+sprite.getHeight()/2,punto.getY()+sprite.getWidth()/2,rango); //creamos el rango que tendrá el monstruo
         }catch(Exception ex){}
     }
 
+    public boolean colisionCon(Shape lado,Shape mapa){
+        return lado.intersects(mapa);
+    }
+    
     /**
-     * Get the value of poligono
+     * Obtiene el polígono superior del personaje
      *
-     * @return the value of poligono
+     * @return el polígono superior del personaje
      */
-    public Shape getPoligono() {
-        return poligono;
+    public Rectangle getPersUp() {
+        return PersUp;
     }
 
     /**
-     * Set the value of poligono
+     * Obtiene el polígono inferior del personaje
      *
-     * @param poligono new value of poligono
+     * @return el polígono inferior del personaje
      */
-    public void setPoligono(Shape poligono) {
-        this.poligono = poligono;
+    public Rectangle getPersDown() {
+        return PersDown;
     }
-    
+
+    /**
+     * Obtiene el polígono izquierdo del personaje
+     *
+     * @return el polígono izquierdo del personaje
+     */
+    public Rectangle getPersL() {
+        return PersL;
+    }
+
+    /**
+     * Obtiene el polígono derecho del personaje
+     *
+     * @return el polígono derecho del personaje
+     */
+    public Rectangle getPersR() {
+        return PersR;
+    }
+        
     /**
      * Get the value of rango
      *
@@ -105,13 +131,16 @@ public class Monstruo extends Ente{
      * Realiza un movimiento al azar en caso de ser pasivo o de bajo nivel
      *
      * @param j
+     * @param delta
+     * @param reloj
      */
-    public void realizarMovimiento(Jugador j,int delta){
+    public void realizarMovimiento(Jugador j,Escena escena,int delta,int reloj){
         this.detectarJugador(j);
-        this.actualizarRango();
-        //Random rand = new Random();  
+        this.actualizarRango(); 
         if(this.getComportamiento().equals("Hostil")){
-            this.movimientoHostil(j);
+            this.movimientoHostil(j,escena,delta);
+        }else{
+            this.movimientoPasivo(escena,delta,reloj);    
         }
     } 
     
@@ -128,71 +157,72 @@ public class Monstruo extends Ente{
         }
     }
     
-    public void movimientoPasivo(){
-        int numAleatorio = 0;
-        switch(numAleatorio){
+    public void movimientoPasivo(Escena escena,int delta,int reloj){
             //case Up
-            case 0:
-                movimiento.setDestino(new Punto(0,-this.getVelocidad()));
-                this.setDireccion(0);
-                break;
-            //case Down 
-            case 1:
-                movimiento.setDestino(new Punto(0,this.getVelocidad()));
-                this.setDireccion(1);
-                break;
+            if(reloj > 1500){
+                if(!this.colisionCon(this.getPersUp(),escena.getMapa_colision())){
+                    this.move(delta,0,0,0,-this.getVelocidad());
+                    this.setDireccion(0);
+                }
             //case Left
-            case 2:
-                movimiento.setDestino(new Punto(-this.getVelocidad(),0));
-                this.setDireccion(2);
-                break;
+            }else if(reloj > 1000){
+                if(!this.colisionCon(this.getPersL(),escena.getMapa_colision())){
+                    this.move(delta,0,0,-this.getVelocidad(),0);
+                    this.setDireccion(2);
+                }
+            //case Down 
+            }else if(reloj > 500){
+                if(!this.colisionCon(this.getPersDown(),escena.getMapa_colision())){
+                    this.move(delta,0,0,0,this.getVelocidad());
+                    this.setDireccion(1);
+                }
             //case Right
-            case 3:
-                movimiento.setDestino(new Punto(this.getVelocidad(),0));
-                this.setDireccion(3);
-                break;
-            //error
-            default:
-                System.out.println("ERROR");
-        }
+            }else{
+                if(!this.colisionCon(this.getPersR(),escena.getMapa_colision())){
+                    this.move(delta,0,0,this.getVelocidad(),0);
+                    this.setDireccion(3);
+                }
+            }
     }
     
-    public void movimientoHostil(Jugador j){
-        float jugadorX =  j.getPunto().getX();
-        float jugadorY =  j.getPunto().getY();
-        System.out.println("jugadorX: " + jugadorX +  " jugadorY: " + jugadorY);
-              
-        float enemigoX = this.getPunto().getX();
-        float enemigoY = this.getPunto().getY();
-        System.out.println("enemigoX: " + enemigoX +  " enemigoY: " + enemigoY);
-    }
-    
-    public void mover(int reloj){
-        if(reloj > 2000){
-            reloj = 0;
+    public void movimientoHostil(Jugador j,Escena escena,int delta){
+        if(this.colisionCon(this.getPersUp(),escena.getMapa_colision()) || this.colisionCon(this.getPersDown(),escena.getMapa_colision())){
+            this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+        }else if(this.colisionCon(this.getPersR(),escena.getMapa_colision()) || this.colisionCon(this.getPersL(),escena.getMapa_colision())){
+            this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+        }else{
+            this.move(delta,this.getPunto().getX(),this.getPunto().getY(),j.getPunto().getX(),j.getPunto().getY());
         }
-    }
-    
-    public void detectarColision(Shape poligono,int delta){
-        if(!this.getPoligono().intersects(poligono)){
-            this.actualizarPosicion(delta);
-            this.actualizarRango();
-        }
+        
     }
     
     public void actualizarPosicion(int delta){
         float x = this.getPunto().getX() + movimiento.getX() * ((float) delta/1000);
         float y = this.getPunto().getY() + movimiento.getY() * ((float) delta/1000);
         this.setPunto(new Punto(x,y));
-        this.getPoligono().setX(x);
-        this.getPoligono().setY(y);
+        this.actualizarPosicionPoligono();
     }
     
-    public void move(int delta,float dx,float dy){
-        movimiento.setOrigen(new Punto(this.getPunto().getX(),this.getPunto().getY()));
+    public void move(int delta,float ox,float oy,float dx,float dy){
+        movimiento.setOrigen(new Punto(ox,oy));
         movimiento.setDestino(new Punto(dx,dy));
-        this.setDireccion(0);
         this.actualizarPosicion(delta);
         this.actualizarRango();
     }
+    
+    /**
+     * Actualiza la posición de los polígonos de acuerdo a la posición del personaje
+     *
+     */
+    public void actualizarPosicionPoligono(){
+        this.getPersL().setX(this.getPunto().getX());
+        this.getPersR().setX((this.getPunto().getX()+16));
+        this.getPersUp().setX(this.getPunto().getX()+2);
+        this.getPersDown().setX((this.getPunto().getX()+2));
+        this.getPersL().setY((this.getPunto().getY()+2));
+        this.getPersR().setY((this.getPunto().getY()+2));
+        this.getPersUp().setY((this.getPunto().getY()));
+        this.getPersDown().setY((this.getPunto().getY()+16));
+    }
+    
 }
