@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import materials.Inventario;
 import location.Punto;
 import map.Escena;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+import materials.Arco;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -47,8 +46,8 @@ public class Jugador extends Ente{
     //Variable que guarda el hud del jugador
     private final Hud hud;
     
-    //Cantidad con el que empieza el jugador
-    private int municion;
+    //Arco del jugador
+    private Arco arco;
     
     /**
      * Constructor de la clase Jugador
@@ -60,7 +59,7 @@ public class Jugador extends Ente{
      * @throws org.newdawn.slick.SlickException posibles exceptiones por la carga de la imagen
      * 
      */    
-    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion) throws SlickException{
+    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int municion) throws SlickException{
         super(hp, punto, sprite, velocidad,direccion);
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
@@ -72,9 +71,19 @@ public class Jugador extends Ente{
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
         this.hud = new Hud();
-        this.municion = 50;
+        this.arco = new Arco(municion);
+        
     }
 
+    /**
+     * Get the value of arco
+     * 
+     * @return the value of arco 
+     */
+    public Arco getArco(){
+        return arco;
+    }
+    
     /**
      * Get the value of hud
      *
@@ -84,40 +93,6 @@ public class Jugador extends Ente{
         return hud;
     }
     
-    /**
-     * Get the value of municion
-     *
-     * @return the value of municion
-     */
-    public int getMunicion() {
-        return municion;
-    }
-
-    /**
-     * Set the value of municion
-     *
-     * @param municion new value of municion
-     */
-    public void setMunicion(int municion) {
-        this.municion = municion;
-    }
-    
-    /**
-     * Añade tanta munición como se especifica en el parámetro
-     * 
-     * @param municion cantidad añadida
-     */
-    public void addMunicion(int municion){
-        this.municion+=municion;
-    }
-   
-    /**
-     * Decrementa en uno la mmunición cuando se usa
-     * 
-     */
-    public void decrementarMunicion(){
-        this.municion--;
-    }
     /**
      * Get the value of inventario
      *
@@ -135,6 +110,9 @@ public class Jugador extends Ente{
     public void setInventario(Inventario inventario) {
         this.inventario = inventario;
     }
+    
+    
+    
     /**
      * Get the value of experiencia
      *
@@ -283,6 +261,13 @@ public class Jugador extends Ente{
         }
     }
     
+    public void controlDeProyectil(Input entrada,GameContainer container,Escena escena,int delta){
+        this.getArco().actualizarProyectil(container,escena, delta);
+        if(entrada.isKeyPressed(Input.KEY_SPACE) && this.getArco().getMunicion()!= 0){
+            this.getArco().dispararFlecha(entrada,this);
+        }
+    }
+    
     /**
      * Actualiza la posición de los polígonos de acuerdo a la posición del personaje
      *
@@ -386,7 +371,4 @@ public class Jugador extends Ente{
         return ((escenas.get(this.getEscenario()).colisionEntrada(this.getPersL())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersR())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersUp())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersDown())));       
     }
     
-    public void dispararFlecha(){
-        
-    }
 }

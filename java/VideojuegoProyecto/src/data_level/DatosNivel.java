@@ -18,8 +18,8 @@ public class DatosNivel {
     //Dato del mapa
     private final float[][] mapas;
     
-    //Dato del punto donde respawnea al inicio del nivel
-    private Punto inicio;
+    //Dato del punto donde respawnea al inicio de cada habitación
+    private final Punto [] respawn;
     
     //Dato del polígono de entrada
     private final float[][] poligonosDeEntrada;
@@ -57,7 +57,7 @@ public class DatosNivel {
         this.numObjetos = numObjetos;
         this.entradas = new Punto[numEscenas];
         this.salidas = new Punto[numEscenas];
-        this.inicio = new Punto();
+        this.respawn = new Punto[numEscenas];
         this.mapa_objetos = new ArrayList<>();
     }
     
@@ -77,9 +77,14 @@ public class DatosNivel {
         
         //Datos de los puntos de respawn al entrar en la escena o punto
         Punto[] entrada = {new Punto(230,200),new Punto(233,292)};
-        inicio = entrada[0];
         for(int i = 0;i<(numEscenas-1);i++){
             entradas[i] = entrada[i];
+        }
+        
+        //Datos de los puntos de respawn al salir del mapa
+        Punto[] aparecer = {new Punto(230,200),new Punto(233,292),new Punto(500,0)};
+        for(int i = 0;i<numEscenas;i++){
+            respawn[i] = aparecer[i];
         }
         
         //Datos de los puntos de respawn al salir de la escena o punto donde aparecerá en la siguiente escena
@@ -159,14 +164,25 @@ public class DatosNivel {
     }
 
     /**
-     * Obtiene el punto de inicio
+     * Obtiene el punto de inicio del escenario
      * 
+     * @param index indica la escena que se encuentra
      * @return el punto de respawn inicial de cada nivel
      */
-    public Punto getInicio() {
-        return inicio;
+    public Punto getRespawn(int index) {
+        return respawn[index];
     }
 
+    /**
+     * Obtiene el punto de inicio del escenario
+     * 
+     * @param index indica la escena que se encuentra
+     * @param punto punto a establecer
+     */
+    public void setRespawn(int index,Punto punto) {
+        this.respawn[index] = punto;
+    }
+    
     /**
      * Establece la nueva posición de la entrada a la escena
      * 

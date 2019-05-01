@@ -63,9 +63,9 @@ public class ControladorFlechas {
     public void update(GameContainer container,Escena escena,int delta){
         for(int i= 0;i<flechas.size();i++){
             flechas.get(i).actualizarCoordenadas(delta);
-            this.actualizarPoligono(i, delta,flechas.get(i).getVelocidad());delete(container,escena,delta);
+            this.actualizarPoligono(i, delta,flechas.get(i).getVelocidad());
+            delete(container,escena,delta);
         }
-        delete(container,escena,delta);
     }
     
     public void delete(GameContainer container,Escena escena,int delta){
@@ -77,11 +77,10 @@ public class ControladorFlechas {
                 flechas.remove(i);
                 colisiones.remove(i);
             }else if(colisiones.get(i).intersects(escena.getMapa_colision())){
-                System.out.println(flechas.get(i).getVelocidad().getModulo()*((float) delta / 1000));
                 flechas.remove(i);
                 colisiones.remove(i);
             }
-            
+            //caso de que colisione on un enemigo
         }
     }
     

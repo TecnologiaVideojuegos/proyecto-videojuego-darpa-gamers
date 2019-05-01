@@ -62,6 +62,22 @@ public class Escena {
         return false;
     }
 
+    public boolean detectarPermanenciaMapa(Shape lado){
+        if(mapa_colision.contains(lado)){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean detectarPermanenciaObjeto(Shape lado){
+        for(int i = 0;i<mapa_objetos.size();i++){
+            if(!mapa_objetos.get(i).contains(lado)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean colisionSalida(Shape lado){
         return lado.intersects(area_salida);
     }
