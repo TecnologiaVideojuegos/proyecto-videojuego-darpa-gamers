@@ -18,7 +18,7 @@ public class Ente {
     private Punto punto;
     private SpriteSheet sprite;
     private float velocidad;
-    int direccion;
+    private int direccion;
 
     /**
      * Constructor de la clase Ente
@@ -38,7 +38,23 @@ public class Ente {
         this.direccion = direccion;
     }
 
-    
+    /**
+     * Get the value of direccion
+     *
+     * @return the value of direccion
+     */
+    public int getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * Set the value of direccion
+     *
+     * @param direccion new value of direccion
+     */
+    public void setDireccion(int direccion) {
+        this.direccion = direccion;
+    }
     
     /**
      * Get the value of velocidad

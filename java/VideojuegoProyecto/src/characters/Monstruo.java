@@ -5,10 +5,9 @@
  */
 package characters;
 
-import location.Punto;
-import location.Vector;
-import org.newdawn.slick.SpriteSheet;
-import org.newdawn.slick.geom.Circle;
+import location.*;
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.*;
 
 /**
  *
@@ -18,6 +17,8 @@ public class Monstruo extends Ente{
     
     private String comportamiento;
     private Circle rango;
+    private Shape poligono;
+    private Vector movimiento;
 
     /**
      * Constructor de la clase Monstruo
@@ -34,9 +35,29 @@ public class Monstruo extends Ente{
     public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento) {
         super(hp, punto, sprite, velocidad,direccion);
         try{
+            this.poligono = new Rectangle(punto.getX(),punto.getY(),sprite.getHeight(),sprite.getWidth());
+            this.movimiento = new Vector(new Punto(0,0));
             this.comportamiento = comportamiento;
-            this.rango = new Circle(punto.getX(),punto.getY(),rango); //creamos el rango que tendrá el monstruo
+            this.rango = new Circle(punto.getX()+sprite.getHeight()/2,punto.getY()+sprite.getWidth()/2,rango); //creamos el rango que tendrá el monstruo
         }catch(Exception ex){}
+    }
+
+    /**
+     * Get the value of poligono
+     *
+     * @return the value of poligono
+     */
+    public Shape getPoligono() {
+        return poligono;
+    }
+
+    /**
+     * Set the value of poligono
+     *
+     * @param poligono new value of poligono
+     */
+    public void setPoligono(Shape poligono) {
+        this.poligono = poligono;
     }
     
     /**
@@ -76,8 +97,8 @@ public class Monstruo extends Ente{
     }
 
     public void actualizarRango(){
-        this.rango.setCenterX(this.getPunto().getX());
-        this.rango.setCenterY(this.getPunto().getY());
+        this.rango.setCenterX(this.getPunto().getX()+this.getSpriteSheet().getHeight()/2);
+        this.rango.setCenterY(this.getPunto().getY()+this.getSpriteSheet().getWidth()/2);
     }
     
     /**
@@ -108,7 +129,32 @@ public class Monstruo extends Ente{
     }
     
     public void movimientoPasivo(){
-        
+        int numAleatorio = 0;
+        switch(numAleatorio){
+            //case Up
+            case 0:
+                movimiento.setDestino(new Punto(0,-this.getVelocidad()));
+                this.setDireccion(0);
+                break;
+            //case Down 
+            case 1:
+                movimiento.setDestino(new Punto(0,this.getVelocidad()));
+                this.setDireccion(1);
+                break;
+            //case Left
+            case 2:
+                movimiento.setDestino(new Punto(-this.getVelocidad(),0));
+                this.setDireccion(2);
+                break;
+            //case Right
+            case 3:
+                movimiento.setDestino(new Punto(this.getVelocidad(),0));
+                this.setDireccion(3);
+                break;
+            //error
+            default:
+                System.out.println("ERROR");
+        }
     }
     
     public void movimientoHostil(Jugador j){
@@ -125,5 +171,28 @@ public class Monstruo extends Ente{
         if(reloj > 2000){
             reloj = 0;
         }
+    }
+    
+    public void detectarColision(Shape poligono,int delta){
+        if(!this.getPoligono().intersects(poligono)){
+            this.actualizarPosicion(delta);
+            this.actualizarRango();
+        }
+    }
+    
+    public void actualizarPosicion(int delta){
+        float x = this.getPunto().getX() + movimiento.getX() * ((float) delta/1000);
+        float y = this.getPunto().getY() + movimiento.getY() * ((float) delta/1000);
+        this.setPunto(new Punto(x,y));
+        this.getPoligono().setX(x);
+        this.getPoligono().setY(y);
+    }
+    
+    public void move(int delta,float dx,float dy){
+        movimiento.setOrigen(new Punto(this.getPunto().getX(),this.getPunto().getY()));
+        movimiento.setDestino(new Punto(dx,dy));
+        this.setDireccion(0);
+        this.actualizarPosicion(delta);
+        this.actualizarRango();
     }
 }

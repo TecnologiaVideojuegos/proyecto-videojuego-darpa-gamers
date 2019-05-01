@@ -23,7 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Jugador extends Ente{
     
     //Variables que representan la hitbox del personaje
-    private Rectangle PersUp,PersDown,PersL,PersR;
+    private final Rectangle PersUp,PersDown,PersL,PersR;
     
     //Variable que representa la experiencia que tiene el personaje
     private int experiencia;
