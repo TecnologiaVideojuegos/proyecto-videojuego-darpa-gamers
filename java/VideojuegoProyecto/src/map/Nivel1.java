@@ -94,10 +94,9 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        j.siguienteNivel(game,numEscenas,escenas);
+        j.gestorCambiosMapas(game, numEscenas, escenas, datos);
         j.controlDeTeclado(delta,entrada,escenas);
         j.controlDeProyectil(entrada, container,escenas.get(j.getEscenario()), delta);
-        j.comprobarLimite(escenas,datos);
         enemigo.realizarMovimiento(j,escenas.get(j.getEscenario()),delta,reloj);
         if(reloj >2000){
             reloj = 0;

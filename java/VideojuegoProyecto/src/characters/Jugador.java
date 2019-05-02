@@ -353,11 +353,16 @@ public class Jugador extends Ente{
      * @param game necesario para acceder al siguiente nivel
      * @param numEscenarios indicador para verificar que se encuentra en el último escenario
      * @param escenas obtiene el último polígono adquirido en el escenario
+     * @param datos obtener los poligonos para las colisiones
      */
-    public void siguienteNivel(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas){
-        if((this.getEscenario()==numEscenarios) && this.comprobarUltimoPoligono(escenas)){
-            this.avanzarMapa();
-            game.enterState(this.getNivelMapa());
+    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos){
+        if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
+            System.out.println("FINAL DEL NIVEL");
+            this.getHud().anadirCorazon();
+            ///this.avanzarMapa();
+            //game.enterState(this.getNivelMapa());
+        }else{
+            this.comprobarLimite(escenas, datos);
         }
     }
     
