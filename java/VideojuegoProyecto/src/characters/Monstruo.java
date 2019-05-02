@@ -5,6 +5,7 @@
  */
 package characters;
 
+import java.util.ArrayList;
 import location.*;
 import map.Escena;
 import org.newdawn.slick.*;
@@ -131,18 +132,35 @@ public class Monstruo extends Ente{
      * Realiza un movimiento al azar en caso de ser pasivo o de bajo nivel
      *
      * @param j
+     * @param escena
      * @param delta
      * @param reloj
      */
     public void realizarMovimiento(Jugador j,Escena escena,int delta,int reloj){
-        this.detectarJugador(j);
-        this.actualizarRango(); 
+        this.detectarJugador(j); 
         if(this.getComportamiento().equals("Hostil")){
             this.movimientoHostil(j,escena,delta);
         }else{
             this.movimientoPasivo(escena,delta,reloj);    
         }
+        this.detectarColisionEnemigo(escena.getEnemigos());
+        this.actualizarPosicionPoligono();
+        this.actualizarRango();
     } 
+    
+    public void detectarColisionEnemigo(ArrayList<Monstruo> mon){
+        for(int i = 0;i<mon.size();i++){
+            if(this.getPersDown().intersects(mon.get(i).getPersUp())){
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-10));
+            }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+10));
+            }else if(this.getPersL().intersects(mon.get(i).getPersR())){
+                this.setPunto(new Punto(this.getPunto().getX()+10,this.getPunto().getY()));
+            }else if(this.getPersR().intersects(mon.get(i).getPersL())){
+                this.setPunto(new Punto(this.getPunto().getX()-10,this.getPunto().getY()));
+            }
+        }
+    }
     
     /**
      * Se encarga de detectar si está al alcance del jugador
@@ -223,6 +241,10 @@ public class Monstruo extends Ente{
         this.getPersR().setY((this.getPunto().getY()+2));
         this.getPersUp().setY((this.getPunto().getY()));
         this.getPersDown().setY((this.getPunto().getY()+16));
+    }
+    
+    public void corregirBug(){
+        
     }
     
 }
