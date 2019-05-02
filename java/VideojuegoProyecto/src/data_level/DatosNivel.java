@@ -5,8 +5,10 @@
  */
 package data_level;
 
+import characters.Monstruo;
 import java.util.ArrayList;
 import location.Punto;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 
 /**
@@ -35,12 +37,17 @@ public class DatosNivel {
     
     //ArrayLists donde contendrá los objetos de cada escena
     private final ArrayList<ArrayList<Polygon>> mapa_objetos; 
+    
+    private final ArrayList<ArrayList<Monstruo>> enemigos;
 
     //entero que indica el número de escenas que tiene el nivel
     private final int numEscenas;
     
     //entero que contiene el número de objetos que hay en cada escena
     private final int[] numObjetos;
+    
+    //entero que contiene el número de enemigos que hay en cada escena
+    private final int[] numEnemigos;
     
     /**
      * Constructor de la clase Punto
@@ -49,16 +56,18 @@ public class DatosNivel {
      * @param numObjetos array de objetos que indica la cantidad que tiene cada escena
      * 
      */
-    public DatosNivel(int numEscenas,int[] numObjetos){
+    public DatosNivel(int numEscenas,int[] numObjetos,int[] numEnemigos){
         this.numEscenas = numEscenas;
         mapas = new float[numEscenas][];
         poligonosDeEntrada = new float[numEscenas][];
         poligonosDeSalida = new float[numEscenas][];
         this.numObjetos = numObjetos;
+        this.numEnemigos = numEnemigos;
         this.entradas = new Punto[numEscenas];
         this.salidas = new Punto[numEscenas];
         this.respawn = new Punto[numEscenas];
         this.mapa_objetos = new ArrayList<>();
+        this.enemigos = new ArrayList<>();
     }
     
     /**
@@ -82,7 +91,7 @@ public class DatosNivel {
         }
         
         //Datos de los puntos de respawn al salir del mapa
-        Punto[] aparecer = {new Punto(230,200),new Punto(233,292),new Punto(500,0)};
+        Punto[] aparecer = {new Punto(230,200),new Punto(233,292),new Punto(230,295)};
         for(int i = 0;i<numEscenas;i++){
             respawn[i] = aparecer[i];
         }
@@ -121,6 +130,22 @@ public class DatosNivel {
                 mapa_objetos.get(i).add((new Polygon(objetos[a])));
             }
         }
+        
+        //Generador de enemigos
+        Punto[] inicioEnemigos1 = {new Punto(480,110)};
+        Punto[] inicioEnemigos2 = {};
+        Punto[] inicioEnemigos3 = {new Punto(603,218),new Punto(410,421)};
+        Punto[][] inicioEnemigos = {inicioEnemigos1,inicioEnemigos2,inicioEnemigos3};
+        
+        for(int i = 0;i<numEscenas;i++){
+            enemigos.add(new ArrayList<>());
+            for(int j = 0;j<numEnemigos[i];j++){
+                try{
+                    int velocidad = (int)(100+51*Math.random());
+                    enemigos.get(i).add(new Monstruo(100,inicioEnemigos[i][j],new SpriteSheet("./res/flecha.png",24,22),velocidad,0,64,"Pasivo"));
+                }catch(Exception ex){}
+            }
+        }
     }
     
     /**
@@ -151,6 +176,16 @@ public class DatosNivel {
      */
     public Polygon salidasNivel(int index){ //Devuelve el poligono para salir de la escena
         return new Polygon(poligonosDeSalida[index]);
+    }
+    
+    /**
+     * Devuelve los enemigos de esa escena
+     * 
+     * @param index indica el índice para obtener los objetos de la escena
+     * @return la lista de polígonos de los objetos decorativos
+     */
+    public ArrayList<Monstruo> enemigosNivel(int index){ 
+        return enemigos.get(index);
     }
     
     /**
