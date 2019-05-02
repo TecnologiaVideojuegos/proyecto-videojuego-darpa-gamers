@@ -47,7 +47,7 @@ public class Jugador extends Ente{
     private final Hud hud;
     
     //Arco del jugador
-    private Arco arco;
+    private final Arco arco;
     
     /**
      * Constructor de la clase Jugador
@@ -56,6 +56,8 @@ public class Jugador extends Ente{
      * @param punto lugar del mapa donde se posiciona
      * @param sprite imagen del ente
      * @param velocidad velocidad a la que se mueve el ente
+     * @param direccion dirección en la que se queda mirando
+     * @param municion cantidad de proyectiles a disparar
      * @throws org.newdawn.slick.SlickException posibles exceptiones por la carga de la imagen
      * 
      */    
@@ -261,6 +263,14 @@ public class Jugador extends Ente{
         }
     }
     
+    /**
+     * Método que gestiona los disparos
+     * 
+     * @param entrada dirección disparo
+     * @param container obtener tamaños de la ventana
+     * @param escena escena actual
+     * @param delta tiempo transcurrido
+     */
     public void controlDeProyectil(Input entrada,GameContainer container,Escena escena,int delta){
         this.getArco().actualizarProyectil(container,escena, delta);
         if(entrada.isKeyPressed(Input.KEY_SPACE) && this.getArco().getMunicion()!= 0){
@@ -353,7 +363,7 @@ public class Jugador extends Ente{
      * @param game necesario para acceder al siguiente nivel
      * @param numEscenarios indicador para verificar que se encuentra en el último escenario
      * @param escenas obtiene el último polígono adquirido en el escenario
-     * @param datos obtener los poligonos para las colisiones
+     * @param datos
      */
     public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
@@ -365,7 +375,7 @@ public class Jugador extends Ente{
             this.comprobarLimite(escenas, datos);
         }
     }
-    
+       
     /**
      * Comprueba si colisiona con el último polígono 
      *
@@ -376,4 +386,83 @@ public class Jugador extends Ente{
         return ((escenas.get(this.getEscenario()).colisionEntrada(this.getPersL())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersR())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersUp())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersDown())));       
     }
     
+    /**
+     * Método que indica si se colisiona con un monstruo o no
+     * 
+     * @param mon monstruos que se encuentran en esa escena
+     */
+    public void colisionMonstruo(ArrayList<Monstruo> mon){
+        this.destruirEnemigo(mon);
+        for(int i = 0;i<mon.size();i++){
+            if(this.getPersDown().intersects(mon.get(i).getPersUp())){
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-10));
+                this.setHp(this.getHp()-25);
+                this.getHud().quitarVida();
+            }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+10));
+                this.setHp(this.getHp()-25);
+                this.getHud().quitarVida();
+            }else if(this.getPersL().intersects(mon.get(i).getPersR())){
+                this.setPunto(new Punto(this.getPunto().getX()+10,this.getPunto().getY()));
+                this.setHp(this.getHp()-25);
+                this.getHud().quitarVida();
+            }else if(this.getPersR().intersects(mon.get(i).getPersL())){
+                this.setPunto(new Punto(this.getPunto().getX()-10,this.getPunto().getY()));
+                this.setHp(this.getHp()-25);
+                this.getHud().quitarVida();
+            }
+            this.actualizarPosicion();
+        }
+    }
+    
+    /**
+     * Si el jugador muere la partida acaba
+     * 
+     * @param game cambiar entre estados
+     */
+    public void respawnear(StateBasedGame game){
+        if(this.getHp()<=0){
+            game.enterState(2);
+        }
+    }
+    
+    /**
+     * Método que elimina los enemigos en caso de ser eliminado
+     * 
+     * @param mon obtener los enemigos que hay en la escena actual
+     */
+    public void destruirEnemigo(ArrayList<Monstruo> mon){
+        for(int i = 0;i<mon.size();i++){
+            for(int j = 0;j<this.getArco().getFlecha().getColisiones().size();j++){
+                if(this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersDown()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersUp()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersL()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersR())){
+                    this.getArco().getFlecha().getColisiones().remove(j);
+                    this.getArco().getFlecha().getFlechas().remove(j);
+                    mon.get(i).setHp(mon.get(i).getHp()-25);
+                }           
+                if(mon.get(i).getHp()<=0){
+                    mon.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+    
+    /**
+     * Método general que engloba todo lo necesario para gestionar la persona en el juego
+     * 
+     * @param container controlar el proyectil
+     * @param game moverse entre niveles o menús
+     * @param numEscenas cuantas escenas hay
+     * @param delta tiempo que transcurre
+     * @param entrada gestión del teclado
+     * @param datos datos a obtener
+     * @param escena escena en el que nos encontramos
+     */
+    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena){
+        this.respawnear(game);
+        this.gestorCambiosMapas(game, numEscenas, escena, datos);
+        this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
+        this.controlDeTeclado(delta, entrada, escena);
+        this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);
+    }
 }
