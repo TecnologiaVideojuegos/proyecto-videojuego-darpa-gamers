@@ -27,16 +27,7 @@ public class ControladorFlechas {
         this.flechas = new ArrayList<>();
         this.colisiones = new ArrayList<>();
     }
-    
-    
-    
-    public void addFlecha(float x,float y) throws SlickException{
-        SpriteMovil flecha = new SpriteMovil("./res/flecha.png",new Punto(x,y),new Punto(300,300));
-        Rectangle contorno = new Rectangle(x,y,24,22);
-        flechas.add(flecha);
-        colisiones.add(contorno);
-    }
-    
+      
     /**
      * Método que añade la flecha he indica la dirección del disparo
      * 
@@ -90,4 +81,13 @@ public class ControladorFlechas {
         colisiones.get(index).setX(x);
         colisiones.get(index).setY(y);
     }
+
+    public ArrayList<Rectangle> getColisiones() {
+        return colisiones;
+    }
+
+    public ArrayList<SpriteMovil> getFlechas() {
+        return flechas;
+    }
+
 }
