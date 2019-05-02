@@ -37,30 +37,31 @@ public class Nivel1 extends BasicGameState{
     //Cantidad de objetos que tendrá cada escena
     private final int[] numObjetos = {2,0,0}; 
     
+    //Cantidad de enemigos que tendrá cada escena
+    private final int[] numEnemigos = {1,0,2};
+    
     //Variable para extraer toda la información acerca del nivel especificado
     private final DatosNivel datos;
 
     //Reloj para controlar movimiento
     private int reloj;
     
-    private Monstruo enemigo;
     /**
      * Constructor de la clase Nivel1
      * 
      */   
     public Nivel1(){
-        datos = new DatosNivel(numEscenas,numObjetos);
+        datos = new DatosNivel(numEscenas,numObjetos,numEnemigos);
         datos.datosNivel1();
         reloj = 0;
     }
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-           j = new Jugador(100,datos.getRespawn(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50);
-           enemigo = new Monstruo(100,new Punto(480,110),new SpriteSheet("./res/flecha.png",24,22),150,0,100,"Pasivo");
+           j = new Jugador(200,datos.getRespawn(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50);
            j.getHud().iniciarJugador();
            for(int i = 0;i<numEscenas;i++){ 
-               Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i));
+               Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i));
                escenas.add(es);
            }
            entrada = container.getInput(); 
@@ -73,44 +74,44 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprimirCorazones();
         /*for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
+        }*/
+        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getRango());
+            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersDown());
+            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersL());
+            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersR());
+            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
         }
-        g.draw(escenas.get(j.getEscenario()).getArea_entrada());
+        /*g.draw(escenas.get(j.getEscenario()).getArea_entrada());
         g.draw(escenas.get(j.getEscenario()).getArea_salida());
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());*/
-        g.draw(enemigo.getRango());
         j.getArco().getFlecha().draw(g);
-        g.draw(enemigo.getPersL());
-        g.draw(enemigo.getPersR());
-        g.draw(enemigo.getPersUp());
-        g.draw(enemigo.getPersDown());
         g.draw(j.getPersL());
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
         g.draw(j.getPersDown());
         g.drawString("escenario " + j.getEscenario(),20,20);
         g.drawString("municion " + j.getArco().getMunicion(),20,40);
+        g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,60);
+        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+            g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,80+(20*i));
+        }
+        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+            g.drawString("Vida: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,120+(20*i));
+        }
+        g.drawString("Vida del jugador: " + j.getHp(),20,160);
+        
     }
     
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        j.gestorCambiosMapas(game, numEscenas, escenas, datos);
-        j.controlDeTeclado(delta,entrada,escenas);
-        j.controlDeProyectil(entrada, container,escenas.get(j.getEscenario()), delta);
-        enemigo.realizarMovimiento(j,escenas.get(j.getEscenario()),delta,reloj);
+        j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas);
+        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+            escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);
+        }
         if(reloj >2000){
             reloj = 0;
-        }
-    }
-    
-    public void corregirBug(){
-        if(!escenas.get(j.getEscenario()).detectarPermanenciaMapa(j.getPersDown()) && !escenas.get(j.getEscenario()).detectarPermanenciaMapa(j.getPersUp()) && !escenas.get(j.getEscenario()).detectarPermanenciaMapa(j.getPersL()) && !escenas.get(j.getEscenario()).detectarPermanenciaMapa(j.getPersR())){
-            System.out.println(datos.getRespawn(j.getEscenario()).getX() + " " + datos.getRespawn(j.getEscenario()).getY());
-            j.setPunto(new Punto(500,300));
-            j.actualizarPosicion();
-              System.out.println(datos.getRespawn(0).getX() + " " + datos.getRespawn(0).getY());
-  
-            //datos.setRespawn(j.getEscenario(),j.getPunto());
         }
     }
     
