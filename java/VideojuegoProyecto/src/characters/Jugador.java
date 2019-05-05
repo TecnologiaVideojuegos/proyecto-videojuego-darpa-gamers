@@ -395,19 +395,19 @@ public class Jugador extends Ente{
         this.destruirEnemigo(mon);
         for(int i = 0;i<mon.size();i++){
             if(this.getPersDown().intersects(mon.get(i).getPersUp())){
-                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-10));
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
                 this.setHp(this.getHp()-25);
                 this.getHud().quitarVida();
             }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
-                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+10));
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
                 this.setHp(this.getHp()-25);
                 this.getHud().quitarVida();
             }else if(this.getPersL().intersects(mon.get(i).getPersR())){
-                this.setPunto(new Punto(this.getPunto().getX()+10,this.getPunto().getY()));
+                this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
                 this.setHp(this.getHp()-25);
                 this.getHud().quitarVida();
             }else if(this.getPersR().intersects(mon.get(i).getPersL())){
-                this.setPunto(new Punto(this.getPunto().getX()-10,this.getPunto().getY()));
+                this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
                 this.setHp(this.getHp()-25);
                 this.getHud().quitarVida();
             }
@@ -420,7 +420,7 @@ public class Jugador extends Ente{
      * 
      * @param game cambiar entre estados
      */
-    public void respawnear(StateBasedGame game){
+    public void finPartida(StateBasedGame game){
         if(this.getHp()<=0){
             game.enterState(2);
         }
@@ -447,6 +447,31 @@ public class Jugador extends Ente{
         }
     }
     
+    public void corregirBug(ArrayList<Escena> escena,DatosNivel datos){
+        if(!escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersUp()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersDown()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersL()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersR()) ){
+            System.out.println(datos.getEntradas(this.getEscenario()).getX() + " " + datos.getEntradas(this.getEscenario()).getY());
+            this.setPunto(new Punto(respawn().getX(),respawn().getY()));
+            this.actualizarPosicion();
+        }else{
+            for(int i = 0;i<escena.get(this.getEscenario()).getMapa_objetos().size();i++){
+                if(escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersUp()) && escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersDown()) && escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersL()) && escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersR()) ){
+                    this.setPunto(new Punto(respawn().getX(),respawn().getY()));
+                    this.actualizarPosicion();
+                }
+            }
+        }
+    }
+    
+    public Punto[] nivelesRespawn(){
+        Punto[][] niveles = {{new Punto(230,200),new Punto(233,292),new Punto(230,295)}};
+        return niveles[this.getNivelMapa()-1];
+    }
+    
+    public Punto respawn(){
+        Punto[] escenarios = nivelesRespawn();
+        return escenarios[this.getEscenario()];
+    }
+    
     /**
      * Método general que engloba todo lo necesario para gestionar la persona en el juego
      * 
@@ -459,7 +484,8 @@ public class Jugador extends Ente{
      * @param escena escena en el que nos encontramos
      */
     public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena){
-        this.respawnear(game);
+        this.finPartida(game);
+        this.corregirBug(escena, datos);
         this.gestorCambiosMapas(game, numEscenas, escena, datos);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
