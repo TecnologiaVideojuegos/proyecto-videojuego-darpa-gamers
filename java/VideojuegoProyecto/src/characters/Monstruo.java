@@ -204,14 +204,37 @@ public class Monstruo extends Ente{
     }
     
     public void movimientoHostil(Jugador j,Escena escena,int delta){
-        if(this.colisionCon(this.getPersUp(),escena.getMapa_colision()) || this.colisionCon(this.getPersDown(),escena.getMapa_colision())){
-            this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
-        }else if(this.colisionCon(this.getPersR(),escena.getMapa_colision()) || this.colisionCon(this.getPersL(),escena.getMapa_colision())){
-            this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+        if(this.colisionCon(this.getPersDown(),escena.getMapa_colision()) && this.colisionCon(this.getPersL(),escena.getMapa_colision())){
+        }else if(this.colisionCon(this.getPersDown(),escena.getMapa_colision()) && this.colisionCon(this.getPersR(),escena.getMapa_colision())){            
+        }else if(this.colisionCon(this.getPersUp(),escena.getMapa_colision()) && this.colisionCon(this.getPersL(),escena.getMapa_colision())){           
+        }else if(this.colisionCon(this.getPersUp(),escena.getMapa_colision()) && this.colisionCon(this.getPersR(),escena.getMapa_colision())){           
+        }else if(this.colisionCon(this.getPersUp(),escena.getMapa_colision())){
+            if(j.getPunto().getY() >= this.getPunto().getY()){
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }else{
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+            }
+        }else if(this.colisionCon(this.getPersDown(),escena.getMapa_colision())){
+            if(j.getPunto().getY() <= this.getPunto().getY()){
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }else{
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);               
+            }
+        }else if(this.colisionCon(this.getPersL(),escena.getMapa_colision())){
+            if(j.getPunto().getX() >= this.getPunto().getX()){
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+            }else{
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }
+        }else if(this.colisionCon(this.getPersR(),escena.getMapa_colision())){
+            if(j.getPunto().getX() <= this.getPunto().getX()){
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+            }else{
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }
         }else{
             this.move(delta,this.getPunto().getX(),this.getPunto().getY(),j.getPunto().getX(),j.getPunto().getY());
-        }
-        
+        }        
     }
     
     public void actualizarPosicion(int delta){
