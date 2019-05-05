@@ -234,7 +234,7 @@ public class Monstruo extends Ente{
             }
         }else{
             this.move(delta,this.getPunto().getX(),this.getPunto().getY(),j.getPunto().getX(),j.getPunto().getY());
-        }        
+        }
     }
     
     public void actualizarPosicion(int delta){
@@ -264,10 +264,6 @@ public class Monstruo extends Ente{
         this.getPersR().setY((this.getPunto().getY()+2));
         this.getPersUp().setY((this.getPunto().getY()));
         this.getPersDown().setY((this.getPunto().getY()+16));
-    }
-    
-    public void corregirBug(){
-        
     }
     
 }
