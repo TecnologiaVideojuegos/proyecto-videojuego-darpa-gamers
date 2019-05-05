@@ -8,7 +8,6 @@ package map;
 import characters.*;
 import data_level.DatosNivel;
 import java.util.ArrayList;
-import location.Punto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.tiled.*;
@@ -20,7 +19,7 @@ import org.newdawn.slick.tiled.*;
 public class Nivel1 extends BasicGameState{
 
     //Arraylist donde guardamos todas las escenas de ese nivel
-    private final ArrayList<Escena> escenas = new ArrayList<>(); 
+    private ArrayList<Escena> escenas;
     
     //Velocidad
     private final float VELOCIDAD = 100.0f; 
@@ -41,30 +40,33 @@ public class Nivel1 extends BasicGameState{
     private final int[] numEnemigos = {1,0,2};
     
     //Variable para extraer toda la información acerca del nivel especificado
-    private final DatosNivel datos;
+    private DatosNivel datos;
 
     //Reloj para controlar movimiento
     private int reloj;
+    
     
     /**
      * Constructor de la clase Nivel1
      * 
      */   
     public Nivel1(){
-        datos = new DatosNivel(numEscenas,numObjetos,numEnemigos);
-        datos.datosNivel1();
-        reloj = 0;
+        
     }
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-           j = new Jugador(200,datos.getRespawn(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50);
-           j.getHud().iniciarJugador();
-           for(int i = 0;i<numEscenas;i++){ 
-               Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i));
-               escenas.add(es);
-           }
-           entrada = container.getInput(); 
+        escenas = new ArrayList<>(); 
+        datos = new DatosNivel(numEscenas,numObjetos,numEnemigos);
+        datos.datosNivel1();
+        reloj = 0;
+        j = new Jugador(200,datos.getEntradas(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50);
+        j.getHud().iniciarJugador();
+        for(int i = 0;i<numEscenas;i++){ 
+            Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i));
+            escenas.add(es);
+        }
+        entrada = container.getInput(); 
            
     }
 
@@ -83,8 +85,8 @@ public class Nivel1 extends BasicGameState{
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
         }
         /*g.draw(escenas.get(j.getEscenario()).getArea_entrada());
-        g.draw(escenas.get(j.getEscenario()).getArea_salida());
-        g.draw(escenas.get(j.getEscenario()).getMapa_colision());*/
+        g.draw(escenas.get(j.getEscenario()).getArea_salida());*/
+        g.draw(escenas.get(j.getEscenario()).getMapa_colision());
         j.getArco().getFlecha().draw(g);
         g.draw(j.getPersL());
         g.draw(j.getPersR());
@@ -114,6 +116,13 @@ public class Nivel1 extends BasicGameState{
             reloj = 0;
         }
     }
+    
+    @Override
+    public void enter(GameContainer container,StateBasedGame game)throws SlickException{
+        container.getInput().clearKeyPressedRecord();
+        init(container, game);     
+    }
+   
     
     @Override
     public void mouseClicked(int button, int x, int y, int clickCount){
