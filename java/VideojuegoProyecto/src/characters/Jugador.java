@@ -248,18 +248,22 @@ public class Jugador extends Ente{
         if(entrada.isKeyDown(Input.KEY_LEFT) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersL())){
             this.getPunto().setX(this.getPunto().getX()-(this.getVelocidad() * (float)delta/1000));
             this.actualizarPosicion();
+            this.setDireccion(1);
         }
         if(entrada.isKeyDown(Input.KEY_RIGHT) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersR())){
             this.getPunto().setX(this.getPunto().getX()+(this.getVelocidad() * (float)delta/1000));
             this.actualizarPosicion();
+            this.setDireccion(0);
         }
         if(entrada.isKeyDown(Input.KEY_UP) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersUp())){
            this.getPunto().setY(this.getPunto().getY()-(this.getVelocidad() * (float)delta/1000));
            this.actualizarPosicion();
+           this.setDireccion(2);
         }
         if(entrada.isKeyDown(Input.KEY_DOWN) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersDown())){
            this.getPunto().setY(this.getPunto().getY()+(this.getVelocidad() * (float)delta/1000));
            this.actualizarPosicion();
+           this.setDireccion(3);
         }
     }
     
@@ -396,20 +400,28 @@ public class Jugador extends Ente{
         for(int i = 0;i<mon.size();i++){
             if(this.getPersDown().intersects(mon.get(i).getPersUp())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
-                this.setHp(this.getHp()-25);
-                this.getHud().quitarVida();
+                this.setHp(this.getHp()-mon.get(i).getDanyo());
+                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                    this.getHud().quitarVida();
+                }
             }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
-                this.setHp(this.getHp()-25);
-                this.getHud().quitarVida();
+                this.setHp(this.getHp()-mon.get(i).getDanyo());
+                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                    this.getHud().quitarVida();
+                }
             }else if(this.getPersL().intersects(mon.get(i).getPersR())){
                 this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
-                this.setHp(this.getHp()-25);
-                this.getHud().quitarVida();
+                this.setHp(this.getHp()-mon.get(i).getDanyo());
+                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                    this.getHud().quitarVida();
+                }
             }else if(this.getPersR().intersects(mon.get(i).getPersL())){
                 this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
-                this.setHp(this.getHp()-25);
-                this.getHud().quitarVida();
+                this.setHp(this.getHp()-mon.get(i).getDanyo());
+                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                    this.getHud().quitarVida();
+                }
             }
             this.actualizarPosicion();
         }
@@ -427,7 +439,7 @@ public class Jugador extends Ente{
     }
     
     /**
-     * Método que elimina los enemigos en caso de ser eliminado
+     * Método que elimina los enemigos en caso de ser eliminado o que le quita vida
      * 
      * @param mon obtener los enemigos que hay en la escena actual
      */
@@ -437,7 +449,8 @@ public class Jugador extends Ente{
                 if(this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersDown()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersUp()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersL()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersR())){
                     this.getArco().getFlecha().getColisiones().remove(j);
                     this.getArco().getFlecha().getFlechas().remove(j);
-                    mon.get(i).setHp(mon.get(i).getHp()-25);
+                    int damage = this.getNivelJugador()*50; //daño que hace la flecha
+                    mon.get(i).setHp(mon.get(i).getHp()-damage);
                 }           
                 if(mon.get(i).getHp()<=0){
                     mon.remove(i);
@@ -449,7 +462,6 @@ public class Jugador extends Ente{
     
     public void corregirBug(ArrayList<Escena> escena,DatosNivel datos){
         if(!escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersUp()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersDown()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersL()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersR()) ){
-            System.out.println(datos.getEntradas(this.getEscenario()).getX() + " " + datos.getEntradas(this.getEscenario()).getY());
             this.setPunto(new Punto(respawn().getX(),respawn().getY()));
             this.actualizarPosicion();
         }else{

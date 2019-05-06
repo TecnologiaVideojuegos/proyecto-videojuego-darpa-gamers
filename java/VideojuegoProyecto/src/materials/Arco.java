@@ -75,49 +75,64 @@ public class Arco {
     }
     
     public void controlDisparo(Input entrada,Jugador j) throws SlickException{
+        decrementarMunicion();
         if(entrada.isKeyDown(Input.KEY_RIGHT) && entrada.isKeyDown(Input.KEY_UP)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersUp().getMaxX(),j.getPersR().getMaxY(),300,-300);
+            j.setDireccion(0);
             
         }else if(entrada.isKeyDown(Input.KEY_RIGHT) && entrada.isKeyDown(Input.KEY_DOWN)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersDown().getMinX(),j.getPersR().getMinY(),300,300);
+            j.setDireccion(0);
             
         }else if(entrada.isKeyDown(Input.KEY_LEFT) && entrada.isKeyDown(Input.KEY_UP)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersUp().getMinX(),j.getPersL().getMaxY(),-300,-300);
+            j.setDireccion(1);
             
         }else if(entrada.isKeyDown(Input.KEY_LEFT) && entrada.isKeyDown(Input.KEY_DOWN)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersDown().getMaxX(),j.getPersL().getMinY(),-300,300);
+            j.setDireccion(1);
             
         }else if(entrada.isKeyDown(Input.KEY_RIGHT)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersR().getX(),j.getPersR().getY(),300,0);
+            j.setDireccion(0);
             
         }else if(entrada.isKeyDown(Input.KEY_LEFT)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersL().getX(),j.getPersL().getY(),-300,0);
+            j.setDireccion(1);
             
         }else if(entrada.isKeyDown(Input.KEY_UP)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersUp().getX(),j.getPersUp().getY(),0,-300);
+            j.setDireccion(2);
             
         }else if(entrada.isKeyDown(Input.KEY_DOWN)){
             
-            decrementarMunicion();
             flecha.addFlecha(j.getPersDown().getX(),j.getPersDown().getY(),0,300);
+            j.setDireccion(3);
             
         }else{
-            decrementarMunicion();
-            flecha.addFlecha(j.getPersR().getX(),j.getPersR().getY(),300,0);
+            switch(j.getDireccion()){
+                case 0:
+                    flecha.addFlecha(j.getPersR().getX(),j.getPersR().getY(),300,0);
+                    break;
+                case 1:
+                    flecha.addFlecha(j.getPersL().getX(),j.getPersL().getY(),-300,0);
+                    break;
+                case 2:
+                    flecha.addFlecha(j.getPersUp().getX(),j.getPersUp().getY(),0,-300);
+                    break;
+                case 3:
+                    flecha.addFlecha(j.getPersDown().getX(),j.getPersDown().getY(),0,300);
+                    break;
+                default:
+                    System.out.println("Dirección errónea");   
+            }
         }
         
     }
