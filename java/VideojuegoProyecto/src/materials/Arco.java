@@ -30,7 +30,6 @@ public class Arco {
     
     public void dispararFlecha(Input entrada,Jugador j){
         try{
-            int damage = j.getNivelJugador()*50; //daño que hace la flecha
             controlDisparo(entrada,j);
         }catch(SlickException ex){}  
     }
