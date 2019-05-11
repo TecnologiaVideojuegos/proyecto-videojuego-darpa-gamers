@@ -530,7 +530,7 @@ public class Jugador extends Ente{
                     mon.remove(i);
                     //Añadir municion aleatoria y notificar
                     Random random = new Random();
-                    this.varita.setMunicion(this.varita.getMunicion() + random.nextInt(50));
+                    this.varita.addMunicion(random.nextInt(50));
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[5]);
                     break;
                 }
