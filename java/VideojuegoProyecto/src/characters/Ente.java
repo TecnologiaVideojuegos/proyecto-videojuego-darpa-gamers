@@ -18,6 +18,7 @@ public class Ente {
     private Punto punto;
     private SpriteSheet sprite;
     private float velocidad;
+    int damage;
     int direccion;
 
     /**
@@ -28,16 +29,36 @@ public class Ente {
      * @param sprite imagen del ente
      * @param velocidad velocidad a la que se mueve el ente
      * @param direccion direccion 0,1,2,3 corresponde a donde mira el ente
+     * @param damage daño del ente
      *
      */
-    public Ente(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion) {
+    public Ente(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion, int damage) {
         this.hp = hp;
         this.punto = punto;
         this.sprite = sprite;
         this.velocidad = velocidad;
         this.direccion = direccion;
+        this.damage = damage;
+    }
+    
+    /**
+     * Get the value of damage
+     *
+     * @return the value of damage
+     */
+    public int getDanyo() {
+        return damage;
     }
 
+    /**
+     * Set the value of damage
+     *
+     * @param damage new value of damage
+     */
+    public void setDanyo(int damage) {
+        this.damage = damage;
+    }
+    
     /**
      * Get the value of direccion
      *

@@ -12,6 +12,7 @@ import materials.Inventario;
 import location.Punto;
 import map.Escena;
 import materials.Arco;
+import materials.Objeto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -49,6 +50,15 @@ public class Jugador extends Ente{
     //Arco del jugador
     private final Arco arco;
     
+    //Vida max
+    private final int vida_max;
+    
+    //Estado personaje invulnerable
+    private boolean buff_inv;
+    
+    //Timer estado personaje invulnerable
+    private long buff_inv_timer;
+    
     /**
      * Constructor de la clase Jugador
      * 
@@ -58,13 +68,15 @@ public class Jugador extends Ente{
      * @param velocidad velocidad a la que se mueve el ente
      * @param direccion dirección en la que se queda mirando
      * @param municion cantidad de proyectiles a disparar
+     * @param danio daño del juagor 
      * @throws org.newdawn.slick.SlickException posibles exceptiones por la carga de la imagen
      * 
      */    
-    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int municion) throws SlickException{
-        super(hp, punto, sprite, velocidad,direccion);
+    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int municion,int danio) throws SlickException{
+        super(hp, punto, sprite, velocidad,direccion, danio);
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
+        this.vida_max = hp * this.nivelJugador;
         this.nivelMapa = 1; //inicializado
         this.escenario = 0; //inicializado
         this.img = sprite;
@@ -74,9 +86,44 @@ public class Jugador extends Ente{
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
         this.hud = new Hud();
         this.arco = new Arco(municion);
+        this.inventario = new Inventario(9); // Para que los slots del inventario vayan de 1-9
+        this.buff_inv = false;
+        this.buff_inv_timer= 0;
         
     }
-
+    
+    /**
+     * 
+     * @return el timer del estado de invuln. 
+     */
+    public long getTimerEstadoBuffInv(){
+        return this.buff_inv_timer;
+    }
+    
+    /**
+     * 
+     * @param ms a ser añadidos al timer
+     */
+    public void setTimerEstadoBuffInv( long ms){
+        this.buff_inv_timer = ms;
+    }
+    
+    /**
+     * 
+     * @return el estado del buff de invuln.
+     */
+    public boolean getEstadoBuffInv(){
+        return this.buff_inv;
+    }
+    
+    /**
+     * 
+     * @param estado para el buff de invuln.
+     */
+    public void setEstadoBuffInv(boolean estado){
+        this.buff_inv = estado;
+    }
+    
     /**
      * Get the value of arco
      * 
@@ -112,7 +159,6 @@ public class Jugador extends Ente{
     public void setInventario(Inventario inventario) {
         this.inventario = inventario;
     }
-    
     
     
     /**
@@ -400,27 +446,35 @@ public class Jugador extends Ente{
         for(int i = 0;i<mon.size();i++){
             if(this.getPersDown().intersects(mon.get(i).getPersUp())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
-                this.setHp(this.getHp()-mon.get(i).getDanyo());
-                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
-                    this.getHud().quitarVida();
+                if(!this.buff_inv){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
                 }
             }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
-                this.setHp(this.getHp()-mon.get(i).getDanyo());
-                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
-                    this.getHud().quitarVida();
+                if(!this.buff_inv){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
                 }
             }else if(this.getPersL().intersects(mon.get(i).getPersR())){
                 this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
-                this.setHp(this.getHp()-mon.get(i).getDanyo());
-                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
-                    this.getHud().quitarVida();
+                if(!this.buff_inv){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
                 }
             }else if(this.getPersR().intersects(mon.get(i).getPersL())){
                 this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
-                this.setHp(this.getHp()-mon.get(i).getDanyo());
-                for(int a = 0;a<mon.get(i).getDanyo();a+=25){
-                    this.getHud().quitarVida();
+                if(!this.buff_inv){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
                 }
             }
             this.actualizarPosicion();
@@ -449,8 +503,7 @@ public class Jugador extends Ente{
                 if(this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersDown()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersUp()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersL()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersR())){
                     this.getArco().getFlecha().getColisiones().remove(j);
                     this.getArco().getFlecha().getFlechas().remove(j);
-                    int damage = this.getNivelJugador()*50; //daño que hace la flecha
-                    mon.get(i).setHp(mon.get(i).getHp()-damage);
+                    mon.get(i).setHp(mon.get(i).getHp()- super.getDanyo());
                 }           
                 if(mon.get(i).getHp()<=0){
                     mon.remove(i);
@@ -502,5 +555,127 @@ public class Jugador extends Ente{
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);
+        this.controlPocion(entrada);
+        this.controlBuffInvulnerable(delta);
+    }
+    
+    
+    /**
+     * 
+     * Metodo para saber que pocion estamos tomando
+     * 
+     * @param entrada para saber que pocion estamos tomando
+     * 
+     */
+    public void controlPocion(Input entrada){
+    
+            if(entrada.isKeyPressed(Input.KEY_1)){
+                this.consumirPocion(0);
+            }else if(entrada.isKeyPressed(Input.KEY_2)){
+                this.consumirPocion(1);
+            }else if(entrada.isKeyPressed(Input.KEY_3)){
+                this.consumirPocion(2);
+            }else if(entrada.isKeyPressed(Input.KEY_4)){
+                this.consumirPocion(3);
+            }else if(entrada.isKeyPressed(Input.KEY_5)){
+                this.consumirPocion(4);
+            }else if(entrada.isKeyPressed(Input.KEY_6)){
+                this.aniadirPocion(0);
+                this.aniadirPocion(1);
+                this.aniadirPocion(2);
+                this.aniadirPocion(3);
+                this.aniadirPocion(4);
+            }
+    }
+    
+    /**
+     *  Método para consumir una poción del inventario según el id de poción
+     * 
+     *   @param id_pocion que identifica el tipo de objeto:
+     * 
+     *          id == 0  --> Vida
+     *          id == 1  --> Velocidad
+     *          id == 2  --> Experiencia
+     *          id == 3  --> Defensa
+     *          id == 4  --> Fuerza
+     *  En el motodo tambien modificaremos las caracteristicas los atributos del jugador
+     *  en función de la poción consumida
+     * 
+     */
+    public void consumirPocion(int id_pocion){
+        
+        if(this.inventario.QuedanObj(id_pocion)){
+            switch(id_pocion){
+                //Hp
+                case 0:
+                    this.inventario.RemoveObj(id_pocion);
+                    //Modificar hp del jugador
+                    if(super.getHp() < this.vida_max){
+                        super.setHp( super.getHp() + 25 );
+                        this.hud.anadirVida();
+                        if(super.getHp() > this.vida_max){
+                          super.setHp(this.vida_max);
+                        }   
+                    }
+                    //Sonido consumir poción
+                    break;
+                
+                //Velo
+                case 1:
+                    this.inventario.RemoveObj(id_pocion);
+                    //Modificar velocidad del jugador
+                    super.setVelocidad( super.getVelocidad() + 5.0f);
+                    //Sonido consumir poción
+                    break;
+                
+                //Exp
+                case 2:
+                    this.inventario.RemoveObj(id_pocion);
+                    //Subir experiencia del jugador this.experiencia += 100; p.e
+                    this.anadirExperiencia(200);
+                    //Sonido consumir poción
+                    break;
+                
+                //Def
+                case 3:
+                    this.inventario.RemoveObj(id_pocion);
+                    // Estado invulnerable
+                    setEstadoBuffInv(true);
+                    this.buff_inv_timer = 0;
+                    //Sonido consumir poción
+                    break;
+                
+                //Fuerza
+                case 4:
+                    this.inventario.RemoveObj(id_pocion);
+                    //Modificar el daño que hacemos con el arma arco
+                    super.setDanyo(super.getDanyo() + 25);
+                    //Sonido consumir poción
+                    break;
+            }
+        }
+    }
+    
+    
+    /**
+     * Metodo para añadir una poción al inventario del jugador 
+     * 
+     * @param id_pocion 
+     */
+    public void aniadirPocion(int id_pocion){
+        this.inventario.AddObj((new Objeto(id_pocion,"pocion", "pocion comun")), id_pocion);
+    }
+    
+    
+    public void controlBuffInvulnerable(int delta){
+        
+        if(this.getEstadoBuffInv()){
+            this.setTimerEstadoBuffInv(this.getTimerEstadoBuffInv() + delta );
+            
+            // Despues de 20 segundos se termin el buff
+            if( this.getTimerEstadoBuffInv() > 20000){
+                setEstadoBuffInv(false);
+            }
+        }
     }
 }

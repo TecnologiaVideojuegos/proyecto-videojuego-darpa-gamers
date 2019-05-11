@@ -21,7 +21,6 @@ public class Monstruo extends Ente{
     private Circle rango;
     private Vector movimiento;    
     private final Rectangle PersUp,PersDown,PersL,PersR;
-    private int danyo;
 
     /**
      * Constructor de la clase Monstruo
@@ -33,16 +32,15 @@ public class Monstruo extends Ente{
      * @param direccion
      * @param rango
      * @param comportamiento establece el comportamiento del monstruo
-     * @param danyo
+     * @param danio daño del ente
      * 
      */
-    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento,int danyo) {
-        super(hp, punto, sprite, velocidad,direccion);
+    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento,int danio) {
+        super(hp, punto, sprite, velocidad,direccion, danio);
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+16),12,1);
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
-        this.danyo = danyo;
         try{
             this.movimiento = new Vector(new Punto(0,0));
             this.comportamiento = comportamiento;
@@ -50,23 +48,6 @@ public class Monstruo extends Ente{
         }catch(Exception ex){}
     }
 
-    /**
-     * Get the value of danyo
-     *
-     * @return the value of danyo
-     */
-    public int getDanyo() {
-        return danyo;
-    }
-
-    /**
-     * Set the value of danyo
-     *
-     * @param danyo new value of danyo
-     */
-    public void setDanyo(int danyo) {
-        this.danyo = danyo;
-    }
 
     /**
      * Método que devuelve true o false en caso de colisionar con otro polígono

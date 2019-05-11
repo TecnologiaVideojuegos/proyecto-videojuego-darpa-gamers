@@ -60,7 +60,8 @@ public class Nivel1 extends BasicGameState{
         datos = new DatosNivel(numEscenas,numObjetos,numEnemigos);
         datos.datosNivel1();
         reloj = 0;
-        j = new Jugador(200,datos.getEntradas(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50);
+        /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
+        j = new Jugador(200,datos.getEntradas(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50,50);
         j.getHud().iniciarJugador();
         for(int i = 0;i<numEscenas;i++){ 
             Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i));
@@ -74,6 +75,7 @@ public class Nivel1 extends BasicGameState{
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         escenas.get(j.getEscenario()).getMapa_escena().render(0,0);
         j.getHud().imprimirCorazones();
+        j.getInventario().imprimirInventario();
         /*for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
         }*/
@@ -92,16 +94,25 @@ public class Nivel1 extends BasicGameState{
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
         g.draw(j.getPersDown());
-        g.drawString("escenario " + j.getEscenario(),20,20);
-        g.drawString("municion " + j.getArco().getMunicion(),20,40);
-        g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,60);
-        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
-            g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,80+(20*i));
+        g.drawString("Escenario " + j.getEscenario(),20,20);
+        g.drawString("Municion " + j.getArco().getMunicion(),20,40);
+        g.drawString("Vida del jugador: " + j.getHp(),20,60);
+        g.drawString("Velocidad del jugador: " + j.getVelocidad(),20 ,80 );
+        g.drawString("Fuerza del jugador: " + j.getDanyo(),20 ,100 );
+        g.drawString("Exp: " + j.getExperiencia() ,20,120);
+        if(j.getEstadoBuffInv()){
+            g.drawString("Buff Invulnerabilidad: " + (20 - (j.getTimerEstadoBuffInv()/1000) ) + " seg" ,20,140);
         }
+        g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,180);
+        
+        /*
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
-            g.drawString("Vida: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,120+(20*i));
+            g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
+        }*/
+        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+            g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,200+(20*i));
         }
-        g.drawString("Vida del jugador: " + j.getHp(),20,160);
+        
         
     }
     

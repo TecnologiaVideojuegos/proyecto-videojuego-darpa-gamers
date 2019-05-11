@@ -21,7 +21,7 @@ public class MainGame extends StateBasedGame{
     public MainGame() throws SlickException{
         super("Shiawase Story");
         contenedor = new AppGameContainer(this);
-        contenedor.setDisplayMode(1024,868,false);
+        contenedor.setDisplayMode(1024,768,false);
         contenedor.setShowFPS(true);
         contenedor.start();
     }
