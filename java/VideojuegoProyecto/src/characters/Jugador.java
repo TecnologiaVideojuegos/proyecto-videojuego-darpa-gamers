@@ -9,6 +9,7 @@ import data_level.DatosNivel;
 import graphic.Hud;
 import graphic.Notificaciones;
 import java.util.ArrayList;
+import java.util.Random;
 import materials.Inventario;
 import location.Punto;
 import map.Escena;
@@ -527,6 +528,10 @@ public class Jugador extends Ente{
                 }           
                 if(mon.get(i).getHp()<=0){
                     mon.remove(i);
+                    //Añadir municion aleatoria y notificar
+                    Random random = new Random();
+                    this.varita.setMunicion(this.varita.getMunicion() + random.nextInt(50));
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[5]);
                     break;
                 }
             }
