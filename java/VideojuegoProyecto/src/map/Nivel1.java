@@ -101,8 +101,8 @@ public class Nivel1 extends BasicGameState{
         g.drawString("Velocidad del jugador: " + j.getVelocidad(),20 ,80 );
         g.drawString("Fuerza del jugador: " + j.getDanyo(),20 ,100 );
         g.drawString("Exp: " + j.getExperiencia() ,20,120);
-        if(j.getEstadoBuffInv()){
-            g.drawString("Buff Invulnerabilidad: " + (20 - (j.getTimerEstadoBuffInv()/1000) ) + " seg" ,20,140);
+        if(j.getBuffInv().getEstadoBuff()){
+            g.drawString("Buff Invulnerabilidad: " + ((j.getBuffInv().getMaxTimeBuff()/1000) - (j.getBuffInv().getTimerEstadoBuff()/1000) ) + " seg" ,20,140);
         }
         g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,180);
         

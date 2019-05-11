@@ -12,6 +12,7 @@ import materials.Inventario;
 import location.Punto;
 import map.Escena;
 import materials.Arco;
+import materials.Buff;
 import materials.Objeto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
@@ -54,11 +55,16 @@ public class Jugador extends Ente{
     //Vida max
     private final int vida_max;
     
-    //Estado personaje invulnerable
-    private boolean buff_inv;
+    //Buff personaje invulnerable
+    private Buff buff_invulnerable;
     
-    //Timer estado personaje invulnerable
-    private long buff_inv_timer;
+    //Buff personaje invulnerable
+    private Buff buff_fuerza;
+    
+    //Buff personaje invulnerable
+    private Buff buff_velocidad;
+    
+    
     
     /**
      * Constructor de la clase Jugador
@@ -88,41 +94,34 @@ public class Jugador extends Ente{
         this.hud = new Hud();
         this.arco = new Arco(municion);
         this.inventario = new Inventario(9); // Para que los slots del inventario vayan de 1-9
-        this.buff_inv = false;
-        this.buff_inv_timer= 0;
+        this.buff_invulnerable = new Buff(20000);
+        this.buff_fuerza = new Buff(60000);
+        this.buff_velocidad = new Buff(60000);
         
     }
     
     /**
      * 
-     * @return el timer del estado de invuln. 
+     * @return buff inv
      */
-    public long getTimerEstadoBuffInv(){
-        return this.buff_inv_timer;
+    public Buff getBuffInv(){
+        return this.buff_invulnerable;
     }
     
     /**
      * 
-     * @param ms a ser añadidos al timer
+     * @return buff Fuerza
      */
-    public void setTimerEstadoBuffInv( long ms){
-        this.buff_inv_timer = ms;
+    public Buff getBuffFuerza(){
+        return this.buff_fuerza;
     }
     
     /**
      * 
-     * @return el estado del buff de invuln.
+     * @return buff Velo
      */
-    public boolean getEstadoBuffInv(){
-        return this.buff_inv;
-    }
-    
-    /**
-     * 
-     * @param estado para el buff de invuln.
-     */
-    public void setEstadoBuffInv(boolean estado){
-        this.buff_inv = estado;
+    public Buff getBuffVelo(){
+        return this.buff_velocidad;
     }
     
     /**
@@ -447,7 +446,7 @@ public class Jugador extends Ente{
         for(int i = 0;i<mon.size();i++){
             if(this.getPersDown().intersects(mon.get(i).getPersUp())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
-                if(!this.buff_inv){
+                if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
@@ -455,7 +454,7 @@ public class Jugador extends Ente{
                 }
             }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
-                if(!this.buff_inv){
+                if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
@@ -463,7 +462,7 @@ public class Jugador extends Ente{
                 }
             }else if(this.getPersL().intersects(mon.get(i).getPersR())){
                 this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
-                if(!this.buff_inv){
+                if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
@@ -471,7 +470,7 @@ public class Jugador extends Ente{
                 }
             }else if(this.getPersR().intersects(mon.get(i).getPersL())){
                 this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
-                if(!this.buff_inv){
+                if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
@@ -557,7 +556,7 @@ public class Jugador extends Ente{
         this.controlDeTeclado(delta, entrada, escena);
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);
         this.controlPocion(entrada);
-        this.controlBuffInvulnerable(delta);
+        this.buff_invulnerable.controlBuff(delta);
     }
     
     
@@ -641,8 +640,8 @@ public class Jugador extends Ente{
                 case 3:
                     this.inventario.RemoveObj(id_pocion);
                     // Estado invulnerable
-                    setEstadoBuffInv(true);
-                    this.buff_inv_timer = 0;
+                    this.buff_invulnerable.setEstadoBuff(true);
+                    this.buff_invulnerable.setTimerEstadoBuff(0);
                     //Sonido consumir poción
                     break;
                 
@@ -668,15 +667,4 @@ public class Jugador extends Ente{
     }
     
     
-    public void controlBuffInvulnerable(int delta){
-        
-        if(this.getEstadoBuffInv()){
-            this.setTimerEstadoBuffInv(this.getTimerEstadoBuffInv() + delta );
-            
-            // Despues de 20 segundos se termin el buff
-            if( this.getTimerEstadoBuffInv() > 20000){
-                setEstadoBuffInv(false);
-            }
-        }
-    }
 }
