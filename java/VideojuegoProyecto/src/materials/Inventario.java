@@ -17,10 +17,12 @@ import org.newdawn.slick.SlickException;
 public class Inventario {
     
     private final int tamanio_slot;
+    private boolean help_state;
     private final ArrayList<Objeto> [] inventario;
     private final Image[] listaSlots;
     private final Image[] listaNumObj;
     private final Image[] listaPociones;
+    private final Image[] listaImagenesInfoPoc;
 
     /**
      * Constructor de la clase Inventario
@@ -37,14 +39,50 @@ public class Inventario {
             this.inventario[i] = new ArrayList<Objeto>();
         }
         
+        help_state = false;
         listaSlots = new Image[5];
         listaNumObj = new Image[9];
         listaPociones = new Image[5];
+        listaImagenesInfoPoc = new Image[1];
         
         cargar_imagenes();
         imprimir_Inventario_init();
     }
-
+    
+    /**
+     * 
+     * @return true si se debe mostrar la imagen ayuda pociones
+     */
+    public boolean getHelpState(){
+        return this.help_state;
+    }
+    
+    /**
+     * 
+     * @param x boolean value
+     */
+    public void setHelpState(boolean x){
+        this.help_state = x;
+    }
+    
+    /**
+     * 
+     * Metodo para imprimir la imagen de ayuda sobre pociones
+     */
+    public void imprimirImagenInfoPociones(){
+        if(this.getHelpState()){
+            //this.dibujarElem(this.listaImagenesInfoPoc[0], (new Punto(100,100)));
+            this.listaImagenesInfoPoc[0].draw(265.0f,100.0f);
+        }
+    }
+    /**
+     * 
+     * @return lista de imagenes de info del inventario
+     */
+    public Image [] getImagenInvPocionesInfo(){
+        return listaImagenesInfoPoc;
+    }
+    
     /**
      * Get the value of inventario
      *
@@ -83,6 +121,8 @@ public class Inventario {
         listaPociones[2] = (new Image("./res/pociones/exp_2_32px.png"));
         listaPociones[3] = (new Image("./res/pociones/def_2_32px.png"));
         listaPociones[4] = (new Image("./res/pociones/fuerza_2_32px.png"));
+        
+        listaImagenesInfoPoc[0] = (new Image("./res/game_utils/info_poc.png"));
             
     }
     

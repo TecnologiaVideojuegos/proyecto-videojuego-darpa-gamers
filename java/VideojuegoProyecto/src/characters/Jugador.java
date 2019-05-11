@@ -567,6 +567,7 @@ public class Jugador extends Ente{
         this.buff_invulnerable.controlBuff(delta);
         this.controlBuffFuerza(delta);
         this.controlBuffVelocidad(delta);
+        controlMenuAyudaPociones(entrada);
     }
     
     
@@ -717,6 +718,15 @@ public class Jugador extends Ente{
                 super.setVelocidad(velo_base);
             }
         }
+    }
+    
+    public void controlMenuAyudaPociones(Input entrada){   
+        if(entrada.isKeyDown(Input.KEY_TAB)){
+                this.inventario.setHelpState(true);
+        }else{
+            this.inventario.setHelpState(false);
+        }
+    
     }
     
 }

@@ -78,6 +78,7 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
+        j.getInventario().imprimirImagenInfoPociones();
         /*for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
         }*/
