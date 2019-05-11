@@ -7,7 +7,7 @@ package materials;
 
 /**
  *
- * @author David
+ * @author Davidcawork
  */
 public class Buff {
     

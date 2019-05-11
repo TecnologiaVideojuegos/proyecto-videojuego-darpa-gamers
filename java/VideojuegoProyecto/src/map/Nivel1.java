@@ -104,14 +104,20 @@ public class Nivel1 extends BasicGameState{
         if(j.getBuffInv().getEstadoBuff()){
             g.drawString("Buff Invulnerabilidad: " + ((j.getBuffInv().getMaxTimeBuff()/1000) - (j.getBuffInv().getTimerEstadoBuff()/1000) ) + " seg" ,20,140);
         }
-        g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,180);
+        if(j.getBuffFuerza().getEstadoBuff()){
+            g.drawString("Buff Fuerza: " + ((j.getBuffFuerza().getMaxTimeBuff()/1000) - (j.getBuffFuerza().getTimerEstadoBuff()/1000) ) + " seg" ,20,160);
+        }
+        if(j.getBuffVelo().getEstadoBuff()){
+            g.drawString("Buff Velocidad: " + ((j.getBuffVelo().getMaxTimeBuff()/1000) - (j.getBuffVelo().getTimerEstadoBuff()/1000) ) + " seg" ,20,180);
+        }
+        g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,220);
         
         /*
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
         }*/
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
-            g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,200+(20*i));
+            g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
         }
         
         

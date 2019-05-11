@@ -55,14 +55,20 @@ public class Jugador extends Ente{
     //Vida max
     private final int vida_max;
     
-    //Buff personaje invulnerable
-    private Buff buff_invulnerable;
+    //Velo base
+    private final float velo_base;
+    
+    //Dmg base
+    private final int danyo_base;
     
     //Buff personaje invulnerable
-    private Buff buff_fuerza;
+    private final Buff buff_invulnerable;
     
     //Buff personaje invulnerable
-    private Buff buff_velocidad;
+    private final Buff buff_fuerza;
+    
+    //Buff personaje invulnerable
+    private final Buff buff_velocidad;
     
     
     
@@ -84,6 +90,8 @@ public class Jugador extends Ente{
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
         this.vida_max = hp * this.nivelJugador;
+        this.velo_base = velocidad;
+        this.danyo_base = danio;
         this.nivelMapa = 1; //inicializado
         this.escenario = 0; //inicializado
         this.img = sprite;
@@ -557,6 +565,8 @@ public class Jugador extends Ente{
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);
         this.controlPocion(entrada);
         this.buff_invulnerable.controlBuff(delta);
+        this.controlBuffFuerza(delta);
+        this.controlBuffVelocidad(delta);
     }
     
     
@@ -625,6 +635,8 @@ public class Jugador extends Ente{
                     this.inventario.RemoveObj(id_pocion);
                     //Modificar velocidad del jugador
                     super.setVelocidad( super.getVelocidad() + 5.0f);
+                    this.buff_velocidad.setEstadoBuff(true);
+                    this.buff_velocidad.setTimerEstadoBuff(0);
                     //Sonido consumir poción
                     break;
                 
@@ -650,6 +662,8 @@ public class Jugador extends Ente{
                     this.inventario.RemoveObj(id_pocion);
                     //Modificar el daño que hacemos con el arma arco
                     super.setDanyo(super.getDanyo() + 25);
+                    this.buff_fuerza.setEstadoBuff(true);
+                    this.buff_fuerza.setTimerEstadoBuff(0);
                     //Sonido consumir poción
                     break;
             }
@@ -666,5 +680,43 @@ public class Jugador extends Ente{
         this.inventario.AddObj((new Objeto(id_pocion,"pocion", "pocion comun")), id_pocion);
     }
     
+    /**
+     * 
+     * 
+     * @param delta tiempo en ms desde la ultima que se hizo 
+     *              un update en el nivel.
+     */
+    public void controlBuffFuerza(int delta){
+        
+        if(this.buff_fuerza.getEstadoBuff()){
+            this.buff_fuerza.setTimerEstadoBuff(this.buff_fuerza.getTimerEstadoBuff() + delta );
+            
+            // Despues de x segundos se termin el buff
+            if( this.buff_fuerza.getTimerEstadoBuff() > this.buff_fuerza.getMaxTimeBuff()){
+                this.buff_fuerza.setEstadoBuff(false);
+                super.setDanyo(danyo_base);
+                
+            }
+        }
+    }
+    
+    /**
+     * 
+     * 
+     * @param delta tiempo en ms desde la ultima que se hizo 
+     *              un update en el nivel.
+     */
+    public void controlBuffVelocidad(int delta){
+        
+        if(this.buff_velocidad.getEstadoBuff()){
+            this.buff_velocidad.setTimerEstadoBuff(this.buff_velocidad.getTimerEstadoBuff() + delta );
+            
+            // Despues de x segundos se termin el buff
+            if( this.buff_velocidad.getTimerEstadoBuff() > this.buff_velocidad.getMaxTimeBuff()){
+                this.buff_velocidad.setEstadoBuff(false);
+                super.setVelocidad(velo_base);
+            }
+        }
+    }
     
 }
