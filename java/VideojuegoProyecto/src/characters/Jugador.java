@@ -7,6 +7,7 @@ package characters;
 
 import data_level.DatosNivel;
 import graphic.Hud;
+import graphic.Notificaciones;
 import java.util.ArrayList;
 import materials.Inventario;
 import location.Punto;
@@ -70,6 +71,9 @@ public class Jugador extends Ente{
     //Buff personaje invulnerable
     private final Buff buff_velocidad;
     
+    //Notificador
+    private final Notificaciones notif;
+    
     
     
     /**
@@ -105,9 +109,17 @@ public class Jugador extends Ente{
         this.buff_invulnerable = new Buff(20000);
         this.buff_fuerza = new Buff(60000);
         this.buff_velocidad = new Buff(60000);
+        this.notif = new Notificaciones(3000);
         
     }
     
+    /**
+     * 
+     * @return devuelve el notificador
+     */
+    public Notificaciones getNoti(){
+        return this.notif;
+    }
     /**
      * 
      * @return buff inv
@@ -568,6 +580,7 @@ public class Jugador extends Ente{
         this.controlBuffFuerza(delta);
         this.controlBuffVelocidad(delta);
         controlMenuAyudaPociones(entrada);
+        this.notif.controlBuff(delta);
     }
     
     
@@ -592,10 +605,15 @@ public class Jugador extends Ente{
                 this.consumirPocion(4);
             }else if(entrada.isKeyPressed(Input.KEY_6)){
                 this.aniadirPocion(0);
+                this.notif.aniadirNotificacion(this.notif.getImgNotf()[0]);
                 this.aniadirPocion(1);
+                this.notif.aniadirNotificacion(this.notif.getImgNotf()[1]);
                 this.aniadirPocion(2);
+                this.notif.aniadirNotificacion(this.notif.getImgNotf()[2]);
                 this.aniadirPocion(3);
+                this.notif.aniadirNotificacion(this.notif.getImgNotf()[3]);
                 this.aniadirPocion(4);
+                this.notif.aniadirNotificacion(this.notif.getImgNotf()[4]);
             }
     }
     
