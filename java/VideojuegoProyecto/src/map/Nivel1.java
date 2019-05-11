@@ -93,13 +93,13 @@ public class Nivel1 extends BasicGameState{
         /*g.draw(escenas.get(j.getEscenario()).getArea_entrada());
         g.draw(escenas.get(j.getEscenario()).getArea_salida());*/
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());
-        j.getArco().getFlecha().draw(g);
+        j.getVarita().getFlecha().draw(g);
         g.draw(j.getPersL());
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
         g.draw(j.getPersDown());
         g.drawString("Escenario " + j.getEscenario(),20,20);
-        g.drawString("Municion " + j.getArco().getMunicion(),20,40);
+        g.drawString("Municion " + j.getVarita().getMunicion(),20,40);
         g.drawString("Vida del jugador: " + j.getHp(),20,60);
         g.drawString("Velocidad del jugador: " + j.getVelocidad(),20 ,80 );
         g.drawString("Fuerza del jugador: " + j.getDanyo(),20 ,100 );

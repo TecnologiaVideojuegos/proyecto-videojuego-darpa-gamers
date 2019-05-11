@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import materials.Inventario;
 import location.Punto;
 import map.Escena;
-import materials.Arco;
 import materials.Buff;
 import materials.Objeto;
+import materials.Varita;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -50,8 +50,8 @@ public class Jugador extends Ente{
     //Variable que guarda el hud del jugador
     private final Hud hud;
     
-    //Arco del jugador
-    private final Arco arco;
+    //Varita del jugador
+    private final Varita varita;
     
     //Vida max
     private final int vida_max;
@@ -104,7 +104,7 @@ public class Jugador extends Ente{
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
         this.hud = new Hud();
-        this.arco = new Arco(municion);
+        this.varita = new Varita(municion);
         this.inventario = new Inventario(9); // Para que los slots del inventario vayan de 1-9
         this.buff_invulnerable = new Buff(20000);
         this.buff_fuerza = new Buff(60000);
@@ -145,12 +145,12 @@ public class Jugador extends Ente{
     }
     
     /**
-     * Get the value of arco
+     * Get the value of Varita
      * 
-     * @return the value of arco 
+     * @return the value of Varita 
      */
-    public Arco getArco(){
-        return arco;
+    public Varita getVarita(){
+        return varita;
     }
     
     /**
@@ -342,9 +342,9 @@ public class Jugador extends Ente{
      * @param delta tiempo transcurrido
      */
     public void controlDeProyectil(Input entrada,GameContainer container,Escena escena,int delta){
-        this.getArco().actualizarProyectil(container,escena, delta);
-        if(entrada.isKeyPressed(Input.KEY_SPACE) && this.getArco().getMunicion()!= 0){
-            this.getArco().dispararFlecha(entrada,this);
+        this.getVarita().actualizarProyectil(container,escena, delta);
+        if(entrada.isKeyPressed(Input.KEY_SPACE) && this.getVarita().getMunicion()!= 0){
+            this.getVarita().dispararFlecha(entrada,this);
         }
     }
     
@@ -519,10 +519,10 @@ public class Jugador extends Ente{
      */
     public void destruirEnemigo(ArrayList<Monstruo> mon){
         for(int i = 0;i<mon.size();i++){
-            for(int j = 0;j<this.getArco().getFlecha().getColisiones().size();j++){
-                if(this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersDown()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersUp()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersL()) || this.getArco().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersR())){
-                    this.getArco().getFlecha().getColisiones().remove(j);
-                    this.getArco().getFlecha().getFlechas().remove(j);
+            for(int j = 0;j<this.getVarita().getFlecha().getColisiones().size();j++){
+                if(this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersDown()) || this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersUp()) || this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersL()) || this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersR())){
+                    this.getVarita().getFlecha().getColisiones().remove(j);
+                    this.getVarita().getFlecha().getFlechas().remove(j);
                     mon.get(i).setHp(mon.get(i).getHp()- super.getDanyo());
                 }           
                 if(mon.get(i).getHp()<=0){
@@ -679,7 +679,7 @@ public class Jugador extends Ente{
                 //Fuerza
                 case 4:
                     this.inventario.RemoveObj(id_pocion);
-                    //Modificar el daño que hacemos con el arma arco
+                    //Modificar el daño que hacemos con el arma Varita
                     super.setDanyo(super.getDanyo() + 25);
                     this.buff_fuerza.setEstadoBuff(true);
                     this.buff_fuerza.setTimerEstadoBuff(0);

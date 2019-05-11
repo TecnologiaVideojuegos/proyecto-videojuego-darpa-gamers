@@ -15,15 +15,15 @@ import org.newdawn.slick.SlickException;
  *
  * @author Senapi Aroal
  */
-public class Arco {
+public class Varita {
     
     //Generador de flechas
     private ControladorFlechas flecha;
     
-    //Municion del arco
+    //Municion de la Varita
     private int municion;
     
-    public Arco(int municion){
+    public Varita(int municion){
         this.municion = municion;
         flecha = new ControladorFlechas();
     }
