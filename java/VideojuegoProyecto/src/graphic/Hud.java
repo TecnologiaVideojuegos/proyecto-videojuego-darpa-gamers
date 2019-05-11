@@ -7,6 +7,7 @@ package graphic;
 
 import java.util.ArrayList;
 import location.Punto;
+import materials.Buff;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -20,6 +21,7 @@ public class Hud {
     private final int numCorazonesMax = 6;
     private final ArrayList<Image> listaCorazones;
     private final Image[] listaBasica;
+    private final Image [] listaEstadosPociones;
     
     /**
      * Constructor de la clase Hud
@@ -27,11 +29,65 @@ public class Hud {
      * @throws org.newdawn.slick.SlickException
      */
     public Hud() throws SlickException{
+        listaEstadosPociones = new Image[3];
         listaCorazones = new ArrayList<>();
         listaBasica = new Image[5];
         inicio();
+        cargar_img_estados_pociones();
     }
-
+    
+    /**
+     * 
+     * Carga las imagenes de los estados de las pociones
+     * 
+     * @throws SlickException se trata por error de obtener la imagen 
+     * 
+     */
+    public void cargar_img_estados_pociones() throws SlickException{
+        
+        listaEstadosPociones[0] = (new Image("./res/estados_pociones/estado_dmg.png"));
+        listaEstadosPociones[1] = (new Image("./res/estados_pociones/estado_invul.png")); 
+        listaEstadosPociones[2] = (new Image("./res/estados_pociones/estado_velo.png")); 
+        
+    }
+    
+    
+    /**
+     * 
+     * Metodo para mostrar imagenes de los estados actuales
+     * 
+     * @param fuerza buff
+     * @param invul buff
+     * @param velo  buff
+     */
+    public void imprime_estados(Buff fuerza, Buff invul, Buff velo){
+        
+        if(fuerza.getEstadoBuff()){
+            this.dibujarElem(this.listaEstadosPociones[0], (new Punto(950, 150)));
+            
+        }
+        if(invul.getEstadoBuff()){
+            this.dibujarElem(this.listaEstadosPociones[1], (new Punto(950, 200)));
+            
+        }
+        if(velo.getEstadoBuff()){
+            this.dibujarElem(this.listaEstadosPociones[2], (new Punto(950, 250)));
+            
+        }
+        
+    }
+    
+    /**
+     * 
+     * Metodo para pintar estados 
+     * 
+     * @param img
+     * @param punto 
+     */
+    public void dibujarElem(Image img,Punto punto){
+        img.draw(punto.getX(),punto.getY());
+    }
+    
     /**
      * inicializa los dibujos gráficos de la vida del jugador
      * 
