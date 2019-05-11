@@ -15,6 +15,7 @@ import org.newdawn.slick.tiled.*;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class Nivel1 extends BasicGameState{
 

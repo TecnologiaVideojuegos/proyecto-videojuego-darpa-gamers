@@ -14,6 +14,7 @@ import org.newdawn.slick.geom.*;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class Monstruo extends Ente{
     

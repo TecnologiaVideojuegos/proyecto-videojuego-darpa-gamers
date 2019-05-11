@@ -11,6 +11,7 @@ import org.newdawn.slick.SpriteSheet;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class Ente {
     

@@ -20,6 +20,7 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class Jugador extends Ente{
     
