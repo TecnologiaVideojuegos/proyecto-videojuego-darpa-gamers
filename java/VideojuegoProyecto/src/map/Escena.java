@@ -7,6 +7,7 @@ package map;
 
 import characters.Monstruo;
 import java.util.ArrayList;
+import materials.Cofre;
 import org.newdawn.slick.geom.*;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -22,14 +23,16 @@ public class Escena {
     private final Polygon mapa_colision;
     private final ArrayList<Polygon> mapa_objetos;
     private final ArrayList<Monstruo> enemigos;
+    private final ArrayList<Cofre> cofres;
 
-    public Escena(TiledMap mapa_escena,Polygon mapa_colision,ArrayList<Polygon> mapa_objetos,Polygon area_entrada,Polygon area_salida,ArrayList<Monstruo> enemigos) {
+    public Escena(TiledMap mapa_escena,Polygon mapa_colision,ArrayList<Polygon> mapa_objetos,Polygon area_entrada,Polygon area_salida,ArrayList<Monstruo> enemigos,ArrayList<Cofre> cofres) {
         this.mapa_escena = mapa_escena;
         this.mapa_colision = mapa_colision;
         this.area_entrada = area_entrada;
         this.area_salida = area_salida;
         this.mapa_objetos = mapa_objetos;
         this.enemigos = enemigos;
+        this.cofres = cofres;
     }
 
     public TiledMap getMapa_escena() {
@@ -55,6 +58,10 @@ public class Escena {
     public ArrayList<Monstruo> getEnemigos() {
         return enemigos;
     }  
+    
+    public ArrayList<Cofre> getCofres(){
+        return this.cofres;
+    }
     
     public boolean colisionConObjetos(Shape lado){
         if(lado.intersects(mapa_colision)){

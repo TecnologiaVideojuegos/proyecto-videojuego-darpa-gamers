@@ -8,6 +8,7 @@ package map;
 import characters.*;
 import data_level.DatosNivel;
 import java.util.ArrayList;
+import materials.Cofre;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.tiled.*;
@@ -57,6 +58,9 @@ public class Nivel1 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        ArrayList<Cofre> cofres = new ArrayList<>();
+        cofres.add((new Cofre(600,500)));
+        
         escenas = new ArrayList<>(); 
         datos = new DatosNivel(numEscenas,numObjetos,numEnemigos);
         datos.datosNivel1();
@@ -65,7 +69,7 @@ public class Nivel1 extends BasicGameState{
         j = new Jugador(200,datos.getEntradas(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50,50);
         j.getHud().iniciarJugador();
         for(int i = 0;i<numEscenas;i++){ 
-            Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i));
+            Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),cofres);
             escenas.add(es);
         }
         entrada = container.getInput(); 
@@ -80,6 +84,10 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getInventario().imprimirImagenInfoPociones();
         j.getNoti().imprimirNotificaciones();
+        
+        for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
+            escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
+        }
         /*for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
         }*/

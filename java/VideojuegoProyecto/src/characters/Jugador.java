@@ -14,6 +14,7 @@ import materials.Inventario;
 import location.Punto;
 import map.Escena;
 import materials.Buff;
+import materials.Cofre;
 import materials.Objeto;
 import materials.Varita;
 import org.newdawn.slick.*;
@@ -586,6 +587,7 @@ public class Jugador extends Ente{
         this.controlBuffVelocidad(delta);
         controlMenuAyudaPociones(entrada);
         this.notif.controlBuff(delta);
+        this.controlColisionCofres(escena.get(this.getEscenario()).getCofres(), entrada);
     }
     
     
@@ -743,6 +745,10 @@ public class Jugador extends Ente{
         }
     }
     
+    /**
+     * 
+     * @param entrada controlar el mensaje informtivo sobre las pociones
+     */
     public void controlMenuAyudaPociones(Input entrada){   
         if(entrada.isKeyDown(Input.KEY_TAB)){
                 this.inventario.setHelpState(true);
@@ -750,6 +756,90 @@ public class Jugador extends Ente{
             this.inventario.setHelpState(false);
         }
     
+    }
+    
+    public void controlColisionCofres(ArrayList<Cofre> cofres, Input entrada){
+    
+          for(int i =0; i < cofres.size(); i++){
+              if(this.getPersDown().intersects(cofres.get(i).getCofreRect())){
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
+                if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
+                    //Recoger drop
+                    
+                    for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
+                        //Añadir pocion al inventario
+                        this.aniadirPocion(cofres.get(i).getListaIdsCofre().get(j));
+                        
+                        //Notificar del drop
+                        this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
+                            
+                    }
+                    
+                    //Cambiar de estado el cofre a abierto
+                    cofres.get(i).setEstadoCofre(true);
+                    
+                }
+                
+            }else if(this.getPersUp().intersects(cofres.get(i).getCofreRect())){
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
+                if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
+                    //Recoger drop
+                    
+                    for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
+                        //Añadir pocion al inventario
+                        this.aniadirPocion(cofres.get(i).getListaIdsCofre().get(j));
+                        
+                        //Notificar del drop
+                        this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
+                            
+                    }
+                    
+                    //Cambiar de estado el cofre a abierto
+                    cofres.get(i).setEstadoCofre(true);
+                    
+                }
+                
+            }else if(this.getPersL().intersects(cofres.get(i).getCofreRect())){
+                this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
+                if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
+                    //Recoger drop
+                    
+                    for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
+                        //Añadir pocion al inventario
+                        this.aniadirPocion(cofres.get(i).getListaIdsCofre().get(j));
+                        
+                        //Notificar del drop
+                        this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
+                            
+                    }
+                    
+                    //Cambiar de estado el cofre a abierto
+                    cofres.get(i).setEstadoCofre(true);
+                    
+                }
+               
+            }else if(this.getPersR().intersects(cofres.get(i).getCofreRect())){
+                this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
+                if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
+                    //Recoger drop
+                    
+                    for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
+                        //Añadir pocion al inventario
+                        this.aniadirPocion(cofres.get(i).getListaIdsCofre().get(j));
+                        
+                        //Notificar del drop
+                        this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
+                            
+                    }
+                    
+                    //Cambiar de estado el cofre a abierto
+                    cofres.get(i).setEstadoCofre(true);
+                    
+                }
+                
+            }
+            this.actualizarPosicion();
+          }  
     }
     
 }
