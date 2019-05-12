@@ -38,7 +38,7 @@ public class Notificaciones {
         this.timer_not = 0;
         this.duracion_notf = duracion;
         this.wait_state = false;
-        this.duracion_espera = 1000;
+        this.duracion_espera = 750;
         this.timer_not_wait_state = 0;
         
         cargar_imagenes_notficaciones();
