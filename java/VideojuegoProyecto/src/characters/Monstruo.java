@@ -19,6 +19,7 @@ import org.newdawn.slick.geom.*;
 public class Monstruo extends Ente{
     
     private String comportamiento;
+    private Punto respawn;
     private Circle rango;
     private Vector movimiento;    
     private final Rectangle PersUp,PersDown,PersL,PersR;
@@ -46,10 +47,28 @@ public class Monstruo extends Ente{
             this.movimiento = new Vector(new Punto(0,0));
             this.comportamiento = comportamiento;
             this.rango = new Circle(punto.getX()+sprite.getHeight()/2,punto.getY()+sprite.getWidth()/2,rango); //creamos el rango que tendrá el monstruo
+            this.respawn = punto;
         }catch(Exception ex){}
     }
 
+    /**
+     * Get the value of respawn
+     *
+     * @return the value of respawn
+     */
+    public Punto getRespawn() {
+        return respawn;
+    }
 
+    /**
+     * Set the value of respawn
+     *
+     * @param respawn new value of respawn
+     */
+    public void setRespawn(Punto respawn) {
+        this.respawn = respawn;
+    }
+    
     /**
      * Método que devuelve true o false en caso de colisionar con otro polígono
      * 
@@ -154,9 +173,24 @@ public class Monstruo extends Ente{
             this.movimientoPasivo(escena,delta,reloj);    
         }
         this.detectarColisionEnemigo(escena.getEnemigos());
+        this.corregirBug(escena);
         this.actualizarPosicionPoligono();
         this.actualizarRango();
     } 
+    
+    public void corregirBug(Escena escena){
+
+        if(!escena.getMapa_colision().contains(this.getPersUp()) && !escena.getMapa_colision().contains(this.getPersDown()) && !escena.getMapa_colision().contains(this.getPersL()) && !escena.getMapa_colision().contains(this.getPersR()) ){
+            this.setPunto(this.getRespawn());
+            
+        }else{
+            for(int i = 0;i<escena.getMapa_objetos().size();i++){
+                if(escena.getMapa_objetos().get(i).contains(this.getPersUp()) && escena.getMapa_objetos().get(i).contains(this.getPersDown()) && escena.getMapa_objetos().get(i).contains(this.getPersL()) && escena.getMapa_objetos().get(i).contains(this.getPersR()) ){
+                    this.setPunto(this.getRespawn());
+                }
+            }
+        }
+    }
     
     public void detectarColisionEnemigo(ArrayList<Monstruo> mon){
         for(int i = 0;i<mon.size();i++){
