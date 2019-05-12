@@ -777,7 +777,7 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    cofres.get(i).getSonidoCofre().play();
                     
                     
                     //Cambiar de estado el cofre a abierto
@@ -799,7 +799,7 @@ public class Jugador extends Ente{
                             
                     }
                     //Sacar el sonido de apertura
-                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    cofres.get(i).getSonidoCofre().play();
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
@@ -821,7 +821,7 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    cofres.get(i).getSonidoCofre().play();
                     
                     
                     //Cambiar de estado el cofre a abierto
@@ -844,7 +844,7 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    cofres.get(i).getSonidoCofre().play();
                     
                     
                     //Cambiar de estado el cofre a abierto
