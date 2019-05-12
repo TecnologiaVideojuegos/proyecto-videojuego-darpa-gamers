@@ -6,17 +6,11 @@
 package characters;
 
 import data_level.DatosNivel;
-import graphic.Hud;
-import graphic.Notificaciones;
-import java.util.ArrayList;
-import java.util.Random;
-import materials.Inventario;
+import graphic.*;
+import java.util.*;
 import location.Punto;
 import map.Escena;
-import materials.Buff;
-import materials.Cofre;
-import materials.Objeto;
-import materials.Varita;
+import materials.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
