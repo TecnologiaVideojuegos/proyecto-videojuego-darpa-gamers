@@ -22,6 +22,9 @@ public class Notificaciones {
     private final ArrayList<Image> colaNotificaciones;
     private long timer_not;
     private final int duracion_notf;
+    private boolean wait_state;
+    private long timer_not_wait_state;
+    private final int duracion_espera;
     
     /**
      * 
@@ -34,8 +37,43 @@ public class Notificaciones {
         this.colaNotificaciones = new ArrayList<>();
         this.timer_not = 0;
         this.duracion_notf = duracion;
+        this.wait_state = false;
+        this.duracion_espera = 1000;
+        this.timer_not_wait_state = 0;
         
         cargar_imagenes_notficaciones();
+    }
+    
+    /**
+     * 
+     * @return el timepo actual del timer entre notf
+     */
+    public long getTimerNotfWS(){
+        return this.timer_not_wait_state;
+    }
+    
+    /**
+     * 
+     * @param ms establecer un tiempo entre notificaciones
+     */
+    public void setTimerNotfWS( long ms){
+        this.timer_not_wait_state = ms;
+    }
+    
+    /**
+     * 
+     * @return el estado de espera de las notificacion entre una y otra 
+     */
+    public boolean getWaitState(){
+        return this.wait_state;
+    }
+    
+    /**
+     * 
+     * @param state a asignar al estado de espera
+     */
+    public void setWaitState(boolean state){
+        this.wait_state = state;
     }
     
     /**
@@ -99,7 +137,7 @@ public class Notificaciones {
      * 
      */
     public void imprimirNotificaciones(){
-        if(!this.colaNotificaciones.isEmpty()){
+        if(!this.colaNotificaciones.isEmpty()&& !this.getWaitState()){
             this.colaNotificaciones.get(this.colaNotificaciones.size() - 1).draw(40.0f, 640.0f);
         }
     }
@@ -108,16 +146,37 @@ public class Notificaciones {
      * 
      * @param delta tiempo desde el ultimo update 
      */
-    public void controlBuff(int delta){
+    public void controlNotif(int delta){
         
-        if(!this.colaNotificaciones.isEmpty()){
+        if(!this.colaNotificaciones.isEmpty() && !this.getWaitState()){
             this.setTimerNotf(this.getTimerNotf() + delta );
             
             // Despues de x seg eliminamos la notificacion
             if( this.getTimerNotf() > this.duracion_notf){
                 this.eliminarNotificacion();
                 this.setTimerNotf(0);
+                this.setWaitState(true);
             }
         }
     }
+    
+    /**
+     * 
+     * @param delta tiempo desde el ultimo update 
+     */
+    public void controlEstadoEspera(int delta){
+        
+        if(this.getWaitState()){
+            
+            this.setTimerNotfWS(this.getTimerNotfWS() + delta );
+            
+            // Despues de x seg dejamos mostrar la notificacion
+            if( this.getTimerNotfWS() > this.duracion_espera){
+                this.setWaitState(false);
+                this.setTimerNotfWS(0);
+            }
+        }
+    }
+    
+    
 }

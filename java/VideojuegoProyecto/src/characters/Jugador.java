@@ -591,7 +591,8 @@ public class Jugador extends Ente{
         this.controlBuffFuerza(delta);
         this.controlBuffVelocidad(delta);
         controlMenuAyudaPociones(entrada);
-        this.notif.controlBuff(delta);
+        this.notif.controlNotif(delta);
+        this.notif.controlEstadoEspera(delta);
         this.controlColisionCofres(escena.get(this.getEscenario()).getCofres(), entrada);
     }
     
