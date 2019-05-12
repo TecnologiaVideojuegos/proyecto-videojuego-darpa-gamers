@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import location.Punto;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.*;
 
@@ -23,6 +24,7 @@ public final class Cofre {
     private boolean estado_cofre;
     private ArrayList<Integer> lista_id_pociones;
     private Rectangle cofreRect;
+    private Sound sonido_apertura_cofre;
     
     /**
      * 
@@ -34,6 +36,8 @@ public final class Cofre {
      */
     public Cofre(int x, int y) throws SlickException{
         
+        /*Cargar el sonido de apertura del cofre    */
+        this.sonido_apertura_cofre = new Sound("./res/sounds/open_chest.wav");
         
         /*Cargar el spritesheet del cofre */
         cargar_animacion_cofre();
@@ -178,5 +182,12 @@ public final class Cofre {
         return this.cofreRect;
     }
     
+    /**
+     * 
+     * @return Retorna el sonido de apertura del cofre
+     */
+    public Sound getSonidoCofre(){
+        return this.sonido_apertura_cofre;
+    }
     
 }
