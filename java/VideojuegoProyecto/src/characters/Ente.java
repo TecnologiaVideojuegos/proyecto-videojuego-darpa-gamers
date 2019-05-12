@@ -6,6 +6,7 @@
 package characters;
 
 import location.Punto;
+import map.Escena;
 import org.newdawn.slick.SpriteSheet;
 
 /**
@@ -13,7 +14,7 @@ import org.newdawn.slick.SpriteSheet;
  * @author Senapi Aroal
  * @author Davidcawork
  */
-public class Ente {
+public abstract class Ente {
     
     private int hp;
     private Punto punto;
@@ -150,4 +151,6 @@ public class Ente {
         this.hp = hp;
     }
 
+    abstract void corregirBug(Escena escena);
+    
 }

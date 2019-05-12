@@ -543,13 +543,14 @@ public class Jugador extends Ente{
         }
     }
     
-    public void corregirBug(ArrayList<Escena> escena,DatosNivel datos){
-        if(!escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersUp()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersDown()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersL()) && !escena.get(this.getEscenario()).getMapa_colision().contains(this.getPersR()) ){
+    @Override
+    public void corregirBug(Escena escena){
+        if(!escena.getMapa_colision().contains(this.getPersUp()) && !escena.getMapa_colision().contains(this.getPersDown()) && !escena.getMapa_colision().contains(this.getPersL()) && !escena.getMapa_colision().contains(this.getPersR()) ){
             this.setPunto(new Punto(respawn().getX(),respawn().getY()));
             this.actualizarPosicion();
         }else{
-            for(int i = 0;i<escena.get(this.getEscenario()).getMapa_objetos().size();i++){
-                if(escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersUp()) && escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersDown()) && escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersL()) && escena.get(this.getEscenario()).getMapa_objetos().get(i).contains(this.getPersR()) ){
+            for(int i = 0;i<escena.getMapa_objetos().size();i++){
+                if(escena.getMapa_objetos().get(i).contains(this.getPersUp()) && escena.getMapa_objetos().get(i).contains(this.getPersDown()) && escena.getMapa_objetos().get(i).contains(this.getPersL()) && escena.getMapa_objetos().get(i).contains(this.getPersR()) ){
                     this.setPunto(new Punto(respawn().getX(),respawn().getY()));
                     this.actualizarPosicion();
                 }
@@ -580,7 +581,7 @@ public class Jugador extends Ente{
      */
     public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena){
         this.finPartida(game);
-        this.corregirBug(escena, datos);
+        this.corregirBug(escena.get(this.getEscenario()));
         this.gestorCambiosMapas(game, numEscenas, escena, datos);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
