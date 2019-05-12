@@ -21,6 +21,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 
+
 /**
  *
  * @author Senapi Aroal
@@ -775,6 +776,10 @@ public class Jugador extends Ente{
                             
                     }
                     
+                    //Sacar el sonido de apertura
+                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    
+                    
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
                     
@@ -793,6 +798,8 @@ public class Jugador extends Ente{
                         this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
                             
                     }
+                    //Sacar el sonido de apertura
+                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
@@ -813,6 +820,10 @@ public class Jugador extends Ente{
                             
                     }
                     
+                    //Sacar el sonido de apertura
+                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    
+                    
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
                     
@@ -831,6 +842,10 @@ public class Jugador extends Ente{
                         this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
                             
                     }
+                    
+                    //Sacar el sonido de apertura
+                    cofres.get(i).getSonidoCofre().playAt(-1,0,0);
+                    
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
