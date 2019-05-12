@@ -529,11 +529,14 @@ public class Jugador extends Ente{
                     mon.get(i).setHp(mon.get(i).getHp()- super.getDanyo());
                 }           
                 if(mon.get(i).getHp()<=0){
-                    mon.remove(i);
+                    
                     //Añadir municion aleatoria y notificar
                     Random random = new Random();
                     this.varita.addMunicion(random.nextInt(50));
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[5]);
+                    this.anadirExperiencia((int)Math.sqrt((double)mon.get(i).getDanyo()) + 15*this.nivelJugador);
+                    
+                    mon.remove(i);
                     break;
                 }
             }
