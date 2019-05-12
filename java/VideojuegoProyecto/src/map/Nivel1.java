@@ -84,7 +84,7 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
-        j.getInventario().imprimirImagenInfoPociones();
+        
         j.getNoti().imprimirNotificaciones();
         
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
@@ -132,6 +132,9 @@ public class Nivel1 extends BasicGameState{
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
         }
+        
+        
+        j.getInventario().imprimirImagenInfoPociones();
         
         
     }
