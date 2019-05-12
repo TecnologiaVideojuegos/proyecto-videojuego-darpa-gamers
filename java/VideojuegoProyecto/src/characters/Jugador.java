@@ -762,7 +762,7 @@ public class Jugador extends Ente{
     
           for(int i =0; i < cofres.size(); i++){
               if(this.getPersDown().intersects(cofres.get(i).getCofreRect())){
-                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-1));
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -781,7 +781,7 @@ public class Jugador extends Ente{
                 }
                 
             }else if(this.getPersUp().intersects(cofres.get(i).getCofreRect())){
-                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+1));
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -800,7 +800,7 @@ public class Jugador extends Ente{
                 }
                 
             }else if(this.getPersL().intersects(cofres.get(i).getCofreRect())){
-                this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
+                this.setPunto(new Punto(this.getPunto().getX()+1,this.getPunto().getY()));
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -819,7 +819,7 @@ public class Jugador extends Ente{
                 }
                
             }else if(this.getPersR().intersects(cofres.get(i).getCofreRect())){
-                this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
+                this.setPunto(new Punto(this.getPunto().getX()-1,this.getPunto().getY()));
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     

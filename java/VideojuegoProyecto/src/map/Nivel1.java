@@ -41,6 +41,9 @@ public class Nivel1 extends BasicGameState{
     //Cantidad de enemigos que tendrá cada escena
     private final int[] numEnemigos = {1,0,2};
     
+    //Cantidad de cofres que tendrá cada escena
+    private final int[] numCofres = {1, 1, 0};
+    
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos;
 
@@ -58,18 +61,17 @@ public class Nivel1 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        ArrayList<Cofre> cofres = new ArrayList<>();
-        cofres.add((new Cofre(600,500)));
+        
         
         escenas = new ArrayList<>(); 
-        datos = new DatosNivel(numEscenas,numObjetos,numEnemigos);
+        datos = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);
         datos.datosNivel1();
         reloj = 0;
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j = new Jugador(200,datos.getEntradas(0),new SpriteSheet("./res/Character1.png",48,72),VELOCIDAD,0,50,50);
         j.getHud().iniciarJugador();
         for(int i = 0;i<numEscenas;i++){ 
-            Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),cofres);
+            Escena es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
             escenas.add(es);
         }
         entrada = container.getInput(); 

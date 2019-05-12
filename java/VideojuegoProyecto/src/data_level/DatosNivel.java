@@ -8,6 +8,7 @@ package data_level;
 import characters.Monstruo;
 import java.util.ArrayList;
 import location.Punto;
+import materials.Cofre;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Polygon;
 
@@ -36,6 +37,8 @@ public class DatosNivel {
     private final ArrayList<ArrayList<Polygon>> mapa_objetos; 
     
     private final ArrayList<ArrayList<Monstruo>> enemigos;
+    
+    private final ArrayList<ArrayList<Cofre>> cofres_escenas;
 
     //entero que indica el número de escenas que tiene el nivel
     private final int numEscenas;
@@ -46,25 +49,31 @@ public class DatosNivel {
     //entero que contiene el número de enemigos que hay en cada escena
     private final int[] numEnemigos;
     
+    //entero que contiene el numero de cofres que hay en cada escena
+    private final int [] numCofres;
+    
     /**
      * Constructor de la clase Punto
      * 
      * @param numEscenas numero de escenas que tiene el nivel que invoca a esta clase
      * @param numObjetos array de objetos que indica la cantidad que tiene cada escena
      * @param numEnemigos numero de enemigos que habrá en cada escena
+     * @param num_cofres numero de cofres que habrá en cada escena
      * 
      */
-    public DatosNivel(int numEscenas,int[] numObjetos,int[] numEnemigos){
+    public DatosNivel(int numEscenas,int[] numObjetos,int[] numEnemigos, int[] num_cofres){
         this.numEscenas = numEscenas;
         mapas = new float[numEscenas][];
         poligonosDeEntrada = new float[numEscenas][];
         poligonosDeSalida = new float[numEscenas][];
         this.numObjetos = numObjetos;
         this.numEnemigos = numEnemigos;
+        this.numCofres = num_cofres;
         this.entradas = new Punto[numEscenas];
         this.salidas = new Punto[numEscenas];
         this.mapa_objetos = new ArrayList<>();
         this.enemigos = new ArrayList<>();
+        this.cofres_escenas = new ArrayList<>();
     }
     
     /**
@@ -137,6 +146,25 @@ public class DatosNivel {
                 }catch(Exception ex){}
             }
         }
+        
+        //Generador de cofres
+        Punto[] loc_cofres_escena1 = {new Punto(600,500)};
+        Punto[] loc_cofres_escena2 = {new Punto (450, 100)};
+        Punto[] loc_cofres_escena3 = {};
+        Punto[][] loc_cofres_escenas = {loc_cofres_escena1,loc_cofres_escena2,loc_cofres_escena3};
+        
+        for(int i = 0;i<numEscenas;i++){
+            this.cofres_escenas.add(new ArrayList<>());
+            for(int j = 0; j < this.numCofres[i]; j++){
+                try{
+                    
+                    cofres_escenas.get(i).add(new Cofre((int)loc_cofres_escenas[i][j].getX(),(int)loc_cofres_escenas[i][j].getY()));
+                
+                }catch(Exception ex){
+                    System.out.println("Error al generar los cofres");
+                }
+            }
+        }
     }
     
     /**
@@ -167,6 +195,16 @@ public class DatosNivel {
      */
     public Polygon salidasNivel(int index){ //Devuelve el poligono para salir de la escena
         return new Polygon(poligonosDeSalida[index]);
+    }
+    
+    /**
+     * Devuelve los cofres de esa escena
+     * 
+     * @param index indica el índice para obtener los cofres de la escena
+     * @return ArrayList de los cofres
+     */
+    public ArrayList<Cofre> cofresNivel(int index){ 
+        return this.cofres_escenas.get(index);
     }
     
     /**
