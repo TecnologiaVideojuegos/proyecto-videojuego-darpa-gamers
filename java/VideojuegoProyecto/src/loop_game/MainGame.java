@@ -5,7 +5,7 @@
  */
 package loop_game;
 
-import map.*;
+import menu.MenuMainGame;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -29,7 +29,7 @@ public class MainGame extends StateBasedGame{
     
     @Override
     public void initStatesList(GameContainer container) throws SlickException {
-           this.addState(new Nivel1());
+           this.addState(new MenuMainGame());
     }
    
     /**
