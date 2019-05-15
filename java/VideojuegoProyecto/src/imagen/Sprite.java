@@ -15,6 +15,19 @@ import org.newdawn.slick.*;
 public class Sprite extends Image{
     
     protected Punto posicion;
+    private float escala;
+   
+    /**
+     * Constructor de la clase Sprite
+     * 
+     * @param url url de donde se encuentra la imagen
+     * @throws SlickException tratar excepción sobre el url
+     */
+    public Sprite(String url) throws SlickException{
+        super(url);
+        this.posicion = new Punto();
+        this.escala = 1.0f;
+    }
     
     /**
      * Constructor de la clase Sprite
@@ -26,6 +39,21 @@ public class Sprite extends Image{
     public Sprite(String ruta,Punto posicion) throws SlickException{
         super(ruta);
         this.posicion = posicion;
+        this.escala = 1.0f;
+    }
+    
+    /**
+     * Constructor de la clase Sprite
+     * 
+     * @param ruta url de donde se encuentra la imagen
+     * @param posicion posición del sprite
+     * @param escala redimensionar imagen
+     * @throws SlickException tratar excepción sobre el url
+     */
+    public Sprite(String ruta,Punto posicion,float escala) throws SlickException{
+        super(ruta);
+        this.posicion = posicion;
+        this.escala = escala;
     }
     
     /**
@@ -39,6 +67,40 @@ public class Sprite extends Image{
     public Sprite(String ruta,float x,float y) throws SlickException{
         super(ruta);
         this.posicion = new Punto(x,y);
+        this.escala = 1.0f;
+    }
+    
+    /**
+     * Constructor de la clase Sprite
+     * 
+     * @param ruta url de donde se encuentra la imagen
+     * @param x posición del sprite en el eje x
+     * @param y posición del sprite en el eje y
+     * @param escala redimensionar imagen
+     * @throws SlickException tratar excepción sobre el url
+     */
+    public Sprite(String ruta,float x,float y,float escala) throws SlickException{
+        super(ruta);
+        this.posicion = new Punto(x,y);
+        this.escala = escala;
+    }
+    
+    /**
+     * Get the value of escala
+     *
+     * @return the value of escala
+     */
+    public float getEscala() {
+        return escala;
+    }
+
+    /**
+     * Set the value of escala
+     *
+     * @param escala new value of escala
+     */
+    public void setEscala(float escala) {
+        this.escala = escala;
     }
     
     /**
@@ -75,6 +137,6 @@ public class Sprite extends Image{
      */
     @Override
     public void draw(){
-        super.draw(posicion.getX(),posicion.getY());
+        super.draw(posicion.getX(),posicion.getY(),escala);
     }
 }
