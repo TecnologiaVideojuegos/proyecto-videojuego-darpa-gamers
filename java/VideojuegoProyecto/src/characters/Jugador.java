@@ -6,15 +6,18 @@
 package characters;
 
 import data_level.DatosNivel;
-import graphic.*;
-import java.util.*;
+import exception_serialization.AlmacenarAvatar;
+import graphic.Hud;
+import graphic.Notificaciones;
+import java.util.ArrayList;
+import java.util.Random;
+import materials.Inventario;
 import location.Punto;
 import map.Escena;
 import materials.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
-
 
 /**
  *
@@ -38,6 +41,9 @@ public class Jugador extends Ente{
     //Variable que indica el nivel del mapa en el que se encuentra el personaje
     private int nivelMapa;
     
+    //Variable que indica el nivel máximo del mapa que ha alcanzado el jugador
+    private int nivelMapaMax;
+    
     //Variable que indica en que escenario de un nivel se encuentra el personaje
     private int escenario;
     
@@ -47,7 +53,7 @@ public class Jugador extends Ente{
     //Variable que guarda el hud del jugador
     private final Hud hud;
     
-    //Varita del jugador
+    //Arco del jugador
     private final Varita varita;
     
     //Vida max
@@ -71,11 +77,13 @@ public class Jugador extends Ente{
     //Notificador
     private final Notificaciones notif;
     
-    
+    //Nombre
+    private String nombre;
     
     /**
      * Constructor de la clase Jugador
      * 
+     * @param nombre
      * @param hp vida del ente
      * @param punto lugar del mapa donde se posiciona
      * @param sprite imagen del ente
@@ -86,14 +94,16 @@ public class Jugador extends Ente{
      * @throws org.newdawn.slick.SlickException posibles exceptiones por la carga de la imagen
      * 
      */    
-    public Jugador(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int municion,int danio) throws SlickException{
+    public Jugador(String nombre,int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int municion,int danio,int nivelMapa) throws SlickException{
         super(hp, punto, sprite, velocidad,direccion, danio);
+        this.nombre = nombre;
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
         this.vida_max = hp * this.nivelJugador;
         this.velo_base = velocidad;
         this.danyo_base = danio;
-        this.nivelMapa = 1; //inicializado
+        this.nivelMapa = nivelMapa; //inicializado
+        this.nivelMapaMax = this.nivelMapa;
         this.escenario = 0; //inicializado
         this.img = sprite;
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
@@ -108,6 +118,44 @@ public class Jugador extends Ente{
         this.buff_velocidad = new Buff(60000);
         this.notif = new Notificaciones(3000);
         
+    }
+
+    
+    
+    /**
+     * Get the value of NivelMapaMax
+     * 
+     * @return the value of nivel del mapa max
+     */
+    public int getNivelMapaMax() {
+        return nivelMapaMax;
+    }
+
+    /**
+     * Set value of NivelMapaMax
+     * 
+     * @param nivelMapaMax the new value of nivelMapaMax
+     */
+    public void setNivelMapaMax(int nivelMapaMax) {
+        this.nivelMapaMax = nivelMapaMax;
+    }
+    
+    /**
+     * Get the value of nombre
+     * 
+     * @return the value of nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Set value of nombre
+     * 
+     * @param nombre the new value of nombre
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     /**
@@ -246,6 +294,15 @@ public class Jugador extends Ente{
         return nivelJugador;
     }
 
+    /**
+     * Get the value of jugador
+     *
+     * @param nivel nivel
+     */
+    public void setNivelJugador(int nivel) {
+        this.nivelJugador = nivel;
+    }
+    
     /**
      * Get the value of nivelMapa
      *
@@ -432,12 +489,15 @@ public class Jugador extends Ente{
      * @param escenas obtiene el último polígono adquirido en el escenario
      * @param datos
      */
-    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos){
+    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
             System.out.println("FINAL DEL NIVEL");
             this.getHud().anadirCorazon();
-            ///this.avanzarMapa();
-            //game.enterState(this.getNivelMapa());
+            if(this.getNivelMapaMax() == this.getNivelMapa()){
+                this.nivelMapaMax++;
+            }
+            this.avanzarMapa();
+            game.enterState(this.getNivelMapa());
         }else{
             this.comprobarLimite(escenas, datos);
         }
@@ -573,10 +633,10 @@ public class Jugador extends Ente{
      * @param datos datos a obtener
      * @param escena escena en el que nos encontramos
      */
-    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena){
+    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,AlmacenarAvatar alm){
         this.finPartida(game);
         this.corregirBug(escena.get(this.getEscenario()));
-        this.gestorCambiosMapas(game, numEscenas, escena, datos);
+        this.gestorCambiosMapas(game, numEscenas, escena, datos,alm);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);
@@ -843,8 +903,8 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    cofres.get(i).getSonidoCofre().play();
-                    
+                    //cofres.get(i).getSonidoCofre().play();
+                    //Mirar error de ejecución del sonido
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
