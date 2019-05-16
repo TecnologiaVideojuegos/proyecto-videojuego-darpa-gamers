@@ -1,1 +1,1 @@
-Aquí iran los mapas del videojuego
+Aquí iran los ficheros tmx de los mapas del videojuego
