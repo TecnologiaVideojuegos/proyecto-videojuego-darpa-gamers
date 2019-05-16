@@ -1,0 +1,1 @@
+# Aquí iran los recursos gráficos del proyecto de java
