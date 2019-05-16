@@ -24,7 +24,7 @@ public final class Cofre {
     private boolean estado_cofre;
     private ArrayList<Integer> lista_id_pociones;
     private Rectangle cofreRect;
-    private final Sound sonido_apertura_cofre;
+    private Sound sonido_apertura_cofre;
     
     /**
      * 
@@ -37,8 +37,8 @@ public final class Cofre {
     public Cofre(int x, int y) throws SlickException{
         
         /*Cargar el sonido de apertura del cofre    */
-        this.sonido_apertura_cofre = new Sound("./res/sounds/open_chest.ogg");
-        
+        //this.sonido_apertura_cofre = new Sound("./res/sounds/open_chest.ogg");
+        this.sonido_apertura_cofre = null;
         /*Cargar el spritesheet del cofre */
         cargar_animacion_cofre();
         
