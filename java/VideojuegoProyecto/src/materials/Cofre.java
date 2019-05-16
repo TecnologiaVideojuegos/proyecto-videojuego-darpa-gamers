@@ -24,6 +24,7 @@ public final class Cofre {
     private boolean estado_cofre;
     private ArrayList<Integer> lista_id_pociones;
     private Rectangle cofreRect;
+    private Rectangle cofreRect_lootArea;
     private Sound sonido_apertura_cofre;
     
     /**
@@ -50,6 +51,7 @@ public final class Cofre {
         
         this.loc_cofre = new Punto(x, y);
         this.cofreRect = new Rectangle(x, y, 32.0f, 32.0f);
+        this.cofreRect_lootArea = new Rectangle(x - 10, y - 10 , 52.0f, 52.0f);
         
     }
     
@@ -180,6 +182,14 @@ public final class Cofre {
      */
     public Rectangle getCofreRect(){
         return this.cofreRect;
+    }
+    
+        /**
+     * 
+     * @return Devuelve el rectangulo para gestionar la colision en jugador
+     */
+    public Rectangle getCofreRectLootArea(){
+        return this.cofreRect_lootArea;
     }
     
     /**

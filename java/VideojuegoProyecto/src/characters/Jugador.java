@@ -648,6 +648,7 @@ public class Jugador extends Ente{
         this.notif.controlNotif(delta);
         this.notif.controlEstadoEspera(delta);
         this.controlColisionCofres(escena.get(this.getEscenario()).getCofres(), entrada);
+        this.controlColisionCofresLoot(escena.get(this.getEscenario()).getCofres(), entrada);
     }
     
     
@@ -823,29 +824,51 @@ public class Jugador extends Ente{
           for(int i =0; i < cofres.size(); i++){
               if(this.getPersDown().intersects(cofres.get(i).getCofreRect())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-1));
-                if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
-                    //Recoger drop
-                    
-                    for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
-                        //Añadir pocion al inventario
-                        this.aniadirPocion(cofres.get(i).getListaIdsCofre().get(j));
-                        
-                        //Notificar del drop
-                        this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
-                            
-                    }
-                    
-                    //Sacar el sonido de apertura
-                    //cofres.get(i).getSonidoCofre().play();
-                    
-                    
-                    //Cambiar de estado el cofre a abierto
-                    cofres.get(i).setEstadoCofre(true);
-                    
-                }
+                
                 
             }else if(this.getPersUp().intersects(cofres.get(i).getCofreRect())){
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+1));
+              
+                
+            }else if(this.getPersL().intersects(cofres.get(i).getCofreRect())){
+                this.setPunto(new Punto(this.getPunto().getX()+1,this.getPunto().getY()));
+                
+               
+            }else if(this.getPersR().intersects(cofres.get(i).getCofreRect())){
+                this.setPunto(new Punto(this.getPunto().getX()-1,this.getPunto().getY()));
+                
+            }
+            this.actualizarPosicion();
+          }  
+    }
+    
+    
+    public void controlColisionCofresLoot(ArrayList<Cofre> cofres, Input entrada){
+    
+          for(int i =0; i < cofres.size(); i++){
+              if(this.getPersDown().intersects(cofres.get(i).getCofreRectLootArea())){
+                if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
+                    //Recoger drop
+                    for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
+                        //Añadir pocion al inventario
+                        this.aniadirPocion(cofres.get(i).getListaIdsCofre().get(j));
+                        
+                        //Notificar del drop
+                        this.notif.aniadirNotificacion(this.notif.getImgNotf()[cofres.get(i).getListaIdsCofre().get(j)]);
+                            
+                    }
+                    
+                    //Sacar el sonido de apertura
+                    //cofres.get(i).getSonidoCofre().play();
+                    
+                    
+                    //Cambiar de estado el cofre a abierto
+                    cofres.get(i).setEstadoCofre(true);
+                    
+                }
+                
+            }else if(this.getPersUp().intersects(cofres.get(i).getCofreRectLootArea())){
+               
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -865,8 +888,7 @@ public class Jugador extends Ente{
                     
                 }
                 
-            }else if(this.getPersL().intersects(cofres.get(i).getCofreRect())){
-                this.setPunto(new Punto(this.getPunto().getX()+1,this.getPunto().getY()));
+            }else if(this.getPersL().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -888,8 +910,8 @@ public class Jugador extends Ente{
                     
                 }
                
-            }else if(this.getPersR().intersects(cofres.get(i).getCofreRect())){
-                this.setPunto(new Punto(this.getPunto().getX()-1,this.getPunto().getY()));
+            }else if(this.getPersR().intersects(cofres.get(i).getCofreRectLootArea())){
+                
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -908,7 +930,6 @@ public class Jugador extends Ente{
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
-                    
                 }
                 
             }
