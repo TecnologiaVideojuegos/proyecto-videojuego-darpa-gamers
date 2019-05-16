@@ -18,7 +18,7 @@ public class Inventario {
     
     private final int tamanio_slot;
     private boolean help_state;
-    private final ArrayList<Objeto> [] inventario;
+    private ArrayList<Objeto> [] inventario;
     private final Image[] listaSlots;
     private final Image[] listaNumObj;
     private final Image[] listaPociones;
@@ -92,6 +92,15 @@ public class Inventario {
         return inventario;
     }
 
+    /**
+     * Set the value of inventario
+     * 
+     * @param inventario 
+     */
+    public void setInventario(ArrayList<Objeto>[] inventario) {
+        this.inventario = inventario;
+    }
+    
     /**
      * Get the value of tamanio_slot
      *
