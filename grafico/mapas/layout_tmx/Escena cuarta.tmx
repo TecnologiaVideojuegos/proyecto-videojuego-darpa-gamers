@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../../1º MAPS/terrenos/casa_madera.tsx"/>
+ <tileset firstgid="118" source="../../1º MAPS/terrenos/obj_misk_atlas.tsx"/>
+ <tileset firstgid="1142" source="../../1º MAPS/terrenos/city_outside.tsx"/>
+ <tileset firstgid="1574" source="../../1º MAPS/terrenos/city_inside.tsx"/>
+ <tileset firstgid="1958" source="../../1º MAPS/terrenos/build_atlas.tsx"/>
+ <layer id="1" name="suelo" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYBvFo3gQYkYgZiUSs9DAfi4g5iMS89LA38pA/BOI/6DRyBgmpkTFcID5WweLfej2wrA2FcIB3d8gbMaI2w0wbIOkhtRwCAfiCKgebP4OI8J+XOGAL70GAXEwECcAcSIR4U0qhrkDF44G4hggzgTiLCA2hmJq2W9MAKcAceogsL8IiIuBWAGIBalovwDUTFw4F4jzGFDToh0V7bdlID3/yVAQDrDyAOZveTLsxxYOZSTkv4+s5PmbGuFADX/jCwdaxDex4UAMpqa/RzH9MAA4ctEX
+  </data>
+ </layer>
+ <layer id="2" name="objetos" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztlU1OwkAYhr+PGLU9ACKaVE4hXkRLZMEtFGWjSw8giC6qiSv2/OmCk0D0ELLQBN/KTPLN2AaEdmP6Jk+mk07nmZnOtERZsmSJy80mUWdjcZlWPsAUDJlGA9AHQ0VY/8S9rxS8Y2de5ploBxTALiha13tgn+dt353k/FtY123ggEP0X1YcWZyy2XbdjK05HPNif5XNZ1ZZB9sr/SfCr8dQUUT5da5comv3d/kc43pjqnHOpAS03xd+X/i9HAUzNpmAR7iegF2GRAXP1GYWnvBLr/RjjAFbYC7Bn1/Ckutftvxx679q5HnWfj8C6few9w9AKYEzIMcQ519m/60TOZ8z9H8O6uBCoa8vQYPNMSeZW/TdBHegrWiJ+j14SGH+Ol303QP41of/gB/6ov4CXlP0Z/nf+QZrsGWk
+  </data>
+ </layer>
+</map>
