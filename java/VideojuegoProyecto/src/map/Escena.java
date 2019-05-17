@@ -63,7 +63,7 @@ public class Escena {
         return this.cofres;
     }
     
-    public boolean colisionConObjetos(Shape lado){
+    public boolean colisionConPoligonos(Shape lado){
         if(lado.intersects(mapa_colision)){
             return true;
         }
