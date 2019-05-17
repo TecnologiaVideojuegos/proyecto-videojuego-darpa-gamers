@@ -17,15 +17,14 @@ import org.newdawn.slick.state.*;
  */
 public class MenuRankingGame  extends BasicGameState implements ComponentListener{
     
-    private Sprite fondo,creditos,salir;
+    private Sprite marcadores,salir;
     private MouseOverArea boton;
     private int estado = -1;
 
     public MenuRankingGame(GameContainer container) {
         try{
-            fondo = new Sprite("./res/grafico/fonds/fondo.png");
-            //creditos = new Sprite("");
-            salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,550));
+            marcadores = new Sprite("./res/grafico/game_utils/marcadores.png");
+            salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,610));
             boton = new MouseOverArea(container,salir,(int)salir.getPosicion().getX(),(int)salir.getPosicion().getY(),(int)salir.getWidth(),(int)salir.getHeight(),this);
             boton.setNormalColor(new Color(1,1,1,0.7f));
             boton.setMouseOverColor(new Color(1,1,1,0.9f));
@@ -38,8 +37,7 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        fondo.draw();
-        //creditos.draw();
+        marcadores.draw();
         boton.render(container, g);
     }
 

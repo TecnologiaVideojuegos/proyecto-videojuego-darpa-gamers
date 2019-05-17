@@ -25,6 +25,11 @@ public class SpriteMovil extends Sprite{
         this(ruta,posicion,new Vector(velocidad));
     }
     
+    public SpriteMovil(Image img, Punto posicion,Punto velocidad) throws SlickException {
+        super(img,posicion);
+        this.velocidad = new Vector(velocidad);
+    }
+    
     /**
      * Get the value of velocidad
      *

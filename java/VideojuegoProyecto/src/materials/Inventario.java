@@ -158,10 +158,10 @@ public class Inventario {
             if (!this.inventario[i].isEmpty()){
                 
                 //Pintar pocion
-                this.dibujarElem(this.listaPociones[i], (new Punto((i*32*1.5f)+400, 650)));
+                this.dibujarElem(this.listaPociones[i], (new Punto((i*32*1.5f)+300, 650)));
                 
                 //Pintar numero de pocion
-                this.dibujarElem(this.listaNumObj[this.inventario[i].size() - 1], (new Punto((i*32*1.5f)+400, 650)));
+                this.dibujarElem(this.listaNumObj[this.inventario[i].size() - 1], (new Punto((i*32*1.5f)+300, 650)));
             }
         }
     }

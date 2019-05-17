@@ -85,6 +85,12 @@ public class Sprite extends Image{
         this.escala = escala;
     }
     
+    public Sprite(Image img,Punto posicion) throws SlickException{
+        super(img);
+        this.posicion = posicion;
+        this.escala = 1.0f;
+    }
+    
     /**
      * Get the value of escala
      *

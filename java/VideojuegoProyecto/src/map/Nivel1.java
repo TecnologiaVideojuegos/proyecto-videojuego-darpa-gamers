@@ -84,12 +84,10 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         escenas.get(j.getEscenario()).getMapa_escena().render(0,0);
-        j.getHud().imprimirCorazones();
-        j.getInventario().imprimirInventario();
-        j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
-        
-        j.getNoti().imprimirNotificaciones();
-        
+        g.draw(j.getPersL());
+        g.draw(j.getPersR());
+        g.draw(j.getPersUp());
+        g.draw(j.getPersDown());        
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
         }
@@ -107,10 +105,6 @@ public class Nivel1 extends BasicGameState{
         g.draw(escenas.get(j.getEscenario()).getArea_salida());
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());
         j.getVarita().getFlecha().draw(g);
-        g.draw(j.getPersL());
-        g.draw(j.getPersR());
-        g.draw(j.getPersUp());
-        g.draw(j.getPersDown());
         /*
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
@@ -119,6 +113,12 @@ public class Nivel1 extends BasicGameState{
             g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
         }        
         j.getInventario().imprimirImagenInfoPociones();   
+        
+         j.getHud().imprimirCorazones();
+        j.getInventario().imprimirInventario();
+        j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
+        
+        j.getNoti().imprimirNotificaciones();
         menu.mostrarMenu(g,j);
     }
     

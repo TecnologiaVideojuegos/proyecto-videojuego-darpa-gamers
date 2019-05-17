@@ -12,6 +12,7 @@ import map.Escena;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Rectangle;
 
 /**
@@ -31,15 +32,19 @@ public class ControladorFlechas {
     /**
      * Método que añade la flecha he indica la dirección del disparo
      * 
+     * @param tipo dirección del disparo
      * @param x origen en eje x donde saldrá
      * @param y origen en eje y donde saldrá
      * @param dx dirección en eje x de disparo
      * @param dy dirección en eje y de disparo
+     * @param ancho tamaño de la flecha a lo ancho
+     * @param alto tamaño de la flecha a lo largo
      * @throws SlickException 
      */
-    public void addFlecha(float x,float y,float dx,float dy) throws SlickException{
-        SpriteMovil flecha = new SpriteMovil("./res/grafico/flecha.png",new Punto(x,y),new Punto(dx,dy));
-        Rectangle contorno = new Rectangle(x,y,24,22);
+    public void addFlecha(int evolucion,int tipo,float x,float y,float dx,float dy,float ancho,float alto) throws SlickException{
+        SpriteSheet img = new SpriteSheet("./res/grafico/disparos/magia_level_" + evolucion +".png",24,24);
+        SpriteMovil flecha = new SpriteMovil(img.getSprite(tipo,0),new Punto(x,y),new Punto(dx,dy));
+        Rectangle contorno = new Rectangle(x,y,ancho,alto);
         flechas.add(flecha);
         colisiones.add(contorno);
     }
@@ -47,7 +52,6 @@ public class ControladorFlechas {
     public void draw(Graphics g){
         for(int i= 0;i<flechas.size();i++){
             flechas.get(i).draw();
-            g.drawRect(colisiones.get(i).getX(),colisiones.get(i).getY(),colisiones.get(i).getWidth(),colisiones.get(i).getHeight());
         }
     }
     
