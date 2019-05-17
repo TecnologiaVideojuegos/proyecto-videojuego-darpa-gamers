@@ -143,7 +143,7 @@ public class Inventario {
     public final void imprimir_Inventario_init(){
         //System.out.println("Mostramos inventario");
         for(int i =0; i < 5; i++){
-            this.dibujarElem(listaSlots[i],(new Punto((i*32*1.5f)+400, 650)));    
+            this.dibujarElem(listaSlots[i],(new Punto((i*32*1.5f)+300, 650)));    
         }
     }
     

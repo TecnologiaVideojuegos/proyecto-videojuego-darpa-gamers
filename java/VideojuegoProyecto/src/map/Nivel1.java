@@ -36,10 +36,10 @@ public class Nivel1 extends BasicGameState{
     private final int numEscenas = 3;  
     
     //Cantidad de objetos que tendrá cada escena
-    private final int[] numObjetos = {2,0,0}; 
+    private final int[] numObjetos = {1,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {1,0,2};
+    private final int[] numEnemigos = {0,0,2};
     
     //Cantidad de cofres que tendrá cada escena
     private final int[] numCofres = {1, 1, 0};
@@ -64,7 +64,7 @@ public class Nivel1 extends BasicGameState{
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
-                es = new Escena(new TiledMap("./map/level1/test_escena"+(i+1)+".tmx","map/level1"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
+                es = new Escena(new TiledMap("./res/mapas/Nivel1/layout_tmx/escena_"+(i+1)+".tmx","./res/mapas/Nivel1/resources_tsx"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
                 escenas.add(es);
             } catch (SlickException ex) {
                 Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,9 +93,9 @@ public class Nivel1 extends BasicGameState{
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
         }
-        /*for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
+        for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
-        }*/
+        }
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getRango());
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersDown());
@@ -103,8 +103,8 @@ public class Nivel1 extends BasicGameState{
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersR());
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
         }
-        /*g.draw(escenas.get(j.getEscenario()).getArea_entrada());
-        g.draw(escenas.get(j.getEscenario()).getArea_salida());*/
+        g.draw(escenas.get(j.getEscenario()).getArea_entrada());
+        g.draw(escenas.get(j.getEscenario()).getArea_salida());
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());
         j.getVarita().getFlecha().draw(g);
         g.draw(j.getPersL());
