@@ -11,6 +11,7 @@ import exception_serialization.AlmacenarAvatar;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import menu.MenuPauseGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.tiled.*;
@@ -49,6 +50,8 @@ public class Nivel1 extends BasicGameState{
     //Reloj para controlar movimiento
     private int reloj;
     
+    private MenuPauseGame menu;
+    
     private AlmacenarAvatar almacenar = new AlmacenarAvatar();
     /**
      * Constructor de la clase Nivel1
@@ -72,6 +75,7 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         reloj = 0;
+        menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador();   
         entrada = container.getInput(); 
@@ -107,41 +111,24 @@ public class Nivel1 extends BasicGameState{
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
         g.draw(j.getPersDown());
-        g.drawString("Escenario " + j.getEscenario(),20,20);
-        g.drawString("Municion " + j.getVarita().getMunicion(),20,40);
-        g.drawString("Vida del jugador: " + j.getHp(),20,60);
-        g.drawString("Velocidad del jugador: " + j.getVelocidad(),20 ,80 );
-        g.drawString("Fuerza del jugador: " + j.getDanyo(),20 ,100 );
-        g.drawString("Exp: " + j.getExperiencia() ,20,120);
-        if(j.getBuffInv().getEstadoBuff()){
-            g.drawString("Buff Invulnerabilidad: " + ((j.getBuffInv().getMaxTimeBuff()/1000) - (j.getBuffInv().getTimerEstadoBuff()/1000) ) + " seg" ,20,140);
-        }
-        if(j.getBuffFuerza().getEstadoBuff()){
-            g.drawString("Buff Fuerza: " + ((j.getBuffFuerza().getMaxTimeBuff()/1000) - (j.getBuffFuerza().getTimerEstadoBuff()/1000) ) + " seg" ,20,160);
-        }
-        if(j.getBuffVelo().getEstadoBuff()){
-            g.drawString("Buff Velocidad: " + ((j.getBuffVelo().getMaxTimeBuff()/1000) - (j.getBuffVelo().getTimerEstadoBuff()/1000) ) + " seg" ,20,180);
-        }
-        g.drawString("Número enemigos: " + datos.enemigosNivel(j.getEscenario()).size(),20,220);
-        
         /*
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
         }*/
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
-        }
-        
-        
-        j.getInventario().imprimirImagenInfoPociones();
-        
-        
+        }        
+        j.getInventario().imprimirImagenInfoPociones();   
+        menu.mostrarMenu(g,j);
     }
     
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
+        menu.comprobarMenuPausa(entrada);
+        if(!menu.isPausa()){
+            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
+        } 
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);
         }
