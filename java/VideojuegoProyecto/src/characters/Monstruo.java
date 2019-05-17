@@ -44,7 +44,7 @@ public class Monstruo extends Ente{
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
         try{
-            this.movimiento = new Vector(new Punto(0,0));
+            this.movimiento = new Vector(new Punto());
             this.comportamiento = comportamiento;
             this.rango = new Circle(punto.getX()+sprite.getHeight()/2,punto.getY()+sprite.getWidth()/2,rango); //creamos el rango que tendrá el monstruo
             this.respawn = punto;

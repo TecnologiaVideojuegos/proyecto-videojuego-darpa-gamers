@@ -522,7 +522,7 @@ public class Jugador extends Ente{
         this.destruirEnemigo(mon);
         for(int i = 0;i<mon.size();i++){
             if(this.getPersDown().intersects(mon.get(i).getPersUp())){
-                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-4));
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
@@ -530,7 +530,7 @@ public class Jugador extends Ente{
                     }
                 }
             }else if(this.getPersUp().intersects(mon.get(i).getPersDown())){
-                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+4));
+                this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
@@ -538,7 +538,7 @@ public class Jugador extends Ente{
                     }
                 }
             }else if(this.getPersL().intersects(mon.get(i).getPersR())){
-                this.setPunto(new Punto(this.getPunto().getX()+4,this.getPunto().getY()));
+                this.setPunto(new Punto(this.getPunto().getX()+32,this.getPunto().getY()));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
@@ -546,7 +546,39 @@ public class Jugador extends Ente{
                     }
                 }
             }else if(this.getPersR().intersects(mon.get(i).getPersL())){
-                this.setPunto(new Punto(this.getPunto().getX()-4,this.getPunto().getY()));
+                this.setPunto(new Punto(this.getPunto().getX()-32,this.getPunto().getY()));
+                if(!this.buff_invulnerable.getEstadoBuff()){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
+                }
+            }else if(this.getPersL().intersects(mon.get(i).getPersR()) && this.getPersUp().intersects(mon.get(i).getPersDown())){
+                this.setPunto(new Punto(this.getPunto().getX()+32,this.getPunto().getY()+32));
+                if(!this.buff_invulnerable.getEstadoBuff()){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
+                }
+            }else if(this.getPersL().intersects(mon.get(i).getPersR()) && this.getPersDown().intersects(mon.get(i).getPersUp())){
+                this.setPunto(new Punto(this.getPunto().getX()+32,this.getPunto().getY()-32));
+                if(!this.buff_invulnerable.getEstadoBuff()){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
+                }
+            }else if(this.getPersR().intersects(mon.get(i).getPersL()) && this.getPersUp().intersects(mon.get(i).getPersDown())){
+                this.setPunto(new Punto(this.getPunto().getX()-32,this.getPunto().getY()+32));
+                if(!this.buff_invulnerable.getEstadoBuff()){
+                    this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    for(int a = 0;a<mon.get(i).getDanyo();a+=25){
+                        this.getHud().quitarVida();
+                    }
+                }
+            }else if(this.getPersR().intersects(mon.get(i).getPersL()) && this.getPersDown().intersects(mon.get(i).getPersUp())){
+                this.setPunto(new Punto(this.getPunto().getX()-32,this.getPunto().getY()-32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
