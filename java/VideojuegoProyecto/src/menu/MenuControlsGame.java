@@ -17,13 +17,13 @@ import org.newdawn.slick.state.*;
  */
 public class MenuControlsGame extends BasicGameState implements ComponentListener{
 
-    private Sprite fondo,controles,salir;
+    private Sprite controles,salir;
     private MouseOverArea boton;
     private int estado = -1;
     
     public MenuControlsGame(GameContainer container) {
         try{
-            fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            controles = new Sprite("./res/grafico/game_utils/controles.png");
             salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,550));
             boton = new MouseOverArea(container,salir,(int)salir.getPosicion().getX(),(int)salir.getPosicion().getY(),(int)salir.getWidth(),(int)salir.getHeight(),this);
             boton.setNormalColor(new Color(1,1,1,0.7f));
@@ -37,7 +37,7 @@ public class MenuControlsGame extends BasicGameState implements ComponentListene
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        fondo.draw();
+        controles.draw();
         boton.render(container, g);
     }
 
