@@ -68,18 +68,7 @@ public class Monstruo extends Ente{
     public void setRespawn(Punto respawn) {
         this.respawn = respawn;
     }
-    
-    /**
-     * Método que devuelve true o false en caso de colisionar con otro polígono
-     * 
-     * @param lado polígono del monstruo
-     * @param mapa polígono con el que colisiona o no
-     * @return si colisiona o no con ese poígono
-     */
-    public boolean colisionCon(Shape lado,Shape mapa){
-        return lado.intersects(mapa);
-    }
-    
+
     /**
      * Obtiene el polígono superior del personaje
      *
@@ -222,25 +211,25 @@ public class Monstruo extends Ente{
     public void movimientoPasivo(Escena escena,int delta,int reloj){
             //case Up
             if(reloj > 1500){
-                if(!this.colisionCon(this.getPersUp(),escena.getMapa_colision())){
+                if(!escena.colisionConPoligonos(this.getPersUp())){
                     this.move(delta,0,0,0,-this.getVelocidad());
                     this.setDireccion(0);
                 }
             //case Left
             }else if(reloj > 1000){
-                if(!this.colisionCon(this.getPersL(),escena.getMapa_colision())){
+                if(!escena.colisionConPoligonos(this.getPersL())){
                     this.move(delta,0,0,-this.getVelocidad(),0);
                     this.setDireccion(2);
                 }
             //case Down 
             }else if(reloj > 500){
-                if(!this.colisionCon(this.getPersDown(),escena.getMapa_colision())){
+                if(!escena.colisionConPoligonos(this.getPersDown())){
                     this.move(delta,0,0,0,this.getVelocidad());
                     this.setDireccion(1);
                 }
             //case Right
             }else{
-                if(!this.colisionCon(this.getPersR(),escena.getMapa_colision())){
+                if(!escena.colisionConPoligonos(this.getPersR())){
                     this.move(delta,0,0,this.getVelocidad(),0);
                     this.setDireccion(3);
                 }
@@ -248,29 +237,53 @@ public class Monstruo extends Ente{
     }
     
     public void movimientoHostil(Jugador j,Escena escena,int delta){
-        if(this.colisionCon(this.getPersDown(),escena.getMapa_colision()) && this.colisionCon(this.getPersL(),escena.getMapa_colision())){
-        }else if(this.colisionCon(this.getPersDown(),escena.getMapa_colision()) && this.colisionCon(this.getPersR(),escena.getMapa_colision())){            
-        }else if(this.colisionCon(this.getPersUp(),escena.getMapa_colision()) && this.colisionCon(this.getPersL(),escena.getMapa_colision())){           
-        }else if(this.colisionCon(this.getPersUp(),escena.getMapa_colision()) && this.colisionCon(this.getPersR(),escena.getMapa_colision())){           
-        }else if(this.colisionCon(this.getPersUp(),escena.getMapa_colision())){
+        if(escena.colisionConPoligonos(this.getPersDown()) && escena.colisionConPoligonos(this.getPersL())){
+        }else if(escena.colisionConPoligonos(this.getPersDown()) &&escena.colisionConPoligonos(this.getPersR())){            
+        }else if(escena.colisionConPoligonos(this.getPersUp()) && escena.colisionConPoligonos(this.getPersL())){           
+        }else if(escena.colisionConPoligonos(this.getPersUp()) && escena.colisionConPoligonos(this.getPersR())){           
+        }else if(escena.colisionConPoligonos(this.getPersUp())){
             if(j.getPunto().getY() >= this.getPunto().getY()){
                 this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
             }else{
                 this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
             }
-        }else if(this.colisionCon(this.getPersDown(),escena.getMapa_colision())){
+        }else if(escena.colisionConPoligonos(this.getPersDown())){
             if(j.getPunto().getY() <= this.getPunto().getY()){
                 this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
             }else{
                 this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);               
             }
-        }else if(this.colisionCon(this.getPersL(),escena.getMapa_colision())){
+        }else if(escena.colisionConPoligonos(this.getPersL())){
             if(j.getPunto().getX() >= this.getPunto().getX()){
                 this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
             }else{
                 this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
             }
-        }else if(this.colisionCon(this.getPersR(),escena.getMapa_colision())){
+        }else if(escena.colisionConPoligonos(this.getPersR())){
+            if(j.getPunto().getX() <= this.getPunto().getX()){
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+            }else{
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }
+        }else if(escena.colisionConPoligonos(this.getPersUp())){
+            if(j.getPunto().getY() >= this.getPunto().getY()){
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }else{
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+            }
+        }else if(escena.colisionConPoligonos(this.getPersDown())){
+            if(j.getPunto().getY() <= this.getPunto().getY()){
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }else{
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);               
+            }
+        }else if(escena.colisionConPoligonos(this.getPersL())){
+            if(j.getPunto().getX() >= this.getPunto().getX()){
+                this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
+            }else{
+                this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
+            }
+        }else if(escena.colisionConPoligonos(this.getPersR())){
             if(j.getPunto().getX() <= this.getPunto().getX()){
                 this.move(delta,this.getPunto().getX()*2,0,j.getPunto().getX()*2,0);
             }else{
