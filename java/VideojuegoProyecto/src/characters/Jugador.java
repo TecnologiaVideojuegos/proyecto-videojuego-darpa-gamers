@@ -645,7 +645,7 @@ public class Jugador extends Ente{
     }
     
     public Punto[] nivelesRespawn(){
-        Punto[][] niveles = {{new Punto(80,655),new Punto(233,292),new Punto(230,295)}};
+        Punto[][] niveles = {{new Punto(80,655),new Punto(370,450),new Punto(230,295)}};
         return niveles[this.getNivelMapa()-1];
     }
     
