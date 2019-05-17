@@ -365,22 +365,22 @@ public class Jugador extends Ente{
      * @param escenas ArrayList de Escena para averiguar en qé escena estamos
      */
     public void controlDeTeclado(int delta,Input entrada,ArrayList<Escena> escenas){
-        if(entrada.isKeyDown(Input.KEY_LEFT) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersL())){
+        if(entrada.isKeyDown(Input.KEY_LEFT) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersL())){
             this.getPunto().setX(this.getPunto().getX()-(this.getVelocidad() * (float)delta/1000));
             this.actualizarPosicion();
             this.setDireccion(1);
         }
-        if(entrada.isKeyDown(Input.KEY_RIGHT) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersR())){
+        if(entrada.isKeyDown(Input.KEY_RIGHT) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersR())){
             this.getPunto().setX(this.getPunto().getX()+(this.getVelocidad() * (float)delta/1000));
             this.actualizarPosicion();
             this.setDireccion(0);
         }
-        if(entrada.isKeyDown(Input.KEY_UP) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersUp())){
+        if(entrada.isKeyDown(Input.KEY_UP) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersUp())){
            this.getPunto().setY(this.getPunto().getY()-(this.getVelocidad() * (float)delta/1000));
            this.actualizarPosicion();
            this.setDireccion(2);
         }
-        if(entrada.isKeyDown(Input.KEY_DOWN) && !escenas.get(this.getEscenario()).colisionConObjetos(this.getPersDown())){
+        if(entrada.isKeyDown(Input.KEY_DOWN) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersDown())){
            this.getPunto().setY(this.getPunto().getY()+(this.getVelocidad() * (float)delta/1000));
            this.actualizarPosicion();
            this.setDireccion(3);
