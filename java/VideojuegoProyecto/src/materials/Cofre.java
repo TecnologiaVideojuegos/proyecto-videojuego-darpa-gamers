@@ -38,7 +38,7 @@ public final class Cofre {
     public Cofre(int x, int y) throws SlickException{
         
         /*Cargar el sonido de apertura del cofre    */
-        //this.sonido_apertura_cofre = new Sound("./res/sounds/open_chest.ogg");
+        //this.sonido_apertura_cofre = new Sound("./res/audio/sounds/open_chest.ogg");
         this.sonido_apertura_cofre = null;
         /*Cargar el spritesheet del cofre */
         cargar_animacion_cofre();
@@ -62,7 +62,7 @@ public final class Cofre {
      * @throws SlickException 
      */
     public void cargar_animacion_cofre() throws SlickException{
-        this.sheet_cofre = new SpriteSheet("./res/game_utils/chest2.png",32,32);
+        this.sheet_cofre = new SpriteSheet("./res/grafico/game_utils/chest2.png",32,32);
     }
     
     /**

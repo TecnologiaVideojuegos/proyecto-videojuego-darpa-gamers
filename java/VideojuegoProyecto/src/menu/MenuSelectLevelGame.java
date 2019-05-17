@@ -34,10 +34,10 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
         try{
             this.almacenar = new AlmacenarAvatar();
             this.nombre = nombre;
-            fondo = new Sprite("./res/fonds/fondo.png");
-            level1 = new Sprite("./res/buttons/boton_LEVEL1.png",new Punto(78,400));
-            level2 = new Sprite("./res/buttons/boton_LEVEL2.png",new Punto(384,400));
-            level3 = new Sprite("./res/buttons/boton_LEVEL3.png",new Punto(690,400)); 
+            fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            level1 = new Sprite("./res/grafico/buttons/boton_LEVEL1.png",new Punto(78,400));
+            level2 = new Sprite("./res/grafico/buttons/boton_LEVEL2.png",new Punto(384,400));
+            level3 = new Sprite("./res/grafico/buttons/boton_LEVEL3.png",new Punto(690,400)); 
             Sprite boton[] = {level1,level2,level3};
             for(int i = 0;i<botones.length;i++){
                 botones[i] = new MouseOverArea(container,boton[i],(int)boton[i].getPosicion().getX(),(int)boton[i].getPosicion().getY(),(int)boton[i].getWidth(),(int)boton[i].getHeight(),this);

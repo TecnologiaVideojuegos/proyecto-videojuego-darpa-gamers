@@ -24,14 +24,14 @@ public class MenuMainGame extends BasicGameState implements ComponentListener{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        fondo = new Sprite("./res/fonds/fondo.png");
-        titulo = new Sprite("./res/titles/titulo_principal.png",new Punto(150,10));
-        logo_juego = new Sprite("./res/fonds/logotipo_juego.png",new Punto(949,693),0.25f);
-        logo_grupo = new Sprite("./res/fonds/logotipo_grupo.png",new Punto(0,693),0.25f);
-        nueva_partida = new Sprite("./res/buttons/boton_nueva_partida.png",new Punto(250,200));
-        cargar_partida = new Sprite("./res/buttons/boton_cargar_partida.png",new Punto(250,300));
-        opciones = new Sprite("./res/buttons/boton_opciones.png",new Punto(250,400));
-        salir = new Sprite("./res/buttons/boton_salir.png",new Punto(378,550));
+        fondo = new Sprite("./res/grafico/fonds/fondo.png");
+        titulo = new Sprite("./res/grafico/titles/titulo_principal.png",new Punto(150,10));
+        logo_juego = new Sprite("./res/grafico/fonds/logotipo_juego.png",new Punto(949,693),0.25f);
+        logo_grupo = new Sprite("./res/grafico/fonds/logotipo_grupo.png",new Punto(0,693),0.25f);
+        nueva_partida = new Sprite("./res/grafico/buttons/boton_nueva_partida.png",new Punto(250,200));
+        cargar_partida = new Sprite("./res/grafico/buttons/boton_cargar_partida.png",new Punto(250,300));
+        opciones = new Sprite("./res/grafico/buttons/boton_opciones.png",new Punto(250,400));
+        salir = new Sprite("./res/grafico/buttons/boton_salir.png",new Punto(378,550));
         Sprite buttons[] = {nueva_partida,cargar_partida,opciones,salir};
         for(int i = 0;i<botones.length;i++){
             botones[i] = new MouseOverArea(container,buttons[i],(int)buttons[i].getPosicion().getX(),(int)buttons[i].getPosicion().getY(),buttons[i].getWidth(),buttons[i].getHeight(),this);         

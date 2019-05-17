@@ -47,7 +47,7 @@ public class Info_Jugador implements Serializable{
         Jugador j = null;
         
         try{
-            j = new Jugador(this.getNombre(),this.getHp(),data.getEntradas((this.getNivelMapaActual()-1)),new SpriteSheet("./res/Character"+this.getNivelJugador() +".png",48,72),this.getVelocidad(),0,this.getMunicion(),this.getDanyo(),this.getNivelMapaActual());            
+            j = new Jugador(this.getNombre(),this.getHp(),data.getEntradas((this.getNivelMapaActual()-1)),new SpriteSheet("./res/grafico/Character"+this.getNivelJugador() +".png",48,72),this.getVelocidad(),0,this.getMunicion(),this.getDanyo(),this.getNivelMapaActual());            
             j.setExperiencia(this.getExperiencia());
             j.setNivelMapaMax(this.getNivelMapaMax());          
             j.setNivelJugador(this.getNivelJugador());            

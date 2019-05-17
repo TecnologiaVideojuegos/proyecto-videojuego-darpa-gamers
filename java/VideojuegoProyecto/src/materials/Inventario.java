@@ -114,24 +114,24 @@ public class Inventario {
         
         //Guardamos en un array de Obj tipo Image los slots del inventario
         for(int i = 0; i < 5; i++){
-            listaSlots[i] = (new Image("./res/inventario/sprite_inventario_4_" + (i+1) +".png"));  
+            listaSlots[i] = (new Image("./res/grafico/inventario/sprite_inventario_4_" + (i+1) +".png"));  
         }
         
         //Guardamos en un array de Obj tipo Image los números de objetos del inventario
         for(int i = 0; i < 9; i++){
-            listaNumObj[i] = (new Image("./res/num_obj/num_obj_" + (i+1) +".png"));  
+            listaNumObj[i] = (new Image("./res/grafico/num_obj/num_obj_" + (i+1) +".png"));  
         }
         
         //Guardamos en un array de Obj tipo Image las pociones
         //Podríamos hacerlo en un bucle tambien cambiando de nombre a las imagenes
         //Pero así se ve más claro que es cada cosa
-        listaPociones[0] = (new Image("./res/pociones/hp_2_32px.png"));
-        listaPociones[1] = (new Image("./res/pociones/velo_2_32px.png"));
-        listaPociones[2] = (new Image("./res/pociones/exp_2_32px.png"));
-        listaPociones[3] = (new Image("./res/pociones/def_2_32px.png"));
-        listaPociones[4] = (new Image("./res/pociones/fuerza_2_32px.png"));
+        listaPociones[0] = (new Image("./res/grafico/pociones/hp_2_32px.png"));
+        listaPociones[1] = (new Image("./res/grafico/pociones/velo_2_32px.png"));
+        listaPociones[2] = (new Image("./res/grafico/pociones/exp_2_32px.png"));
+        listaPociones[3] = (new Image("./res/grafico/pociones/def_2_32px.png"));
+        listaPociones[4] = (new Image("./res/grafico/pociones/fuerza_2_32px.png"));
         
-        listaImagenesInfoPoc[0] = (new Image("./res/game_utils/info_poc.png"));
+        listaImagenesInfoPoc[0] = (new Image("./res/grafico/game_utils/info_poc.png"));
             
     }
     

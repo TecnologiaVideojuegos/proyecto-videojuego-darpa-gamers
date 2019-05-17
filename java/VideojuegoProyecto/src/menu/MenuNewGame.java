@@ -34,9 +34,9 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         almacenar.cargarDatos(1);
         name = new TextField(gc,gc.getDefaultFont(),578,141,300,40,this);
         try {
-            fondo = new Sprite("./res/fonds/fondo.png");
-            jugar = new Sprite("./res/buttons/boton_jugar.png",new Punto(250,500));
-            salir = new Sprite("./res/buttons/boton_atras.png",new Punto(378,630));
+            fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            jugar = new Sprite("./res/grafico/buttons/boton_jugar.png",new Punto(250,500));
+            salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,630));
         } catch (SlickException ex) {
             Logger.getLogger(MenuNewGame.class.getName()).log(Level.SEVERE, null, ex);
         } 

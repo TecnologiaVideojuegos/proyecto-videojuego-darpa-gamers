@@ -24,11 +24,11 @@ public class MenuOpcionGame extends BasicGameState implements ComponentListener{
 
     public MenuOpcionGame(GameContainer container) {
         try{
-            fondo = new Sprite("./res/fonds/fondo.png");
-            controles = new Sprite("./res/buttons/boton_controles.png",new Punto(250,200));
-            marcadores = new Sprite("./res/buttons/boton_marcadores.png",new Punto(250,300));
-            creditos = new Sprite("./res/buttons/boton_creditos.png",new Punto(250,400));
-            salir = new Sprite("./res/buttons/boton_atras.png",new Punto(378,550));
+            fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            controles = new Sprite("./res/grafico/buttons/boton_controles.png",new Punto(250,200));
+            marcadores = new Sprite("./res/grafico/buttons/boton_marcadores.png",new Punto(250,300));
+            creditos = new Sprite("./res/grafico/buttons/boton_creditos.png",new Punto(250,400));
+            salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,550));
             Sprite buttons[] = {controles,marcadores,creditos,salir};
             for(int i = 0;i<botones.length;i++){
                 botones[i] = new MouseOverArea(container,buttons[i],(int)buttons[i].getPosicion().getX(),(int)buttons[i].getPosicion().getY(),buttons[i].getWidth(),buttons[i].getHeight(),this);         

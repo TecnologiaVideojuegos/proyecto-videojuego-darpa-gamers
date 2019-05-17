@@ -45,9 +45,9 @@ public class Hud {
      */
     public void cargar_img_estados_pociones() throws SlickException{
         
-        listaEstadosPociones[0] = (new Image("./res/estados_pociones/estado_dmg.png"));
-        listaEstadosPociones[1] = (new Image("./res/estados_pociones/estado_invul.png")); 
-        listaEstadosPociones[2] = (new Image("./res/estados_pociones/estado_velo.png")); 
+        listaEstadosPociones[0] = (new Image("./res/grafico/estados_pociones/estado_dmg.png"));
+        listaEstadosPociones[1] = (new Image("./res/grafico/estados_pociones/estado_invul.png")); 
+        listaEstadosPociones[2] = (new Image("./res/grafico/estados_pociones/estado_velo.png")); 
         
     }
     
@@ -95,7 +95,7 @@ public class Hud {
      */
     private void inicio() throws SlickException{
         for(int i = 0;i<=100;i+=25){
-            listaBasica[(i/25)] = (new Image("./res/corazones_jugador/corazon_" + i +".png"));
+            listaBasica[(i/25)] = (new Image("./res/grafico/corazones_jugador/corazon_" + i +".png"));
         }
     }
     

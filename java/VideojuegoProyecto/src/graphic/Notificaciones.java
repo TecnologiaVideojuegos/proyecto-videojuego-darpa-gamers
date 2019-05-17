@@ -106,9 +106,9 @@ public class Notificaciones {
      */
     public void cargar_imagenes_notficaciones() throws SlickException {
         for(int i=0; i < 5; i++){
-            this.listaNotificaciones[i] = (new Image("./res/notificaciones_pociones/not_" + (i+1) +".png"));      
+            this.listaNotificaciones[i] = (new Image("./res/grafico/notificaciones_pociones/not_" + (i+1) +".png"));      
         }
-        this.listaNotificaciones[5] = (new Image("./res/notificaciones_varios/not_1.png")); 
+        this.listaNotificaciones[5] = (new Image("./res/grafico/notificaciones_varios/not_1.png")); 
         
     }
     

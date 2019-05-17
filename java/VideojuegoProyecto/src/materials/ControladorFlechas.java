@@ -38,7 +38,7 @@ public class ControladorFlechas {
      * @throws SlickException 
      */
     public void addFlecha(float x,float y,float dx,float dy) throws SlickException{
-        SpriteMovil flecha = new SpriteMovil("./res/flecha.png",new Punto(x,y),new Punto(dx,dy));
+        SpriteMovil flecha = new SpriteMovil("./res/grafico/flecha.png",new Punto(x,y),new Punto(dx,dy));
         Rectangle contorno = new Rectangle(x,y,24,22);
         flechas.add(flecha);
         colisiones.add(contorno);

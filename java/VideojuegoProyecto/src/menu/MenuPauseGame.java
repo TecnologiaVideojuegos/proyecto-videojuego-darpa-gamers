@@ -28,9 +28,9 @@ public class MenuPauseGame implements ComponentListener{
             this.pausa = false;
             this.debug = false;
             this.container = container;
-            this.fondo = new Sprite("./res/fonds/fondo.png");
-            this.continuar = new Sprite("./res/buttons/boton_inicio.png",new Punto(200,300));
-            this.salir = new Sprite("./res/buttons/boton_salir.png");
+            this.fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            this.continuar = new Sprite("./res/grafico/buttons/boton_inicio.png",new Punto(200,300));
+            this.salir = new Sprite("./res/grafico/buttons/boton_salir.png");
             Sprite[] buttons = {continuar,salir};
             for(int i = 0;i<botones.length;i++){
                 botones[i] = new MouseOverArea(container,buttons[i],(int)buttons[i].getPosicion().getX(),(int)buttons[i].getPosicion().getY(),buttons[i].getWidth(),buttons[i].getHeight(),this);         
