@@ -39,7 +39,7 @@ public class Nivel1 extends BasicGameState{
     private final int[] numObjetos = {1,0,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {0,0,0,0};
+    private final int[] numEnemigos = {0,0,0,1};
     
     //Cantidad de cofres que tendrá cada escena
     private final int[] numCofres = {1,1,0,0};
@@ -94,13 +94,16 @@ public class Nivel1 extends BasicGameState{
         for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
         }
+       
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getRango());
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersDown());
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersL());
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersR());
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
+            
         }
+        g.drawString(escenas.get(j.getEscenario()).getEnemigos().size()+"",50,50);
         g.draw(escenas.get(j.getEscenario()).getArea_entrada());
         g.draw(escenas.get(j.getEscenario()).getArea_salida());
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());

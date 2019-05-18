@@ -127,7 +127,7 @@ public class DatosNivel {
         
         //Datos de los objetos del nivel
         float[] pozo = {800,480,928,480,928,544,800,544};
-        float [][][] objetos = {{pozo,pozo}};
+        float [][][] objetos = {{pozo},{},{},{}};
         for(int i=0;i<numEscenas;i++){
             mapa_objetos.add((new ArrayList<>()));//añadimos tantos arrayList como numEscenas haya (inicialmente están vacíos).
             for(int a = 0;a<numObjetos[i];a++){
@@ -136,17 +136,19 @@ public class DatosNivel {
         }
         
         //Generador de enemigos
-        Punto[] inicioEnemigos1 = {new Punto(480,110)};
-        Punto[] inicioEnemigos2 = {};
-        Punto[] inicioEnemigos3 = {new Punto(603,218),new Punto(410,421)};
-        Punto[][] inicioEnemigos = {inicioEnemigos1,inicioEnemigos2,inicioEnemigos3};
+        Punto[] enemigosEscena1 = {new Punto()};
+        Punto[] enemigosEscena2 = {new Punto()};
+        Punto[] enemigosEscena3 = {new Punto()};
+        Punto[] enemigosEscena4 = {new Punto(346,440)};
+        Punto[][] enemigosNivel1 = {enemigosEscena1,enemigosEscena2,enemigosEscena3,enemigosEscena4};
         
         for(int i = 0;i<numEscenas;i++){
             enemigos.add(new ArrayList<>());
             for(int j = 0;j<numEnemigos[i];j++){
                 try{
                     int velocidad = (int)(100+51*Math.random());
-                    enemigos.get(i).add(new Monstruo(100,inicioEnemigos[i][j],new SpriteSheet("./res/grafico/flecha.png",24,22),velocidad,0,96,"Pasivo",50));
+                    enemigos.get(i).add(new Monstruo(100,enemigosNivel1[i][j],new SpriteSheet("./res/grafico/Character2.png",24,22),velocidad,0,96,"Pasivo",50));
+                    System.out.println(enemigos.get(i).size());
                 }catch(Exception ex){}
             }
         }

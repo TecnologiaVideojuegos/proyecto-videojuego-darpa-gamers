@@ -156,7 +156,7 @@ public class Monstruo extends Ente{
      */
     public void realizarMovimiento(Jugador j,Escena escena,int delta,int reloj){
         this.detectarJugador(j); 
-        if(this.getComportamiento().equals("Hostil")){
+        if(this.getComportamiento().equals("Hostil") || this.getComportamiento().equals("Perseguir")){
             this.movimientoHostil(j,escena,delta);
         }else{
             this.movimientoPasivo(escena,delta,reloj);    
@@ -201,7 +201,8 @@ public class Monstruo extends Ente{
      * @param j
      */
     public void detectarJugador(Jugador j){
-        if(rango.intersects(j.getPersDown()) || rango.intersects(j.getPersL()) || rango.intersects(j.getPersR()) || rango.intersects(j.getPersUp())){
+        if(this.getComportamiento().equals("Perseguir")){
+        }else if(rango.intersects(j.getPersDown()) || rango.intersects(j.getPersL()) || rango.intersects(j.getPersR()) || rango.intersects(j.getPersUp())){
             this.setComportamiento("Hostil");
         }else{
             this.setComportamiento("Pasivo");

@@ -491,13 +491,16 @@ public class Jugador extends Ente{
      */
     public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
-            System.out.println("FINAL DEL NIVEL");
-            this.getHud().anadirCorazon();
-            if(this.getNivelMapaMax() == this.getNivelMapa()){
-                this.nivelMapaMax++;
+            if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
+                System.out.println("FINAL DEL NIVEL");
+                this.getHud().anadirCorazon();
+                if(this.getNivelMapaMax() == this.getNivelMapa()){
+                    this.nivelMapaMax++;
+                }
+                this.avanzarMapa();
+                game.enterState(this.getNivelMapa());
             }
-            this.avanzarMapa();
-            game.enterState(this.getNivelMapa());
+            
         }else{
             this.comprobarLimite(escenas, datos);
         }
@@ -613,6 +616,7 @@ public class Jugador extends Ente{
                     this.getVarita().getFlecha().getColisiones().remove(j);
                     this.getVarita().getFlecha().getFlechas().remove(j);
                     mon.get(i).setHp(mon.get(i).getHp()- super.getDanyo());
+                    mon.get(i).setComportamiento("Perseguir");
                 }           
                 if(mon.get(i).getHp()<=0){
                     
@@ -645,7 +649,7 @@ public class Jugador extends Ente{
     }
     
     public Punto[] nivelesRespawn(){
-        Punto[][] niveles = {{new Punto(80,655),new Punto(370,450),new Punto(940,215),new Punto(420,900)}};
+        Punto[][] niveles = {{new Punto(80,655),new Punto(370,450),new Punto(940,215),new Punto(900,420)}};
         return niveles[this.getNivelMapa()-1];
     }
     
