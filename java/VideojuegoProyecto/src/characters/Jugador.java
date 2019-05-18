@@ -1048,7 +1048,7 @@ public class Jugador extends Ente{
             Dir drch  ( dir == 0) == (id_animacion == 2)
         
         */
-        System.out.println("Devulevo animacion dir: "+ this.getDireccion());
+        
         if(this.getDireccion() == 0){
             this.animacion_jugador.getAnimacion(2).draw( super.getPunto().getX(), super.getPunto().getY());
         }else if(this.getDireccion() == 1){
