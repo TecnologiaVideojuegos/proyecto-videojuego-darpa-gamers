@@ -42,7 +42,7 @@ public class Nivel1 extends BasicGameState{
     private final int[] numEnemigos = {0,0,0,1};
     
     //Cantidad de cofres que tendrá cada escena
-    private final int[] numCofres = {1,1,0,0};
+    private final int[] numCofres = {3,1,2,1};
     
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos  = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);
@@ -89,7 +89,7 @@ public class Nivel1 extends BasicGameState{
         g.draw(j.getPersUp());
         g.draw(j.getPersDown());      
         j.getVarita().getFlecha().draw(g);
-        j.imprimirJugador();
+        
         
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
@@ -106,7 +106,7 @@ public class Nivel1 extends BasicGameState{
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
             
         }
-        
+        j.imprimirJugador();
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();

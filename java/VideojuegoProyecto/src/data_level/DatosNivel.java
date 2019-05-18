@@ -154,10 +154,11 @@ public class DatosNivel {
         }
         
         //Generador de cofres
-        Punto[] loc_cofres_escena1 = {new Punto(600,500)};
-        Punto[] loc_cofres_escena2 = {new Punto (450, 100)};
-        Punto[] loc_cofres_escena3 = {};
-        Punto[][] loc_cofres_escenas = {loc_cofres_escena1,loc_cofres_escena2,loc_cofres_escena3};
+        Punto[] loc_cofres_escena1 = {new Punto(739,418),new Punto(407,535),new Punto(541,132)};
+        Punto[] loc_cofres_escena2 = {new Punto(284, 67)};
+        Punto[] loc_cofres_escena3 = {new Punto(39,600), new Punto(406,221)};
+        Punto[] loc_cofres_escena4 = {new Punto(389, 289)};
+        Punto[][] loc_cofres_escenas = {loc_cofres_escena1,loc_cofres_escena2,loc_cofres_escena3,loc_cofres_escena4};
         
         for(int i = 0;i<numEscenas;i++){
             this.cofres_escenas.add(new ArrayList<>());
