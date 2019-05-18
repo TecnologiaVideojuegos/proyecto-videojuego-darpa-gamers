@@ -22,7 +22,6 @@ public class MainGame extends StateBasedGame{
         super("Shiawase Story");
         contenedor = new AppGameContainer(this);
         contenedor.setDisplayMode(1024,768,false);
-        contenedor.setTargetFrameRate(120);
         contenedor.setShowFPS(true);
         contenedor.start();
     }
