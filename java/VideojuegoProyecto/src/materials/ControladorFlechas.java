@@ -32,19 +32,22 @@ public class ControladorFlechas {
     /**
      * Método que añade la flecha he indica la dirección del disparo
      * 
+     * @param evolucion
      * @param tipo dirección del disparo
      * @param x origen en eje x donde saldrá
      * @param y origen en eje y donde saldrá
      * @param dx dirección en eje x de disparo
      * @param dy dirección en eje y de disparo
+     * @param px origen del polígono eje x
+     * @param py origne del polígono eje y
      * @param ancho tamaño de la flecha a lo ancho
      * @param alto tamaño de la flecha a lo largo
      * @throws SlickException 
      */
-    public void addFlecha(int evolucion,int tipo,float x,float y,float dx,float dy,float ancho,float alto) throws SlickException{
+    public void addFlecha(int evolucion,int tipo,float x,float y,float dx,float dy,float px,float py,float ancho,float alto) throws SlickException{
         SpriteSheet img = new SpriteSheet("./res/grafico/disparos/magia_level_" + evolucion +".png",24,24);
         SpriteMovil flecha = new SpriteMovil(img.getSprite(tipo,0),new Punto(x,y),new Punto(dx,dy));
-        Rectangle contorno = new Rectangle(x,y,ancho,alto);
+        Rectangle contorno = new Rectangle(px,py,ancho,alto);
         flechas.add(flecha);
         colisiones.add(contorno);
     }

@@ -87,7 +87,8 @@ public class Nivel1 extends BasicGameState{
         g.draw(j.getPersL());
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
-        g.draw(j.getPersDown());        
+        g.draw(j.getPersDown());      
+        j.getVarita().getFlecha().draw(g);
         j.imprimirJugador();
         
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
@@ -105,11 +106,9 @@ public class Nivel1 extends BasicGameState{
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
             
         }
-        g.drawString(escenas.get(j.getEscenario()).getEnemigos().size()+"",50,50);
         g.draw(escenas.get(j.getEscenario()).getArea_entrada());
         g.draw(escenas.get(j.getEscenario()).getArea_salida());
         g.draw(escenas.get(j.getEscenario()).getMapa_colision());
-        j.getVarita().getFlecha().draw(g);
         /*
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
