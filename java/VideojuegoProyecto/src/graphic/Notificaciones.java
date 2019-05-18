@@ -138,7 +138,7 @@ public class Notificaciones {
      */
     public void imprimirNotificaciones(){
         if(!this.colaNotificaciones.isEmpty()&& !this.getWaitState()){
-            this.colaNotificaciones.get(this.colaNotificaciones.size() - 1).draw(40.0f, 640.0f);
+            this.colaNotificaciones.get(this.colaNotificaciones.size() - 1).draw(20.0f, 640.0f);
         }
     }
     
