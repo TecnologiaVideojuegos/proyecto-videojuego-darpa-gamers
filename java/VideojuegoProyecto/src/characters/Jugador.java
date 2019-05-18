@@ -1050,13 +1050,13 @@ public class Jugador extends Ente{
         */
         
         if(this.getDireccion() == 0){
-            this.animacion_jugador.getAnimacion(2).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-20.0f);
+            this.animacion_jugador.getAnimacion(2).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-18.0f);
         }else if(this.getDireccion() == 1){
-            this.animacion_jugador.getAnimacion(3).draw( super.getPunto().getX()-13.0f, super.getPunto().getY()-20.0f);
+            this.animacion_jugador.getAnimacion(3).draw( super.getPunto().getX()-13.0f, super.getPunto().getY()-18.0f);
         }else if(this.getDireccion() == 2){
-            this.animacion_jugador.getAnimacion(1).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-20.0f);
+            this.animacion_jugador.getAnimacion(1).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-18.0f);
         }else if(this.getDireccion() == 3){
-            this.animacion_jugador.getAnimacion(0).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-20.0f);
+            this.animacion_jugador.getAnimacion(0).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-18.0f);
         }
     
     }

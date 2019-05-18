@@ -105,6 +105,12 @@ public class Nivel1 extends BasicGameState{
             g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
             
         }
+        
+        //Pintar Enemigos
+        for(int i = 0; i < escenas.get(j.getEscenario()).getEnemigos().size();i++){
+            escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
+        }
+        
         g.drawString(escenas.get(j.getEscenario()).getEnemigos().size()+"",50,50);
         g.draw(escenas.get(j.getEscenario()).getArea_entrada());
         g.draw(escenas.get(j.getEscenario()).getArea_salida());

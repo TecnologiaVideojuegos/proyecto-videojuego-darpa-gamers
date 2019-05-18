@@ -5,6 +5,7 @@
  */
 package characters;
 
+import graphic.Animacion;
 import java.util.ArrayList;
 import location.*;
 import map.Escena;
@@ -23,6 +24,8 @@ public class Monstruo extends Ente{
     private Circle rango;
     private Vector movimiento;    
     private final Rectangle PersUp,PersDown,PersL,PersR;
+    //Animaciones
+    private final Animacion animacion_enemigo;
 
     /**
      * Constructor de la clase Monstruo
@@ -37,18 +40,22 @@ public class Monstruo extends Ente{
      * @param danio daño del ente
      * 
      */
-    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento,int danio) {
+    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento,int danio) throws SlickException {
         super(hp, punto, sprite, velocidad,direccion, danio);
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+16),12,1);
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
         this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
+        this.animacion_enemigo = new Animacion(new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",32,50), 9);
+        
         try{
             this.movimiento = new Vector(new Punto());
             this.comportamiento = comportamiento;
             this.rango = new Circle(punto.getX()+sprite.getHeight()/2,punto.getY()+sprite.getWidth()/2,rango); //creamos el rango que tendrá el monstruo
             this.respawn = punto;
-        }catch(Exception ex){}
+            }catch(Exception ex){
+            
+        }
     }
 
     /**
@@ -162,6 +169,7 @@ public class Monstruo extends Ente{
             this.movimientoPasivo(escena,delta,reloj);    
         }
         this.detectarColisionEnemigo(escena.getEnemigos());
+        this.controlAnimacionesEnemigo(delta);
         this.corregirBug(escena);
         this.actualizarPosicionPoligono();
         this.actualizarRango();
@@ -215,24 +223,28 @@ public class Monstruo extends Ente{
                 if(!escena.colisionConPoligonos(this.getPersUp())){
                     this.move(delta,0,0,0,-this.getVelocidad());
                     this.setDireccion(0);
+                    //this.animacion_enemigo.getAnimacion(1).update(delta);
                 }
             //case Left
             }else if(reloj > 1000){
                 if(!escena.colisionConPoligonos(this.getPersL())){
                     this.move(delta,0,0,-this.getVelocidad(),0);
                     this.setDireccion(2);
+                    //this.animacion_enemigo.getAnimacion(3).update(delta);
                 }
             //case Down 
             }else if(reloj > 500){
                 if(!escena.colisionConPoligonos(this.getPersDown())){
                     this.move(delta,0,0,0,this.getVelocidad());
                     this.setDireccion(1);
+                    //this.animacion_enemigo.getAnimacion(0).update(delta);
                 }
             //case Right
             }else{
                 if(!escena.colisionConPoligonos(this.getPersR())){
                     this.move(delta,0,0,this.getVelocidad(),0);
                     this.setDireccion(3);
+                    //this.animacion_enemigo.getAnimacion(2).update(delta);
                 }
             }
     }
@@ -322,6 +334,52 @@ public class Monstruo extends Ente{
         this.getPersR().setY((this.getPunto().getY()+2));
         this.getPersUp().setY((this.getPunto().getY()));
         this.getPersDown().setY((this.getPunto().getY()+16));
+    }
+    
+    /**
+     * 
+     * Metodo para pintar las animaciones o imagenes estaticas
+     * 
+     */
+    public void imprimirEnemigo(){
+        
+        /*  Dir abajo ( dir == 1) == (id_animacion == 0)
+            Dir arriba( dir == 0) == (id_animacion == 1)
+            Dir izq   ( dir == 2) == (id_animacion == 3)
+            Dir drch  ( dir == 3) == (id_animacion == 2)
+        
+        */
+        
+        if(this.getDireccion() == 0){
+            this.animacion_enemigo.getAnimacion(1).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-18.0f);
+        }else if(this.getDireccion() == 1){
+            this.animacion_enemigo.getAnimacion(0).draw( super.getPunto().getX()-13.0f, super.getPunto().getY()-18.0f);
+        }else if(this.getDireccion() == 2){
+            this.animacion_enemigo.getAnimacion(3).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-18.0f);
+        }else if(this.getDireccion() == 3){
+            this.animacion_enemigo.getAnimacion(2).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-18.0f);
+        }
+    
+    }
+    
+    
+    public void controlAnimacionesEnemigo(int delta){
+        switch (this.getDireccion()) {
+            case 0:
+                this.animacion_enemigo.getAnimacion(1).update(delta);
+                break;
+            case 1:
+                this.animacion_enemigo.getAnimacion(0).update(delta);
+                break;
+            case 2:
+                this.animacion_enemigo.getAnimacion(3).update(delta);
+                break;
+            case 3:
+                this.animacion_enemigo.getAnimacion(2).update(delta);
+                break;
+            default:
+                break;
+        }
     }
     
 }
