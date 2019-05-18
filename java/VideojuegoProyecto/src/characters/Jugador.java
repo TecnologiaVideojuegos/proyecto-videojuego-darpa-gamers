@@ -7,9 +7,11 @@ package characters;
 
 import data_level.DatosNivel;
 import exception_serialization.AlmacenarAvatar;
+import graphic.Animacion;
 import graphic.Hud;
 import graphic.Notificaciones;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import materials.Inventario;
 import location.Punto;
@@ -77,6 +79,12 @@ public class Jugador extends Ente{
     //Notificador
     private final Notificaciones notif;
     
+    //Animaciones
+    private final Animacion animacion_jugador;
+    
+    //Estado estatico
+    private boolean state_estatico;
+    
     //Nombre
     private String nombre;
     
@@ -117,9 +125,28 @@ public class Jugador extends Ente{
         this.buff_fuerza = new Buff(60000);
         this.buff_velocidad = new Buff(60000);
         this.notif = new Notificaciones(3000);
-        
+        this.animacion_jugador = new Animacion((new SpriteSheet("./res/grafico/personaje/lvl" + this.getNivelJugador() + "_spritesheet.png",44,50)), 6);
+        this.state_estatico = true;
     }
-
+    
+    /**
+     * 
+     * Metodo que devuelve si el jugador está en movimiento o parado
+     * 
+     * @return true o false(True == parado, false en movimiento)
+     */
+    public boolean getEstadoEstatico(){
+        return this.state_estatico;
+    }
+    
+    /**
+     * 
+     * @param state a poner al nuestro estado de si esta parado o no
+     */
+    public void setEstadoEstatico(boolean state){
+        
+        this.state_estatico = state;
+    }
     
     
     /**
@@ -369,21 +396,25 @@ public class Jugador extends Ente{
             this.getPunto().setX(this.getPunto().getX()-(this.getVelocidad() * (float)delta/1000));
             this.actualizarPosicion();
             this.setDireccion(1);
+
         }
         if(entrada.isKeyDown(Input.KEY_RIGHT) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersR())){
             this.getPunto().setX(this.getPunto().getX()+(this.getVelocidad() * (float)delta/1000));
             this.actualizarPosicion();
             this.setDireccion(0);
+
         }
         if(entrada.isKeyDown(Input.KEY_UP) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersUp())){
            this.getPunto().setY(this.getPunto().getY()-(this.getVelocidad() * (float)delta/1000));
            this.actualizarPosicion();
            this.setDireccion(2);
+
         }
         if(entrada.isKeyDown(Input.KEY_DOWN) && !escenas.get(this.getEscenario()).colisionConPoligonos(this.getPersDown())){
            this.getPunto().setY(this.getPunto().getY()+(this.getVelocidad() * (float)delta/1000));
            this.actualizarPosicion();
            this.setDireccion(3);
+
         }
     }
     
@@ -686,6 +717,7 @@ public class Jugador extends Ente{
         this.notif.controlEstadoEspera(delta);
         this.controlColisionCofres(escena.get(this.getEscenario()).getCofres(), entrada);
         this.controlColisionCofresLoot(escena.get(this.getEscenario()).getCofres(), entrada);
+        this.controlAnimaciones( entrada,  delta);
     }
     
     
@@ -972,6 +1004,61 @@ public class Jugador extends Ente{
             }
             this.actualizarPosicion();
           }  
+    }
+    
+    public void controlAnimaciones(Input entrada, int delta){
+    
+        if(entrada.isKeyDown(Input.KEY_LEFT)){
+            
+            this.setDireccion(1);
+            this.animacion_jugador.getAnimacion(3).update(delta);
+            this.setEstadoEstatico(false);
+            
+        }else if(entrada.isKeyDown(Input.KEY_RIGHT)){
+            this.setDireccion(0);
+            this.animacion_jugador.getAnimacion(2).update(delta);
+            this.setEstadoEstatico(false);
+        }
+        if(entrada.isKeyDown(Input.KEY_UP)){
+           
+           this.setDireccion(2);
+           this.animacion_jugador.getAnimacion(1).update(delta);
+           this.setEstadoEstatico(false);
+        }
+        if(entrada.isKeyDown(Input.KEY_DOWN)){
+
+           this.setDireccion(3);
+           this.animacion_jugador.getAnimacion(0).update(delta);
+           this.setEstadoEstatico(false);
+           
+        }else{
+            this.setEstadoEstatico(true);
+        }
+    }
+    /**
+     * 
+     * Metodo para pintar las animaciones o imagenes estaticas
+     * 
+     */
+    public void imprimirJugador(){
+        
+        /*  Dir abajo ( dir == 3) == (id_animacion == 0)
+            Dir arriba( dir == 2) == (id_animacion == 1)
+            Dir izq   ( dir == 1) == (id_animacion == 3)
+            Dir drch  ( dir == 0) == (id_animacion == 2)
+        
+        */
+        System.out.println("Devulevo animacion dir: "+ this.getDireccion());
+        if(this.getDireccion() == 0){
+            this.animacion_jugador.getAnimacion(2).draw( super.getPunto().getX(), super.getPunto().getY());
+        }else if(this.getDireccion() == 1){
+            this.animacion_jugador.getAnimacion(3).draw( super.getPunto().getX(), super.getPunto().getY());
+        }else if(this.getDireccion() == 2){
+            this.animacion_jugador.getAnimacion(1).draw( super.getPunto().getX(), super.getPunto().getY());
+        }else if(this.getDireccion() == 3){
+            this.animacion_jugador.getAnimacion(0).draw( super.getPunto().getX(), super.getPunto().getY());
+        }
+    
     }
     
 }

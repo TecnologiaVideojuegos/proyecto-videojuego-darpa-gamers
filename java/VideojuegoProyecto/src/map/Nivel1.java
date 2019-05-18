@@ -88,6 +88,8 @@ public class Nivel1 extends BasicGameState{
         g.draw(j.getPersR());
         g.draw(j.getPersUp());
         g.draw(j.getPersDown());        
+        j.imprimirJugador();
+        
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
         }
