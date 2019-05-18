@@ -500,9 +500,10 @@ public class Jugador extends Ente{
                 this.avanzarMapa();
                 game.enterState(this.getNivelMapa());
             }
-            
         }else{
-            this.comprobarLimite(escenas, datos);
+            if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
+                this.comprobarLimite(escenas, datos);
+            }
         }
     }
        
