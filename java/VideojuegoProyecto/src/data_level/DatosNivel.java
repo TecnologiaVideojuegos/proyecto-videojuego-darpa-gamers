@@ -147,7 +147,7 @@ public class DatosNivel {
             for(int j = 0;j<numEnemigos[i];j++){
                 try{
                     int velocidad = (int)(100+51*Math.random());
-                    enemigos.get(i).add(new Monstruo(100,enemigosNivel1[i][j],new SpriteSheet("./res/grafico/Character2.png",24,22),velocidad,0,96,"Pasivo",50));
+                    enemigos.get(i).add(new Monstruo(100,enemigosNivel1[i][j],new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",24,22),velocidad,0,96,"Pasivo",50));
                     System.out.println(enemigos.get(i).size());
                 }catch(Exception ex){}
             }
