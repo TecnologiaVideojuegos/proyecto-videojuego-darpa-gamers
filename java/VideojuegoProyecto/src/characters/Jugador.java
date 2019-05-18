@@ -7,12 +7,8 @@ package characters;
 
 import data_level.DatosNivel;
 import exception_serialization.AlmacenarAvatar;
-import graphic.Animacion;
-import graphic.Hud;
-import graphic.Notificaciones;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
+import graphic.*;
+import java.util.*;
 import materials.Inventario;
 import location.Punto;
 import map.Escena;
