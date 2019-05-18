@@ -124,10 +124,10 @@ public class Nivel1 extends BasicGameState{
         }        
         j.getInventario().imprimirImagenInfoPociones();   
         
-         j.getHud().imprimirCorazones();
+        j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
-        
+        j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
         menu.mostrarMenu(g,j);
     }

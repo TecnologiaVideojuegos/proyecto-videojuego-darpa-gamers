@@ -8,6 +8,7 @@ package graphic;
 import java.util.ArrayList;
 import location.Punto;
 import materials.Buff;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -22,6 +23,7 @@ public class Hud {
     private final ArrayList<Image> listaCorazones;
     private final Image[] listaBasica;
     private final Image [] listaEstadosPociones;
+    private final Image exp_municion;
     
     /**
      * Constructor de la clase Hud
@@ -32,6 +34,8 @@ public class Hud {
         listaEstadosPociones = new Image[3];
         listaCorazones = new ArrayList<>();
         listaBasica = new Image[5];
+        exp_municion = new Image("./res/grafico/hud_exp/hud_exp_mun.png");
+        
         inicio();
         cargar_img_estados_pociones();
     }
@@ -195,6 +199,22 @@ public class Hud {
         }else{
             System.out.println("Limite max");
         }
+    }
+    
+    
+    /**
+     * 
+     * Metodo para pintar la munición y la experiencia
+     * 
+     * @param g para pintar las strings en pantalla 
+     * @param municion del personaje 
+     * @param exp  del personaje
+     */
+    public void imprimirHudExpMunicion(Graphics g, int municion, int exp){
+        this.exp_municion.draw( 2.0f, 10.0f,0.7f);
+        g.drawString(exp+"", 100.0f, 25.0f);
+        g.drawString(""+municion, 125.0f, 68.0f);
+        
     }
     
 }
