@@ -49,7 +49,7 @@ public final class Animacion {
         for( int i = 0; i < 4; i++){
             for(int j = 0; j < this.frames_per_sprite; j++){
                 //100 ms cada frame
-                this.animaciones[i].addFrame( this.hoja_sprite.getSprite(j, i), 200);
+                this.animaciones[i].addFrame( this.hoja_sprite.getSprite(j, i), 150);
             }    
         }
     }
