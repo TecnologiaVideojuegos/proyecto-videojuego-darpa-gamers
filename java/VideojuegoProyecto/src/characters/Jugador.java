@@ -115,9 +115,9 @@ public class Jugador extends Ente{
         this.escenario = 0; //inicializado
         this.img = sprite;
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
-        this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+16),12,1);
-        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
-        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
+        this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+32),12,1);
+        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,30);
+        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,30);
         this.hud = new Hud();
         this.varita = new Varita(municion);
         this.inventario = new Inventario(9); // Para que los slots del inventario vayan de 1-9
@@ -445,7 +445,7 @@ public class Jugador extends Ente{
         this.getPersL().setY((this.getPunto().getY()+2));
         this.getPersR().setY((this.getPunto().getY()+2));
         this.getPersUp().setY((this.getPunto().getY()));
-        this.getPersDown().setY((this.getPunto().getY()+16));
+        this.getPersDown().setY((this.getPunto().getY()+32));
     }
     
     /**
@@ -1050,13 +1050,13 @@ public class Jugador extends Ente{
         */
         
         if(this.getDireccion() == 0){
-            this.animacion_jugador.getAnimacion(2).draw( super.getPunto().getX(), super.getPunto().getY());
+            this.animacion_jugador.getAnimacion(2).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-20.0f);
         }else if(this.getDireccion() == 1){
-            this.animacion_jugador.getAnimacion(3).draw( super.getPunto().getX(), super.getPunto().getY());
+            this.animacion_jugador.getAnimacion(3).draw( super.getPunto().getX()-13.0f, super.getPunto().getY()-20.0f);
         }else if(this.getDireccion() == 2){
-            this.animacion_jugador.getAnimacion(1).draw( super.getPunto().getX(), super.getPunto().getY());
+            this.animacion_jugador.getAnimacion(1).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-20.0f);
         }else if(this.getDireccion() == 3){
-            this.animacion_jugador.getAnimacion(0).draw( super.getPunto().getX(), super.getPunto().getY());
+            this.animacion_jugador.getAnimacion(0).draw( super.getPunto().getX()-10.0f, super.getPunto().getY()-20.0f);
         }
     
     }
