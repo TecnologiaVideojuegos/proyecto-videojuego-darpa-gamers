@@ -135,7 +135,7 @@ public class Nivel1 extends BasicGameState{
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);
         }
-        if(reloj >2000){
+        if(reloj > 2000){
             reloj = 0;
         }
     }
