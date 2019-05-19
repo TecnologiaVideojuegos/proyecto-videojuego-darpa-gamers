@@ -36,16 +36,16 @@ public class Nivel2 extends BasicGameState{
     private Jugador j; 
     
     //Variable que indica cuantas escenas tiene este nivel
-    private final int numEscenas = 2;  
+    private final int numEscenas = 3;  
     
     //Cantidad de objetos que tendrá cada escena
-    private final int[] numObjetos = {0,0,0,0}; 
+    private final int[] numObjetos = {1,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {0,1,2,2};
+    private final int[] numEnemigos = {3,1,2};
     
     //Cantidad de cofres que tendrá cada escena
-    private final int[] numCofres = {0,1,2,1};
+    private final int[] numCofres = {0,1,2};
     
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos  = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);
@@ -67,7 +67,7 @@ public class Nivel2 extends BasicGameState{
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
-                es = new Escena(new TiledMap("./res/mapas/Nivel1/layout_tmx/escena_"+(i+1)+".tmx","./res/mapas/Nivel1/resources_tsx"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
+                es = new Escena(new TiledMap("./res/mapas/Nivel2/layout_tmx/escena_"+(i+1)+".tmx","./res/mapas/Nivel2/resources_tsx"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
                 escenas.add(es);
             } catch (SlickException ex) {
                 Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);

@@ -453,6 +453,7 @@ public class Jugador extends Ente{
             this.actualizarPosicion();  //y actualizamos todo
         }else if((escenas.get(this.getEscenario()).colisionSalida(this.getPersR())) || (escenas.get(this.getEscenario()).colisionSalida(this.getPersL())) || (escenas.get(this.getEscenario()).colisionSalida(this.getPersUp())) || (escenas.get(this.getEscenario()).colisionSalida(this.getPersDown()))){ //si colisiona con un poligono que indica retroceder a otro escenario
             Punto point = this.guardarPosSalida(escenas);
+            this.getHud().limpiarRestos();
             this.retrocederEscenario(); //retroceder a la anterior escena
             datos.setSalidas(this.getEscenario(),point);
             this.setPunto(datos.getEntradas(this.getEscenario())); //establecemos la posición del personaje en esa nueva escena

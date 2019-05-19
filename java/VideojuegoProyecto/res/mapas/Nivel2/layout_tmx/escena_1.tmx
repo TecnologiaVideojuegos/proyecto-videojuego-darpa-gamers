@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="../resources_tsx/casa_madera.tsx"/>
+ <tileset firstgid="118" source="../resources_tsx/city_inside.tsx"/>
+ <tileset firstgid="502" source="../resources_tsx/build_atlas.tsx"/>
+ <tileset firstgid="1526" source="../resources_tsx/cavern_ruins.tsx"/>
+ <tileset firstgid="1910" source="../resources_tsx/city_outside.tsx"/>
+ <tileset firstgid="2342" source="../resources_tsx/house_inside.tsx"/>
+ <tileset firstgid="2566" source="../resources_tsx/house_interior.tsx"/>
+ <tileset firstgid="2822" source="../resources_tsx/obj_misk_atlas.tsx"/>
+ <layer id="1" name="suelo" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNjYGBgw4MZgZiVDMxCwFxiMRcQ85GBealkvx0Qm7GSjm1H7aeK/TJArEAACwLxPnYGhgNALAAVkyfRHnLTOQgrI9mvREBtEBAHY7Gf3HQOwjpI9msTUBsNxDE44vkiHXAKjvAftX9k209uPicV5wJxHg43ECoDMPI5UBMbAczORnxdSKgMQM/npkBNZgSwORvxdSEoDYQzEYfl2IjH6UTan0Yj+wuItD+fRvYTWxcSkwfIwaTWhaN45GAAPbWQ9wAMAAA=
+  </data>
+ </layer>
+ <layer id="2" name="objetos" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgIAxMORHYhIc4TE2gzYnApNq/CojjseBVUEwMsOZEYJDZs3kR9sQA2bFY+NS0/yMPBMPYxKinJkC2nxbmDzRwZ0JgbGAHO2ni5LphLhBfZGFguATERxkQ7AvsCPZaHOIw8B+I9wHxfgbsevDZvxeH/0kF14D4Opl6y4G4Aogrofx4TsJ6EoBq/NghmFwAi/9+IHsCEE+EiucDzbbkRC0DkLEVEBfgsP8GNwITYz8o/pcD2SuAeCX5XgEDULhpArE6EGtxQsKIkP3Uin8QAIXbX6C//wHxf25IGA0l4ASMS2cgdqFiHicGrIGWrVFAe6OBOAZq/zq0MleNRu7iJtJcO6A6HjYGhiwCmJeNNPs5gebmEqEHZH8jEeqIUYMMuIDm8hIRBmFANSpE+F+VRPuHGohmHVj74wfW+iEPAA6EwzEADAAA
+  </data>
+ </layer>
+ <layer id="3" name="extras" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgIA3I8jAwVAFxNRBLI7FrgLgWKibDg6qHEw2TCuZzI7At0OxZQDwbiK2R2HOAeC5UzIaA/eS4AQZigWbvAuLdQByNxN4DxHuhYjE0tH8UjAJ8IIcLwc4CsnO5cKulBahGsq+KC5VPLtAEZhh1HFgLiP3YIZha4B0av44TP/Zlh+DBBnyhYeQzQAXOX2B5/Q+I/3MPjP2kAjYGRFxiw+hl+AoW4jCt0gbM/JVAvIoFN59UcIONsBp1aJ77AFR7EmjHKSCuhuqD8T8QYQ4lAGQ/BxCzQ90xGYjfA7E3G0SMg8Z5Un0Q5nlqA2xtF3q1ZYixe7QtRRkAAAOnCOAADAAA
+  </data>
+ </layer>
+ <layer id="4" name="extras 2" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYBQMR7CHe6BdQB1wG+iPP0B8C4h/cUP4t6Biv4aJH0fBKBgFo2AUjAJ6AgCKb5FrAAwAAA==
+  </data>
+ </layer>
+</map>
