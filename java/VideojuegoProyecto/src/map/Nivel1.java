@@ -84,7 +84,9 @@ public class Nivel1 extends BasicGameState{
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        //Mapa
         escenas.get(j.getEscenario()).getMapa_escena().render(0,0);     
+        j.getHud().imprimirRestosEnemigos();
         
         //Ataques
         j.getVarita().getFlecha().draw(g,menu);
@@ -110,6 +112,7 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
+        
         menu.mostrarMenu(g,j,escenas);
     }
     

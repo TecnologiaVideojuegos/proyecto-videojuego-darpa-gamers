@@ -21,9 +21,11 @@ public class Hud {
     private int numCorazonesMin;
     private final int numCorazonesMax = 6;
     private final ArrayList<Image> listaCorazones;
+    private ArrayList<Punto> puntos_restos;
     private final Image[] listaBasica;
     private final Image [] listaEstadosPociones;
     private final Image exp_municion;
+    private final Image restos_enemigos;
     
     
     
@@ -36,8 +38,10 @@ public class Hud {
         this.numCorazonesMin = 2;
         listaEstadosPociones = new Image[3];
         listaCorazones = new ArrayList<>();
+        puntos_restos = new ArrayList<>();
         listaBasica = new Image[5];
         exp_municion = new Image("./res/grafico/hud_exp/hud_exp_mun.png");
+        restos_enemigos = new Image("./res/grafico/enemigo/enemigo_restos.png");
         
         inicio();
         cargar_img_estados_pociones();
@@ -232,6 +236,39 @@ public class Hud {
         g.drawString(exp+"", 100.0f, 25.0f);
         g.drawString(""+municion, 125.0f, 68.0f);
         
+    }
+    
+    /**
+     * 
+     * Metodo para añadir los restos de los enemigos por pantalla
+     * 
+     */
+    public void imprimirRestosEnemigos(){
+        
+        if( !this.puntos_restos.isEmpty()){
+            for(int i =0; i < this.puntos_restos.size(); i++){
+                this.restos_enemigos.draw( this.puntos_restos.get(i).getX(), this.puntos_restos.get(i).getY());
+            }
+        }
+    }
+    
+    /**
+     * 
+     * Metodo para añadir restos de enemigo
+     * 
+     * @param a Punto añadir a la lista
+     */
+    public void addRestosEnemigo(Punto a){
+        this.puntos_restos.add(a);
+    }
+    
+    /**
+     * 
+     * Metodo para limpiar restos de una escena
+     * 
+     */
+    public void limpiarRestos(){
+        this.puntos_restos.clear();
     }
     
 }

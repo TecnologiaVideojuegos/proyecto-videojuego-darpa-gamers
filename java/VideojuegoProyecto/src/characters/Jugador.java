@@ -450,6 +450,7 @@ public class Jugador extends Ente{
     public void comprobarLimite(ArrayList<Escena> escenas,DatosNivel datos){
         if((escenas.get(this.getEscenario()).colisionEntrada(this.getPersL())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersR())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersUp())) || (escenas.get(this.getEscenario()).colisionEntrada(this.getPersDown()))){ //si colisiona con un poligono que indica entrar a otro escenario
             Punto point = this.guardarPosEntrada(escenas);
+            this.getHud().limpiarRestos();
             this.avanzarEscenario();  //avanzamos a la siguiente escena
             datos.setEntradas((this.getEscenario()-1),point);
             this.setPunto(datos.getSalidas((this.getEscenario()-1)));  //establecemos la posición del personaje en esa nueva escena
@@ -669,6 +670,8 @@ public class Jugador extends Ente{
                     mon.get(i).setComportamiento("Perseguir");
                 }           
                 if(mon.get(i).getHp()<=0){
+                    //Pintar restos
+                    this.getHud().addRestosEnemigo(mon.get(i).getPunto());
                     
                     //Añadir municion aleatoria y notificar
                     Random random = new Random();
