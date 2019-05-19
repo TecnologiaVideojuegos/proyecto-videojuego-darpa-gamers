@@ -15,7 +15,6 @@ import location.Punto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.*;
 import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
 
 /**
  *

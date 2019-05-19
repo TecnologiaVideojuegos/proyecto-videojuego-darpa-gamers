@@ -6,16 +6,18 @@
 package characters;
 
 import data_level.DatosNivel;
-import exception_serialization.AlmacenarAvatar;
+import exception_serialization.*;
 import graphic.*;
 import java.util.*;
+import java.util.logging.*;
 import materials.Inventario;
-import location.Punto;
-import map.Escena;
+import location.*;
+import map.*;
 import materials.*;
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.geom.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.*;
 
 /**
  *
@@ -514,13 +516,25 @@ public class Jugador extends Ente{
     public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
             if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
-                System.out.println("FINAL DEL NIVEL");
-                this.getHud().anadirCorazon();
-                if(this.getNivelMapaMax() == this.getNivelMapa()){
-                    this.nivelMapaMax++;
+                try {
+                    this.setHp(this.getHp()+200);
+                    this.getHud().setNumCorazonesMin(this.getHud().getNumCorazonesMin()+2);
+                    if(this.getNivelMapaMax() == this.getNivelMapa()){
+                        this.nivelMapaMax++;
+                    }
+                    this.avanzarMapa();
+                    alm.cargarDatos(this.getNivelMapa());
+                    alm.altaJugador(new Info_Jugador(this));
+                    alm.guardarDatos(this.getNivelMapa());
+                    this.addNivel(game);
+                    game.enterState(this.getNivelMapa(),FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                } catch (SlickException ex) {
+                    Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.avanzarMapa();
-                game.enterState(this.getNivelMapa());
             }
         }else{
             if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
@@ -529,6 +543,19 @@ public class Jugador extends Ente{
         }
     }
        
+    public void addNivel(StateBasedGame game){
+        switch(this.getNivelMapa()){
+            case 1:
+                game.addState(new Nivel1(this.getNombre()));
+                break;
+            case 2:
+                game.addState(new Nivel2(this.getNombre()));
+                break;
+            case 3:
+                break;
+        }
+    }
+    
     /**
      * Comprueba si colisiona con el último polígono 
      *
@@ -672,7 +699,7 @@ public class Jugador extends Ente{
     }
     
     public Punto[] nivelesRespawn(){
-        Punto[][] niveles = {{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)}};
+        Punto[][] niveles = {{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)},{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)}};
         return niveles[this.getNivelMapa()-1];
     }
     

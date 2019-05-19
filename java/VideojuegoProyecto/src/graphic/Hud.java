@@ -18,7 +18,7 @@ import org.newdawn.slick.SlickException;
  */
 public class Hud {
     
-    private final int numCorazonesMin = 2;
+    private int numCorazonesMin;
     private final int numCorazonesMax = 6;
     private final ArrayList<Image> listaCorazones;
     private final Image[] listaBasica;
@@ -30,7 +30,8 @@ public class Hud {
      * 
      * @throws org.newdawn.slick.SlickException
      */
-    public Hud() throws SlickException{
+    public Hud() throws SlickException{ 
+        this.numCorazonesMin = 2;
         listaEstadosPociones = new Image[3];
         listaCorazones = new ArrayList<>();
         listaBasica = new Image[5];
@@ -107,9 +108,12 @@ public class Hud {
      * añade los corazones mínimos con los que el jugador comenzará la historia
      * 
      */
-    public void iniciarJugador(){
+    public void iniciarJugador(int hp){
         for(int i = 0;i<numCorazonesMin;i++){
-            listaCorazones.add(listaBasica[4]);
+            listaCorazones.add(listaBasica[0]);            
+        }
+        for(int i = 0;i<hp;i+=25){
+            this.anadirVida();
         }
     }
     
@@ -186,12 +190,13 @@ public class Hud {
     }
     
     /** 
-     * añade un corazón más a la listta de los que tiene el jugador actualmente
+     * añade un corazón más a la lista de los que tiene el jugador actualmente
      * (incrementa la vida en un 100%)
      * 
      */
     public void anadirCorazon(){
         if(this.numCorazonesMax != this.getListaCorazones().size()){
+            this.numCorazonesMin++;
             this.getListaCorazones().add(listaBasica[0]);
             for(int i = 0;i<4;i++){
                 this.anadirVida();
@@ -200,6 +205,15 @@ public class Hud {
             System.out.println("Limite max");
         }
     }
+
+    public int getNumCorazonesMin() {
+        return numCorazonesMin;
+    }
+
+    public void setNumCorazonesMin(int numCorazonesMin) {
+        this.numCorazonesMin = numCorazonesMin;
+    }
+    
     
     
     /**

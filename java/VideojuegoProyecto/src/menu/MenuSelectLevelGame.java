@@ -77,40 +77,46 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
     public void comprobarEstado(GameContainer container,StateBasedGame game) throws SlickException{
         switch (estado) {
             case 0:
-                //Levl1
+                //Level1
                 estado = -1;
-                if(almacenar.cargarDatos(1).size() > 0 && almacenar.cargarDatos(1).get(nombre).getNivelMapaMax()>=1){
-            try {
-                for(int i = 2;i<=nivelMax;i++){//borrar toda información desde el nivel 2 en adelante
-                    if(almacenar.cargarDatos(i).containsKey(nombre)){
-                        almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
-                        almacenar.guardarDatos(i);                      
+                if(almacenar.cargarDatos(1).size() > 0 && almacenar.cargarDatos(1).containsKey(nombre)){
+                    try {
+                        for(int i = 2;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
+                            if(almacenar.cargarDatos(i).containsKey(nombre)){
+                                almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
+                                almacenar.guardarDatos(i);                      
+                            }
+                        }
+                        game.addState(new Nivel1(nombre));
+                        game.enterState(1,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-                game.addState(new Nivel1(nombre));
-                game.enterState(1,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
-            } catch (InstantiationException ex) {
-                Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
-            }
                 }else{
                     System.err.println("Nivel no alcanzado");
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
                 }
                 break;
             case 1:
-                //Levl2
+                //Level2
                 estado = -1;
-                if(almacenar.cargarDatos(2).size() > 0 && almacenar.cargarDatos(2).get(nombre).getNivelMapaMax()>=2){
-                    for(int i = 3;i<=nivelMax;i++){//borrar toda información desde el nivel 2 en adelante
-                        if(almacenar.cargarDatos(i).containsKey(nombre)){
-                            almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
-                            almacenar.guardarDatos(i);
-                        } 
+                if(almacenar.cargarDatos(2).size() > 0 && almacenar.cargarDatos(2).containsKey(nombre)){
+                    try {
+                        for(int i = 3;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
+                            if(almacenar.cargarDatos(i).containsKey(nombre)){
+                                almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
+                                almacenar.guardarDatos(i); 
+                            }
+                        }
+                        game.addState(new Nivel2(nombre));
+                        game.enterState(2,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    game.addState(new MenuRankingGame(container));
-                    game.enterState(2);
                 }else{
                     System.err.println("Nivel no alcanzado");
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
@@ -119,13 +125,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
             case 2:
                 //Level3
                 estado = -1;
-                if(almacenar.cargarDatos(3).size() > 0 && almacenar.cargarDatos(3).get(nombre).getNivelMapaMax()>=3){
-                    for(int i = 4;i<=nivelMax;i++){//borrar toda información desde el nivel 2 en adelante
-                        if(almacenar.cargarDatos(i).containsKey(nombre)){
-                            almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
-                            almacenar.guardarDatos(i);
-                        } 
-                    }
+                if(almacenar.cargarDatos(3).size() > 0 && almacenar.cargarDatos(3).containsKey(nombre)){
                     game.addState(new MenuRankingGame(container));
                     game.enterState(3);
                 }else{
