@@ -17,10 +17,11 @@ import org.newdawn.slick.state.*;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class MenuNewGame  extends BasicGameState implements ComponentListener{
 
-    private Sprite fondo,jugar,salir;
+    private Sprite fondo,jugar,salir,menu_nombre;
     /** The field taking the name */
     private TextField name;
     /** The name value */
@@ -32,9 +33,11 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
     public MenuNewGame(GameContainer gc){
         almacenar = new AlmacenarAvatar();
         almacenar.cargarDatos(1);
-        name = new TextField(gc,gc.getDefaultFont(),578,141,300,40,this);
+        name = new TextField(gc,gc.getDefaultFont(),120+166,80+141,440,65,this);
+        
         try {
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            menu_nombre = new Sprite("./res/grafico/menu_carga_nueva_partida/menu_carga_nueva_partida.png",new Punto(120,80));
             jugar = new Sprite("./res/grafico/buttons/boton_jugar.png",new Punto(250,500));
             salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,630));
         } catch (SlickException ex) {
@@ -52,16 +55,18 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         name.setBackgroundColor(Color.transparent);
-        name.setTextColor(Color.red);
-        name.setBorderColor(Color.yellow);
+        name.setTextColor(Color.darkGray);
+        name.setBorderColor(Color.transparent);
         name.setAcceptingInput(true);
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         fondo.draw();
+        menu_nombre.draw();
         name.render(gc, grphcs);
-        grphcs.drawString("Introduzca su nombre: ",350,141);
+       
+        //grphcs.drawString("Introduzca su nombre: ",350,141);
         for (MouseOverArea botone : botones) {
             botone.render(gc, grphcs);
         }

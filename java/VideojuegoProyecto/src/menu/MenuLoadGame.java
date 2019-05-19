@@ -19,11 +19,12 @@ import org.newdawn.slick.state.transition.*;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class MenuLoadGame extends BasicGameState implements ComponentListener{
 
     private final MouseOverArea[] botones = new MouseOverArea[2];
-    private Sprite fondo,jugar,salir;
+    private Sprite fondo,jugar,salir,menu_nombre;
     /** The field taking the name */
     private TextField name;
     /** The name value */
@@ -34,9 +35,10 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
     public MenuLoadGame(GameContainer container) {
         almacenar = new AlmacenarAvatar();
         almacenar.cargarDatos(1);
-        name = new TextField(container,container.getDefaultFont(),578,141,300,40,this);
+        name = new TextField(container,container.getDefaultFont(),120+166,80+141,440,65,this);
         try {
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            menu_nombre = new Sprite("./res/grafico/menu_carga_nueva_partida/menu_carga_nueva_partida.png",new Punto(120,80));
             jugar = new Sprite("./res/grafico/buttons/boton_jugar.png",new Punto(250,500));
             salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,630));
         } catch (SlickException ex) {
@@ -55,14 +57,15 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         name.setBackgroundColor(Color.transparent);
-        name.setTextColor(Color.red);
-        name.setBorderColor(Color.yellow);
+        name.setTextColor(Color.darkGray);
+        name.setBorderColor(Color.transparent);
         name.setAcceptingInput(true);
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         fondo.draw();
+        menu_nombre.draw();
         name.render(container,g);
         for (MouseOverArea botone : botones) {
             botone.render(container, g);
