@@ -14,6 +14,7 @@ import org.newdawn.slick.state.*;
 /**
  *
  * @author Senapi Aroal
+ * @author Davidcawork
  */
 public class MenuCreditsGame extends BasicGameState implements ComponentListener{
     
@@ -23,9 +24,9 @@ public class MenuCreditsGame extends BasicGameState implements ComponentListener
 
     public MenuCreditsGame(GameContainer container) {
         try{
-            fondo = new Sprite("./res/grafico/fonds/fondo.png");
+            fondo = new Sprite("./res/grafico/creditos/creditos.png");
             //creditos = new Sprite("");
-            salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,550));
+            salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,695));
             boton = new MouseOverArea(container,salir,(int)salir.getPosicion().getX(),(int)salir.getPosicion().getY(),(int)salir.getWidth(),(int)salir.getHeight(),this);
             boton.setNormalColor(new Color(1,1,1,0.7f));
             boton.setMouseOverColor(new Color(1,1,1,0.9f));
