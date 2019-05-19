@@ -931,20 +931,13 @@ public class Jugador extends Ente{
     
     
     public void controlColisionCofresLoot(ArrayList<Cofre> cofres, Input entrada){
-<<<<<<< HEAD
-=======
-          
->>>>>>> d1bf4e48a4a0e30b224abcb787ba735cc2e5422e
           for(int i =0; i < cofres.size(); i++){
               if(this.getPersDown().intersects(cofres.get(i).getCofreRectLootArea())){
                   
                 if(!cofres.get(i).getEstadoCofre()){
-<<<<<<< HEAD
-                    this.getHud().setEstadoCercaCofre(true);
-=======
+
                     
                     cofres.get(i).setEstadoCercaCofre(true);
->>>>>>> d1bf4e48a4a0e30b224abcb787ba735cc2e5422e
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
@@ -968,12 +961,7 @@ public class Jugador extends Ente{
                 
             }else if(this.getPersUp().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(!cofres.get(i).getEstadoCofre()){
-<<<<<<< HEAD
-                    this.getHud().setEstadoCercaCofre(true);
-=======
                     cofres.get(i).setEstadoCercaCofre(true);
-                    
->>>>>>> d1bf4e48a4a0e30b224abcb787ba735cc2e5422e
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
@@ -996,12 +984,7 @@ public class Jugador extends Ente{
                 
             }else if(this.getPersL().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(!cofres.get(i).getEstadoCofre()){
-<<<<<<< HEAD
-                    this.getHud().setEstadoCercaCofre(true);
-=======
                     cofres.get(i).setEstadoCercaCofre(true);
-                    
->>>>>>> d1bf4e48a4a0e30b224abcb787ba735cc2e5422e
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
@@ -1026,12 +1009,7 @@ public class Jugador extends Ente{
                
             }else if(this.getPersR().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(!cofres.get(i).getEstadoCofre()){
-<<<<<<< HEAD
-                    this.getHud().setEstadoCercaCofre(true);
-=======
                     cofres.get(i).setEstadoCercaCofre(true);
-                    
->>>>>>> d1bf4e48a4a0e30b224abcb787ba735cc2e5422e
                 }
                 
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
