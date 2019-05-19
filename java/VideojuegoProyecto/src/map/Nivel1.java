@@ -83,53 +83,23 @@ public class Nivel1 extends BasicGameState{
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        escenas.get(j.getEscenario()).getMapa_escena().render(0,0);
-        g.draw(j.getPersL());
-        g.draw(j.getPersR());
-        g.draw(j.getPersUp());
-        g.draw(j.getPersDown());      
-        j.getVarita().getFlecha().draw(g);
-        
-        
+        escenas.get(j.getEscenario()).getMapa_escena().render(0,0);     
+        j.getVarita().getFlecha().draw(g,menu);
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
-        }
-        for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
-            g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
-        }
-       
-        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
-            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getRango());
-            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersDown());
-            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersL());
-            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersR());
-            g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());
-            
         }
         j.imprimirJugador();
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
-        }
-        
-        g.draw(escenas.get(j.getEscenario()).getArea_entrada());
-        g.draw(escenas.get(j.getEscenario()).getArea_salida());
-        g.draw(escenas.get(j.getEscenario()).getMapa_colision());
-        /*
-        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
-            g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
-        }*/
-        for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
-            g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
-        }        
+        }       
         j.getInventario().imprimirImagenInfoPociones();   
-        
         j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
-        menu.mostrarMenu(g,j);
+        menu.mostrarMenu(g,j,escenas);
     }
     
     @Override
