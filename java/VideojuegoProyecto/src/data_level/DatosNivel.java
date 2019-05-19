@@ -137,9 +137,9 @@ public class DatosNivel {
         
         //Generador de enemigos
         Punto[] enemigosEscena1 = {new Punto()};
-        Punto[] enemigosEscena2 = {new Punto()};
-        Punto[] enemigosEscena3 = {new Punto()};
-        Punto[] enemigosEscena4 = {new Punto(346,440)};
+        Punto[] enemigosEscena2 = {new Punto(586,337)};
+        Punto[] enemigosEscena3 = {new Punto(500,206),new Punto(134,572)};
+        Punto[] enemigosEscena4 = {new Punto(346,440), new Punto(356, 330)};
         Punto[][] enemigosNivel1 = {enemigosEscena1,enemigosEscena2,enemigosEscena3,enemigosEscena4};
         
         for(int i = 0;i<numEscenas;i++){
