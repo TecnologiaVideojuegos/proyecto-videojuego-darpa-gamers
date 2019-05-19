@@ -87,16 +87,25 @@ public class Nivel2 extends BasicGameState{
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        escenas.get(j.getEscenario()).getMapa_escena().render(0,0);     
+        escenas.get(j.getEscenario()).getMapa_escena().render(0,0);  
+        j.getHud().imprimirRestosEnemigos();
         j.getVarita().getFlecha().draw(g,menu);
+        
+        //Cofres
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
+            escenas.get(j.getEscenario()).getCofres().get(i).imprimirTeclaAbrirCofre();
         }
+        
+        //Jugador
         j.imprimirJugador();
+        
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
-        }       
+        } 
+        
+        //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
