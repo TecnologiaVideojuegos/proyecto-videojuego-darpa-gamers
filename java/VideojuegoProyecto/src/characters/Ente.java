@@ -18,7 +18,6 @@ public abstract class Ente {
     
     private int hp;
     private Punto punto;
-    private SpriteSheet sprite;
     private float velocidad;
     int damage;
     int direccion;
@@ -34,10 +33,9 @@ public abstract class Ente {
      * @param damage daño del ente
      *
      */
-    public Ente(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion, int damage) {
+    public Ente(int hp, Punto punto, float velocidad,int direccion, int damage) {
         this.hp = hp;
         this.punto = punto;
-        this.sprite = sprite;
         this.velocidad = velocidad;
         this.direccion = direccion;
         this.damage = damage;
@@ -95,24 +93,6 @@ public abstract class Ente {
      */
     public void setVelocidad(float velocidad) {
         this.velocidad = velocidad;
-    }
-
-    /**
-     * Get the value of sprite
-     *
-     * @return the value of sprite
-     */
-    public SpriteSheet getSpriteSheet() {
-        return sprite;
-    }
-
-    /**
-     * Set the value of sprite
-     *
-     * @param sprite new value of sprite
-     */
-        public void setSpriteSheet(SpriteSheet sprite) {
-        this.sprite = sprite;
     }
 
     /**

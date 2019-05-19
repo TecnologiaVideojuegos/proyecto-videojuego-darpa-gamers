@@ -100,7 +100,7 @@ public class DatosNivel {
         
         //Datos de los puntos de respawn al entrar en la escena o punto donde aparecerá en la siguiente escena
         //Cuando sale de la escena a la anterior, registra la posición en escena
-        Punto[] salida = {new Punto(370,450),new Punto(940,215),new Punto(945,410)};
+        Punto[] salida = {new Punto(370,440),new Punto(940,200),new Punto(945,410)};
         for(int i = 0;i<(numEscenas-1);i++){
             salidas[i] = salida[i];
         }
@@ -147,7 +147,7 @@ public class DatosNivel {
             for(int j = 0;j<numEnemigos[i];j++){
                 try{
                     int velocidad = (int)(100+51*Math.random());
-                    enemigos.get(i).add(new Monstruo(100,enemigosNivel1[i][j],new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",24,22),velocidad,0,96,"Pasivo",50));
+                    enemigos.get(i).add(new Monstruo(100,enemigosNivel1[i][j],velocidad,0,96,"Pasivo",50));
                     System.out.println(enemigos.get(i).size());
                 }catch(Exception ex){}
             }

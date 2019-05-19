@@ -55,6 +55,7 @@ public class ControladorFlechas {
     public void draw(Graphics g){
         for(int i= 0;i<flechas.size();i++){
             flechas.get(i).draw();
+            g.draw(colisiones.get(i));
         }
     }
     
@@ -77,8 +78,10 @@ public class ControladorFlechas {
             }else if(colisiones.get(i).intersects(escena.getMapa_colision())){
                 flechas.remove(i);
                 colisiones.remove(i);
+            }else if(!escena.getMapa_colision().contains(colisiones.get(i))){
+                flechas.remove(i);
+                colisiones.remove(i);
             }
-            //caso de que colisione on un enemigo
         }
     }
     

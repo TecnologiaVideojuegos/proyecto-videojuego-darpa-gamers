@@ -32,7 +32,6 @@ public class Monstruo extends Ente{
      * 
      * @param hp vida del ente
      * @param punto lugar del mapa donde se posiciona
-     * @param sprite imagen del ente
      * @param velocidad velocidad a la que se mueve el ente
      * @param direccion
      * @param rango
@@ -40,24 +39,25 @@ public class Monstruo extends Ente{
      * @param danio daño del ente
      * 
      */
-    public Monstruo(int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int rango, String comportamiento,int danio) throws SlickException {
-        super(hp, punto, sprite, velocidad,direccion, danio);
-        this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
-        this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+16),12,1);
-        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,12);
-        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,12);
+    public Monstruo(int hp, Punto punto, float velocidad,int direccion,int rango, String comportamiento,int danio) throws SlickException {
+        super(hp, punto, velocidad,direccion, danio);
+        this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY()-18,12,1);
+        this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+32),12,1);
+        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()-16),1,46);
+        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()-16),1,46);
         this.animacion_enemigo = new Animacion(new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",32,50), 9);
         
         try{
             this.movimiento = new Vector(new Punto());
             this.comportamiento = comportamiento;
-            this.rango = new Circle(punto.getX()+sprite.getHeight()/2,punto.getY()+sprite.getWidth()/2,rango); //creamos el rango que tendrá el monstruo
+            this.rango = new Circle(this.PersUp.getX()+(this.getPersUp().getWidth()/2),this.getPersUp().getY()+10,rango); //creamos el rango que tendrá el monstruo
             this.respawn = punto;
             }catch(Exception ex){
             
         }
     }
 
+    
     /**
      * Get the value of respawn
      *
@@ -149,8 +149,8 @@ public class Monstruo extends Ente{
     }
 
     public void actualizarRango(){
-        this.rango.setCenterX(this.getPunto().getX()+this.getSpriteSheet().getHeight()/2);
-        this.rango.setCenterY(this.getPunto().getY()+this.getSpriteSheet().getWidth()/2);
+        this.rango.setCenterX(this.PersUp.getX()+(this.getPersUp().getWidth()/2));
+        this.rango.setCenterY(this.getPersUp().getY()+10);
     }
     
     /**
@@ -330,10 +330,10 @@ public class Monstruo extends Ente{
         this.getPersR().setX((this.getPunto().getX()+16));
         this.getPersUp().setX(this.getPunto().getX()+2);
         this.getPersDown().setX((this.getPunto().getX()+2));
-        this.getPersL().setY((this.getPunto().getY()+2));
-        this.getPersR().setY((this.getPunto().getY()+2));
-        this.getPersUp().setY((this.getPunto().getY()));
-        this.getPersDown().setY((this.getPunto().getY()+16));
+        this.getPersL().setY((this.getPunto().getY()-16));
+        this.getPersR().setY((this.getPunto().getY()-16));
+        this.getPersUp().setY((this.getPunto().getY()-18));
+        this.getPersDown().setY((this.getPunto().getY()+32));
     }
     
     /**

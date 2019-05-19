@@ -77,22 +77,22 @@ public class Varita {
         decrementarMunicion();
         if(entrada.isKeyDown(Input.KEY_RIGHT) && entrada.isKeyDown(Input.KEY_UP)){
             
-            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getMaxX(),j.getPersR().getMaxY(),300,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),-10,24);
+            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getMaxX(),j.getPersR().getMaxY(),300,-300,j.getPersUp().getMaxX()+7,j.getPersR().getMaxY(),10,24);
             j.setDireccion(0);
             
         }else if(entrada.isKeyDown(Input.KEY_RIGHT) && entrada.isKeyDown(Input.KEY_DOWN)){
             
-            flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getMinX(),j.getPersR().getMinY(),300,300,j.getPersDown().getX()+7,j.getPersDown().getY(),10,24);
+            flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getMinX(),j.getPersR().getMinY(),300,300,j.getPersDown().getMinX()+7,j.getPersR().getMinY(),10,24);
             j.setDireccion(0);
             
         }else if(entrada.isKeyDown(Input.KEY_LEFT) && entrada.isKeyDown(Input.KEY_UP)){
             
-            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getMinX(),j.getPersL().getMaxY(),-300,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),-10,24);
+            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getMinX(),j.getPersL().getMaxY(),-300,-300,j.getPersUp().getMaxX()-7,j.getPersR().getMaxY(),10,24);
             j.setDireccion(1);
             
         }else if(entrada.isKeyDown(Input.KEY_LEFT) && entrada.isKeyDown(Input.KEY_DOWN)){
             
-            flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getMaxX(),j.getPersL().getMinY(),-300,300,j.getPersDown().getX()+7,j.getPersDown().getY(),10,24);
+            flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getX(),j.getPersDown().getY(),-300,300,j.getPersDown().getX()+7,j.getPersDown().getY(),10,24);
             j.setDireccion(1);
             
         }else if(entrada.isKeyDown(Input.KEY_RIGHT)){
@@ -102,12 +102,12 @@ public class Varita {
             
         }else if(entrada.isKeyDown(Input.KEY_LEFT)){
             
-            flecha.addFlecha(j.getNivelJugador(),2,j.getPersL().getX(),j.getPersL().getY(),-300,0,j.getPersL().getX(),j.getPersL().getY()+7,-24,10);
+            flecha.addFlecha(j.getNivelJugador(),2,j.getPersL().getX(),j.getPersL().getY(),-300,0,j.getPersL().getX(),j.getPersL().getY()+7,24,10);
             j.setDireccion(1);
             
         }else if(entrada.isKeyDown(Input.KEY_UP)){
             
-            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX(),j.getPersUp().getY(),0,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),-10,24);
+            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX(),j.getPersUp().getY(),0,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),10,24);
             j.setDireccion(2);
             
         }else if(entrada.isKeyDown(Input.KEY_DOWN)){
@@ -123,11 +123,11 @@ public class Varita {
                     break;
                 //Izquierda
                 case 1:
-                    flecha.addFlecha(j.getNivelJugador(),2,j.getPersL().getX(),j.getPersL().getY(),-300,0,j.getPersL().getX(),j.getPersL().getY()+7,-24,10);
+                    flecha.addFlecha(j.getNivelJugador(),2,j.getPersL().getX(),j.getPersL().getY(),-300,0,j.getPersL().getX(),j.getPersL().getY()+7,24,10);
                     break;
                 //Arriba
                 case 2:
-                    flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX(),j.getPersUp().getY(),0,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),-10,24);
+                    flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX(),j.getPersUp().getY(),0,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),10,24);
                     break;
                 //Abajo
                 case 3:

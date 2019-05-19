@@ -44,10 +44,7 @@ public class Jugador extends Ente{
     
     //Variable que indica en que escenario de un nivel se encuentra el personaje
     private int escenario;
-    
-    //Variable que guarda la imagen del personaje
-    private final SpriteSheet img;
-    
+       
     //Variable que guarda el hud del jugador
     private final Hud hud;
     
@@ -90,7 +87,6 @@ public class Jugador extends Ente{
      * @param nombre
      * @param hp vida del ente
      * @param punto lugar del mapa donde se posiciona
-     * @param sprite imagen del ente
      * @param velocidad velocidad a la que se mueve el ente
      * @param direccion dirección en la que se queda mirando
      * @param municion cantidad de proyectiles a disparar
@@ -98,8 +94,8 @@ public class Jugador extends Ente{
      * @throws org.newdawn.slick.SlickException posibles exceptiones por la carga de la imagen
      * 
      */    
-    public Jugador(String nombre,int hp, Punto punto, SpriteSheet sprite, float velocidad,int direccion,int municion,int danio,int nivelMapa) throws SlickException{
-        super(hp, punto, sprite, velocidad,direccion, danio);
+    public Jugador(String nombre,int hp, Punto punto, float velocidad,int direccion,int municion,int danio,int nivelMapa) throws SlickException{
+        super(hp, punto, velocidad,direccion, danio);
         this.nombre = nombre;
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
@@ -109,7 +105,6 @@ public class Jugador extends Ente{
         this.nivelMapa = nivelMapa; //inicializado
         this.nivelMapaMax = this.nivelMapa;
         this.escenario = 0; //inicializado
-        this.img = sprite;
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+32),12,1);
         this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,30);
@@ -677,7 +672,7 @@ public class Jugador extends Ente{
     }
     
     public Punto[] nivelesRespawn(){
-        Punto[][] niveles = {{new Punto(80,655),new Punto(370,450),new Punto(940,215),new Punto(900,420)}};
+        Punto[][] niveles = {{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)}};
         return niveles[this.getNivelMapa()-1];
     }
     

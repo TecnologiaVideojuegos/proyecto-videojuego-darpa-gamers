@@ -78,7 +78,7 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
         if(estado == 0){
             estado = -1;
             if(!nameValue.equals("none")){
-               Jugador j = new Jugador(nameValue,200,new Punto(230,200),null,100,0,50,50,1);
+               Jugador j = new Jugador(nameValue,200,new Punto(230,200),100,0,50,50,1);
                 if(almacenar.getMostrar().containsKey(nameValue)){
                     name.setText("");
                     game.addState(new MenuSelectLevelGame(container,j.getNombre()));
