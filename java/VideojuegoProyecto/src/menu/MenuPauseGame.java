@@ -7,6 +7,8 @@ package menu;
 
 import characters.Jugador;
 import imagen.Sprite;
+import map.Escena;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import location.Punto;
@@ -105,8 +107,15 @@ public class MenuPauseGame implements ComponentListener{
         this.comprobarEstado(container, game);
     }
     
-    public void mostrarMenu(Graphics g,Jugador j){
+    public void mostrarMenu(Graphics g,Jugador j,ArrayList<Escena> escenas){
         if(debug){
+            g.draw(escenas.get(j.getEscenario()).getArea_entrada());
+            g.draw(escenas.get(j.getEscenario()).getArea_salida());
+            g.draw(escenas.get(j.getEscenario()).getMapa_colision());
+            g.draw(j.getPersL());
+            g.draw(j.getPersR());
+            g.draw(j.getPersUp());
+            g.draw(j.getPersDown()); 
             g.drawString("Eje x: " + String.format("%.3f",j.getPunto().getX()) + "  Eje y: " + String.format("%.3f",j.getPunto().getY()),20,20);
             g.drawString("Escenario " + j.getEscenario(),20,40);
             g.drawString("Municion " + j.getVarita().getMunicion(),20,60);
@@ -114,6 +123,22 @@ public class MenuPauseGame implements ComponentListener{
             g.drawString("Velocidad del jugador: " + j.getVelocidad(),20 ,100 );
             g.drawString("Fuerza del jugador: " + j.getDanyo(),20 ,120 );
             g.drawString("Exp: " + j.getExperiencia() ,20,140);
+            for(int i = 0;i<escenas.get(j.getEscenario()).getMapa_objetos().size();i++){
+                g.draw(escenas.get(j.getEscenario()).getMapa_objetos().get(i));
+            }
+            for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getRango());
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersDown());
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersL());
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersR());
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());    
+            }
+            for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+                g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
+            } 
+            for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
+                g.drawString("Velocidad: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getVelocidad(),20,120+(20*i));
+            }
             if(j.getBuffInv().getEstadoBuff()){
                 g.drawString("Buff Invulnerabilidad: " + ((j.getBuffInv().getMaxTimeBuff()/1000) - (j.getBuffInv().getTimerEstadoBuff()/1000) ) + " seg" ,20,160);
             }
@@ -138,6 +163,10 @@ public class MenuPauseGame implements ComponentListener{
     
     public boolean isPausa() {
         return pausa;
+    }
+
+    public boolean isDebug() {
+        return debug;
     }
     
     @Override
