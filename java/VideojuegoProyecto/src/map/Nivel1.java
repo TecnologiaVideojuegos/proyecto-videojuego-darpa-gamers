@@ -92,6 +92,7 @@ public class Nivel1 extends BasicGameState{
         //Cofres
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
+            escenas.get(j.getEscenario()).getCofres().get(i).imprimirTeclaAbrirCofre();
         }
         
         //Imprimir jugador
@@ -109,7 +110,6 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
-        j.getHud().imprimirTeclaAbrirCofre(new Punto((int)j.getPunto().getX() + 20,(int)j.getPunto().getY()-20));
         menu.mostrarMenu(g,j,escenas);
     }
     

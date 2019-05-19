@@ -8,6 +8,7 @@ package materials;
 import java.util.ArrayList;
 import java.util.Random;
 import location.Punto;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
@@ -26,6 +27,8 @@ public final class Cofre {
     private Rectangle cofreRect;
     private Rectangle cofreRect_lootArea;
     private Sound sonido_apertura_cofre;
+    private boolean estado_cerca_cofre;
+    private final Image open_cofre;
     
     /**
      * 
@@ -52,6 +55,8 @@ public final class Cofre {
         this.loc_cofre = new Punto(x, y);
         this.cofreRect = new Rectangle(x, y, 32.0f, 32.0f);
         this.cofreRect_lootArea = new Rectangle(x - 10, y - 10 , 62.0f, 62.0f);
+        estado_cerca_cofre = false;
+        open_cofre = new Image("./res/grafico/game_utils/icon_cofre_2.png");
         
     }
     
@@ -198,6 +203,35 @@ public final class Cofre {
      */
     public Sound getSonidoCofre(){
         return this.sonido_apertura_cofre;
+    }
+    
+    
+        /**
+     * 
+     * @return Devuelve si el jugador está cerca de un cofre
+     */
+    public boolean getEstadoCercaCofre(){
+        return this.estado_cerca_cofre;
+    }
+    
+     /**
+     * 
+     */
+    public void setEstadoCercaCofre(boolean state){
+        this.estado_cerca_cofre = state;
+    }
+    
+    
+    /**
+     * 
+     * Metodo para imprimir al jugador si está cerca de un cofre la tecla R
+     * 
+     * @param punto_jugador posicion a hacer el draw
+     */
+    public void imprimirTeclaAbrirCofre(){
+    
+        if(this.estado_cerca_cofre)
+            this.open_cofre.draw( this.loc_cofre.getX() + 8.0f, this.loc_cofre.getY() -20.0f);
     }
     
 }
