@@ -54,8 +54,7 @@ public class Info_Jugador implements Serializable{
             j.setNivelJugador(this.getNivelJugador());            
             j.getInventario().setInventario(this.getInventario());
             j.getHud().setNumCorazonesMin(this.getNumCorazonesMin());
-        }catch(SlickException ex){
-        System.out.println(ex.getMessage());}
+        }catch(SlickException ex){}
         return j;
     }
 

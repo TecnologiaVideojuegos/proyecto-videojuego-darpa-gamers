@@ -112,10 +112,10 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprimirTeclaAbrirCofre(new Punto((int)j.getPunto().getX() + 20,(int)j.getPunto().getY()-20));
         menu.mostrarMenu(g,j,escenas);
     }
-    
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
+        
         menu.gestionarMenuPausa(entrada, container, game);
         if(!menu.isPausa()){
             j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
