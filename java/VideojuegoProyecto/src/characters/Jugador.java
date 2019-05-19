@@ -635,7 +635,7 @@ public class Jugador extends Ente{
     public void destruirEnemigo(ArrayList<Monstruo> mon){
         for(int i = 0;i<mon.size();i++){
             for(int j = 0;j<this.getVarita().getFlecha().getColisiones().size();j++){
-                if(this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersDown()) || this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersUp()) || this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersL()) || this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getPersR())){
+                if(this.getVarita().getFlecha().getColisiones().get(j).intersects(mon.get(i).getColision())){
                     this.getVarita().getFlecha().getColisiones().remove(j);
                     this.getVarita().getFlecha().getFlechas().remove(j);
                     mon.get(i).setHp(mon.get(i).getHp()- super.getDanyo());

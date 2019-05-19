@@ -24,6 +24,7 @@ public class Monstruo extends Ente{
     private Circle rango;
     private Vector movimiento;    
     private final Rectangle PersUp,PersDown,PersL,PersR;
+    private final Rectangle colision;
     //Animaciones
     private final Animacion animacion_enemigo;
 
@@ -41,10 +42,11 @@ public class Monstruo extends Ente{
      */
     public Monstruo(int hp, Punto punto, float velocidad,int direccion,int rango, String comportamiento,int danio) throws SlickException {
         super(hp, punto, velocidad,direccion, danio);
-        this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY()-18,12,1);
+        this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+32),12,1);
-        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()-16),1,46);
-        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()-16),1,46);
+        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()),1,30);
+        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()),1,30);
+        this.colision = new Rectangle(this.getPunto().getX(),this.getPunto().getY()-16,14,46);
         this.animacion_enemigo = new Animacion(new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",32,50), 9);
         
         try{
@@ -57,6 +59,9 @@ public class Monstruo extends Ente{
         }
     }
 
+    public Rectangle getColision(){
+        return colision;
+    }
     
     /**
      * Get the value of respawn
@@ -251,9 +256,13 @@ public class Monstruo extends Ente{
     
     public void movimientoHostil(Jugador j,Escena escena,int delta){
         if(escena.colisionConPoligonos(this.getPersDown()) && escena.colisionConPoligonos(this.getPersL())){
-        }else if(escena.colisionConPoligonos(this.getPersDown()) &&escena.colisionConPoligonos(this.getPersR())){            
-        }else if(escena.colisionConPoligonos(this.getPersUp()) && escena.colisionConPoligonos(this.getPersL())){           
-        }else if(escena.colisionConPoligonos(this.getPersUp()) && escena.colisionConPoligonos(this.getPersR())){           
+            this.setComportamiento("Pasivo");
+        }else if(escena.colisionConPoligonos(this.getPersDown()) &&escena.colisionConPoligonos(this.getPersR())){         
+            this.setComportamiento("Pasivo");
+        }else if(escena.colisionConPoligonos(this.getPersUp()) && escena.colisionConPoligonos(this.getPersL())){    
+            this.setComportamiento("Pasivo");
+        }else if(escena.colisionConPoligonos(this.getPersUp()) && escena.colisionConPoligonos(this.getPersR())){   
+            this.setComportamiento("Pasivo");
         }else if(escena.colisionConPoligonos(this.getPersUp())){
             if(j.getPunto().getY() >= this.getPunto().getY()){
                 this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
@@ -303,6 +312,11 @@ public class Monstruo extends Ente{
                 this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
             }
         }else{
+            if(j.getPunto().getX() <= this.getPunto().getX()){
+                this.setDireccion(2);
+            }else{
+                this.setDireccion(3);
+            }
             this.move(delta,this.getPunto().getX(),this.getPunto().getY(),j.getPunto().getX(),j.getPunto().getY());
         }
     }
@@ -330,10 +344,12 @@ public class Monstruo extends Ente{
         this.getPersR().setX((this.getPunto().getX()+16));
         this.getPersUp().setX(this.getPunto().getX()+2);
         this.getPersDown().setX((this.getPunto().getX()+2));
-        this.getPersL().setY((this.getPunto().getY()-16));
-        this.getPersR().setY((this.getPunto().getY()-16));
-        this.getPersUp().setY((this.getPunto().getY()-18));
+        this.getPersL().setY((this.getPunto().getY()));
+        this.getPersR().setY((this.getPunto().getY()));
+        this.getPersUp().setY((this.getPunto().getY()));
         this.getPersDown().setY((this.getPunto().getY()+32));
+        this.getColision().setX(this.getPunto().getX());
+        this.getColision().setY(this.getPunto().getY()-16);
     }
     
     /**

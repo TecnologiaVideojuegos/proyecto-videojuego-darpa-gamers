@@ -131,7 +131,8 @@ public class MenuPauseGame implements ComponentListener{
                 g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersDown());
                 g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersL());
                 g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersR());
-                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());    
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getPersUp());  
+                g.draw(escenas.get(j.getEscenario()).getEnemigos().get(i).getColision());
             }
             for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
                 g.drawString("Vida Enemigos: "+escenas.get(j.getEscenario()).getEnemigos().get(i).getHp(),20,240+(20*i));
