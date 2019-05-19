@@ -24,8 +24,8 @@ public class Hud {
     private final Image[] listaBasica;
     private final Image [] listaEstadosPociones;
     private final Image exp_municion;
-    private final Image open_cofre;
-    private boolean estado_cerca_cofre;
+    
+    
     
     /**
      * Constructor de la clase Hud
@@ -38,8 +38,7 @@ public class Hud {
         listaCorazones = new ArrayList<>();
         listaBasica = new Image[5];
         exp_municion = new Image("./res/grafico/hud_exp/hud_exp_mun.png");
-        open_cofre = new Image("./res/grafico/game_utils/icon_cofre_2.png");
-        estado_cerca_cofre = false;
+        
         inicio();
         cargar_img_estados_pociones();
     }
@@ -233,33 +232,6 @@ public class Hud {
         g.drawString(exp+"", 100.0f, 25.0f);
         g.drawString(""+municion, 125.0f, 68.0f);
         
-    }
-    
-    /**
-     * 
-     * Metodo para imprimir al jugador si está cerca de un cofre la tecla R
-     * 
-     * @param punto_jugador posicion a hacer el draw
-     */
-    public void imprimirTeclaAbrirCofre(Punto punto_jugador){
-    
-        if(this.estado_cerca_cofre)
-            this.open_cofre.draw( punto_jugador.getX(), punto_jugador.getY());
-    }
-    
-    /**
-     * 
-     * @return Devuelve si el jugador está cerca de un cofre
-     */
-    public boolean getEstadoCercaCofre(){
-        return this.estado_cerca_cofre;
-    }
-    
-     /**
-     * 
-     */
-    public void setEstadoCercaCofre(boolean state){
-        this.estado_cerca_cofre = state;
     }
     
 }
