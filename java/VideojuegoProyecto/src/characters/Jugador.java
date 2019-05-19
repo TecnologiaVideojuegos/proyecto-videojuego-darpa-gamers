@@ -53,9 +53,6 @@ public class Jugador extends Ente{
     //Arco del jugador
     private final Varita varita;
     
-    //Vida max
-    private final int vida_max;
-    
     //Velo base
     private final float velo_base;
     
@@ -101,7 +98,6 @@ public class Jugador extends Ente{
         this.nombre = nombre;
         this.experiencia = 0; //inicializado
         this.nivelJugador = 1; //inicializado
-        this.vida_max = hp * this.nivelJugador;
         this.velo_base = velocidad;
         this.danyo_base = danio;
         this.nivelMapa = nivelMapa; //inicializado
@@ -797,11 +793,11 @@ public class Jugador extends Ente{
                 case 0:
                     this.inventario.RemoveObj(id_pocion);
                     //Modificar hp del jugador
-                    if(super.getHp() < this.vida_max){
+                    if(super.getHp() < (this.getHud().getNumCorazonesMin()*100)){
                         super.setHp( super.getHp() + 25 );
                         this.hud.anadirVida();
-                        if(super.getHp() > this.vida_max){
-                          super.setHp(this.vida_max);
+                        if(super.getHp() > (this.getHud().getNumCorazonesMin()*100)){
+                          super.setHp((this.getHud().getNumCorazonesMin()*100));
                         }   
                     }
                     //Sonido consumir poción

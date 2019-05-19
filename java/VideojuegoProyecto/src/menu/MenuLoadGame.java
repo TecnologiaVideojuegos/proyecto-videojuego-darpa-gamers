@@ -61,6 +61,7 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
         name.setBackgroundColor(Color.transparent);
         name.setTextColor(Color.darkGray);
         name.setBorderColor(Color.transparent);
+        name.setText("");
         name.setAcceptingInput(true);
     }
 
