@@ -9,6 +9,7 @@ import imagen.SpriteMovil;
 import java.util.ArrayList;
 import location.*;
 import map.Escena;
+import menu.MenuPauseGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -52,10 +53,12 @@ public class ControladorFlechas {
         colisiones.add(contorno);
     }
     
-    public void draw(Graphics g){
+    public void draw(Graphics g,MenuPauseGame menu){
         for(int i= 0;i<flechas.size();i++){
             flechas.get(i).draw();
-            g.draw(colisiones.get(i));
+            if(menu.isDebug()){
+                g.draw(colisiones.get(i));
+            }
         }
     }
     
