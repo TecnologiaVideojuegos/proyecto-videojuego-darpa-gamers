@@ -931,12 +931,12 @@ public class Jugador extends Ente{
     
     
     public void controlColisionCofresLoot(ArrayList<Cofre> cofres, Input entrada){
-          System.out.println(cofres.size());
+          
           for(int i =0; i < cofres.size(); i++){
               if(this.getPersDown().intersects(cofres.get(i).getCofreRectLootArea())){
                   
                 if(!cofres.get(i).getEstadoCofre()){
-                    System.out.println("Estoy cerca");
+                    
                     cofres.get(i).setEstadoCercaCofre(true);
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
@@ -962,7 +962,7 @@ public class Jugador extends Ente{
             }else if(this.getPersUp().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(!cofres.get(i).getEstadoCofre()){
                     cofres.get(i).setEstadoCercaCofre(true);
-                    System.out.println("Estoy cerca");
+                    
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
@@ -986,7 +986,7 @@ public class Jugador extends Ente{
             }else if(this.getPersL().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(!cofres.get(i).getEstadoCofre()){
                     cofres.get(i).setEstadoCercaCofre(true);
-                    System.out.println("Estoy cerca");
+                    
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
@@ -1012,7 +1012,7 @@ public class Jugador extends Ente{
             }else if(this.getPersR().intersects(cofres.get(i).getCofreRectLootArea())){
                 if(!cofres.get(i).getEstadoCofre()){
                     cofres.get(i).setEstadoCercaCofre(true);
-                    System.out.println("Estoy cerca");
+                    
                 }
                 
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
