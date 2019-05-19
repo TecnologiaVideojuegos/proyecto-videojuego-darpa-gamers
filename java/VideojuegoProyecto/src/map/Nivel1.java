@@ -11,6 +11,7 @@ import exception_serialization.AlmacenarAvatar;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import location.Punto;
 import menu.MenuPauseGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -84,21 +85,31 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         escenas.get(j.getEscenario()).getMapa_escena().render(0,0);     
+        
+        //Ataques
         j.getVarita().getFlecha().draw(g,menu);
+        
+        //Cofres
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
         }
+        
+        //Imprimir jugador
         j.imprimirJugador();
+        
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
-        }       
+        }  
+        
+        //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
+        j.getHud().imprimirTeclaAbrirCofre(new Punto((int)j.getPunto().getX() + 20,(int)j.getPunto().getY()-20));
         menu.mostrarMenu(g,j,escenas);
     }
     

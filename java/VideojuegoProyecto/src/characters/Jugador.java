@@ -904,9 +904,14 @@ public class Jugador extends Ente{
     
     
     public void controlColisionCofresLoot(ArrayList<Cofre> cofres, Input entrada){
-    
+          System.out.println(cofres.size());
           for(int i =0; i < cofres.size(); i++){
               if(this.getPersDown().intersects(cofres.get(i).getCofreRectLootArea())){
+                  
+                if(!cofres.get(i).getEstadoCofre()){
+                    System.out.println("Estoy cerca");
+                    this.getHud().setEstadoCercaCofre(true);
+                }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     for(int j = 0; j < cofres.get(i).getListaIdsCofre().size(); j++){
@@ -928,7 +933,10 @@ public class Jugador extends Ente{
                 }
                 
             }else if(this.getPersUp().intersects(cofres.get(i).getCofreRectLootArea())){
-               
+                if(!cofres.get(i).getEstadoCofre()){
+                    this.getHud().setEstadoCercaCofre(true);
+                    System.out.println("Estoy cerca");
+                }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -949,6 +957,10 @@ public class Jugador extends Ente{
                 }
                 
             }else if(this.getPersL().intersects(cofres.get(i).getCofreRectLootArea())){
+                if(!cofres.get(i).getEstadoCofre()){
+                    this.getHud().setEstadoCercaCofre(true);
+                    System.out.println("Estoy cerca");
+                }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
                     
@@ -971,6 +983,10 @@ public class Jugador extends Ente{
                 }
                
             }else if(this.getPersR().intersects(cofres.get(i).getCofreRectLootArea())){
+                if(!cofres.get(i).getEstadoCofre()){
+                    this.getHud().setEstadoCercaCofre(true);
+                    System.out.println("Estoy cerca");
+                }
                 
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
                     //Recoger drop
@@ -992,6 +1008,12 @@ public class Jugador extends Ente{
                     cofres.get(i).setEstadoCofre(true);
                 }
                 
+            }else if((!this.getPersR().intersects(cofres.get(i).getCofreRectLootArea())) && 
+                     (!this.getPersL().intersects(cofres.get(i).getCofreRectLootArea())) &&
+                     (!this.getPersUp().intersects(cofres.get(i).getCofreRectLootArea())) &&
+                     (!this.getPersDown().intersects(cofres.get(i).getCofreRectLootArea()))
+                    ){
+                    this.getHud().setEstadoCercaCofre(false);
             }
             this.actualizarPosicion();
           }  

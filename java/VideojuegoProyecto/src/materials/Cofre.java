@@ -51,7 +51,7 @@ public final class Cofre {
         
         this.loc_cofre = new Punto(x, y);
         this.cofreRect = new Rectangle(x, y, 32.0f, 32.0f);
-        this.cofreRect_lootArea = new Rectangle(x - 10, y - 10 , 52.0f, 52.0f);
+        this.cofreRect_lootArea = new Rectangle(x - 10, y - 10 , 62.0f, 62.0f);
         
     }
     
