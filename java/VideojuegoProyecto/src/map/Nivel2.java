@@ -5,24 +5,26 @@
  */
 package map;
 
-import characters.*;
+import characters.Jugador;
 import data_level.DatosNivel;
 import exception_serialization.AlmacenarAvatar;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import location.Punto;
 import menu.MenuPauseGame;
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
-import org.newdawn.slick.tiled.*;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.TiledMap;
 
 /**
  *
  * @author Senapi Aroal
- * @author Davidcawork
  */
-public class Nivel1 extends BasicGameState{
+public class Nivel2 extends BasicGameState{
 
     //Arraylist donde guardamos todas las escenas de ese nivel
     private ArrayList<Escena> escenas = new ArrayList<>();
@@ -34,16 +36,16 @@ public class Nivel1 extends BasicGameState{
     private Jugador j; 
     
     //Variable que indica cuantas escenas tiene este nivel
-    private final int numEscenas = 4;  
+    private final int numEscenas = 2;  
     
     //Cantidad de objetos que tendrá cada escena
-    private final int[] numObjetos = {1,0,0,0}; 
+    private final int[] numObjetos = {0,0,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
     private final int[] numEnemigos = {0,1,2,2};
     
     //Cantidad de cofres que tendrá cada escena
-    private final int[] numCofres = {3,1,2,1};
+    private final int[] numCofres = {0,1,2,1};
     
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos  = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);
@@ -59,9 +61,9 @@ public class Nivel1 extends BasicGameState{
      * 
      * @param nombre
      */
-    public Nivel1(String nombre){
-        datos.datosNivel1();
-        j = almacenar.cargarDatos(1).get(nombre).devolverJugador(datos);
+    public Nivel2(String nombre){
+        datos.datosNivel2();
+        j = almacenar.cargarDatos(2).get(nombre).devolverJugador(datos);
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
@@ -79,37 +81,28 @@ public class Nivel1 extends BasicGameState{
         menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
+        System.out.println(j.getHud().getNumCorazonesMin());
         entrada = container.getInput(); 
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         escenas.get(j.getEscenario()).getMapa_escena().render(0,0);     
-        
-        //Ataques
         j.getVarita().getFlecha().draw(g,menu);
-        
-        //Cofres
         for(int i = 0; i < escenas.get(j.getEscenario()).getCofres().size(); i++){
             escenas.get(j.getEscenario()).getCofres().get(i).imprimir_cofre();
         }
-        
-        //Imprimir jugador
         j.imprimirJugador();
-        
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
-        }  
-        
-        //HUD e inventario
+        }       
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
         j.getInventario().imprimirInventario();
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
-        j.getHud().imprimirTeclaAbrirCofre(new Punto((int)j.getPunto().getX() + 20,(int)j.getPunto().getY()-20));
         menu.mostrarMenu(g,j,escenas);
     }
     
@@ -142,7 +135,7 @@ public class Nivel1 extends BasicGameState{
        
     @Override
     public int getID() {
-        return 1;
+        return 2;
     }
-       
+    
 }

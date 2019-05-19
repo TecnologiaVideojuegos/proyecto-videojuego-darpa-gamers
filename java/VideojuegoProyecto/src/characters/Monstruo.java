@@ -228,28 +228,24 @@ public class Monstruo extends Ente{
                 if(!escena.colisionConPoligonos(this.getPersUp())){
                     this.move(delta,0,0,0,-this.getVelocidad());
                     this.setDireccion(0);
-                    //this.animacion_enemigo.getAnimacion(1).update(delta);
                 }
             //case Left
             }else if(reloj > 1000){
                 if(!escena.colisionConPoligonos(this.getPersL())){
                     this.move(delta,0,0,-this.getVelocidad(),0);
                     this.setDireccion(2);
-                    //this.animacion_enemigo.getAnimacion(3).update(delta);
                 }
             //case Down 
             }else if(reloj > 500){
                 if(!escena.colisionConPoligonos(this.getPersDown())){
                     this.move(delta,0,0,0,this.getVelocidad());
                     this.setDireccion(1);
-                    //this.animacion_enemigo.getAnimacion(0).update(delta);
                 }
             //case Right
             }else{
                 if(!escena.colisionConPoligonos(this.getPersR())){
                     this.move(delta,0,0,this.getVelocidad(),0);
                     this.setDireccion(3);
-                    //this.animacion_enemigo.getAnimacion(2).update(delta);
                 }
             }
     }

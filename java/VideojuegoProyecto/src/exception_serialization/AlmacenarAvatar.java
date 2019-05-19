@@ -79,9 +79,10 @@ public class AlmacenarAvatar{
      * @return el arrayñist general con el hashmap cargado en su interior
      */
     public HashMap<String,Info_Jugador> cargarDatos(int nivel){//obtenemos del archivo los jugadores registrados
+        ObjectInputStream subida;
         try
         {
-        ObjectInputStream subida = new ObjectInputStream(new FileInputStream("./level_saves/level"+nivel+".dat"));
+        subida = new ObjectInputStream(new FileInputStream("./level_saves/level"+nivel+".dat"));
         
             while (true){
              jugadores = (HashMap)subida.readObject();
@@ -89,6 +90,7 @@ public class AlmacenarAvatar{
         }catch(IOException io){
         }catch(ClassNotFoundException c){
         }
+        
         return jugadores;  
     }
     

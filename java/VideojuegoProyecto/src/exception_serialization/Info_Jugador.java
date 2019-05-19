@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import materials.Objeto;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 /**
  *
@@ -28,6 +27,7 @@ public class Info_Jugador implements Serializable{
     private int nivelMapaMax;
     private int experiencia;
     private int nivelJugador;
+    private int numCorazonesMin;
     private ArrayList<Objeto>[] inventario;
     
     public Info_Jugador(Jugador j)throws SlickException{
@@ -39,6 +39,7 @@ public class Info_Jugador implements Serializable{
         this.experiencia = j.getExperiencia();
         this.nivelMapaActual = j.getNivelMapa();
         this.nivelMapaMax = j.getNivelMapaMax();
+        this.numCorazonesMin = j.getHud().getNumCorazonesMin();
         this.inventario = j.getInventario().getInventario();
         this.nivelJugador = j.getNivelJugador();
     }
@@ -47,15 +48,23 @@ public class Info_Jugador implements Serializable{
         Jugador j = null;
         
         try{
-            j = new Jugador(this.getNombre(),this.getHp(),data.getEntradas((this.getNivelMapaActual()-1)),this.getVelocidad(),0,this.getMunicion(),this.getDanyo(),this.getNivelMapaActual());            
+            j = new Jugador(this.getNombre(),this.getHp(),data.getEntradas(0),this.getVelocidad(),0,this.getMunicion(),this.getDanyo(),this.getNivelMapaActual());            
             j.setExperiencia(this.getExperiencia());
             j.setNivelMapaMax(this.getNivelMapaMax());          
             j.setNivelJugador(this.getNivelJugador());            
             j.getInventario().setInventario(this.getInventario());
-        }catch(SlickException ex){}
+            j.getHud().setNumCorazonesMin(this.getNumCorazonesMin());
+        }catch(SlickException ex){
+        System.out.println(ex.getMessage());}
         return j;
     }
 
+    public int getNumCorazonesMin() {
+        return numCorazonesMin;
+    }
+
+    
+    
     public int getNivelJugador() {
         return nivelJugador;
     }

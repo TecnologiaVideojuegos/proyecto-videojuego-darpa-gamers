@@ -5,11 +5,13 @@
  */
 package materials;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Senapi Aroal
  */
-public class Objeto {
+public class Objeto implements Serializable{
     
     private int id;
     private String nombre;
