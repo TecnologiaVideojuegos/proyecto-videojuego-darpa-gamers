@@ -33,7 +33,7 @@ public class Notificaciones {
      * @param duracion durcion de las notificaciones
      */
     public Notificaciones(int duracion) throws SlickException{
-        this.listaNotificaciones = new Image[6];
+        this.listaNotificaciones = new Image[9];
         this.colaNotificaciones = new ArrayList<>();
         this.timer_not = 0;
         this.duracion_notf = duracion;
@@ -109,6 +109,9 @@ public class Notificaciones {
             this.listaNotificaciones[i] = (new Image("./res/grafico/notificaciones_pociones/not_" + (i+1) +".png"));      
         }
         this.listaNotificaciones[5] = (new Image("./res/grafico/notificaciones_varios/not_1.png")); 
+        this.listaNotificaciones[6] = (new Image("./res/grafico/notificaciones_varios/not_nombre_en_uso.png"));
+        this.listaNotificaciones[7] = (new Image("./res/grafico/notificaciones_varios/not_nombre_no_existe.png"));
+        this.listaNotificaciones[8] = (new Image("./res/grafico/notificaciones_varios/not_nivel_no_alcanzado.png"));
         
     }
     

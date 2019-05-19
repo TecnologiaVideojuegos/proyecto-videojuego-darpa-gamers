@@ -11,6 +11,7 @@ import imagen.Sprite;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import location.Punto;
+import graphic.Notificaciones;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.*;
 import org.newdawn.slick.state.*;
@@ -29,11 +30,13 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
     private AlmacenarAvatar almacenar;
     private int estado = -1;
     private final MouseOverArea[] botones = new MouseOverArea[2];
+    private final Notificaciones notif;
 
-    public MenuNewGame(GameContainer gc){
+    public MenuNewGame(GameContainer gc) throws SlickException{
         almacenar = new AlmacenarAvatar();
         almacenar.cargarDatos(1);
         name = new TextField(gc,gc.getDefaultFont(),120+166,80+141,440,65,this);
+        notif = new Notificaciones(3000);
         
         try {
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
@@ -65,16 +68,19 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         fondo.draw();
         menu_nombre.draw();
         name.render(gc, grphcs);
-       
-        //grphcs.drawString("Introduzca su nombre: ",350,141);
+        this.notif.imprimirNotificaciones();
+        
+
         for (MouseOverArea botone : botones) {
             botone.render(gc, grphcs);
         }
     }
 
     @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         comprobarEstado(gc,sbg);
+        this.notif.controlNotif(delta);
+        this.notif.controlEstadoEspera(delta);
     }
 
     @Override
@@ -96,6 +102,7 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
                 }else{
                     name.setText("");
                     System.err.println("Ya registrado");
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[6]);
                 }
             }
         }else if(estado == 1){

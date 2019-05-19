@@ -7,6 +7,7 @@ package menu;
 
 import characters.Jugador;
 import exception_serialization.*;
+import graphic.Notificaciones;
 import imagen.Sprite;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,11 +32,13 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
     private String nameValue = "none";
     private AlmacenarAvatar almacenar;
     private int estado = -1;
+    private final Notificaciones notif;
 
-    public MenuLoadGame(GameContainer container) {
+    public MenuLoadGame(GameContainer container) throws SlickException {
         almacenar = new AlmacenarAvatar();
         almacenar.cargarDatos(1);
         name = new TextField(container,container.getDefaultFont(),120+166,80+141,440,65,this);
+        notif = new Notificaciones(3000);
         try {
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
             menu_nombre = new Sprite("./res/grafico/menu_carga_nueva_partida/menu_carga_nueva_partida.png",new Punto(120,80));
@@ -67,6 +70,7 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
         fondo.draw();
         menu_nombre.draw();
         name.render(container,g);
+        this.notif.imprimirNotificaciones();
         for (MouseOverArea botone : botones) {
             botone.render(container, g);
         }
@@ -75,6 +79,8 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
        comprobarEstado(container,game);
+       this.notif.controlNotif(delta);
+       this.notif.controlEstadoEspera(delta);
     }
 
     public void comprobarEstado(GameContainer container,StateBasedGame game) throws SlickException{
@@ -88,7 +94,8 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
                     game.enterState(-4);
                 }else{
                     name.setText("");
-                    System.err.println("Ya registrado");
+                    System.err.println("No registrado");
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[7]);
                 }
             }
         }else if(estado == 1){
