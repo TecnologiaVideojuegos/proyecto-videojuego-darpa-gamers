@@ -6,6 +6,7 @@
 package menu;
 
 import exception_serialization.*;
+import graphic.Notificaciones;
 import imagen.Sprite;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,11 +30,14 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
     private String nombre;
     private int estado = -1;
     private final int nivelMax = 3;
+    private final Notificaciones notif;
 
-    public MenuSelectLevelGame(GameContainer container,String nombre) {
+    public MenuSelectLevelGame(GameContainer container,String nombre) throws SlickException {
+        notif = new Notificaciones(3000);
         try{
             this.almacenar = new AlmacenarAvatar();
             this.nombre = nombre;
+            
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
             level1 = new Sprite("./res/grafico/buttons/boton_LEVEL1.png",new Punto(78,400));
             level2 = new Sprite("./res/grafico/buttons/boton_LEVEL2.png",new Punto(384,400));
@@ -56,6 +60,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         fondo.draw();
+        this.notif.imprimirNotificaciones();
         for (MouseOverArea botone : botones) {
             botone.render(container, g);
         }
@@ -64,6 +69,8 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         comprobarEstado(container,game);
+        this.notif.controlNotif(delta);
+        this.notif.controlEstadoEspera(delta);
     }
 
     public void comprobarEstado(GameContainer container,StateBasedGame game) throws SlickException{
@@ -88,6 +95,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
             }
                 }else{
                     System.err.println("Nivel no alcanzado");
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
                 }
                 break;
             case 1:
@@ -104,6 +112,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                     game.enterState(2);
                 }else{
                     System.err.println("Nivel no alcanzado");
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
                 }
                 break;
             case 2:
@@ -120,6 +129,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                     game.enterState(3);
                 }else{
                     System.err.println("Nivel no alcanzado");
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
                 }
                 break;
             default:
