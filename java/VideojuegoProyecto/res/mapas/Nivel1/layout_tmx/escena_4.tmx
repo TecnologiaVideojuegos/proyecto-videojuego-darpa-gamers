@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" source="../resources_tsx/casa_madera.tsx"/>
  <tileset firstgid="118" source="../resources_tsx/obj_misk_atlas.tsx"/>
  <tileset firstgid="1142" source="../resources_tsx/city_outside.tsx"/>
  <tileset firstgid="1574" source="../resources_tsx/city_inside.tsx"/>
  <tileset firstgid="1958" source="../resources_tsx/build_atlas.tsx"/>
+ <tileset firstgid="2982" source="../resources_tsx/market.tsx"/>
+ <tileset firstgid="3238" source="../resources_tsx/house_interior.tsx"/>
  <layer id="1" name="suelo" width="32" height="24">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACmNjYGBgG8WjeBBiRiBmJRKz0MB+LiDmIxLz0sDfykD8E4j/oNHIGCamRMVwgPlbB4t96PbCsDYVwgHd3yBsxojbDTBsg6SG1HAIB+IIqB5s/g4jwn5c4YAvvQYBcTAQJwBxIhHhTSqGuQMXjgbiGCDOBOIsIDaGYmrZb0wApwBx6iCwvwiIi4FYAYgFqWi/ANRMXDgXiPMYUNOiHRXtt2UgPf/JUBAOsPIA5m95MuzHFg5lJOS/j6zk+Zsa4UANf+MLB1rEN7HhQAympr9HMf0wAPsEJIcADAAA
@@ -12,7 +14,12 @@
  </layer>
  <layer id="2" name="objetos" width="32" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu2VTU7CQBiGv48YtT0AIppUTiFeREtkwS0UZaNLDyCILqqJK/b86YKTQPQQstAE38pM8s3YBoR2Y/omT6aTTueZmc60RFmyZInLzSZRZ2NxmVY+wBQMmUYD0AdDRVj/xL2vFLxjZ17mmWgHFMAuKFrXe2Cf523fneT8W1jXbeCAQ/RfVhxZnLLZdt2MrTkc82J/lc1nVlkH2yv9J8Kvx1BRRPl1rlyia/d3+RzjemOqcc6kBLTfF35f+L0cBTM2mYBHuJ6AXYZEBc/UZhae8Euv9GOMAVtgLsGfX8KS61+2/HHrv2rkedZ+PwLp97D3D0ApgTMgxxDnX2b/rRM5nzP0fw7q4EKhry9Bg80xJ5lb9N0Ed6CtaIn6PXhIYf46XfTdA/jWh/+AH/qi/gJeU/Rn+d/5Bij2OK4ADAAA
+   H4sIAAAAAAAACu2TTU4CMRiG28QIM2ENqCTgKYCLOGP0HPKjG1h6gOF3g4kr94rKWWbhIZREF7yENvmm02bMTGdD5k2etE3a72mblrEiRYqY8njK2MtJcptXvsEP2Br4BX85eEPn0FY5YzVQB2fgXOlfgAY/zP1y7PlLuNcycEAb9TuCrsINj87NmlA5wxVP9t/y6Jo096B6qd8jfrmHa4HOLzNyGRu78fbZ4Lqr6JF+n/h94jetW8H15MbbPboEFT2exkv9pnU2orv/juI33X/a0P8s/b4G6m/i7bfApYU/QPdg8v/n/WUJPU8P9ftgAIYC2b8HDzy6Z5sJUHsCZmAumJLxAixzOL/MK2q/gXfwIViT8SfY5OgvctzZAS/2LJIADAAA
+  </data>
+ </layer>
+ <layer id="3" name="Capa de patrones 3" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYBSMgsEP9vMMtAtGwSgYBYMFjJYHo2AUUAYASdcH5AAMAAA=
   </data>
  </layer>
 </map>
