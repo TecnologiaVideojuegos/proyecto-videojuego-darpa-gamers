@@ -107,12 +107,12 @@ public class Varita {
             
         }else if(entrada.isKeyDown(Input.KEY_UP)){
             
-            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX(),j.getPersUp().getY(),0,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),10,24);
+            flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX()-5,j.getPersUp().getY(),0,-300,j.getPersUp().getX()+2,j.getPersUp().getY(),10,24);
             j.setDireccion(2);
             
         }else if(entrada.isKeyDown(Input.KEY_DOWN)){
             
-            flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getX(),j.getPersDown().getY(),0,300,j.getPersDown().getX()+7,j.getPersDown().getY(),10,24);
+            flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getX()-5,j.getPersDown().getY(),0,300,j.getPersDown().getX()+2,j.getPersDown().getY(),10,24);
             j.setDireccion(3);
             
         }else{
@@ -127,11 +127,11 @@ public class Varita {
                     break;
                 //Arriba
                 case 2:
-                    flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX(),j.getPersUp().getY(),0,-300,j.getPersUp().getX()+7,j.getPersUp().getY(),10,24);
+                    flecha.addFlecha(j.getNivelJugador(),3,j.getPersUp().getX()-5,j.getPersUp().getY(),0,-300,j.getPersUp().getX()+2,j.getPersUp().getY(),10,24);
                     break;
                 //Abajo
                 case 3:
-                    flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getX(),j.getPersDown().getY(),0,300,j.getPersDown().getX()+7,j.getPersDown().getY(),10,24);
+                    flecha.addFlecha(j.getNivelJugador(),1,j.getPersDown().getX()-5,j.getPersDown().getY(),0,300,j.getPersDown().getX()+2,j.getPersDown().getY(),10,24);
                     break;
                 default:
                     System.out.println("Dirección errónea");   
