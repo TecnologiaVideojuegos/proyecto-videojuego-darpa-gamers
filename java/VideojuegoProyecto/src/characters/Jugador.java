@@ -14,6 +14,7 @@ import materials.Inventario;
 import location.*;
 import map.*;
 import materials.*;
+import menu.MenuCreditsGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.*;
 import org.newdawn.slick.state.*;
@@ -531,7 +532,7 @@ public class Jugador extends Ente{
      * @param escenas obtiene el último polígono adquirido en el escenario
      * @param datos
      */
-    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm){
+    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm, GameContainer container){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
             if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
                 try {
@@ -546,6 +547,8 @@ public class Jugador extends Ente{
                     alm.altaJugador(new Info_Jugador(this));
                     alm.guardarDatos(this.getNivelMapa());
                     this.addNivel(game);
+                    
+                    
                     game.enterState(this.getNivelMapa(),FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
                 } catch (SlickException ex) {
                     Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
@@ -744,7 +747,7 @@ public class Jugador extends Ente{
     public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,AlmacenarAvatar alm){
         this.finPartida(game);
         this.corregirBug(escena.get(this.getEscenario()));
-        this.gestorCambiosMapas(game, numEscenas, escena, datos,alm);
+        this.gestorCambiosMapas(game, numEscenas, escena, datos,alm, container);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);

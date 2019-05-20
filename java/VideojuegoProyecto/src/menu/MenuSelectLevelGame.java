@@ -126,12 +126,32 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                 //Level3
                 estado = -1;
                 if(almacenar.cargarDatos(3).size() > 0 && almacenar.cargarDatos(3).containsKey(nombre)){
+                    try {
+                        for(int i = 3;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
+                            if(almacenar.cargarDatos(i).containsKey(nombre)){
+                                almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
+                                almacenar.guardarDatos(i); 
+                            }
+                        }
+                        game.addState(new Nivel3(nombre));
+                        game.enterState(3,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(MenuSelectLevelGame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    System.err.println("Nivel no alcanzado");
+                    this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
+                }
+                /*
+                if(almacenar.cargarDatos(3).size() > 0 && almacenar.cargarDatos(3).containsKey(nombre)){
                     game.addState(new MenuRankingGame(container));
                     game.enterState(3);
                 }else{
                     System.err.println("Nivel no alcanzado");
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[8]);
-                }
+                }*/
                 break;
             default:
                 break;
