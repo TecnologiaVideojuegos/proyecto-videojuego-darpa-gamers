@@ -21,7 +21,7 @@ que estamos cursando la asignatura de carácter transversal
 
 ### Componentes
 
-  - David Carrascal Acebron, Grado Ingeniería Telemática
+  - David Carrascal Acebrón, Grado Ingeniería Telemática
   - David Gómez Zafra, Grado Ingeniería Informática 
   - Rubén adarve pérez, Grado en Sistemas de Información
   - Ledo Galano Antón Emilio, Grado en Sistemas de Información
