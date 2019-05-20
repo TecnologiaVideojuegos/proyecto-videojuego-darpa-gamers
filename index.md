@@ -49,7 +49,7 @@ A continuación los roles que se han llevado a cabo en el desempeño del proyect
 | David Gómez Zafra | Programador, Diseño de Mapas   | 
 | Rubén Adarve Pérez | Diseño Gráfico, Diseño de Mapas     | 
 | Ledo Galano Antón Emilio | Narrativa, Diseño de mapas | 
-| Pablo Cancio Castaño | Documentación |
+| Pablo Cancio Castaño | Documentación, Sonido |
 
 <br />
 <br />
