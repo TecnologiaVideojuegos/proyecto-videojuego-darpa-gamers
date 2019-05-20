@@ -33,7 +33,7 @@ public class MenuMainGame extends BasicGameState implements ComponentListener{
         cargar_partida = new Sprite("./res/grafico/buttons/boton_cargar_partida.png",new Punto(250,300));
         opciones = new Sprite("./res/grafico/buttons/boton_opciones.png",new Punto(250,400));
         salir = new Sprite("./res/grafico/buttons/boton_salir.png",new Punto(378,550));
-        musica_fondo = new Music("./res/audio/music/loop_medieval.wav");
+        musica_fondo = new Music("./res/audio/music/Warped.ogg");
         Sprite buttons[] = {nueva_partida,cargar_partida,opciones,salir};
         for(int i = 0;i<botones.length;i++){
             botones[i] = new MouseOverArea(container,buttons[i],(int)buttons[i].getPosicion().getX(),(int)buttons[i].getPosicion().getY(),buttons[i].getWidth(),buttons[i].getHeight(),this);         
@@ -66,7 +66,7 @@ public class MenuMainGame extends BasicGameState implements ComponentListener{
                 estado = -1;
                 if(!anadidoNew){
                     anadidoNew = true;
-                    game.addState(new MenuNewGame(container));
+                    game.addState(new MenuNewGame(container,musica_fondo));
                 }   game.enterState(-1);
                 break;
             case 1:
@@ -74,7 +74,7 @@ public class MenuMainGame extends BasicGameState implements ComponentListener{
                 estado = -1;
                 if(!anadidoLoad){
                     anadidoLoad = true;
-                    game.addState(new MenuLoadGame(container));
+                    game.addState(new MenuLoadGame(container,musica_fondo));
                 }   game.enterState(-2);
                 break;
             case 2:
@@ -88,11 +88,18 @@ public class MenuMainGame extends BasicGameState implements ComponentListener{
             case 3:
                 //Salir
                 estado = -1;
+                musica_fondo.stop();
                 System.exit(0);
                 break;
             default:
                 break;
         }
+    }
+    
+    @Override
+    public void enter(GameContainer container,StateBasedGame game)throws SlickException{
+        container.getInput().clearKeyPressedRecord();        
+        init(container, game);     
     }
     
     @Override

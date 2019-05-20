@@ -32,8 +32,10 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
     private AlmacenarAvatar almacenar;
     private int estado = -1;
     private final Notificaciones notif;
+    private Music musica;
 
-    public MenuLoadGame(GameContainer container) throws SlickException {
+    public MenuLoadGame(GameContainer container,Music musica) throws SlickException {
+        this.musica = musica;
         almacenar = new AlmacenarAvatar();
         almacenar.cargarDatos(1);
         name = new TextField(container,container.getDefaultFont(),120+166,80+141,440,65,this);
@@ -90,7 +92,7 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
                Jugador j = new Jugador(nameValue,200,new Punto(230,200),100,0,50,50,1);
                 if(almacenar.getMostrar().containsKey(nameValue)){
                     name.setText("");
-                    game.addState(new MenuSelectLevelGame(container,j.getNombre()));
+                    game.addState(new MenuSelectLevelGame(container,j.getNombre(),musica));
                     game.enterState(-4);
                 }else{
                     name.setText("");

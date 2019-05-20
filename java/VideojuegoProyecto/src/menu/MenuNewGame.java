@@ -31,8 +31,10 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
     private int estado = -1;
     private final MouseOverArea[] botones = new MouseOverArea[2];
     private final Notificaciones notif;
-
-    public MenuNewGame(GameContainer gc) throws SlickException{
+    private Music musica;
+    
+    public MenuNewGame(GameContainer gc,Music musica) throws SlickException{
+        this.musica = musica;
         almacenar = new AlmacenarAvatar();
         almacenar.cargarDatos(1);
         name = new TextField(gc,gc.getDefaultFont(),120+166,80+141,440,65,this);
@@ -70,8 +72,6 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         menu_nombre.draw();
         name.render(gc, grphcs);
         this.notif.imprimirNotificaciones();
-        
-
         for (MouseOverArea botone : botones) {
             botone.render(gc, grphcs);
         }
@@ -98,7 +98,7 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
                 if(almacenar.altaJugador(new Info_Jugador(j))){
                     name.setText("");
                     almacenar.guardarDatos(1);
-                    game.addState(new MenuSelectLevelGame(gc,j.getNombre()));
+                    game.addState(new MenuSelectLevelGame(gc,j.getNombre(),musica));
                     game.enterState(-4);
                 }else{
                     name.setText("");

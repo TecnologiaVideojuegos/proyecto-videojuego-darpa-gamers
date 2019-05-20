@@ -32,9 +32,11 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
     private int estado = -1;
     private final int nivelMax = 3;
     private final Notificaciones notif;
+    private Music musica;
 
-    public MenuSelectLevelGame(GameContainer container,String nombre) throws SlickException {
+    public MenuSelectLevelGame(GameContainer container,String nombre,Music musica) throws SlickException {
         notif = new Notificaciones(3000);
+        this.musica = musica;
         try{
             this.almacenar = new AlmacenarAvatar();
             this.nombre = nombre;
@@ -87,6 +89,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                                 almacenar.guardarDatos(i);                      
                             }
                         }
+                        musica.stop();
                         game.addState(new Nivel1(nombre));
                         game.enterState(1,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
                     } catch (InstantiationException ex) {
