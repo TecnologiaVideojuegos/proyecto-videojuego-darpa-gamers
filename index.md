@@ -34,7 +34,7 @@ A continuación los roles que se han llevado a cabo en el desempeño del proyect
 
 | Nombre        | Rol        |
 |:-------------|:------------------|
-| David Carrascal Acebron |  Jefe de proyecto, Programador, Diseño gráfico, Desarrollador web|
+| David Carrascal Acebrón |  Jefe de proyecto, Programador, Diseño gráfico, Desarrollador web|
 | David Gómez Zafra | Programador, Diseño de Mapas   | 
 | Rubén adarve pérez | Diseño Gráfico, Diseño de Mapas     | 
 | Ledo Galano Antón Emilio | Narrativa, Diseño de mapas | 
