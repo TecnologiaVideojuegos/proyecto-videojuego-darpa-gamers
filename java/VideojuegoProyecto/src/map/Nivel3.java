@@ -25,7 +25,7 @@ import org.newdawn.slick.tiled.TiledMap;
  * @author Senapi Aroal
  * @author Davidcawork
  */
-public class Nivel2 extends BasicGameState{
+public class Nivel3 extends BasicGameState{
 
     //Arraylist donde guardamos todas las escenas de ese nivel
     private ArrayList<Escena> escenas = new ArrayList<>();
@@ -62,9 +62,9 @@ public class Nivel2 extends BasicGameState{
      * 
      * @param nombre
      */
-    public Nivel2(String nombre){
-        datos.datosNivel2();
-        j = almacenar.cargarDatos(2).get(nombre).devolverJugador(datos);
+    public Nivel3(String nombre){
+        datos.datosNivel3();
+        j = almacenar.cargarDatos(3).get(nombre).devolverJugador(datos);
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
@@ -145,7 +145,8 @@ public class Nivel2 extends BasicGameState{
        
     @Override
     public int getID() {
-        return 2;
+        return 3;
     }
     
 }
+

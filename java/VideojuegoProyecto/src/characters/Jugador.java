@@ -571,6 +571,7 @@ public class Jugador extends Ente{
                 game.addState(new Nivel2(this.getNombre()));
                 break;
             case 3:
+                game.addState(new Nivel3(this.getNombre()));
                 break;
         }
     }

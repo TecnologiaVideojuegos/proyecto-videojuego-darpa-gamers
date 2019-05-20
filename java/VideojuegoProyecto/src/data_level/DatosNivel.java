@@ -265,6 +265,99 @@ public class DatosNivel {
         }
     }
     
+    public void datosNivel3(){
+        //Datos de los mapas
+        float[] escena1 = {191,515,381,515,381,417,123,417,123,351,98,351,98,286,122,288,122,257,572,255,573,161,288,161,288,87,704,90,704,163,641,163,639,283,800,283,802,256,923,258,923,418,860,418,860,359,708,359,708,415,449,416,449,608,192,608,191,515};
+        float[] escena2 = {35,256,62,256,62,285,223,285,223,255,320,255,320,285,350,285,350,160,129,160,129,93,448,93,448,158,417,158,417,287,575,287,575,163,542,163,542,64,604,64,604,96,734,96,734,156,639,156,639,288,769,288,769,256,930,256,930,419,895,419,896,383,544,381,544,512,605,514,603,532,639,532,639,513,710,513,710,580,288,580,288,514,476,514,476,382,65,384,65,416,35,416,35,256};
+        float[] escena3 = {68,255,106,256,106,273,545,273,545,289,573,287,573,162,355,162,355,129,324,127,323,97,619,97,619,112,662,112,662,156,641,156,641,287,668,287,668,273,917,273,919,255,993,258,992,414,932,414,932,390,890,390,890,348,453,348,453,542,638,542,641,580,729,580,729,576,897,576,897,671,771,671,771,640,576,640,576,580,545,580,545,606,381,606,381,352,110,352,110,412,65,412,65,255};
+        
+        float[][] datosMapa = {escena1,escena2,escena3}; //se guardan los puntos del mapa
+        for(int i = 0;i<numEscenas;i++){
+            mapas[i] = datosMapa[i];
+        } 
+        
+        //Datos de los puntos de respawn al salir de la escena o punto
+        //Cuando sale de la escena a la siguiente, registra la posición en escena-1
+        Punto[] entrada = {new Punto(161,289),new Punto(),new Punto()};
+        for(int i = 0;i<(numEscenas-1);i++){
+            entradas[i] = entrada[i];
+        }
+        
+        //Datos de los puntos de respawn al entrar en la escena o punto donde aparecerá en la siguiente escena
+        //Cuando sale de la escena a la anterior, registra la posición en escena
+        Punto[] salida = {new Punto(68,326),new Punto(106,309)};
+        for(int i = 0;i<(numEscenas-1);i++){
+            salidas[i] = salida[i];
+        }
+        
+        //Datos de los polígonos de entrada
+        float[] polEntEsc1 = {905,257,921,257,921,418,905,418}; //se almacena los polígonos para acceder al siguiente escenario
+        float[] polEntEsc2 = {915,256,931,256,931,419,915,419};
+        float[] polEntEsc3 = {959,320,992,320,992,351,959,351};
+        
+        float[][] datosEntrada = {polEntEsc1,polEntEsc2,polEntEsc3}; //se guardan los puntos de entrada
+        for(int i = 0;i<numEscenas;i++){
+            poligonosDeEntrada[i] = datosEntrada[i];
+        }
+        
+        //Datos de los polígonos de salida
+        float[] polSalEsc1 = {0,0};
+        float[] polSalEsc2 = {33,256,49,256,49,419,33,419};
+        float[] polSalEsc3 = {66,256,82,256,82,422,66,422};   
+        
+        float[][] datosSalida = {polSalEsc1,polSalEsc2,polSalEsc3}; //se guardan los puntos de salida
+        for(int i = 0;i<numEscenas;i++){
+            poligonosDeSalida[i] = datosSalida[i];
+        }
+        
+        //Datos de los objetos del nivel
+        float[] pozo = {288,300,541,300,541,351,288,343};
+        float [][][] objetos = {{pozo},{},{}};
+        for(int i=0;i<numEscenas;i++){
+            mapa_objetos.add((new ArrayList<>()));//añadimos tantos arrayList como numEscenas haya (inicialmente están vacíos).
+            for(int a = 0;a<numObjetos[i];a++){
+                mapa_objetos.get(i).add((new Polygon(objetos[i][a])));
+            }
+        }
+        
+        //Generador de enemigos
+        Punto[] enemigosEscena1 = {new Punto(511,114), new Punto(623,314), new Punto(287,539), new Punto(313,265)};
+        Punto[] enemigosEscena2 = {new Punto(586,337),new Punto(452,541),new Punto(225,114),new Punto(812,320)};
+        Punto[] enemigosEscena3 = {new Punto(408,296),new Punto(422,570),new Punto(863,301)};
+        
+        Punto[][] enemigosNivel1 = {enemigosEscena1,enemigosEscena2,enemigosEscena3};
+        
+        for(int i = 0;i<numEscenas;i++){
+            enemigos.add(new ArrayList<>());
+            for(int j = 0;j<numEnemigos[i];j++){
+                try{
+                    int velocidad = (int)(100+51*Math.random());
+                    enemigos.get(i).add(new Monstruo(100,enemigosNivel1[i][j],velocidad,0,96,"Pasivo",50));
+                }catch(Exception ex){}
+            }
+        }
+        
+        //Generador de cofres
+        Punto[] loc_cofres_escena1 = {new Punto(295,517)};
+        Punto[] loc_cofres_escena2 = {new Punto(357, 100),new Punto(666, 534),new Punto(551, 69),new Punto(693, 98)};
+        Punto[] loc_cofres_escena3 = {new Punto(483,98), new Punto(857,641),new Punto(778,641)};
+        
+        Punto[][] loc_cofres_escenas = {loc_cofres_escena1,loc_cofres_escena2,loc_cofres_escena3};
+        
+        for(int i = 0;i<numEscenas;i++){
+            this.cofres_escenas.add(new ArrayList<>());
+            for(int j = 0; j < this.numCofres[i]; j++){
+                try{
+                    
+                    cofres_escenas.get(i).add(new Cofre((int)loc_cofres_escenas[i][j].getX(),(int)loc_cofres_escenas[i][j].getY()));
+                
+                }catch(Exception ex){
+                    System.out.println("Error al generar los cofres");
+                }
+            }
+        }
+    }
+    
     /**
      * Devuelve un polígono de colisiones de ese mapa
      * 
