@@ -4,7 +4,7 @@ title: "Darpa Games"
 author: "David Carrascal"
 ---
 
-# Enalces útiles
+# Enlaces útiles
 
 * **[Diseño del Videojuego](./diseñoVideojuego.html).**
 
@@ -15,7 +15,7 @@ author: "David Carrascal"
 ## Sobre nosotros
 <div style="text-align: justify">
 Somos alumnos de la Escuela Politécnica Superior (UAH), 
-que estamos cursando la asignatura de carácter transversal
+que actualmente estamos cursando la asignatura de carácter transversal
  <strong>"Tecnología de Videojuegos"</strong> en el curso 2018/19. 
 </div>
 <br />
@@ -31,7 +31,7 @@ que estamos cursando la asignatura de carácter transversal
 
   - David Carrascal Acebrón, Grado Ingeniería Telemática
   - David Gómez Zafra, Grado Ingeniería Informática 
-  - Rubén adarve pérez, Grado en Sistemas de Información
+  - Rubén Adarve Pérez, Grado en Sistemas de Información
   - Ledo Galano Antón Emilio, Grado en Sistemas de Información
   - Pablo Cancio Castaño, Grado en Sistemas de Información
 
@@ -47,7 +47,7 @@ A continuación los roles que se han llevado a cabo en el desempeño del proyect
 |:-------------|:------------------|
 | David Carrascal Acebrón |  Jefe de proyecto, Programador, Diseño gráfico, Desarrollador web|
 | David Gómez Zafra | Programador, Diseño de Mapas   | 
-| Rubén adarve pérez | Diseño Gráfico, Diseño de Mapas     | 
+| Rubén Adarve Pérez | Diseño Gráfico, Diseño de Mapas     | 
 | Ledo Galano Antón Emilio | Narrativa, Diseño de mapas | 
 | Pablo Cancio Castaño | Documentación |
 
