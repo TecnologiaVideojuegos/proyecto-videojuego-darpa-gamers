@@ -17,6 +17,7 @@ import org.newdawn.slick.state.*;
  */
 public class MenuMainGame extends BasicGameState implements ComponentListener{
 
+    private Music musica_fondo;
     private Sprite fondo,logo_juego,logo_grupo,titulo,nueva_partida,cargar_partida,opciones,salir;
     private int estado = -1;
     private boolean anadidoLoad = false,anadidoNew = false,anadidoOpcion = false;
@@ -32,12 +33,14 @@ public class MenuMainGame extends BasicGameState implements ComponentListener{
         cargar_partida = new Sprite("./res/grafico/buttons/boton_cargar_partida.png",new Punto(250,300));
         opciones = new Sprite("./res/grafico/buttons/boton_opciones.png",new Punto(250,400));
         salir = new Sprite("./res/grafico/buttons/boton_salir.png",new Punto(378,550));
+        musica_fondo = new Music("./res/audio/music/loop_medieval.wav");
         Sprite buttons[] = {nueva_partida,cargar_partida,opciones,salir};
         for(int i = 0;i<botones.length;i++){
             botones[i] = new MouseOverArea(container,buttons[i],(int)buttons[i].getPosicion().getX(),(int)buttons[i].getPosicion().getY(),buttons[i].getWidth(),buttons[i].getHeight(),this);         
             botones[i].setNormalColor(new Color(1,1,1,0.7f));
             botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
         }
+        musica_fondo.loop();
     }
 
     @Override
