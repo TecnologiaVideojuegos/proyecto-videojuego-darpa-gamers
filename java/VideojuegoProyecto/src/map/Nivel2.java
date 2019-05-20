@@ -42,10 +42,10 @@ public class Nivel2 extends BasicGameState{
     private final int[] numObjetos = {1,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {3,1,2};
+    private final int[] numEnemigos = {4,4,3};
     
     //Cantidad de cofres que tendrá cada escena
-    private final int[] numCofres = {0,1,2};
+    private final int[] numCofres = {1,4,3};
     
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos  = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);

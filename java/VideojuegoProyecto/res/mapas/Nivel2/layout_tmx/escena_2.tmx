@@ -11,12 +11,12 @@
  <tileset firstgid="3846" source="../resources_tsx/house_interior.tsx"/>
  <layer id="4" name="sala secreta" width="32" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNgoAwwAjErHsxCofmEABcQ8+HBvDS23w6I/RlxY1s62b8RCVPbfnVG4uz3p5H9+IAMEAsyIOwTALIVkLA8jexFTuPKSPYrocnRCiCncR0k+7XR5OgNOAfAzlEwCkbBKBgFo2AUkAYAS5XTXgAMAAA=
+   H4sIAAAAAAAACmNgoAwwAjErHsxCofmEABcQ8+HBvDS23w6I/RlxY1s62b8RCVPbfnVG4uz3p5H9+IAMEAsyIOwTALIVkLA8jexFTuPKSPYrocnRCiCncR0k+7XR5OgNOAfAzlEwCkbB4ALrB9oBo2AUjAKCAADxBF87AAwAAA==
   </data>
  </layer>
  <layer id="1" name="suelo" width="32" height="24">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACmNjYGBgBGJWMjALEBfzE8ZsDPgxFxDzkYF5qWS/HRBvZCId247aTxX7ZYBYgQAWBLkTaKcDEAtAxeSh9qOrJcX+cCCOICKtKyPZr0RmfgHhICAORrI/AYgTiUjrOkj2axOZP7DhaCCOQQuDLCBm5KAPTsESB6P2j1z7i0D5lUDex4axlQfE4FwgzsMSBiBMSj1ISnnAgsM+SupBUsoDXiLtB9UDD4BYBRgQ64FFUxmQTS6uB+oHmXMfyE4n0v40IJ5JgZ3Y8HQgLiDS/nwgPgHEX5BwAxSj8/FhZP3HGSD1JDH2E1MPkoPlibR/FI88DAAAWDqdAAwAAA==
+   H4sIAAAAAAAACmNjYGBgBGJWMjALEBfzE8ZsDPgxFxDzkYF5qWS/HRBvZCId247aTxX7ZYBYgQAWBLkTaKcDEAtAxeSh9qOrJcX+cCCOICKtKyPZr0RmfgHhICAORrI/AYgTiUjrOkj2axOZP7DhaCCOQQuDLCBm5KAPTsESB6P2j1z7i0D5lUDex4axlQfE4FwgzsMSBiBMSj1ISnnAgsM+SupBUsoDXiLtB9UDD4BYBRgQG4F0GQV4OtSc+0A6nUj704B4JoX2YnNHAZH25wPxCSD+goQboBidjw8j6z/OAKknibGfmHqQHCxPpP2jeORhACE3kqMADAAA
   </data>
  </layer>
  <layer id="2" name="objetos" width="32" height="24">

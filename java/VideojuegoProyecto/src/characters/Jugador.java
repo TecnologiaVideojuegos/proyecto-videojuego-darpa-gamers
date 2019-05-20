@@ -72,7 +72,7 @@ public class Jugador extends Ente{
     private final Notificaciones notif;
     
     //Animaciones
-    private final Animacion animacion_jugador;
+    private Animacion animacion_jugador;
     
     //Estado estatico
     private boolean state_estatico;
@@ -116,6 +116,26 @@ public class Jugador extends Ente{
         this.notif = new Notificaciones(3000);
         this.animacion_jugador = new Animacion((new SpriteSheet("./res/grafico/personaje/lvl" + this.getNivelJugador() + "_spritesheet.png",44,50)), 6);
         this.state_estatico = true;
+    }
+    
+    /**
+     * 
+     * Ponemos la animacion al jugador
+     * 
+     * @param a 
+     */
+    public void setAnimacion_jugador(Animacion a){
+        this.animacion_jugador = a;
+    }
+    
+    /**
+     * 
+     * Devuelve la animacion del jugador
+     * 
+     * @return Animacion
+     */
+    public Animacion getAnimacion_jugador(){
+        return this.animacion_jugador;
     }
     
     /**
@@ -516,6 +536,7 @@ public class Jugador extends Ente{
             if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
                 try {
                     this.setHp(this.getHp()+200);
+                    this.setNivelJugador(this.getNivelJugador() + 1);
                     this.getHud().setNumCorazonesMin(this.getHud().getNumCorazonesMin()+2);
                     if(this.getNivelMapaMax() == this.getNivelMapa()){
                         this.nivelMapaMax++;
@@ -699,7 +720,7 @@ public class Jugador extends Ente{
     }
     
     public Punto[] nivelesRespawn(){
-        Punto[][] niveles = {{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)},{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)}};
+        Punto[][] niveles = {{new Punto(80,655),new Punto(370,440),new Punto(940,200),new Punto(945,410)},{new Punto(161,289),new Punto(66,326),new Punto(97,290)}};
         return niveles[this.getNivelMapa()-1];
     }
     
