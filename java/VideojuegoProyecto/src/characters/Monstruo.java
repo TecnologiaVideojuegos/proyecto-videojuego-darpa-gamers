@@ -44,8 +44,8 @@ public class Monstruo extends Ente{
         super(hp, punto, velocidad,direccion, danio);
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+32),12,1);
-        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()),1,30);
-        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()),1,30);
+        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,30);
+        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,30);
         this.colision = new Rectangle(this.getPunto().getX(),this.getPunto().getY()-16,14,46);
         this.animacion_enemigo = new Animacion(new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",32,50), 9);
         
@@ -308,12 +308,12 @@ public class Monstruo extends Ente{
                 this.move(delta,0,this.getPunto().getY()*2,0,j.getPunto().getY()*2);
             }
         }else{
-            if(j.getPunto().getX() <= this.getPunto().getX()){
-                this.setDireccion(2);
-            }else{
-                this.setDireccion(3);
-            }
             this.move(delta,this.getPunto().getX(),this.getPunto().getY(),j.getPunto().getX(),j.getPunto().getY());
+        }
+        if(j.getPunto().getX() <= this.getPunto().getX()){
+            this.setDireccion(2);
+        }else{
+            this.setDireccion(3);
         }
     }
     
@@ -340,8 +340,8 @@ public class Monstruo extends Ente{
         this.getPersR().setX((this.getPunto().getX()+16));
         this.getPersUp().setX(this.getPunto().getX()+2);
         this.getPersDown().setX((this.getPunto().getX()+2));
-        this.getPersL().setY((this.getPunto().getY()));
-        this.getPersR().setY((this.getPunto().getY()));
+        this.getPersL().setY((this.getPunto().getY())+2);
+        this.getPersR().setY((this.getPunto().getY())+2);
         this.getPersUp().setY((this.getPunto().getY()));
         this.getPersDown().setY((this.getPunto().getY()+32));
         this.getColision().setX(this.getPunto().getX());

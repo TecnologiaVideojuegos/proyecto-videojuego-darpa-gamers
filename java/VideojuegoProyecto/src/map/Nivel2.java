@@ -7,18 +7,16 @@ package map;
 
 import characters.Jugador;
 import data_level.DatosNivel;
-import exception_serialization.AlmacenarAvatar;
+import exception_serialization.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import menu.MenuPauseGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.tiled.TiledMap;
+import menu.*;
+import imagen.*;
+import location.*;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.tiled.*;
 
 /**
  *
@@ -56,6 +54,10 @@ public class Nivel2 extends BasicGameState{
     
     private MenuPauseGame menu;
     
+    private boolean area1,area2,area3;
+    
+    private Sprite area1S,area2S,area3S;
+    
     private AlmacenarAvatar almacenar = new AlmacenarAvatar();
     /**
      * Constructor de la clase Nivel1
@@ -79,6 +81,12 @@ public class Nivel2 extends BasicGameState{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         reloj = 0;
+        area1 = true;
+        area1S = new Sprite("./res/mapas/resource_png/fondo_negro_1024x192.png");
+        area2 = false;
+        area2S = new Sprite("./res/mapas/resource_png/fondo_negro_1024x256.png",new Punto(0,192));
+        area3 = true;
+        area3S = new Sprite("./res/mapas/resource_png/fondo_negro_1024x320.png",new Punto(0,448));
         menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
@@ -106,6 +114,9 @@ public class Nivel2 extends BasicGameState{
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
         } 
         
+        //Ocultamos las habitaciones donde no está el protagonista
+        this.ocultarArea();
+        
         //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
@@ -120,6 +131,7 @@ public class Nivel2 extends BasicGameState{
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
         menu.gestionarMenuPausa(entrada, container, game);
+        this.comprobarPos();
         if(!menu.isPausa()){
             j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
         } 
@@ -137,6 +149,33 @@ public class Nivel2 extends BasicGameState{
         init(container, game);     
     }
    
+    public void comprobarPos(){
+        if((j.getPunto().getY()+j.getPersL().getHeight()) <= 192){
+            this.area1 = false;
+            this.area2 = true;
+            this.area3 = true;
+        }else if((j.getPunto().getY()+j.getPersL().getHeight()) >= 448){
+            this.area1 = true;
+            this.area2 = true;
+            this.area3= false;
+        }else{
+            this.area1 = true;
+            this.area2 = false;
+            this.area3 = true;
+        }
+    }
+    
+    public void ocultarArea(){
+        if(this.area1){
+            area1S.draw();
+        }
+        if(this.area2){
+            area2S.draw();
+        }
+        if(this.area3){
+            area3S.draw();
+        }
+    }
     
     @Override
     public void mouseClicked(int button, int x, int y, int clickCount){

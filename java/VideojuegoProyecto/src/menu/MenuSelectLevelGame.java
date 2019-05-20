@@ -127,7 +127,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                 estado = -1;
                 if(almacenar.cargarDatos(3).size() > 0 && almacenar.cargarDatos(3).containsKey(nombre)){
                     try {
-                        for(int i = 3;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
+                        for(int i = 4;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
                             if(almacenar.cargarDatos(i).containsKey(nombre)){
                                 almacenar.bajaJugador(almacenar.cargarDatos(i).get(nombre));
                                 almacenar.guardarDatos(i); 
