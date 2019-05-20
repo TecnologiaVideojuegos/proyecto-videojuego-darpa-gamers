@@ -5,6 +5,7 @@
  */
 package loop_game;
 
+import java.io.File;
 import menu.MenuMainGame;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -19,6 +20,7 @@ public class MainGame extends StateBasedGame{
 
     private AppGameContainer contenedor;
     public MainGame() throws SlickException{
+        
         super("Shiawase Story");
         contenedor = new AppGameContainer(this);
         contenedor.setDisplayMode(1024,768,false);
@@ -38,6 +40,8 @@ public class MainGame extends StateBasedGame{
     public static void main(String[] args) {
         // TODO code application logic here
         try{
+            //Para el audio
+            System.setProperty("java.library.path", new File("./slick").getAbsolutePath());
             new MainGame();
             
         }catch(SlickException slick){
