@@ -58,6 +58,8 @@ public class Nivel2 extends BasicGameState{
     
     private Sprite area1S,area2S,area3S;
     
+    private Music musica;
+    
     private AlmacenarAvatar almacenar = new AlmacenarAvatar();
     /**
      * Constructor de la clase Nivel1
@@ -130,10 +132,10 @@ public class Nivel2 extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        menu.gestionarMenuPausa(entrada, container, game);
+        menu.gestionarMenuPausa(entrada, container, game,musica);
         this.comprobarPos();
         if(!menu.isPausa()){
-            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
+            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,musica);
         } 
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);

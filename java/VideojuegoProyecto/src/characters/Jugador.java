@@ -14,7 +14,6 @@ import materials.Inventario;
 import location.*;
 import map.*;
 import materials.*;
-import menu.MenuCreditsGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.*;
 import org.newdawn.slick.state.*;
@@ -81,6 +80,9 @@ public class Jugador extends Ente{
     //Nombre
     private String nombre;
     
+    //Sonido de recibir daño
+    private final Sound recibirDanyo;
+    
     /**
      * Constructor de la clase Jugador
      * 
@@ -117,6 +119,7 @@ public class Jugador extends Ente{
         this.notif = new Notificaciones(3000);
         this.animacion_jugador = new Animacion((new SpriteSheet("./res/grafico/personaje/lvl" + this.getNivelJugador() + "_spritesheet.png",44,50)), 6);
         this.state_estatico = true;
+        this.recibirDanyo = new Sound("./res/audio/sounds/recibirDanyo.ogg");
     }
     
     /**
@@ -532,7 +535,7 @@ public class Jugador extends Ente{
      * @param escenas obtiene el último polígono adquirido en el escenario
      * @param datos
      */
-    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm, GameContainer container){
+    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm, GameContainer container,Music musica){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
             if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
                 try {
@@ -547,6 +550,7 @@ public class Jugador extends Ente{
                     alm.altaJugador(new Info_Jugador(this));
                     alm.guardarDatos(this.getNivelMapa());
                     this.addNivel(game);
+                    musica.stop();
                     game.enterState(this.getNivelMapa(),FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
                 } catch (SlickException ex) {
                     Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
@@ -599,6 +603,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()-32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -607,6 +612,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX(),this.getPunto().getY()+32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -615,6 +621,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX()+32,this.getPunto().getY()));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -623,6 +630,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX()-32,this.getPunto().getY()));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -631,6 +639,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX()+32,this.getPunto().getY()+32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -639,6 +648,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX()+32,this.getPunto().getY()-32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -647,6 +657,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX()-32,this.getPunto().getY()+32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -655,6 +666,7 @@ public class Jugador extends Ente{
                 this.setPunto(new Punto(this.getPunto().getX()-32,this.getPunto().getY()-32));
                 if(!this.buff_invulnerable.getEstadoBuff()){
                     this.setHp(this.getHp()-mon.get(i).getDanyo());
+                    this.recibirDanyo.play();
                     for(int a = 0;a<mon.get(i).getDanyo();a+=25){
                         this.getHud().quitarVida();
                     }
@@ -742,10 +754,10 @@ public class Jugador extends Ente{
      * @param datos datos a obtener
      * @param escena escena en el que nos encontramos
      */
-    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,AlmacenarAvatar alm){
+    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,AlmacenarAvatar alm,Music musica){
         this.finPartida(game);
         this.corregirBug(escena.get(this.getEscenario()));
-        this.gestorCambiosMapas(game, numEscenas, escena, datos,alm, container);
+        this.gestorCambiosMapas(game, numEscenas, escena, datos,alm, container,musica);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);
@@ -957,9 +969,7 @@ public class Jugador extends Ente{
           for(int i =0; i < cofres.size(); i++){
               if(this.getPersDown().intersects(cofres.get(i).getCofreRectLootArea())){
                   
-                if(!cofres.get(i).getEstadoCofre()){
-
-                    
+                if(!cofres.get(i).getEstadoCofre()){                    
                     cofres.get(i).setEstadoCercaCofre(true);
                 }
                 if(entrada.isKeyDown(Input.KEY_R) && (!cofres.get(i).getEstadoCofre())){
@@ -974,7 +984,7 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    //cofres.get(i).getSonidoCofre().play();
+                    cofres.get(i).getSonidoCofre().play();
                     
                     
                     //Cambiar de estado el cofre a abierto
@@ -998,7 +1008,7 @@ public class Jugador extends Ente{
                             
                     }
                     //Sacar el sonido de apertura
-                    //cofres.get(i).getSonidoCofre().play();
+                    cofres.get(i).getSonidoCofre().play();
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);
@@ -1022,7 +1032,7 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    //cofres.get(i).getSonidoCofre().play();
+                    cofres.get(i).getSonidoCofre().play();
                     
                     
                     //Cambiar de estado el cofre a abierto
@@ -1048,8 +1058,7 @@ public class Jugador extends Ente{
                     }
                     
                     //Sacar el sonido de apertura
-                    //cofres.get(i).getSonidoCofre().play();
-                    //Mirar error de ejecución del sonido
+                    cofres.get(i).getSonidoCofre().play();
                     
                     //Cambiar de estado el cofre a abierto
                     cofres.get(i).setEstadoCofre(true);

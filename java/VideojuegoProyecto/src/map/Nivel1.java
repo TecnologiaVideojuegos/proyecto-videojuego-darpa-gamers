@@ -51,7 +51,11 @@ public class Nivel1 extends BasicGameState{
     //Reloj para controlar movimiento
     private int reloj;
     
+    //Menú que se encargar del modo pausa y modo debug
     private MenuPauseGame menu;
+    
+    //Música del nivel 1
+    private Music music;
     
     private AlmacenarAvatar almacenar = new AlmacenarAvatar();
     /**
@@ -76,10 +80,13 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         reloj = 0;
+        music = new Music("./res/audio/music/Waking-the-devil.ogg");
         menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
         entrada = container.getInput(); 
+        music.setVolume(0.5f);
+        music.loop();
     }
 
     @Override
@@ -119,9 +126,9 @@ public class Nivel1 extends BasicGameState{
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
         
-        menu.gestionarMenuPausa(entrada, container, game);
+        menu.gestionarMenuPausa(entrada, container, game,music);
         if(!menu.isPausa()){
-            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
+            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,music);
         } 
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);

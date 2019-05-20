@@ -41,8 +41,7 @@ public final class Cofre {
     public Cofre(int x, int y) throws SlickException{
         
         /*Cargar el sonido de apertura del cofre    */
-        //this.sonido_apertura_cofre = new Sound("./res/audio/sounds/open_chest.ogg");
-        this.sonido_apertura_cofre = null;
+        this.sonido_apertura_cofre = new Sound("./res/audio/sounds/open_chest.ogg");
         /*Cargar el spritesheet del cofre */
         cargar_animacion_cofre();
         
@@ -226,7 +225,6 @@ public final class Cofre {
      * 
      * Metodo para imprimir al jugador si está cerca de un cofre la tecla R
      * 
-     * @param punto_jugador posicion a hacer el draw
      */
     public void imprimirTeclaAbrirCofre(){
     

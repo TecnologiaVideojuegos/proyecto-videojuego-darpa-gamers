@@ -67,7 +67,7 @@ public class MenuPauseGame implements ComponentListener{
         }
     }
     
-    public void comprobarEstado(GameContainer container,StateBasedGame game) throws SlickException{
+    public void comprobarEstado(GameContainer container,StateBasedGame game,Music musica) throws SlickException{
         switch (estado) {
             case 0:
                 //Continuar
@@ -84,6 +84,7 @@ public class MenuPauseGame implements ComponentListener{
                 //Salir
                 estado = -1;                  
                 try {
+                    musica.stop();
                     game.enterState(0,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
                 } catch (InstantiationException ex) {
                     Logger.getLogger(MenuPauseGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,9 +103,9 @@ public class MenuPauseGame implements ComponentListener{
         }
     }
     
-    public void gestionarMenuPausa(Input entrada,GameContainer container,StateBasedGame game) throws SlickException{
+    public void gestionarMenuPausa(Input entrada,GameContainer container,StateBasedGame game,Music musica) throws SlickException{
         this.comprobarMenuPausa(entrada);
-        this.comprobarEstado(container, game);
+        this.comprobarEstado(container, game,musica);
     }
     
     public void mostrarMenu(Graphics g,Jugador j,ArrayList<Escena> escenas){

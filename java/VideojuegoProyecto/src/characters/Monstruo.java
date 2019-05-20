@@ -44,8 +44,8 @@ public class Monstruo extends Ente{
         super(hp, punto, velocidad,direccion, danio);
         this.PersUp = new Rectangle((this.getPunto().getX()+2),this.getPunto().getY(),12,1);
         this.PersDown = new Rectangle((this.getPunto().getX()+2),(this.getPunto().getY()+32),12,1);
-        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,30);
-        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,30);
+        this.PersL = new Rectangle(this.getPunto().getX(),(this.getPunto().getY()+2),1,28);
+        this.PersR = new Rectangle((this.getPunto().getX()+16),(this.getPunto().getY()+2),1,28);
         this.colision = new Rectangle(this.getPunto().getX(),this.getPunto().getY()-16,14,46);
         this.animacion_enemigo = new Animacion(new SpriteSheet("./res/grafico/enemigo/enemigo_spritesheet.png",32,50), 9);
         

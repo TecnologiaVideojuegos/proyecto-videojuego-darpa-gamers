@@ -7,17 +7,13 @@ package map;
 
 import characters.Jugador;
 import data_level.DatosNivel;
-import exception_serialization.AlmacenarAvatar;
+import exception_serialization.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import menu.MenuPauseGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
@@ -51,6 +47,8 @@ public class Nivel3 extends BasicGameState{
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos  = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);
 
+    private Music musica;
+    
     //Reloj para controlar movimiento
     private int reloj;
     
@@ -119,9 +117,9 @@ public class Nivel3 extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        menu.gestionarMenuPausa(entrada, container, game);
+        menu.gestionarMenuPausa(entrada, container, game,musica);
         if(!menu.isPausa()){
-            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar);
+            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,musica);
         } 
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);
