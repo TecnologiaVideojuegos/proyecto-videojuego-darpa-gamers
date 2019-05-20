@@ -5,10 +5,14 @@ author: "David Carrascal"
 ---
 
 # Enlaces útiles
-
+----
 * **[Diseño del Videojuego](./diseñoVideojuego.html).**
 
 * **[Memoria del Videojuego](./memoriaVideojuego.html).**
+
+* **[Referencias y recursos utilizados](./referencias.html).**
+----
+
 <br />
 <br />
 

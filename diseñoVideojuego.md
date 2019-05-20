@@ -32,11 +32,19 @@ conseguir mejores objetos, descubrir como has llegado hasta allí y lo mas impor
 conseguir ser feliz de nuevo. 
 </div>
 <br />
+
 ### Clasificación del tipo de juego
 <div style="text-align: justify">
-Este juego es del genero RPG y va orientado a las niñas jóvenes de entre 10 y 15 años según se especificó 
+Este juego es del género RPG y va orientado a las niñas jóvenes de entre 10 y 15 años según se especificó 
 en los requerimientos del proyecto a realizar. Entendemos según la investigación que hemos llevado a cabo, preguntando a hermanas, amigas, buscando por internet tendencias de videojuegos que juegan las chicas con esa franja de edad, que los juegos que más se juegan no dependen tanto del género, si no de la edad del jugador. Por lo tanto debemos intentar que los recursos gráficos se adapten lo más posible a esta franja de edad. Para tratar de acercarnos más a los requerimientos del juego tenemos pensado que el personaje principal sea una niña de edad similar para que así los niñas a las cuales va dirigido nuestro juego se sientas más identificadas.
 </div>
+
+### Cámara del jugador y controles
+
+La cámara queremos que sea de vista de águila ya que consideramos que es la más óptima para los juegos del
+género rpg. Además, los mapas están creados con tiles por lo que será será mas fácil moverse y explorar las
+habitaciones. De forma adicional, el hecho de elegir este tipo de cámara nos va a reportar el no implementar los saltos, por lo que la complejidad
+de la programación será menor, y la demanda de CPU también.
 
 
 
