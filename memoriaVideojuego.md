@@ -271,7 +271,7 @@ Desde nuestro grupo de desarrollo, consideramos que la información que arrojamo
 * Inventario con capacidad para los cinco slots de pociones (vida, experiencia, fuerza, velocidad e invulnerabilidad) en la zona inferior de la pantalla.
 * Indicador de munición y experiencia en la esquina superior izquierda de la pantalla. La información numérica la representamos con el método drawString que nos brinda Slick.
 * Notificaciones en la esquina inferior izquierda de la pantalla. Indicando cuando se hace entrega del drop de munición extra al matar un enemigo, indicando tambien el loot de los cofres cuando estos son recogidos. De forma adicional se emplean las notificaciones para notificar a los usuarios de excepciones controladas en los menús del juego (Por ejemplo, Usuario no registrado o Nivel no alcanzado).
-
+* Mensajes por nivel de la historia de la protagonista, no son muy extensos pero lo suficiente para sumergir al jugador en el juego
 <br />
 <div style = "text-align:center">
 Corazones utilizados para representar la vida.
@@ -309,6 +309,14 @@ Sprites utilizados para representar las notificaciones.
 <img src="./img/not_1.png" alt="hp" width="200"/>
 <img src="./img/not_5.png" alt="hp" width="200"/>
 <img src="./img/not_nivel_no_alcanzado.png" alt="hp" width="200"/>
+</div>
+<br />
+<br />
+<div style = "text-align:center">
+Sprite utilizado para representar la historia de la protagonista.
+<br />
+<br />
+<img src="./img/Dialogo1.png" alt="historia" width="200"/>
 </div>
 <br />
 
