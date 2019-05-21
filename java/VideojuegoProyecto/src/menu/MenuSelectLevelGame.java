@@ -89,8 +89,9 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                         for(int i = 2;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
                             if(mapa1.getMostrar().containsKey(nombre)){
                                 mapa1.bajaJugador(mapa1.getMostrar().get(nombre));
+                                ranking.eliminarNombre(mapa1.getMostrar().get(nombre));
                                 mapa1.guardarDatos(i); 
-                                
+                                ranking.guardarNombre();
                             }
                         }
                         musica.stop();
