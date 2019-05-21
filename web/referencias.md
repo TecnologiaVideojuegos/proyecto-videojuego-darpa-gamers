@@ -27,6 +27,8 @@ Aquí vamos a referenciar en todos los casos la procedencia de material utlizado
 * [Sonido daño enemigo](https://opengameart.org/content/monster-sound-effects-pack)
 * [Sonido muerte enemigo](https://opengameart.org/content/monster-sound-effects-pack)
 * [Sonido disparo 2](https://www.zapsplat.com/sound-effect-category/fantasy/page/14/)
+* [Sonido levelup](https://www.minecraft.net/es-es/)
+* [Sonido Pocion def](https://www.minecraft.net/es-es/)
 * [Música 1](https://opengameart.org/content/something-is-near)
 * [Música 2](https://opengameart.org/content/something-is-near)
 * [Música 3](https://opengameart.org/content/something-is-near)
