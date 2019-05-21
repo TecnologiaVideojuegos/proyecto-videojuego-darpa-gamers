@@ -66,6 +66,120 @@ La protagonista se despierta encerrada en una casa gigante con monstruos por doq
 </div>
 <br />
 
+### Mecánicas del juego
+<div style="text-align: justify">
+Los controles los podemos resumir en esta imagen creada e implementada dentro del juego para que el jugador pueda consultarla siempre que quier desde el menú de pausa, o desde el menú principal. 
+</div>
+<br />
+<div style = "text-align:center">
+<img src="./img/controles.png" alt="controles" width="500"/>
+</div>
+<br />
+<div style="text-align: justify">
+Despues de testear el juego con personas externas al desarrollo nos dimos cuenta que la utilidad de las pociones, era poco evidente y poco perceptible, por lo que hemos creado un botón que te arroje toda la información sobre las pociones. Tipo, duración, explicación, imagen de la poción entre otras coasas.
+El cuadro informativo se puede acceder a él mediante el tabulador, y no detiene el flujo de funcionamiento del nivel.
+</div>
+
+<br />
+<div style = "text-align:center">
+<img src="./img/info_poc.png" alt="info_poc" width="400"/>
+</div>
+<br />
+<div style="text-align: justify">
+ Estas pociones, podrán ser obtenidas de los distintos cofres que haya en el nivel. La localización de los cofres es constante en las distintas escenas de cada nivel, pero el contenido de los mismos no. 
+ </div>
+<br />
+<div style = "text-align:center">
+<img src="./img/chest.png" alt="chest" width="100"/>
+</div>
+ 
+<br />
+<div style="text-align: justify">
+ Hemos aplicado un factor RNG en la creación de los cofres, dando una serie de probabilidades a cada tipo de poción. Con esto conseguimos que la experiencia de pasarse el juego una vez sea completamente distinta a pasárselo otra con otros tipos de pociones. Este aleatorización de los cofres con probabilidades se ha llevado a cabo con el siguiente código.
+</div>
+ 
+<br />
+```java
+/**
+     * 
+     * Según la definicion de Laplace de probabilidad 
+     *   
+     *       Suponemos que todos los posibles numeros aleatorios generados por el obj random 
+     *       son equiprobables, entonces con nuestra condicion del if estamos consiguiendo una prob tal 
+     *       que sería el numero de casos favorables entre todos los posibles resultados del experimento.
+     *   
+     *       En el primer caso tendríamos 1/12 de probabilidad(8.33%). Escogemos un posible valor
+     *       en nuestros caso el 0(nos genera numeros de 0 - 11) entre todos los posibles valores generados.
+     *   
+     *       La probabilidad de cumplir esa condicion es de un 8.33%
+     *   
+     *       Id_pociones: 0 == hp
+     *                    1 == velo
+     *                    2 == exp
+     *                    3 == Invulnerabilidad
+     *                    4 == Fuerza
+     */
+    public void cargar_id_pociones_probabilidad(){
+        
+        //Invulnerabilidad
+        if(0 == new Random().nextInt(12)){
+            this.lista_id_pociones.add(3);
+        
+        //Fuerza
+        } else if(0 == new Random().nextInt(6)){
+            this.lista_id_pociones.add(4);
+        
+        //Velo
+        }else if(0 == new Random().nextInt(3)){
+            this.lista_id_pociones.add(1);
+        
+        //Hp
+        }else if(0 == new Random().nextInt(2)){
+            this.lista_id_pociones.add(0);
+        }
+        
+        //Exp siempre vamos a dar por abrir un cofre, lo que será aleatorio será el numero de esxp que vamos a dar
+        // Vamos a dar de 1 - 3 botellas de exp
+        int exp = (new Random().nextInt(3) +1);
+        for(int i = 0; i <exp; i++){
+            this.lista_id_pociones.add(2);
+        }
+        
+    }
+
+```
+<br />
+<div style="text-align: justify">
+ Los cofres pueden ser recogidos por el jugador una única vez, lo hará pulsando la tecla R (Recoger) siempre que esté en un área próxima al cofre.
+ Esto sea ha implementado con dos polígonos, uno para manejar las colisiones con el cofre y otro para detectar si está en un área próxima al cofre.
+</div>
+<br />
+<div style = "text-align:center">
+<img src="./img/cofre.jpg" alt="cofre" width="200"/>
+</div>
+<br />
+<br />
+<div style = "text-align:center">
+<img src="./img/cofre_usado.jpg" alt="cofre_usado" width="200"/>
+</div>
+<br />
+<div style="text-align: justify">
+Todas las pociones recogidas por el jugador se irán añadiendo al inventario. El inventario está conformado de 5 slots con capacidad de 9 pociones por slot.
+ Si el usuario recoge una poción, y el slots de ese tipo está lleno se descartará. Las pociones se pueden consumir pulsando la tecla numérica asociada al slots del inventario.
+</div>
+<br />
+<div style = "text-align:center">
+<img src="./img/inven.jpg" alt="inven" width="150"/>
+</div>
+<br />
+
+#### Personaje principal
+<br />
+<div style="text-align: justify">
+Todas las pociones recogidas por el jugador se irán añadiendo al inventario. El inventario está conformado de 5 slots con capacidad de 9 pociones por slot.
+ Si el usuario recoge una poción, y el slots de ese tipo está lleno se descartará. Las pociones se pueden consumir pulsando la tecla numérica asociada al slots del inventario.
+</div>
+<br />
 
 [Descargar versión PDF <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png" alt="pdf" width="16"/>](./data/)
 
