@@ -600,7 +600,7 @@ public class Jugador extends Ente{
         }
     }
        
-    public void addNivel(StateBasedGame game){
+    public void addNivel(StateBasedGame game) throws SlickException{
         switch(this.getNivelMapa()){
             case 1:
                 game.addState(new Nivel1(this.getNombre()));

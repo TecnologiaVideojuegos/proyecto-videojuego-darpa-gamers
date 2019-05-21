@@ -134,6 +134,9 @@ public class Nivel2 extends BasicGameState{
         //Ocultamos las habitaciones donde no está el protagonista
         this.ocultarArea();
         
+        //Historia 
+        this.imprimirHistoria();
+        
         //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
@@ -147,6 +150,7 @@ public class Nivel2 extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
+        this.controlHistoria(delta);
         menu.gestionarMenuPausa(entrada, container, game,musica);
         if(!menu.isGameOver()){
             if(!menu.isPausa()){              
@@ -217,7 +221,7 @@ public class Nivel2 extends BasicGameState{
     public void imprimirHistoria(){
         
         if(this.estado_historia){
-            this.sprite_historia.draw(100.0f, 546.0f);
+            this.sprite_historia.draw(300.0f, 200.0f);
         }
     
     }
