@@ -288,7 +288,7 @@ public class DatosNivel {
         
         //Datos de los puntos de respawn al entrar en la escena o punto donde aparecerá en la siguiente escena
         //Cuando sale de la escena a la anterior, registra la posición en escena
-        Punto[] salida = {new Punto(413,562),new Punto(106,309),new Punto(106,309)};
+        Punto[] salida = {new Punto(413,562),new Punto(61,180),new Punto(106,309)};
         for(int i = 0;i<(numEscenas-1);i++){
             salidas[i] = salida[i];
         }
@@ -296,7 +296,7 @@ public class DatosNivel {
         //Datos de los polígonos de entrada
         float[] polEntEsc1 = {450,257,510,257,510,273,450,273}; //se almacena los polígonos para acceder al siguiente escenario
         float[] polEntEsc2 = {988,159,988,227,972,227,972,159};
-        float[] polEntEsc3 = {959,320,992,320,992,351,959,351};
+        float[] polEntEsc3 = {954,386,954,454,939,454,939,386};
         float[] polEntEsc4 = {959,320,992,320,992,351,959,351};
         
         float[][] datosEntrada = {polEntEsc1,polEntEsc2,polEntEsc3,polEntEsc4}; //se guardan los puntos de entrada
@@ -307,7 +307,7 @@ public class DatosNivel {
         //Datos de los polígonos de salida
         float[] polSalEsc1 = {0,0};
         float[] polSalEsc2 = {381,609,381,593,450,593,450,609};
-        float[] polSalEsc3 = {988,159,988,227,972,227,972,159};  
+        float[] polSalEsc3 = {32,160,46,160,46,229,32,229};  
         float[] polSalEsc4 = {66,256,82,256,82,422,66,422};
         
         float[][] datosSalida = {polSalEsc1,polSalEsc2,polSalEsc3,polSalEsc4}; //se guardan los puntos de salida
@@ -319,7 +319,8 @@ public class DatosNivel {
         float[] pozo1 = {129,289,223,290,222,414,191,415,190,511,95,510,95,322,129,319,129,289};
         float[] pozo2 = {513,225,733,225,733,320,513,320};
         float[] pozo3 = {674,385,894,387,894,476,866,476,866,574,769,574,766,512,674,512,674,385};
-        float [][][] objetos = {{},{pozo1,pozo2,pozo3},{},{}};
+        float[] pared = {159,421,224,418,224,545,159,543};
+        float [][][] objetos = {{},{pozo1,pozo2,pozo3},{pared},{}};
         for(int i=0;i<numEscenas;i++){
             mapa_objetos.add((new ArrayList<>()));//añadimos tantos arrayList como numEscenas haya (inicialmente están vacíos).
             for(int a = 0;a<numObjetos[i];a++){
@@ -330,8 +331,8 @@ public class DatosNivel {
         //Generador de enemigos
         Punto[] enemigosEscena1 = {new Punto(665,605), new Punto(851,649), new Punto(918,470), new Punto(556,424)};
         Punto[] enemigosEscena2 = {new Punto(533,385),new Punto(246,234),new Punto(770,202),new Punto(180,537)};
-        Punto[] enemigosEscena3 = {new Punto(408,296),new Punto(422,570),new Punto(863,301)};
-        Punto[] enemigosEscena4 = {new Punto(408,296),new Punto(422,570),new Punto(863,301)};
+        Punto[] enemigosEscena3 = {new Punto(262,375),new Punto(122,560),new Punto(521,388), new Punto(497,384)};
+        Punto[] enemigosEscena4 = {new Punto(408,296),new Punto(422,570),new Punto(863,301),new Punto(863,301)};
         
         Punto[][] enemigosNivel1 = {enemigosEscena1,enemigosEscena2,enemigosEscena3,enemigosEscena4};
         
@@ -348,7 +349,7 @@ public class DatosNivel {
         //Generador de cofres
         Punto[] loc_cofres_escena1 = {new Punto(754,548)};
         Punto[] loc_cofres_escena2 = {new Punto(612, 612),new Punto(48, 577),new Punto(45, 196),new Punto(774, 163)};
-        Punto[] loc_cofres_escena3 = {new Punto(483,98), new Punto(857,641),new Punto(778,641)};
+        Punto[] loc_cofres_escena3 = {new Punto(247,575), new Punto(731,320)};
         Punto[] loc_cofres_escena4 = {new Punto(295,517)};
         
         Punto[][] loc_cofres_escenas = {loc_cofres_escena1,loc_cofres_escena2,loc_cofres_escena3,loc_cofres_escena4};
