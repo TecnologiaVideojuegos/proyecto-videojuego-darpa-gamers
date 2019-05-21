@@ -287,7 +287,7 @@ public class DatosNivel {
         float[] escena1 = {35,544,796,544,800,577,898,577,898,481,447,481,448,256,512,257,512,416,960,418,960,510,989,510,991,612,912,613,915,735,832,735,832,679,710,679,710,736,609,733,609,605,35,606,35,544};
         float[] escena2 = {381,609,381,518,290,515,289,610,30,609,30,190,381,190,381,353,288,353,289,447,443,448,450,162,988,157,988,226,866,226,866,319,959,321,960,642,544,642,544,512,451,512,451,609,381,609};
         float[] escena3 = {32,160,161,160,161,349,287,349,287,320,384,320,384,349,417,349,417,320,545,320,547,349,577,349,577,320,641,320,641,349,670,349,670,320,766,320,766,352,831,352,831,384,955,384,955,454,865,454,865,510,705,510,705,480,676,480,676,512,576,512,576,481,549,481,549,512,289,513,289,608,95,608,95,231,32,231,32,160};
-        float[] escena4 = {64,384,320,384,352,384,352,512,352,576,544,544,576,512,640,512,672,512,672,544,736,544,736,512,768,512,800,512,800,640,768,704,768,640,576,640,576,608,288,608,288,448,64,448,64,384};
+        float[] escena4 = {64,384,320,384,352,384,352,512,352,544,576,544,576,512,640,512,672,512,672,544,736,544,736,512,768,512,800,512,800,672,768,704,768,640,576,640,576,608,288,608,288,448,64,448,64,384};
         float[][] datosMapa = {escena1,escena2,escena3,escena4}; //se guardan los puntos del mapa
         for(int i = 0;i<numEscenas;i++){
             mapas[i] = datosMapa[i];
@@ -302,7 +302,7 @@ public class DatosNivel {
         
         //Datos de los puntos de respawn al entrar en la escena o punto donde aparecerá en la siguiente escena
         //Cuando sale de la escena a la anterior, registra la posición en escena
-        Punto[] salida = {new Punto(413,562),new Punto(61,180),new Punto(106,309)};
+        Punto[] salida = {new Punto(413,562),new Punto(61,180),new Punto(113,401)};
         for(int i = 0;i<(numEscenas-1);i++){
             salidas[i] = salida[i];
         }
@@ -311,7 +311,7 @@ public class DatosNivel {
         float[] polEntEsc1 = {450,257,510,257,510,273,450,273}; //se almacena los polígonos para acceder al siguiente escenario
         float[] polEntEsc2 = {988,159,988,227,972,227,972,159};
         float[] polEntEsc3 = {954,386,954,454,939,454,939,386};
-        float[] polEntEsc4 = {959,320,992,320,992,351,959,351};
+        float[] polEntEsc4 = {672,512,672,544,736,544,736,512};
         
         float[][] datosEntrada = {polEntEsc1,polEntEsc2,polEntEsc3,polEntEsc4}; //se guardan los puntos de entrada
         for(int i = 0;i<numEscenas;i++){
@@ -322,7 +322,7 @@ public class DatosNivel {
         float[] polSalEsc1 = {0,0};
         float[] polSalEsc2 = {381,609,381,593,450,593,450,609};
         float[] polSalEsc3 = {32,160,46,160,46,229,32,229};  
-        float[] polSalEsc4 = {66,256,82,256,82,422,66,422};
+        float[] polSalEsc4 = {64,384,64,448,80,448,80,384};
         
         float[][] datosSalida = {polSalEsc1,polSalEsc2,polSalEsc3,polSalEsc4}; //se guardan los puntos de salida
         for(int i = 0;i<numEscenas;i++){
