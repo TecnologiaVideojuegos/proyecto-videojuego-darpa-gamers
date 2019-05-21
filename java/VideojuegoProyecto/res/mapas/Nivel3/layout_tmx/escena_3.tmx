@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" source="../resources_tsx/casa_madera.tsx"/>
+ <tileset firstgid="118" source="../resources_tsx/city_outside.tsx"/>
+ <tileset firstgid="550" source="../resources_tsx/desierto.tsx"/>
+ <tileset firstgid="690" source="../resources_tsx/cavern_ruins.tsx"/>
+ <tileset firstgid="1074" source="../resources_tsx/decorations.tsx"/>
+ <layer id="2" name="subsuelo" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYPAAPSYGBn2mgbPfBmi37QDaP+p/hP8vMEH41MDEAmT/izND+F5MEJoSfJFIN1DLv3pQd8PYEszE+59WmJi4oNSf+DDMHYT8D4t/WoQBMfEPS//k+BGXHi8i0x82/3vTye/ofiYn/1IK0N3sRYLbR8EoGGoAAJobQsAADAAA
+  </data>
+ </layer>
+ <layer id="1" name="suelo" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3UTw7BQBgF8DH1PyHBikgIywoLWxyCBcKChAXCgiM4n2NYcAMLiTcxkzST+mhM2wWLXzJtM315ma+NM8bif6EZwghiDtEA82cwh6xDJsD8FayhDU3OWAu6IeV3RLbMj2hnYoLbue7hADmtf1o7ExOoc+1p/cV1xDKLOteeo38N6zpssKdgwIl/lq/621g34Ig9Kebuxl8/0+WtZ5eanIM+DIj+Yw/v/pToYss5mMCU6O9HviK+swUsif4JrJMh5Kv+RaxLPmSLXlXYwo7or+b/1XtyxFxSs+p1/tX+M+5dvnR981+n5v/Ov//3cA/ffxj5ZTkbfqoQ+X+/6QEl/5qlAAwAAA==
+  </data>
+ </layer>
+ <layer id="3" name="extras" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjADfghOKRav9AA2sW7HxkcRi7BY8cMWAfEB8g1YFUBNjs/8OCn4+ePgipJ9V+Hlb8fJDd/Ky45dH5tAAbmDHFHpPgb0KAkwEznDmh9t4A4ptAfIsZuzvIAexAzIHDDejgA9DOj0D8iUp2kwLQ/Ust/5MK+NHS2H8qxv0oGAWjYPgCACLQWC8ADAAA
+  </data>
+ </layer>
+</map>

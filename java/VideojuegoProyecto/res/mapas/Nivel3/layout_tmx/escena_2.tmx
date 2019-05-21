@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" source="../resources_tsx/casa_madera.tsx"/>
+ <tileset firstgid="118" source="../resources_tsx/build_atlas.tsx"/>
+ <tileset firstgid="1142" source="../resources_tsx/desierto.tsx"/>
+ <tileset firstgid="1282" source="../resources_tsx/city_outside.tsx"/>
+ <tileset firstgid="1714" source="../resources_tsx/cuarto.tsx"/>
+ <tileset firstgid="1970" source="../resources_tsx/decorations.tsx"/>
+ <tileset firstgid="2226" source="../resources_tsx/city_inside.tsx"/>
+ <layer id="3" name="subsuelo" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYOiBOhbScQ8aJscsGEA3ixiMyyxauxmG65H0kxuWlPi/F4v9pPqB2v4nJeyRw5/SuIe5hRx/UANjs5+cOMWGD5GQFgba/9jiht7hT61wJycvUuIHSvSTGv64ADX8jyuPEmM/pf4n1gxa+X8UjGwAAJiSoB0ADAAA
+  </data>
+ </layer>
+ <layer id="1" name="suelo" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu2WSwrCMBBAU4hBBUU3roSKLnXnuh5Cl7rUjaBHqBewF8jZPIwTTHAITvPTgtDFY6jNzPg6Y1EwxkTLX5EBnUS2wC6iFgf6wDCRPXCIqDUANkAvgkf25gjXJ12rBKkbd0dFgfr75plo9xe61h3uVdwdK6v/p3OyJn8EOTPNBbg27D+39ugX/nVxae2R8PTHOzTROTLA20SJ6hUB/nhueYK/iXb/kLkpFp7zl8R1qD+em2Ll8Ff3vulPvU9KHrcHof5U/6bmb/ZvDKw1+DMq79JN8zfn8dkze707Q56fiZLwdz1fV3/X3tf5T9FvmyJn9H8BH3/J6fmn4vP9Q51amuMJbvc9AwAMAAA=
+  </data>
+ </layer>
+ <layer id="2" name="extras" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjgHRQzsLAUM0CoUF4KhBPA+LpQFyBhJHFq6BqW1hQzWoH8juAuBMqj8yvRuPDwBY0MwYSPOOAYGQ+qWAmC3Y2DMzC4V8dTgYGXSxYj5N0NxxBsuMQFvtSsPjLBWiPKxbsRob9ID/qoLkfW1gggxigulgsOA6q/zAJ6QRktxMe92+nUppDNwfmRxcKw49SALM/Gin8yAHkpElQPLlg8TsobE6yMzAkAdNeIxALshPvD1LTJDb7QeAm1M6JQPvNCVuP1X5iwhSWlmHqCKV9QuaAcBSSn0Dl0hE6lZuwMtEFzX56AZj9yGGKy370shVWzoHEjyLJmaPhwQKOkhin2Mp2UsAdRgQeBUMbAAApAhBPAAwAAA==
+  </data>
+ </layer>
+</map>
