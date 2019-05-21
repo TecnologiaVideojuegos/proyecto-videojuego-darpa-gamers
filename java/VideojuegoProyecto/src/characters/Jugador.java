@@ -86,6 +86,12 @@ public class Jugador extends Ente{
     //Sonido de disparo
     private final Sound hit;
     
+    //Sonido de dañ a monstruo
+    private final Sound danyo;
+    
+    //Sonido cuando el mosntruo muere
+    private final Sound mata;
+    
     /**
      * Constructor de la clase Jugador
      * 
@@ -124,6 +130,8 @@ public class Jugador extends Ente{
         this.state_estatico = true;
         this.recibirDanyo = new Sound("./res/audio/sounds/recibirDanyo.ogg");
         this.hit = new Sound("./res/audio/sounds/rlaunch.ogg");
+        this.danyo = new Sound("./res/audio/sounds/danyoEnemigo.ogg");
+        this.mata = new Sound("./res/audio/sounds/muerteEnemigo.ogg");
     }
     
     /**
@@ -705,6 +713,7 @@ public class Jugador extends Ente{
                     this.getVarita().getFlecha().getFlechas().remove(j);
                     mon.get(i).setHp(mon.get(i).getHp()- super.getDanyo());
                     mon.get(i).setComportamiento("Perseguir");
+                    danyo.play(1.0f,0.5f);
                 }           
                 if(mon.get(i).getHp()<=0){
                     //Pintar restos
@@ -715,7 +724,7 @@ public class Jugador extends Ente{
                     this.varita.addMunicion(random.nextInt(50));
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[5]);
                     this.anadirExperiencia((int)Math.sqrt((double)mon.get(i).getDanyo()) + 15*this.nivelJugador);
-                    
+                    mata.play(1.0f,0.5f);
                     mon.remove(i);
                     break;
                 }

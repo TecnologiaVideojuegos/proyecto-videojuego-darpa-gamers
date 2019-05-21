@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import location.*;
 import map.Escena;
 import menu.MenuPauseGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
 /**
@@ -24,10 +21,12 @@ public class ControladorFlechas {
     
     private final ArrayList<SpriteMovil> flechas;
     private final ArrayList<Rectangle> colisiones;
+    private final Sound colision;
 
-    public ControladorFlechas() {
+    public ControladorFlechas() throws SlickException{
         this.flechas = new ArrayList<>();
         this.colisiones = new ArrayList<>();
+        this.colision = new Sound("./res/audio/sounds/colision.ogg");
     }
       
     /**
@@ -73,15 +72,19 @@ public class ControladorFlechas {
     public void delete(GameContainer container,Escena escena,int delta){
         for(int i = 0;i<flechas.size();i++){
             if(flechas.get(i).getPosicion().getX()>container.getWidth() || flechas.get(i).getPosicion().getX()<0){
+                colision.play(1.0f,0.5f);
                 flechas.remove(i);
                 colisiones.remove(i);
             }else if(flechas.get(i).getPosicion().getY()>container.getHeight() || flechas.get(i).getPosicion().getY()<0){
+                colision.play(1.0f,0.5f);
                 flechas.remove(i);
                 colisiones.remove(i);
             }else if(colisiones.get(i).intersects(escena.getMapa_colision())){
+                colision.play(1.0f,0.5f);
                 flechas.remove(i);
                 colisiones.remove(i);
             }else if(!escena.getMapa_colision().contains(colisiones.get(i))){
+                colision.play(1.0f,0.5f);
                 flechas.remove(i);
                 colisiones.remove(i);
             }
