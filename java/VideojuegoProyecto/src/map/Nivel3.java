@@ -8,6 +8,7 @@ package map;
 import characters.Jugador;
 import data_level.DatosNivel;
 import exception_serialization.*;
+import graphic.Historia;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +54,9 @@ public class Nivel3 extends BasicGameState{
     //Reloj para controlar movimiento
     private int reloj;
     
+    //Historia
+    private Historia historia3;
+    
     private MenuPauseGame menu;
     
     private AlmacenarAvatar mapa =  new AlmacenarAvatar();
@@ -62,7 +66,10 @@ public class Nivel3 extends BasicGameState{
      * 
      * @param nombre
      */
-    public Nivel3(String nombre){
+    public Nivel3(String nombre) throws SlickException{
+        //Historia
+        this.historia3 = new Historia(new Punto(105,462), 8000, new Image("./res/grafico/historia/Dialogo3.png"));
+        
         datos.datosNivel3();
         j = mapa.cargarDatos(3).get(nombre).devolverJugador(datos);
         for(int i = 0;i<numEscenas;i++){
@@ -110,6 +117,9 @@ public class Nivel3 extends BasicGameState{
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
         } 
         
+        //Historia 
+        this.historia3.imprimirHistoria();
+        
         //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
@@ -123,6 +133,8 @@ public class Nivel3 extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
+        
+        this.historia3.controlHistoria(delta);
         menu.gestionarMenuPausa(entrada, container, game,musica);
         if(!menu.isGameOver()){
             if(!menu.isPausa()){        

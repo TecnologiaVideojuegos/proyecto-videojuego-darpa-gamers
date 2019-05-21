@@ -8,8 +8,10 @@ package map;
 import characters.Jugador;
 import data_level.DatosNivel;
 import exception_serialization.*;
+import graphic.Historia;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import location.Punto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -24,8 +26,15 @@ public class NivelFinal extends BasicGameState{
     private Music musica;
     private DatosNivel datos;
     private Jugador j;
+    
+    //Historia 
+    private Historia historia_final;
 
-    public NivelFinal(String nombre) {
+    public NivelFinal(String nombre) throws SlickException {
+        //Historia
+        this.historia_final = new Historia(new Punto(300,200),10000, new Image("./res/grafico/historia/Dialogo_final.png"));
+        
+        
         datos = new DatosNivel();
         datos.datosNivel3();
         j = mapa.cargarDatos(3).get(nombre).devolverJugador(datos);
@@ -61,11 +70,12 @@ public class NivelFinal extends BasicGameState{
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         j.imprimirJugador();
+        this.historia_final.imprimirHistoria();
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-        
+        this.historia_final.controlHistoria(delta);
     }
     
     @Override
