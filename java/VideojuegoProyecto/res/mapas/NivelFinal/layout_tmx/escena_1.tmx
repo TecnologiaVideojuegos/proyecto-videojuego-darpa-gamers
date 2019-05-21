@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
  <tileset firstgid="1" source="../resources_tsx/casa_madera.tsx"/>
  <tileset firstgid="118" source="../resources_tsx/obj_misk_atlas.tsx"/>
  <tileset firstgid="1142" source="../resources_tsx/cuarto.tsx"/>
  <tileset firstgid="1398" source="../resources_tsx/city_inside.tsx"/>
+ <tileset firstgid="1782" source="../../../../../../grafico/mapas/Nivel3/resources_tsx/niña.tsx"/>
  <layer id="1" name="suelo" width="32" height="24">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACmNjYGBgG8WjmATMCMSsBDALDe3nAmI+ApiXhvbbAbExAWw7BO0nNl5pZT+x8Uor+9HNLQd6uJIV01x62d8PtHsiFvtlgFgBigWR5ASQxOWpYP8BoN2H0OxXYkBND8o45MjJ/8SEqzYDanrQwSEHy//40jS6G4mxn1gMi398aRq9jKKm/bC4AMVPOwt2jJ5GkdMVOhYk0X5YXOiQYD+laQMXHg72k4qR420g7EcOt1H7B85+fHkaVEcAAJCxewMADAAA
@@ -17,6 +18,11 @@
  <layer id="3" name="extras 2" width="32" height="24">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACmNgGAWjYOiC2ywMDHdYBs7+10C73wyg/bQCrEiYnmAxMCyXAHEVECsBsTIQnwfi+UC8gA7hvBloxxYg7gJiJyB2BuL7QLweiDfQwf5pSHYkAdnJUP5+IH2ADvYvA9pxEoc9U4dhOqcXYGccaBfQBtiRWUC8pILdP4HpkYOVfDdQCjhZB9Z+jgGyd6gCeWB4KQxgmOkD7TYYZHEGAK7EH/cADAAA
+  </data>
+ </layer>
+ <layer id="4" name="niña" width="32" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3NOREAIBAEsK3Ov1qeDkwwR5EYSALwn1HJrL5/3Xs3/gDwygEuXbE7AAwAAA==
   </data>
  </layer>
 </map>
