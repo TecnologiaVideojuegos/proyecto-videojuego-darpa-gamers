@@ -6,6 +6,8 @@
 package materials;
 
 import characters.Jugador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import map.Escena;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -24,8 +26,12 @@ public class Varita {
     private int municion;
     
     public Varita(int municion){
-        this.municion = municion;
-        flecha = new ControladorFlechas();
+        try {
+            this.municion = municion;
+            flecha = new ControladorFlechas();
+        } catch (SlickException ex) {
+            Logger.getLogger(Varita.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void dispararFlecha(Input entrada,Jugador j){
