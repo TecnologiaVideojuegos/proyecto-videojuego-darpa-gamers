@@ -80,7 +80,7 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         reloj = 0;
-        music = new Music("./res/audio/music/Waking-the-devil.ogg");
+        music = new Music("./res/audio/music/musicaNivel1.ogg");
         menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
