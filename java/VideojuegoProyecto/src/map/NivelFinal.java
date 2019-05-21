@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import location.Punto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+import org.newdawn.slick.tiled.TiledMap;
 
 /**
  *
@@ -21,8 +22,9 @@ import org.newdawn.slick.state.*;
  */
 public class NivelFinal extends BasicGameState{
 
-    
+    private TiledMap map;
     private AlmacenarAvatar mapa = new AlmacenarAvatar();
+    private AlmacenarAvatar mapa1 = new AlmacenarAvatar();
     private Music musica;
     private DatosNivel datos;
     private Jugador j;
@@ -30,36 +32,27 @@ public class NivelFinal extends BasicGameState{
     //Historia 
     private Historia historia_final;
 
-    public NivelFinal(String nombre) throws SlickException {
-        //Historia
-        this.historia_final = new Historia(new Punto(300,200),10000, new Image("./res/grafico/historia/Dialogo_final.png"));
-        
-        
-        datos = new DatosNivel();
-        datos.datosNivel3();
-        j = mapa.cargarDatos(3).get(nombre).devolverJugador(datos);
-        mapa.cargarNombres();
+    
+     public NivelFinal(String nombre) {
+        Jugador j = mapa1.cargarDatos(3).get(nombre).devolverJugador();
+        try{
+            map = new TiledMap("./res/mapas/Nivel2/layout_tmx/escena_1.tmx","./res/mapas/NivelFinal/resources_tsx");
+            musica = new Music("./res/audio/music/calm.ogg");
+            mapa.cargarNombres();
             if(mapa.getNombres().size() == 0){
-            try {
                 mapa.meterNombre(new Info_Jugador(j));
                 mapa.guardarNombre();
-            } catch (SlickException ex) {
-                Logger.getLogger(NivelFinal.class.getName()).log(Level.SEVERE, null, ex);
-            }
                     }
             for(int i = 0;i< mapa.getNombres().size();i++){
                 if(!mapa.getNombres().get(i).getNombre().equals(nombre)){
-                    try {
                         mapa.meterNombre(new Info_Jugador(j));
                         mapa.guardarNombre();
-                        break;
-                    } catch (SlickException ex) {
-                        Logger.getLogger(NivelFinal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                        break;    
                 }
             }
+        }catch(SlickException ex){}
+        musica.loop();
     }
-    
     
     
     @Override

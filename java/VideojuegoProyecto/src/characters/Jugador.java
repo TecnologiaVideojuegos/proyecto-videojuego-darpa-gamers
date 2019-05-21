@@ -584,7 +584,11 @@ public class Jugador extends Ente{
                     alm.guardarDatos(this.getNivelMapa());
                     this.addNivel(game);
                     musica.stop();
-                    game.enterState(this.getNivelMapa(),FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                    if(this.nivelMapa==4){
+                        game.enterState(this.getNivelMapa(),FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                    }else{
+                        game.enterState(this.getNivelMapa(),FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
+                    }
                 } catch (SlickException ex) {
                     Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {

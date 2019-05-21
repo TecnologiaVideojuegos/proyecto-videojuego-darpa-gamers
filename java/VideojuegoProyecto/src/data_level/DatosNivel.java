@@ -76,21 +76,7 @@ public class DatosNivel {
         this.enemigos = new ArrayList<>();
         this.cofres_escenas = new ArrayList<>();
     }
-    
-    public DatosNivel(){
-        this.numEscenas = 0;
-        mapas = null;
-        poligonosDeEntrada = null;
-        poligonosDeSalida = null;
-        this.numObjetos = null;
-        this.numEnemigos = null;
-        this.numCofres = null;
-        this.entradas = null;
-        this.salidas = null;
-        this.mapa_objetos = new ArrayList<>();
-        this.enemigos = new ArrayList<>();
-        this.cofres_escenas = null;
-    }
+   
     
     /**
      * Carga todos los datos referidos al nivel 1

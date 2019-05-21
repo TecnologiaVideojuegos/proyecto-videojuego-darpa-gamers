@@ -10,6 +10,7 @@ import data_level.DatosNivel;
 import graphic.Animacion;
 import java.io.Serializable;
 import java.util.ArrayList;
+import location.Punto;
 import materials.Objeto;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -61,6 +62,21 @@ public class Info_Jugador implements Serializable{
         return j;
     }
 
+    public Jugador devolverJugador(){
+        Jugador j = null;
+        
+        try{
+            j = new Jugador(this.getNombre(),this.getHp(),new Punto(0,0),this.getVelocidad(),0,this.getMunicion(),this.getDanyo(),this.getNivelMapaActual());            
+            j.setExperiencia(this.getExperiencia());
+            j.setNivelMapaMax(this.getNivelMapaMax());          
+            j.setNivelJugador(this.getNivelJugador());            
+            j.getInventario().setInventario(this.getInventario());
+            j.getHud().setNumCorazonesMin(this.getNumCorazonesMin());
+            j.setAnimacion_jugador(new Animacion((new SpriteSheet("./res/grafico/personaje/lvl" + this.getNivelJugador() + "_spritesheet.png",44,50)), 6));
+        }catch(SlickException ex){}
+        return j;
+    }
+    
     public int getNumCorazonesMin() {
         return numCorazonesMin;
     }
