@@ -14,7 +14,12 @@ Cualquier duda que no esté resuelta en los Issues, puede abrir un ticket en los
 
 Si lo prefiere, puede ponerse en contacto con el Jefe del proyecto via email(Unicamente cuestiones importantes).
 
- - [Email de contacto](davidcawork.social@gmail.com)
+<details><summary>Email de contacto</summary>
+<p>
+davidcawork.social@gmail.com
+</p>
+</details>
+
 
 ----
 
