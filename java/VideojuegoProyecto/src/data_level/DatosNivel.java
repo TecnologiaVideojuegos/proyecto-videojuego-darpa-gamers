@@ -270,7 +270,7 @@ public class DatosNivel {
     public void datosNivel3(){
         //Datos de los mapas
         float[] escena1 = {35,544,796,544,800,577,898,577,898,481,447,481,448,256,512,257,512,416,960,418,960,510,989,510,991,612,912,613,915,735,832,735,832,679,710,679,710,736,609,733,609,605,35,613,35,544};
-        float[] escena2 = {35,256,62,256,62,285,223,285,223,255,320,255,320,285,350,285,350,160,129,160,129,93,448,93,448,158,417,158,417,287,575,287,575,163,542,163,542,64,604,64,604,96,734,96,734,156,639,156,639,288,769,288,769,256,930,256,930,419,895,419,896,383,544,381,544,512,605,514,603,532,639,532,639,513,710,513,710,580,288,580,288,514,476,514,476,382,65,384,65,416,35,416,35,256};
+        float[] escena2 = {381,609,381,518,290,515,289,610,30,609,30,190,381,190,381,353,288,353,289,447,443,448,450,162,988,157,988,226,866,226,866,319,959,321,960,642,544,642,544,512,451,512,451,609,381,609};
         float[] escena3 = {68,255,106,256,106,273,545,273,545,289,573,287,573,162,355,162,355,129,324,127,323,97,619,97,619,112,662,112,662,156,641,156,641,287,668,287,668,273,917,273,919,255,993,258,992,414,932,414,932,390,890,390,890,348,453,348,453,542,638,542,641,580,729,580,729,576,897,576,897,671,771,671,771,640,576,640,576,580,545,580,545,606,381,606,381,352,110,352,110,412,65,412,65,255};
         float[] escena4 = {68,255,106,256,106,273,545,273,545,289,573,287,573,162,355,162,355,129,324,127,323,97,619,97,619,112,662,112,662,156,641,156,641,287,668,287,668,273,917,273,919,255,993,258,992,414,932,414,932,390,890,390,890,348,453,348,453,542,638,542,641,580,729,580,729,576,897,576,897,671,771,671,771,640,576,640,576,580,545,580,545,606,381,606,381,352,110,352,110,412,65,412,65,255};
         
@@ -288,7 +288,7 @@ public class DatosNivel {
         
         //Datos de los puntos de respawn al entrar en la escena o punto donde aparecerá en la siguiente escena
         //Cuando sale de la escena a la anterior, registra la posición en escena
-        Punto[] salida = {new Punto(68,326),new Punto(106,309),new Punto(106,309)};
+        Punto[] salida = {new Punto(413,562),new Punto(106,309),new Punto(106,309)};
         for(int i = 0;i<(numEscenas-1);i++){
             salidas[i] = salida[i];
         }
@@ -306,7 +306,7 @@ public class DatosNivel {
         
         //Datos de los polígonos de salida
         float[] polSalEsc1 = {0,0};
-        float[] polSalEsc2 = {33,256,49,256,49,419,33,419};
+        float[] polSalEsc2 = {381,609,381,593,450,593,450,609};
         float[] polSalEsc3 = {988,159,988,227,972,227,972,159};  
         float[] polSalEsc4 = {66,256,82,256,82,422,66,422};
         
@@ -316,8 +316,10 @@ public class DatosNivel {
         }
         
         //Datos de los objetos del nivel
-        //float[] pozo = {288,300,541,300,541,351,288,343};
-        float [][][] objetos = {{},{},{},{}};
+        float[] pozo1 = {129,289,223,290,222,414,191,415,190,511,95,510,95,322,129,319,129,289};
+        float[] pozo2 = {513,225,733,225,733,320,513,320};
+        float[] pozo3 = {674,385,894,387,894,476,866,476,866,574,769,574,766,512,674,512,674,385};
+        float [][][] objetos = {{},{pozo1,pozo2,pozo3},{},{}};
         for(int i=0;i<numEscenas;i++){
             mapa_objetos.add((new ArrayList<>()));//añadimos tantos arrayList como numEscenas haya (inicialmente están vacíos).
             for(int a = 0;a<numObjetos[i];a++){
@@ -327,7 +329,7 @@ public class DatosNivel {
         
         //Generador de enemigos
         Punto[] enemigosEscena1 = {new Punto(665,605), new Punto(851,649), new Punto(918,470), new Punto(556,424)};
-        Punto[] enemigosEscena2 = {new Punto(586,337),new Punto(452,541),new Punto(225,114),new Punto(812,320)};
+        Punto[] enemigosEscena2 = {new Punto(533,385),new Punto(246,234),new Punto(770,202),new Punto(180,537)};
         Punto[] enemigosEscena3 = {new Punto(408,296),new Punto(422,570),new Punto(863,301)};
         Punto[] enemigosEscena4 = {new Punto(408,296),new Punto(422,570),new Punto(863,301)};
         
@@ -345,7 +347,7 @@ public class DatosNivel {
         
         //Generador de cofres
         Punto[] loc_cofres_escena1 = {new Punto(754,548)};
-        Punto[] loc_cofres_escena2 = {new Punto(357, 100),new Punto(666, 534),new Punto(551, 69),new Punto(693, 98)};
+        Punto[] loc_cofres_escena2 = {new Punto(612, 612),new Punto(48, 577),new Punto(45, 196),new Punto(774, 163)};
         Punto[] loc_cofres_escena3 = {new Punto(483,98), new Punto(857,641),new Punto(778,641)};
         Punto[] loc_cofres_escena4 = {new Punto(295,517)};
         
