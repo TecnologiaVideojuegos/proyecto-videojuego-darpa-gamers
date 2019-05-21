@@ -57,6 +57,14 @@ public class Nivel1 extends BasicGameState{
     //Música del nivel 1
     private Music music;
     
+    //Historia lvl1
+    private Image sprite_historia;
+    private long timer_historia;
+    private boolean estado_historia;
+    
+    
+    
+    
     private AlmacenarAvatar mapa =  new AlmacenarAvatar();
     
     /**
@@ -64,7 +72,12 @@ public class Nivel1 extends BasicGameState{
      * 
      * @param nombre
      */
-    public Nivel1(String nombre){
+    public Nivel1(String nombre) throws SlickException{
+        //Historia
+        this.estado_historia = true;
+        this.timer_historia = 0;
+        this.sprite_historia = new Image("./res/grafico/historia/Dialogo1.png");
+        
         datos.datosNivel1();
         j = mapa.cargarDatos(1).get(nombre).devolverJugador(datos);
         for(int i = 0;i<numEscenas;i++){
@@ -114,6 +127,9 @@ public class Nivel1 extends BasicGameState{
             escenas.get(j.getEscenario()).getEnemigos().get(i).imprimirEnemigo();
         }  
         
+        //Historia
+        this.imprimirHistoria();
+        
         //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
         j.getHud().imprimirCorazones();
@@ -121,11 +137,15 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
+        
+        
+        
         menu.mostrarMenu(g,j,escenas);
     }
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
+        this.controlHistoria(delta);
         menu.gestionarMenuPausa(entrada, container, game,music);
         if(!menu.isGameOver()){
             if(!menu.isPausa()){
@@ -158,6 +178,39 @@ public class Nivel1 extends BasicGameState{
     @Override
     public int getID() {
         return 1;
+    }
+    
+    /**
+     * 
+     * Metodo para imprimir la historia 
+     * 
+     */
+    public void imprimirHistoria(){
+        
+        if(this.estado_historia){
+            this.sprite_historia.draw(100.0f, 546.0f);
+        }
+    
+    }
+    
+    /**
+     * 
+     * Metodo para controlar la historia del nivel
+     * 
+     * @param delta tiempo desde el último update
+     */
+    public void controlHistoria(int delta){
+        
+        if(this.estado_historia){
+            
+            this.timer_historia += delta ;
+            
+           
+            if( this.timer_historia > 8000){
+                this.estado_historia = false;
+                
+            }
+        }
     }
        
 }
