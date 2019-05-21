@@ -73,7 +73,7 @@ public class Nivel3 extends BasicGameState{
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
-                es = new Escena(new TiledMap("./res/mapas/Nivel2/layout_tmx/escena_"+(i+1)+".tmx","./res/mapas/Nivel2/resources_tsx"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
+                es = new Escena(new TiledMap("./res/mapas/Nivel3/layout_tmx/escena_"+(i+1)+".tmx","./res/mapas/Nivel3/resources_tsx"),datos.mapasNivel(i),datos.objetosNivel(i),datos.entradasNivel(i),datos.salidasNivel(i),datos.enemigosNivel(i),datos.cofresNivel(i));
                 escenas.add(es);
             } catch (SlickException ex) {
                 Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
