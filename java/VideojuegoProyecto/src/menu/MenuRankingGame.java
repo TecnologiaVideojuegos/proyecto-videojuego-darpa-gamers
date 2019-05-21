@@ -7,9 +7,7 @@ package menu;
 
 import exception_serialization.*;
 import imagen.Sprite;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import location.Punto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.*;
@@ -21,34 +19,48 @@ import org.newdawn.slick.state.*;
  */
 public class MenuRankingGame  extends BasicGameState implements ComponentListener{
     
-    private AlmacenarAvatar almacenar = new AlmacenarAvatar();;
+    private AlmacenarAvatar mapa3 = new AlmacenarAvatar();
     private Sprite marcadores,salir;
     private MouseOverArea boton;
-    private ArrayList<Info_Jugador> lista = new ArrayList<>();;
+    private ArrayList<Info_Jugador> lista = new ArrayList<>();
     private int estado = -1;
 
     public MenuRankingGame(GameContainer container) {
         try{
-            almacenar.cargarDatos(3);
-            almacenar.cargarNombres();
-            lista = almacenar.ordenarMarcador();
             marcadores = new Sprite("./res/grafico/game_utils/marcadores.png");
             salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,610));
             boton = new MouseOverArea(container,salir,(int)salir.getPosicion().getX(),(int)salir.getPosicion().getY(),(int)salir.getWidth(),(int)salir.getHeight(),this);
             boton.setNormalColor(new Color(1,1,1,0.7f));
             boton.setMouseOverColor(new Color(1,1,1,0.9f));
-            System.out.println(lista.size());
         }catch(SlickException ex){}
     }
     
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        mapa3.cargarDatos(3);
+        mapa3.cargarNombres();
+        lista = mapa3.ordenarMarcador();    
+        System.out.println(lista.toString());
+        for(int i = 0;i< lista.size();i++){
+            System.out.println(lista.get(i).getNombre());
+        }
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         marcadores.draw();
         boton.render(container, g);
+        if(lista.size() <= 5){
+            for(int i = 0;i < lista.size();i++){
+                g.drawString(lista.get(i).getNombre(),260,220+(i*100));
+                g.drawString(lista.get(i).getExperiencia()+"",590,220+(i*100));
+            }
+        }else{
+            for(int i = 0;i < 5;i++){
+                g.drawString(lista.get(i).getNombre(),260,220+(i*100));
+                g.drawString(lista.get(i).getExperiencia()+"",590,220+(i*100));
+            }
+        }
     }
 
     @Override
@@ -72,6 +84,11 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
     public void enter(GameContainer container,StateBasedGame game)throws SlickException{
         container.getInput().clearKeyPressedRecord();        
         init(container, game);     
+    }
+    
+    @Override
+    public void mouseClicked(int button, int x, int y, int clickCount){
+            System.out.println("Eje x: " +x + " Eje y: " + y);
     }
     
     @Override

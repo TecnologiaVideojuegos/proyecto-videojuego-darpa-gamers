@@ -14,7 +14,6 @@ import materials.Inventario;
 import location.*;
 import map.*;
 import materials.*;
-import menu.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.*;
 import org.newdawn.slick.state.*;
@@ -549,7 +548,7 @@ public class Jugador extends Ente{
      * @param escenas obtiene el último polígono adquirido en el escenario
      * @param datos
      */
-    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos,AlmacenarAvatar alm, GameContainer container,Music musica){
+    public void gestorCambiosMapas(StateBasedGame game,int numEscenarios,ArrayList<Escena> escenas,DatosNivel datos, GameContainer container,Music musica,AlmacenarAvatar alm){
         if((this.getEscenario()==(numEscenarios-1)) && this.comprobarUltimoPoligono(escenas)){
             if(escenas.get(this.getEscenario()).getEnemigos().size()==0){
                 try {
@@ -758,9 +757,9 @@ public class Jugador extends Ente{
      * @param datos datos a obtener
      * @param escena escena en el que nos encontramos
      */
-    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,AlmacenarAvatar alm,Music musica){
+    public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,Music musica,AlmacenarAvatar alm){
         this.corregirBug(escena.get(this.getEscenario()));
-        this.gestorCambiosMapas(game, numEscenas, escena, datos,alm, container,musica);
+        this.gestorCambiosMapas(game, numEscenas, escena, datos, container,musica,alm);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());
         this.controlDeTeclado(delta, entrada, escena);
         this.controlDeProyectil(entrada, container,escena.get(this.getEscenario()), delta);

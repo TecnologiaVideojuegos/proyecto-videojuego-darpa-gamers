@@ -16,14 +16,12 @@ import java.util.logging.Logger;
  */
 public class AlmacenarAvatar{
     
-    private HashMap<String,Info_Jugador> jugadores;
-    private ArrayList<String> nombres;
-    
-    public AlmacenarAvatar(){
-        this.jugadores = new HashMap<>();
-        this.nombres = new ArrayList<>();
+    private HashMap<String,Info_Jugador> jugadores = new HashMap<>();
+    private ArrayList<String> nombres = new ArrayList<>();
+
+    public AlmacenarAvatar() {
     }
-    
+  
     /**
      * Añade un jugador a la lista
      * 
@@ -129,7 +127,7 @@ public class AlmacenarAvatar{
      * Método para cargar los nombres registrados
      * @return dni
      */
-    public ArrayList cargarNombres(){  //cargamos los datos de un archivo para obtener los dni de los jugadores registrados
+    public ArrayList<String> cargarNombres(){  //cargamos los datos de un archivo para obtener los dni de los jugadores registrados
         try{
         ObjectInputStream subida = new ObjectInputStream(new FileInputStream("./level_saves/nombres.dat"));
         while(true){
@@ -137,11 +135,8 @@ public class AlmacenarAvatar{
         }
         }catch(EOFException e){
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(AlmacenarAvatar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(AlmacenarAvatar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AlmacenarAvatar.class.getName()).log(Level.SEVERE, null, ex);
         }
         return nombres;
     }
@@ -166,6 +161,7 @@ public class AlmacenarAvatar{
             }
         };
         Collections.sort(Jug,PuntDeJug);
+        System.out.println(Jug.toString());
         return Jug;  
     }
     

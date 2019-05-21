@@ -5,6 +5,7 @@
  */
 package menu;
 
+import exception_serialization.AlmacenarAvatar;
 import imagen.Sprite;
 import location.Punto;
 import org.newdawn.slick.*;

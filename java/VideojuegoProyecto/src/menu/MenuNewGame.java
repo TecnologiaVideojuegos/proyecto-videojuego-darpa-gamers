@@ -27,16 +27,14 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
     private TextField name;
     /** The name value */
     private String nameValue = "none";
-    private AlmacenarAvatar almacenar;
     private int estado = -1;
     private final MouseOverArea[] botones = new MouseOverArea[2];
     private final Notificaciones notif;
     private Music musica;
+    private AlmacenarAvatar mapa1 = new AlmacenarAvatar();
     
     public MenuNewGame(GameContainer gc,Music musica) throws SlickException{
         this.musica = musica;
-        almacenar = new AlmacenarAvatar();
-        almacenar.cargarDatos(1);
         name = new TextField(gc,gc.getDefaultFont(),120+166,80+141,440,65,this);
         notif = new Notificaciones(3000);
         
@@ -55,15 +53,17 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
             botones[i].setNormalColor(new Color(1,1,1,0.7f));
             botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
         }
-    }
-    
-    @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         name.setBackgroundColor(Color.transparent);
         name.setTextColor(Color.darkGray);
         name.setBorderColor(Color.transparent);
         name.setText("");
         name.setAcceptingInput(true);
+        System.out.println(mapa1.getMostrar());
+    }
+    
+    @Override
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+        
     }
 
     @Override
@@ -95,9 +95,9 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
             estado = -1;
             if(!nameValue.equals("none")){
                 Jugador j = new Jugador(nameValue,200,new Punto(230,200),100,0,20,50,1);
-                if(almacenar.altaJugador(new Info_Jugador(j))){
+                if(mapa1.altaJugador(new Info_Jugador(j))){
                     name.setText("");
-                    almacenar.guardarDatos(1);
+                    mapa1.guardarDatos(1);
                     game.addState(new MenuSelectLevelGame(gc,j.getNombre(),musica));
                     game.enterState(-4);
                 }else{

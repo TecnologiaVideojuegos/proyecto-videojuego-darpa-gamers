@@ -57,7 +57,8 @@ public class Nivel1 extends BasicGameState{
     //Música del nivel 1
     private Music music;
     
-    private AlmacenarAvatar almacenar = new AlmacenarAvatar();
+    private AlmacenarAvatar mapa =  new AlmacenarAvatar();
+    
     /**
      * Constructor de la clase Nivel1
      * 
@@ -65,7 +66,7 @@ public class Nivel1 extends BasicGameState{
      */
     public Nivel1(String nombre){
         datos.datosNivel1();
-        j = almacenar.cargarDatos(1).get(nombre).devolverJugador(datos);
+        j = mapa.cargarDatos(1).get(nombre).devolverJugador(datos);
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
@@ -128,7 +129,7 @@ public class Nivel1 extends BasicGameState{
         menu.gestionarMenuPausa(entrada, container, game,music);
         if(!menu.isGameOver()){
             if(!menu.isPausa()){
-                j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,music);
+                j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,music,mapa);
             }
         }else{
             j.setPunto(new Punto());

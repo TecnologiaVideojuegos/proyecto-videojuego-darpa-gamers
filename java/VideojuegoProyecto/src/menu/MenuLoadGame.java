@@ -23,21 +23,20 @@ import org.newdawn.slick.state.*;
  */
 public class MenuLoadGame extends BasicGameState implements ComponentListener{
 
+    private AlmacenarAvatar mapa1 = new AlmacenarAvatar();
     private final MouseOverArea[] botones = new MouseOverArea[2];
     private Sprite fondo,jugar,salir,menu_nombre;
     /** The field taking the name */
     private TextField name;
     /** The name value */
     private String nameValue = "none";
-    private AlmacenarAvatar almacenar;
     private int estado = -1;
     private final Notificaciones notif;
     private Music musica;
 
     public MenuLoadGame(GameContainer container,Music musica) throws SlickException {
         this.musica = musica;
-        almacenar = new AlmacenarAvatar();
-        almacenar.cargarDatos(1);
+        mapa1.cargarDatos(1);
         name = new TextField(container,container.getDefaultFont(),120+166,80+141,440,65,this);
         notif = new Notificaciones(3000);
         try {
@@ -53,18 +52,19 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
         for(int i = 0;i<botones.length;i++){
             botones[i].setNormalColor(new Color(1,1,1,0.7f));
             botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
-        }     
+        }    
+        name.setBackgroundColor(Color.transparent);
+        name.setTextColor(Color.darkGray);
+        name.setBorderColor(Color.transparent);
+        name.setText("");
+        name.setAcceptingInput(true);
+        System.out.println(mapa1.getMostrar());
     }
     
     
     
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        name.setBackgroundColor(Color.transparent);
-        name.setTextColor(Color.darkGray);
-        name.setBorderColor(Color.transparent);
-        name.setText("");
-        name.setAcceptingInput(true);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class MenuLoadGame extends BasicGameState implements ComponentListener{
             estado = -1;
             if(!nameValue.equals("none")){
                Jugador j = new Jugador(nameValue,200,new Punto(230,200),100,0,20,50,1);
-                if(almacenar.getMostrar().containsKey(nameValue)){
+                if(mapa1.getMostrar().containsKey(nameValue)){
                     name.setText("");
                     game.addState(new MenuSelectLevelGame(container,j.getNombre(),musica));
                     game.enterState(-4);

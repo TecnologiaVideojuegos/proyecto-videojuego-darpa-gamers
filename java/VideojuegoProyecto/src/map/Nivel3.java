@@ -55,7 +55,8 @@ public class Nivel3 extends BasicGameState{
     
     private MenuPauseGame menu;
     
-    private AlmacenarAvatar almacenar = new AlmacenarAvatar();
+    private AlmacenarAvatar mapa =  new AlmacenarAvatar();
+    
     /**
      * Constructor de la clase Nivel1
      * 
@@ -63,11 +64,12 @@ public class Nivel3 extends BasicGameState{
      */
     public Nivel3(String nombre){
         datos.datosNivel3();
-        j = almacenar.cargarDatos(3).get(nombre).devolverJugador(datos);
+        j = mapa.cargarDatos(3).get(nombre).devolverJugador(datos);
         try{
-            almacenar.meterNombre(new Info_Jugador(j));
+            mapa.cargarNombres();
+            mapa.meterNombre(new Info_Jugador(j));
+            mapa.guardarNombre();
         }catch(SlickException ex){}
-        almacenar.guardarNombre();
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
@@ -128,7 +130,7 @@ public class Nivel3 extends BasicGameState{
         menu.gestionarMenuPausa(entrada, container, game,musica);
         if(!menu.isGameOver()){
             if(!menu.isPausa()){        
-                j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,musica);
+                j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,musica,mapa);
             } 
         }else{
             j.setPunto(new Punto());
