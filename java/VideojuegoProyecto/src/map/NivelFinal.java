@@ -28,15 +28,17 @@ public class NivelFinal extends BasicGameState{
     private Music musica;
     private DatosNivel datos;
     private Jugador j;
+   
     
     //Historia 
     private Historia historia_final;
 
     
-     public NivelFinal(String nombre) {
-        Jugador j = mapa1.cargarDatos(3).get(nombre).devolverJugador();
+     public NivelFinal(String nombre) throws SlickException {
+        
+        historia_final = new Historia(new Punto(300,200),10000, new Image("./res/grafico/historia/Dialogo_final.png"));
         try{
-            map = new TiledMap("./res/mapas/Nivel2/layout_tmx/escena_1.tmx","./res/mapas/NivelFinal/resources_tsx");
+            map = new TiledMap("./res/mapas/NivelFinal/layout_tmx/escena_1.tmx","./res/mapas/NivelFinal/resources_tsx");
             musica = new Music("./res/audio/music/calm.ogg");
             mapa.cargarNombres();
             if(mapa.getNombres().size() == 0){
@@ -62,8 +64,9 @@ public class NivelFinal extends BasicGameState{
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        j.imprimirJugador();
+        
         this.historia_final.imprimirHistoria();
+        
     }
 
     @Override

@@ -85,6 +85,7 @@ public class Nivel3 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        System.out.println(j.getNivelJugador());
         reloj = 0;
         menu = new MenuPauseGame(container,j);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
