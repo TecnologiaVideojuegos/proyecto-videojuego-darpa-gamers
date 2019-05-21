@@ -83,6 +83,9 @@ public class Jugador extends Ente{
     //Sonido de recibir daño
     private final Sound recibirDanyo;
     
+    //Sonido de disparo
+    private final Sound hit;
+    
     /**
      * Constructor de la clase Jugador
      * 
@@ -120,6 +123,7 @@ public class Jugador extends Ente{
         this.animacion_jugador = new Animacion((new SpriteSheet("./res/grafico/personaje/lvl" + this.getNivelJugador() + "_spritesheet.png",44,50)), 6);
         this.state_estatico = true;
         this.recibirDanyo = new Sound("./res/audio/sounds/recibirDanyo.ogg");
+        this.hit = new Sound("./res/audio/sounds/rlaunch.ogg");
     }
     
     /**
@@ -442,6 +446,7 @@ public class Jugador extends Ente{
     public void controlDeProyectil(Input entrada,GameContainer container,Escena escena,int delta){
         this.getVarita().actualizarProyectil(container,escena, delta);
         if(entrada.isKeyPressed(Input.KEY_SPACE) && this.getVarita().getMunicion()!= 0){
+            this.hit.play();
             this.getVarita().dispararFlecha(entrada,this);
         }
     }
