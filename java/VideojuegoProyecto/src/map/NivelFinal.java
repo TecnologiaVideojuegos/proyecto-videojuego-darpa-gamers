@@ -64,7 +64,7 @@ public class NivelFinal extends BasicGameState{
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        
+        this.map.render(0,0);
         this.historia_final.imprimirHistoria();
         
     }
