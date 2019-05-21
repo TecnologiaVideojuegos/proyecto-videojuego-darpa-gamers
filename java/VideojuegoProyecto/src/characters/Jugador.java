@@ -446,7 +446,7 @@ public class Jugador extends Ente{
     public void controlDeProyectil(Input entrada,GameContainer container,Escena escena,int delta){
         this.getVarita().actualizarProyectil(container,escena, delta);
         if(entrada.isKeyPressed(Input.KEY_SPACE) && this.getVarita().getMunicion()!= 0){
-            this.hit.play();
+            this.hit.play(1.0f,0.05f);
             this.getVarita().dispararFlecha(entrada,this);
         }
     }

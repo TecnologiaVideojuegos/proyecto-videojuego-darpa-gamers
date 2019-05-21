@@ -85,8 +85,7 @@ public class Nivel1 extends BasicGameState{
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
         entrada = container.getInput(); 
-        music.setVolume(0.5f);
-        music.loop();
+        music.loop(1.0f,0.2f);
     }
 
     @Override
