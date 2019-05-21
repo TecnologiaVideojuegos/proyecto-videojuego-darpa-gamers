@@ -94,6 +94,8 @@ public class Nivel2 extends BasicGameState{
         j.getHud().iniciarJugador(j.getHp());   
         System.out.println(j.getHud().getNumCorazonesMin());
         entrada = container.getInput(); 
+        musica = new Music("./res/audio/music/musicaNivel2.ogg");
+        musica.loop(1.0f,0.2f);
     }
 
     @Override
