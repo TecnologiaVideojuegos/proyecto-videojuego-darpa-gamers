@@ -7,9 +7,6 @@ package exception_serialization;
 
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Senapi Aroal
@@ -17,7 +14,7 @@ import java.util.logging.Logger;
 public class AlmacenarAvatar{
     
     private HashMap<String,Info_Jugador> jugadores = new HashMap<>();
-    private ArrayList<String> nombres = new ArrayList<>();
+    private ArrayList<Info_Jugador> nombres = new ArrayList<>();
 
     public AlmacenarAvatar() {
     }
@@ -57,8 +54,7 @@ public class AlmacenarAvatar{
      * @param jug jugador
      */
     public void meterNombre(Info_Jugador jug){//guardamos en nif de la persona registrada
-        nombres.add(jug.getNombre());
-        System.out.println("Nombre guardado");
+        nombres.add(jug);
     }
     
 
@@ -67,7 +63,7 @@ public class AlmacenarAvatar{
      * @param jug jugador
      */
     public void eliminarNombre(Info_Jugador jug){//borramos el nif de la presona registrada
-        nombres.remove(jug.getNombre());
+        nombres.remove(jug);
         }
     
     /**
@@ -111,13 +107,18 @@ public class AlmacenarAvatar{
         
         return jugadores;  
     }
+
+    public ArrayList<Info_Jugador> getNombres() {
+        return nombres;
+    }
+
     
     /**
      * Método que guarda la información en el fichero especificado por el nivel
      * 
      */
     public void guardarNombre(){//guardamos los jugadores registrados en un archivo
-        try(ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("./level_saves/nombres.dat"))){
+        try(ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("./level_saves/ranking.dat"))){
             oos.writeObject(nombres);
         }catch(IOException io){
         }
@@ -127,9 +128,9 @@ public class AlmacenarAvatar{
      * Método para cargar los nombres registrados
      * @return dni
      */
-    public ArrayList<String> cargarNombres(){  //cargamos los datos de un archivo para obtener los dni de los jugadores registrados
+    public ArrayList<Info_Jugador> cargarNombres(){  //cargamos los datos de un archivo para obtener los dni de los jugadores registrados
         try{
-        ObjectInputStream subida = new ObjectInputStream(new FileInputStream("./level_saves/nombres.dat"));
+        ObjectInputStream subida = new ObjectInputStream(new FileInputStream("./level_saves/ranking.dat"));
         while(true){
             nombres = (ArrayList)subida.readObject();
         }
@@ -148,7 +149,7 @@ public class AlmacenarAvatar{
     public ArrayList<Info_Jugador> ordenarMarcador(){//metodo para ordenar los jugadores registrados segun las puntuaciones totales
         ArrayList<Info_Jugador> Jug= new ArrayList();
         for(int i=0;i<nombres.size();i++){
-            Jug.add(jugadores.get(nombres.get(i)));          
+            Jug.add(nombres.get(i));          
         }
         Comparator PuntDeJug = new Comparator() {
             @Override
@@ -161,7 +162,6 @@ public class AlmacenarAvatar{
             }
         };
         Collections.sort(Jug,PuntDeJug);
-        System.out.println(Jug.toString());
         return Jug;  
     }
     

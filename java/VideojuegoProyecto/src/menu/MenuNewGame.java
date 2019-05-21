@@ -52,18 +52,16 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         for(int i = 0;i<botones.length;i++){
             botones[i].setNormalColor(new Color(1,1,1,0.7f));
             botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
-        }
+        }    
+    }
+    
+    @Override
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         name.setBackgroundColor(Color.transparent);
         name.setTextColor(Color.darkGray);
         name.setBorderColor(Color.transparent);
         name.setText("");
         name.setAcceptingInput(true);
-        System.out.println(mapa1.getMostrar());
-    }
-    
-    @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        
     }
 
     @Override
