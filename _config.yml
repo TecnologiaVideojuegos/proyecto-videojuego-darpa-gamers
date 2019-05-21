@@ -13,16 +13,17 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Darpa Games
+title: "Darpa Games"
 email: davidcawork@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Web creada con el proposito de exponer información sobre el desarrollo del videojuego
-  <strong>Shiawase Story</strong>.
+  <div style="text-align: justify"> Web creada con el propósito de exponer información sobre el desarrollo del videojuego
+  <strong>Shiawase Story</strong>.</div>
+
 logo: ./img/titulo_3.png
 show_downloads: true
-baseurl: "proyecto-videojuego-darpa-gamers" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github: https://github.com/TecnologiaVideojuegos/proyecto-videojuego-darpa-gamers
+github: "https://github.com/TecnologiaVideojuegos/proyecto-videojuego-darpa-gamers"
 
 # Build settings
 markdown: kramdown
