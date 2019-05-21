@@ -51,13 +51,13 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
         boton.render(container, g);
         if(lista.size() <= 5){
             for(int i = 0;i < lista.size();i++){
-                g.drawString(lista.get(i).getNombre(),260,220+(i*100));
-                g.drawString(lista.get(i).getExperiencia()+"",590,220+(i*100));
+                g.drawString(lista.get(i).getNombre(),260,220+(i*90));
+                g.drawString(lista.get(i).getExperiencia()+"",650,220+(i*90));
             }
         }else{
             for(int i = 0;i < 5;i++){
-                g.drawString(lista.get(i).getNombre(),260,220+(i*100));
-                g.drawString(lista.get(i).getExperiencia()+"",590,220+(i*100));
+                g.drawString(lista.get(i).getNombre(),260,220+(i*90));
+                g.drawString(lista.get(i).getExperiencia()+"",650,220+(i*90));
             }
         }
     }
