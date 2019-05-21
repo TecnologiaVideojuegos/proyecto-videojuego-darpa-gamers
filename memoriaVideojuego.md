@@ -81,7 +81,7 @@ Los controles los podemos resumir en esta imagen creada e implementada dentro de
 </div>
 <br />
 <div style="text-align: justify">
-Despues de testear el juego con personas externas al desarrollo nos dimos cuenta que la utilidad de las pociones, era poco evidente y poco perceptible, por lo que hemos creado un botón que te arroje toda la información sobre las pociones. Tipo, duración, explicación, imagen de la poción entre otras coasas.
+Después de testear el juego con personas externas al desarrollo nos dimos cuenta que la utilidad de las pociones, era poco evidente y poco perceptible, por lo que hemos creado un botón que te arroje toda la información sobre las pociones. Tipo, duración, explicación, imagen de la poción entre otras cosas.
 El cuadro informativo se puede acceder a él mediante el tabulador, y no detiene el flujo de funcionamiento del nivel.
 </div>
 
@@ -313,7 +313,7 @@ Sprites utilizados para representar las notificaciones.
 <br />
 
 <div style="text-align: justify">
-Únicamente queremos añadir que el sistema de notificaciones es un sistema LIFO. El tiempo de la notificación está parametrizado en el constructor de la clase Notificaciones por lo que lo hemos podido reutilizar sin ningún tipo de problema. La gestión de los tiempos lo hemos hecho gracias al parametro delta, que nos indica el tiempo que ha trasncurrido desde la ultima vez que el nivel llamó a update. 
+Únicamente queremos añadir que el sistema de notificaciones es un sistema LIFO. El tiempo de la notificación está parametrizado en el constructor de la clase Notificaciones por lo que lo hemos podido reutilizar sin ningún tipo de problema. La gestión de los tiempos lo hemos hecho gracias al parámetro delta, que nos indica el tiempo que ha transcurrido desde la ultima vez que el nivel llamó a update. 
 </div>
 <br />
 [Más información sobre el sistema de notificaciones](https://github.com/TecnologiaVideojuegos/proyecto-videojuego-darpa-gamers/blob/master/java/VideojuegoProyecto/src/graphic/Notificaciones.java)
@@ -325,7 +325,7 @@ El juego parte de un menú de inicio que tendrá una serie de botones que nos pe
 </div>
 <br />
 <div style="text-align: justify">
-La linea lógica del juego se compone de tres niveles, en cada niveles hay una serie de escenas(Mapas), donde el jugador tendrá que ir superendolos para ganar la partida. El sistema de experiencia está pensado para incitar al jugador a re-jugar al juego una vez pasado para mejorar su marca. Esto sumado al factor RNG anteriormente descrito hace que cada partida sea un cúmulo distinto de sensaciones. 
+La linea lógica del juego se compone de tres niveles, en cada niveles hay una serie de escenas(Mapas), donde el jugador tendrá que ir superándolos para ganar la partida. El sistema de experiencia está pensado para incitar al jugador a re-jugar al juego una vez pasado para mejorar su marca. Esto sumado al factor RNG anteriormente descrito hace que cada partida sea un cúmulo distinto de sensaciones. 
 </div>
 <br />
 <br />
@@ -350,7 +350,7 @@ Las herramientas utilizadas para el montaje y edición de los fondos y sprites h
 </div>
 <br />
 <br />
-**El código está comentado con JavaDocs y organizado por paquetes**, esperamos que esté lo sufientemente limpio y claro para cualquiera que quiera hacer uso de él o colaborar en el proyecto.
+**El código está comentado con JavaDocs y organizado por paquetes**, esperamos que esté lo suficientemente limpio y claro para cualquiera que quiera hacer uso de él o colaborar en el proyecto.
 
 [Source code](https://github.com/TecnologiaVideojuegos/proyecto-videojuego-darpa-gamers/tree/master/java/VideojuegoProyecto/src)
 <br />
@@ -360,7 +360,7 @@ Las herramientas utilizadas para el montaje y edición de los fondos y sprites h
 
 <br />
 
-[Descargar versión PDF <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png" alt="pdf" width="16"/>](./data/)
+[Descargar versión PDF <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png" alt="pdf" width="16"/>](./data/MemoriaVideojuego.pdf)
 
 ----
 
