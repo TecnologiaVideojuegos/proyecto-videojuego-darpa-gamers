@@ -24,6 +24,7 @@ Si lo prefiere, puede ponerse en contacto con el Jefe del proyecto vía email(Un
 
 <br />
 
+----
 
 ### Componentes 
 
