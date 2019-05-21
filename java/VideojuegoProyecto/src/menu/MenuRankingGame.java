@@ -5,7 +5,11 @@
  */
 package menu;
 
+import exception_serialization.*;
 import imagen.Sprite;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import location.Punto;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.*;
@@ -17,8 +21,10 @@ import org.newdawn.slick.state.*;
  */
 public class MenuRankingGame  extends BasicGameState implements ComponentListener{
     
+    private AlmacenarAvatar almacenar = new AlmacenarAvatar();;
     private Sprite marcadores,salir;
     private MouseOverArea boton;
+    private ArrayList<Info_Jugador> lista = new ArrayList<>();;
     private int estado = -1;
 
     public MenuRankingGame(GameContainer container) {
@@ -28,11 +34,17 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
             boton = new MouseOverArea(container,salir,(int)salir.getPosicion().getX(),(int)salir.getPosicion().getY(),(int)salir.getWidth(),(int)salir.getHeight(),this);
             boton.setNormalColor(new Color(1,1,1,0.7f));
             boton.setMouseOverColor(new Color(1,1,1,0.9f));
+            
         }catch(SlickException ex){}
     }
     
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        almacenar.guardarDatos(3);
+            almacenar.guardarNombre();
+            almacenar.cargarDatos(3);
+            almacenar.cargarNombres();
+            lista = almacenar.ordenarMarcador();
     }
 
     @Override
@@ -56,6 +68,12 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
             default:
                 break;
         }
+    }
+    
+    @Override
+    public void enter(GameContainer container,StateBasedGame game)throws SlickException{
+        container.getInput().clearKeyPressedRecord();        
+        init(container, game);     
     }
     
     @Override
