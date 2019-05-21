@@ -8,7 +8,6 @@ package menu;
 import exception_serialization.*;
 import graphic.Notificaciones;
 import imagen.Sprite;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import location.Punto;
@@ -28,6 +27,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
     private AlmacenarAvatar mapa1 = new AlmacenarAvatar();
     private AlmacenarAvatar mapa2 = new AlmacenarAvatar();
     private AlmacenarAvatar mapa3 = new AlmacenarAvatar();
+    private AlmacenarAvatar ranking = new AlmacenarAvatar();
     private Sprite fondo,level1,level2,level3;
     private MouseOverArea[] botones = new MouseOverArea[3];
     private String nombre;
@@ -52,12 +52,10 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                 botones[i].setNormalColor(new Color(1,1,1,0.7f));
                 botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
             }
+            ranking.cargarNombres();
             mapa1.cargarDatos(1);
-            System.out.println(mapa1.toString());
             mapa2.cargarDatos(2);
-            System.out.println(mapa2.toString());
             mapa3.cargarDatos(3);
-            System.out.println(mapa3.toString());
         }catch(SlickException ex){}
     }
     
@@ -92,6 +90,7 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                             if(mapa1.getMostrar().containsKey(nombre)){
                                 mapa1.bajaJugador(mapa1.getMostrar().get(nombre));
                                 mapa1.guardarDatos(i); 
+                                
                             }
                         }
                         musica.stop();
@@ -115,7 +114,9 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                         for(int i = 3;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
                             if(mapa2.getMostrar().containsKey(nombre)){
                                 mapa2.bajaJugador(mapa2.getMostrar().get(nombre));
+                                ranking.eliminarNombre(mapa1.getMostrar().get(nombre));                                
                                 mapa2.guardarDatos(i); 
+                                ranking.guardarNombre();
                             }
                         }
                         game.addState(new Nivel2(nombre));
@@ -138,7 +139,9 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                         for(int i = 4;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
                             if(mapa3.getMostrar().containsKey(nombre)){
                                 mapa3.bajaJugador(mapa3.getMostrar().get(nombre));
+                                ranking.eliminarNombre(mapa1.getMostrar().get(nombre));                                
                                 mapa3.guardarDatos(i); 
+                                ranking.guardarNombre();
                             }
                         }
                         game.addState(new Nivel3(nombre));

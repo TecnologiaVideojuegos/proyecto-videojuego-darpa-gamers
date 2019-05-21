@@ -37,7 +37,6 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         this.musica = musica;
         name = new TextField(gc,gc.getDefaultFont(),120+166,80+141,440,65,this);
         notif = new Notificaciones(3000);
-        
         try {
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
             menu_nombre = new Sprite("./res/grafico/menu_carga_nueva_partida/menu_carga_nueva_partida.png",new Punto(120,80));
@@ -52,18 +51,16 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         for(int i = 0;i<botones.length;i++){
             botones[i].setNormalColor(new Color(1,1,1,0.7f));
             botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
-        }
+        }    
+    }
+    
+    @Override
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         name.setBackgroundColor(Color.transparent);
         name.setTextColor(Color.darkGray);
         name.setBorderColor(Color.transparent);
         name.setText("");
         name.setAcceptingInput(true);
-        System.out.println(mapa1.getMostrar());
-    }
-    
-    @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        
     }
 
     @Override

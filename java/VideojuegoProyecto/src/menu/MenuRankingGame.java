@@ -37,7 +37,6 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
     
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        mapa3.cargarDatos(3);
         mapa3.cargarNombres();
         lista = mapa3.ordenarMarcador();    
         System.out.println(lista.toString());
