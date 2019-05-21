@@ -12,6 +12,8 @@ author: "David Carrascal"
 
 * **[Referencias y recursos utilizados](./referencias.html).**
 
+* **[Problemas encontrados y soluciones](./problemas.html).**
+
 ----
 
 <br />
