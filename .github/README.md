@@ -1,6 +1,10 @@
 # PROYECTO VIDEOJUEGO 2018-2019
 
+# Nota para el profesor
+
+Nos retrasamos 42 minutos en arreglar un fallo con un archivo corructo y con un nivel que no queria entrar, disculpe las molestias y disfrute del juego
 <br />
+
 
 ## Website Oficial del Proyecto
 
