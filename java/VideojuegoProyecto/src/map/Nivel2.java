@@ -60,6 +60,11 @@ public class Nivel2 extends BasicGameState{
     
     private Music musica;
     
+    //Historia lvl2
+    private Image sprite_historia;
+    private long timer_historia;
+    private boolean estado_historia;
+    
     private AlmacenarAvatar mapa =  new AlmacenarAvatar();
     
     /**
@@ -67,7 +72,12 @@ public class Nivel2 extends BasicGameState{
      * 
      * @param nombre
      */
-    public Nivel2(String nombre){
+    public Nivel2(String nombre) throws SlickException{
+        //Historia
+        this.estado_historia = true;
+        this.timer_historia = 0;
+        this.sprite_historia = new Image("./res/grafico/historia/Dialogo2.png");
+        
         datos.datosNivel2();
         j = mapa.cargarDatos(2).get(nombre).devolverJugador(datos);
         for(int i = 0;i<numEscenas;i++){
@@ -197,6 +207,39 @@ public class Nivel2 extends BasicGameState{
     @Override
     public int getID() {
         return 2;
+    }
+    
+    /**
+     * 
+     * Metodo para imprimir la historia 
+     * 
+     */
+    public void imprimirHistoria(){
+        
+        if(this.estado_historia){
+            this.sprite_historia.draw(100.0f, 546.0f);
+        }
+    
+    }
+    
+    /**
+     * 
+     * Metodo para controlar la historia del nivel
+     * 
+     * @param delta tiempo desde el último update
+     */
+    public void controlHistoria(int delta){
+        
+        if(this.estado_historia){
+            
+            this.timer_historia += delta ;
+            
+           
+            if( this.timer_historia > 8000){
+                this.estado_historia = false;
+                
+            }
+        }
     }
     
 }
