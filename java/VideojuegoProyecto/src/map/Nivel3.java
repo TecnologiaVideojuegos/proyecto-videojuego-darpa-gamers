@@ -65,20 +65,6 @@ public class Nivel3 extends BasicGameState{
     public Nivel3(String nombre){
         datos.datosNivel3();
         j = mapa.cargarDatos(3).get(nombre).devolverJugador(datos);
-        try{
-            mapa.cargarNombres();
-            if(mapa.getNombres().size() == 0){
-                mapa.meterNombre(new Info_Jugador(j));
-                    mapa.guardarNombre();
-                    }
-            for(int i = 0;i< mapa.getNombres().size();i++){
-                if(!mapa.getNombres().get(i).getNombre().equals(nombre)){
-                    mapa.meterNombre(new Info_Jugador(j));
-                    mapa.guardarNombre();
-                    break;
-                }
-            }
-        }catch(SlickException ex){}
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {

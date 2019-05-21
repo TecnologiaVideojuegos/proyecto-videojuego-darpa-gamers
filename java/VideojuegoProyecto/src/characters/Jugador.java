@@ -730,7 +730,7 @@ public class Jugador extends Ente{
                     
                     //Añadir municion aleatoria y notificar
                     Random random = new Random();
-                    this.varita.addMunicion((random.nextInt(10)+1));
+                    this.varita.addMunicion((random.nextInt(6)+5));
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[5]);
                     this.anadirExperiencia((int)Math.sqrt((double)mon.get(i).getDanyo()) + 15*this.nivelJugador);
                     mata.play(1.0f,0.5f);
