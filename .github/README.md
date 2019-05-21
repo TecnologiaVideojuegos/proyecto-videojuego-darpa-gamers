@@ -6,7 +6,7 @@
 
 Aquí podrá encontrar toda la información relativa sobre el desarrollo del juego. Desde la documentación, diseño y memoria, a la los roles seguidos en el desarrollo. Y lo que es más importante, **las referencias y los recursos utilizados, dando el merito de dichos recursos a sus autores y creadores**, que sin ellos no habría habido cabida a este proyecto por nuestras evidentes carencias en el diseño grafico y en la música. 
 
-[Oficial del Proyecto](tecnologiavideojuegos.github.io/proyecto-videojuego-darpa-gamers/)
+[Oficial del Proyecto](https://tecnologiavideojuegos.github.io/proyecto-videojuego-darpa-gamers/)
 
 
 
