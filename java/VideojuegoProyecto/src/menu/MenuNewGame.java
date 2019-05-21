@@ -37,7 +37,6 @@ public class MenuNewGame  extends BasicGameState implements ComponentListener{
         this.musica = musica;
         name = new TextField(gc,gc.getDefaultFont(),120+166,80+141,440,65,this);
         notif = new Notificaciones(3000);
-        
         try {
             fondo = new Sprite("./res/grafico/fonds/fondo.png");
             menu_nombre = new Sprite("./res/grafico/menu_carga_nueva_partida/menu_carga_nueva_partida.png",new Punto(120,80));

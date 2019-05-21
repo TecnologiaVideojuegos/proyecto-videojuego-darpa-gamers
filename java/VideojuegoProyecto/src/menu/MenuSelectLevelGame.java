@@ -8,7 +8,6 @@ package menu;
 import exception_serialization.*;
 import graphic.Notificaciones;
 import imagen.Sprite;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import location.Punto;
@@ -53,16 +52,15 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                 botones[i].setNormalColor(new Color(1,1,1,0.7f));
                 botones[i].setMouseOverColor(new Color(1,1,1,0.9f));
             }
-            
+            ranking.cargarNombres();
+            mapa1.cargarDatos(1);
+            mapa2.cargarDatos(2);
+            mapa3.cargarDatos(3);
         }catch(SlickException ex){}
     }
     
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        ranking.cargarNombres();
-        mapa1.cargarDatos(1);
-        mapa2.cargarDatos(2);
-        mapa3.cargarDatos(3);
     }
 
     @Override
@@ -91,9 +89,8 @@ public class MenuSelectLevelGame extends BasicGameState implements ComponentList
                         for(int i = 2;i<(nivelMax+1);i++){//borrar toda información desde el nivel 2 en adelante
                             if(mapa1.getMostrar().containsKey(nombre)){
                                 mapa1.bajaJugador(mapa1.getMostrar().get(nombre));
-                                ranking.eliminarNombre(mapa1.getMostrar().get(nombre));
                                 mapa1.guardarDatos(i); 
-                                ranking.guardarNombre();
+                                
                             }
                         }
                         musica.stop();
