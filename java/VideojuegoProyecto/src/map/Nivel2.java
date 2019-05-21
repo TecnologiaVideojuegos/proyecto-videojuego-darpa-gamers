@@ -41,7 +41,7 @@ public class Nivel2 extends BasicGameState{
     private final int[] numObjetos = {1,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {4,4,3};
+    private final int[] numEnemigos = {4,6,3};
     
     //Cantidad de cofres que tendrá cada escena
     private final int[] numCofres = {1,4,3};
