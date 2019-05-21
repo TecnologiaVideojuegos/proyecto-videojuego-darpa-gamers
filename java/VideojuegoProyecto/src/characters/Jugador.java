@@ -92,6 +92,11 @@ public class Jugador extends Ente{
     //Sonido cuando el mosntruo muere
     private final Sound mata;
     
+    //Sonido cuando toma poc
+    private final Sound poc;
+    
+    
+    
     /**
      * Constructor de la clase Jugador
      * 
@@ -132,6 +137,7 @@ public class Jugador extends Ente{
         this.hit = new Sound("./res/audio/sounds/rlaunch.ogg");
         this.danyo = new Sound("./res/audio/sounds/danyoEnemigo.ogg");
         this.mata = new Sound("./res/audio/sounds/muerteEnemigo.ogg");
+        this.poc = new Sound("./res/audio/sounds/pocion_def.ogg");
     }
     
     /**
@@ -795,17 +801,6 @@ public class Jugador extends Ente{
                 this.consumirPocion(3);
             }else if(entrada.isKeyPressed(Input.KEY_5)){
                 this.consumirPocion(4);
-            }else if(entrada.isKeyPressed(Input.KEY_6)){
-                this.aniadirPocion(0);
-                this.notif.aniadirNotificacion(this.notif.getImgNotf()[0]);
-                this.aniadirPocion(1);
-                this.notif.aniadirNotificacion(this.notif.getImgNotf()[1]);
-                this.aniadirPocion(2);
-                this.notif.aniadirNotificacion(this.notif.getImgNotf()[2]);
-                this.aniadirPocion(3);
-                this.notif.aniadirNotificacion(this.notif.getImgNotf()[3]);
-                this.aniadirPocion(4);
-                this.notif.aniadirNotificacion(this.notif.getImgNotf()[4]);
             }
     }
     
