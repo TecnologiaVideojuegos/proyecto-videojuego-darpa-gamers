@@ -793,6 +793,7 @@ public class Jugador extends Ente{
     
             if(entrada.isKeyPressed(Input.KEY_1)){
                 this.consumirPocion(0);
+                
             }else if(entrada.isKeyPressed(Input.KEY_2)){
                 this.consumirPocion(1);
             }else if(entrada.isKeyPressed(Input.KEY_3)){
@@ -824,6 +825,7 @@ public class Jugador extends Ente{
             switch(id_pocion){
                 //Hp
                 case 0:
+                    this.poc.play();
                     this.inventario.RemoveObj(id_pocion);
                     //Modificar hp del jugador
                     if(super.getHp() < (this.getHud().getNumCorazonesMin()*100)){
@@ -838,6 +840,7 @@ public class Jugador extends Ente{
                 
                 //Velo
                 case 1:
+                    this.poc.play();
                     this.inventario.RemoveObj(id_pocion);
                     //Modificar velocidad del jugador
                     super.setVelocidad( super.getVelocidad() + 5.0f);
@@ -848,6 +851,7 @@ public class Jugador extends Ente{
                 
                 //Exp
                 case 2:
+                    this.poc.play();
                     this.inventario.RemoveObj(id_pocion);
                     //Subir experiencia del jugador this.experiencia += 100; p.e
                     this.anadirExperiencia(200);
@@ -856,6 +860,7 @@ public class Jugador extends Ente{
                 
                 //Def
                 case 3:
+                    this.poc.play();
                     this.inventario.RemoveObj(id_pocion);
                     // Estado invulnerable
                     this.buff_invulnerable.setEstadoBuff(true);
@@ -865,6 +870,7 @@ public class Jugador extends Ente{
                 
                 //Fuerza
                 case 4:
+                    this.poc.play();
                     this.inventario.RemoveObj(id_pocion);
                     //Modificar el daño que hacemos con el arma Varita
                     super.setDanyo(super.getDanyo() + 25);
