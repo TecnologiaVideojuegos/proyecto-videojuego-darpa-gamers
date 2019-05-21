@@ -96,6 +96,7 @@ public class Nivel2 extends BasicGameState{
         entrada = container.getInput(); 
         musica = new Music("./res/audio/music/musicaNivel2.ogg");
         musica.loop(1.0f,0.2f);
+        j.getSoundLVLup().play();
     }
 
     @Override

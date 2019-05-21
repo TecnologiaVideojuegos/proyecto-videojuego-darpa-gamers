@@ -95,6 +95,9 @@ public class Jugador extends Ente{
     //Sonido cuando toma poc
     private final Sound poc;
     
+    //Sonido cuando lvlup
+    private final Sound lvlup;
+    
     
     
     /**
@@ -138,6 +141,17 @@ public class Jugador extends Ente{
         this.danyo = new Sound("./res/audio/sounds/danyoEnemigo.ogg");
         this.mata = new Sound("./res/audio/sounds/muerteEnemigo.ogg");
         this.poc = new Sound("./res/audio/sounds/pocion_def.ogg");
+        this.lvlup = new Sound("./res/audio/sounds/levelup.ogg");
+    }
+    
+    /**
+     * 
+     * Metodo que devuelve el sound de lvlup
+     * 
+     * @return sound
+     */
+    public Sound getSoundLVLup(){
+        return this.lvlup;
     }
     
     /**
