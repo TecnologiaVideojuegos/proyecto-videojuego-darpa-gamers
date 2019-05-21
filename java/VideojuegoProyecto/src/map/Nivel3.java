@@ -34,16 +34,16 @@ public class Nivel3 extends BasicGameState{
     private Jugador j; 
     
     //Variable que indica cuantas escenas tiene este nivel
-    private final int numEscenas = 3;  
+    private final int numEscenas = 4;  
     
     //Cantidad de objetos que tendrá cada escena
-    private final int[] numObjetos = {1,0,0}; 
+    private final int[] numObjetos = {0,3,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {4,4,3};
+    private final int[] numEnemigos = {4,4,3,0};
     
     //Cantidad de cofres que tendrá cada escena
-    private final int[] numCofres = {1,4,3};
+    private final int[] numCofres = {1,4,3,0};
     
     //Variable para extraer toda la información acerca del nivel especificado
     private DatosNivel datos  = new DatosNivel(numEscenas,numObjetos,numEnemigos,numCofres);
