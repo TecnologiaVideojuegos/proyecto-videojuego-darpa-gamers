@@ -106,8 +106,6 @@ public class Nivel1 extends BasicGameState{
         //Imprimir jugador
         if(!menu.isGameOver()){
             j.imprimirJugador();
-        }else{
-            j.setPunto(new Punto(j.getPunto().getX()-1500,j.getPunto().getY()));
         }
         
         //Imprimir enemigos
@@ -122,17 +120,20 @@ public class Nivel1 extends BasicGameState{
         j.getHud().imprime_estados( j.getBuffFuerza(), j.getBuffInv(), j.getBuffVelo());
         j.getHud().imprimirHudExpMunicion(g,j.getVarita().getMunicion() , j.getExperiencia());
         j.getNoti().imprimirNotificaciones();
-        
         menu.mostrarMenu(g,j,escenas);
     }
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        
         menu.gestionarMenuPausa(entrada, container, game,music);
-        if(!menu.isPausa()){
-            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,music);
-        } 
+        if(!menu.isGameOver()){
+            if(!menu.isPausa()){
+                j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,music);
+            }
+        }else{
+            j.setPunto(new Punto());
+            j.actualizarPosicion();
+        }
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);
         }

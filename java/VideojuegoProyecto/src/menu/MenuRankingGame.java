@@ -29,22 +29,20 @@ public class MenuRankingGame  extends BasicGameState implements ComponentListene
 
     public MenuRankingGame(GameContainer container) {
         try{
+            almacenar.cargarDatos(3);
+            almacenar.cargarNombres();
+            lista = almacenar.ordenarMarcador();
             marcadores = new Sprite("./res/grafico/game_utils/marcadores.png");
             salir = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,610));
             boton = new MouseOverArea(container,salir,(int)salir.getPosicion().getX(),(int)salir.getPosicion().getY(),(int)salir.getWidth(),(int)salir.getHeight(),this);
             boton.setNormalColor(new Color(1,1,1,0.7f));
             boton.setMouseOverColor(new Color(1,1,1,0.9f));
-            
+            System.out.println(lista.size());
         }catch(SlickException ex){}
     }
     
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        almacenar.guardarDatos(3);
-            almacenar.guardarNombre();
-            almacenar.cargarDatos(3);
-            almacenar.cargarNombres();
-            lista = almacenar.ordenarMarcador();
     }
 
     @Override

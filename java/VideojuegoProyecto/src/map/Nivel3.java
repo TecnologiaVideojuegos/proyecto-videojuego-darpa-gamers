@@ -64,7 +64,10 @@ public class Nivel3 extends BasicGameState{
     public Nivel3(String nombre){
         datos.datosNivel3();
         j = almacenar.cargarDatos(3).get(nombre).devolverJugador(datos);
-        
+        try{
+            almacenar.meterNombre(new Info_Jugador(j));
+        }catch(SlickException ex){}
+        almacenar.guardarNombre();
         for(int i = 0;i<numEscenas;i++){
             Escena es;
             try {
@@ -78,8 +81,6 @@ public class Nivel3 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        almacenar.meterNombre(new Info_Jugador(j));
-        almacenar.guardarNombre();
         reloj = 0;
         menu = new MenuPauseGame(container,j);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
@@ -104,8 +105,6 @@ public class Nivel3 extends BasicGameState{
         //Imprimir jugador
         if(!menu.isGameOver()){
             j.imprimirJugador();
-        }else{
-            j.setPunto(new Punto(j.getPunto().getX()-1500,j.getPunto().getY()));
         }
         
         //Imprimir enemigos
@@ -127,9 +126,14 @@ public class Nivel3 extends BasicGameState{
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
         menu.gestionarMenuPausa(entrada, container, game,musica);
-        if(!menu.isPausa()){
-            j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,musica);
-        } 
+        if(!menu.isGameOver()){
+            if(!menu.isPausa()){        
+                j.gestionarJugador(container, game, numEscenas, delta, entrada, datos, escenas,almacenar,musica);
+            } 
+        }else{
+            j.setPunto(new Punto());
+            j.actualizarPosicion();
+        }
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
             escenas.get(j.getEscenario()).getEnemigos().get(i).realizarMovimiento(j, escenas.get(j.getEscenario()), delta, reloj);
         }

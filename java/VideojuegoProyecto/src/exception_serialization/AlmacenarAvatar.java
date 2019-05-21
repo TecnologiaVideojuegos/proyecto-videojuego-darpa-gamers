@@ -59,7 +59,9 @@ public class AlmacenarAvatar{
      * @param jug jugador
      */
     public void meterNombre(Info_Jugador jug){//guardamos en nif de la persona registrada
-        nombres.add(jug.getNombre());}
+        nombres.add(jug.getNombre());
+        System.out.println("Nombre guardado");
+    }
     
 
     /**
