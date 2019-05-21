@@ -81,7 +81,7 @@ public class Nivel1 extends BasicGameState{
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         reloj = 0;
         music = new Music("./res/audio/music/musicaNivel1.ogg");
-        menu = new MenuPauseGame(container);
+        menu = new MenuPauseGame(container,j);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
         entrada = container.getInput(); 
@@ -104,7 +104,11 @@ public class Nivel1 extends BasicGameState{
         }
         
         //Imprimir jugador
-        j.imprimirJugador();
+        if(!menu.isGameOver()){
+            j.imprimirJugador();
+        }else{
+            j.setPunto(new Punto(j.getPunto().getX()-1500,j.getPunto().getY()));
+        }
         
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){

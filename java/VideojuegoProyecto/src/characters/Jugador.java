@@ -14,6 +14,7 @@ import materials.Inventario;
 import location.*;
 import map.*;
 import materials.*;
+import menu.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.*;
 import org.newdawn.slick.state.*;
@@ -690,18 +691,6 @@ public class Jugador extends Ente{
     }
     
     /**
-     * Si el jugador muere la partida acaba
-     * 
-     * @param game cambiar entre estados
-     */
-    public void finPartida(StateBasedGame game){
-        if(this.getHp()<=0){
-            System.out.println("MUERTO");
-            game.enterState(0);
-        }
-    }
-    
-    /**
      * Método que elimina los enemigos en caso de ser eliminado o que le quita vida
      * 
      * @param mon obtener los enemigos que hay en la escena actual
@@ -770,7 +759,6 @@ public class Jugador extends Ente{
      * @param escena escena en el que nos encontramos
      */
     public void gestionarJugador(GameContainer container,StateBasedGame game,int numEscenas,int delta,Input entrada,DatosNivel datos,ArrayList<Escena> escena,AlmacenarAvatar alm,Music musica){
-        this.finPartida(game);
         this.corregirBug(escena.get(this.getEscenario()));
         this.gestorCambiosMapas(game, numEscenas, escena, datos,alm, container,musica);
         this.colisionMonstruo(escena.get(this.getEscenario()).getEnemigos());

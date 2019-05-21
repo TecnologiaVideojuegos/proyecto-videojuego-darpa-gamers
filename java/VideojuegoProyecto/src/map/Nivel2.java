@@ -89,7 +89,7 @@ public class Nivel2 extends BasicGameState{
         area2S = new Sprite("./res/mapas/resource_png/fondo_negro_1024x256.png",new Punto(0,192));
         area3 = true;
         area3S = new Sprite("./res/mapas/resource_png/fondo_negro_1024x320.png",new Punto(0,448));
-        menu = new MenuPauseGame(container);
+        menu = new MenuPauseGame(container,j);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());
         entrada = container.getInput(); 
@@ -109,8 +109,12 @@ public class Nivel2 extends BasicGameState{
             escenas.get(j.getEscenario()).getCofres().get(i).imprimirTeclaAbrirCofre();
         }
         
-        //Jugador
-        j.imprimirJugador();
+        //Imprimir jugador
+        if(!menu.isGameOver()){
+            j.imprimirJugador();
+        }else{
+            j.setPunto(new Punto(j.getPunto().getX()-1500,j.getPunto().getY()));
+        }
         
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){

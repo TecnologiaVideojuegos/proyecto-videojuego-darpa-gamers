@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import location.Punto;
 import org.newdawn.slick.gui.*;
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.*;
 import org.newdawn.slick.state.transition.*;
 
 /**
@@ -23,25 +23,30 @@ import org.newdawn.slick.state.transition.*;
  */
 public class MenuPauseGame implements ComponentListener{
     
-    private Sprite fondo,continuar,controles,salir,imgControl,atras;
-    private MouseOverArea[] botones = new MouseOverArea[4];
-    private boolean pausa,debug,control;
+    private Sprite fondo,continuar,controles,salir,imgControl,atras,inicio,muerte;
+    private MouseOverArea[] botones = new MouseOverArea[5];
+    private boolean pausa,debug,control,gameOver;
     private int estado = -1;
     private GameContainer container;
+    private Jugador j;
 
-    public MenuPauseGame(GameContainer container) {
+    public MenuPauseGame(GameContainer container,Jugador j) {
         try{
+            this.j = j;
             this.pausa = false;
             this.debug = false;
             this.control = false;
+            this.gameOver = false;
             this.container = container;
             this.fondo = new Sprite("./res/grafico/fonds/menu_pausa_nobotones_2.png");
             this.continuar = new Sprite("./res/grafico/buttons/boton_continuar.png",new Punto(250,250));
             this.controles = new Sprite("./res/grafico/buttons/boton_controles.png",new Punto(250,350));
             this.salir = new Sprite("./res/grafico/buttons/boton_salir.png",new Punto(378,500));
             this.atras = new Sprite("./res/grafico/buttons/boton_atras.png",new Punto(378,550));
+            this.inicio = new Sprite("./res/grafico/buttons/boton_inicio.png",new Punto(250,400));
             this.imgControl = new Sprite("./res/grafico/game_utils/controles.png");
-            Sprite[] buttons = {continuar,controles,salir,atras};
+            this.muerte = new Sprite("./res/grafico/fonds/muerte"+ j.getNivelJugador() +".png");
+            Sprite[] buttons = {continuar,controles,salir,atras,inicio};
             for(int i = 0;i<botones.length;i++){
                 botones[i] = new MouseOverArea(container,buttons[i],(int)buttons[i].getPosicion().getX(),(int)buttons[i].getPosicion().getY(),buttons[i].getWidth(),buttons[i].getHeight(),this);         
                 botones[i].setNormalColor(new Color(1,1,1,0.7f));
@@ -65,9 +70,13 @@ public class MenuPauseGame implements ComponentListener{
                 debug = true;
             }
         }
+        if(j.getHp() <= 0){
+            this.gameOver = true;
+        }
     }
     
     public void comprobarEstado(GameContainer container,StateBasedGame game,Music musica) throws SlickException{
+        if(estado == 4){estado = 2;}
         switch (estado) {
             case 0:
                 //Continuar
@@ -82,7 +91,8 @@ public class MenuPauseGame implements ComponentListener{
                 break;
             case 2:
                 //Salir
-                estado = -1;                  
+                estado = -1;    
+                gameOver = false;
                 try {
                     musica.stop();
                     game.enterState(0,FadeOutTransition.class.newInstance(), FadeInTransition.class.newInstance());
@@ -106,6 +116,7 @@ public class MenuPauseGame implements ComponentListener{
     public void gestionarMenuPausa(Input entrada,GameContainer container,StateBasedGame game,Music musica) throws SlickException{
         this.comprobarMenuPausa(entrada);
         this.comprobarEstado(container, game,musica);
+        
     }
     
     public void mostrarMenu(Graphics g,Jugador j,ArrayList<Escena> escenas){
@@ -147,7 +158,7 @@ public class MenuPauseGame implements ComponentListener{
         }
         if(pausa){
             fondo.draw();
-            for(int i = 0;i<(botones.length-1);i++){
+            for(int i = 0;i<(botones.length-2);i++){
                 botones[i].render(container, g);
             }
         }
@@ -155,6 +166,14 @@ public class MenuPauseGame implements ComponentListener{
             imgControl.draw();
             botones[3].render(container, g);
         }
+        if(gameOver){
+            muerte.draw();
+            botones[4].render(container, g);
+        }
+    }
+    
+    public boolean isGameOver(){
+        return gameOver;
     }
     
     public boolean isPausa() {

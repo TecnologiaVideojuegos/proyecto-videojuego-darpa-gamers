@@ -168,6 +168,9 @@ public class Monstruo extends Ente{
      */
     public void realizarMovimiento(Jugador j,Escena escena,int delta,int reloj){
         this.detectarJugador(j); 
+        if(j.getHp()<=0){
+            this.setComportamiento("Pasivo");
+        }
         if(this.getComportamiento().equals("Hostil") || this.getComportamiento().equals("Perseguir")){
             this.movimientoHostil(j,escena,delta);
         }else{

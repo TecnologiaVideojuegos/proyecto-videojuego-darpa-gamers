@@ -11,6 +11,7 @@ import exception_serialization.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import location.Punto;
 import menu.MenuPauseGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -77,7 +78,7 @@ public class Nivel3 extends BasicGameState{
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         reloj = 0;
-        menu = new MenuPauseGame(container);
+        menu = new MenuPauseGame(container,j);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
         entrada = container.getInput(); 
@@ -97,8 +98,12 @@ public class Nivel3 extends BasicGameState{
             escenas.get(j.getEscenario()).getCofres().get(i).imprimirTeclaAbrirCofre();
         }
         
-        //Jugador
-        j.imprimirJugador();
+        //Imprimir jugador
+        if(!menu.isGameOver()){
+            j.imprimirJugador();
+        }else{
+            j.setPunto(new Punto(j.getPunto().getX()-1500,j.getPunto().getY()));
+        }
         
         //Imprimir enemigos
         for(int i = 0;i<escenas.get(j.getEscenario()).getEnemigos().size();i++){
