@@ -103,7 +103,7 @@ para recortar algunos sonidos.
 </div>
 <br />
 
-[Descargar versión PDF <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png" alt="pdf" width="16"/>](./data/DiseñoVideojuego.pdf)
+[Descargar versión PDF <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png" alt="pdf" width="16"/>](https://github.com/TecnologiaVideojuegos/proyecto-videojuego-darpa-gamers/raw/gh-pages/data/Dise%C3%B1oVideojuego.pdf)
 
 ----
 
