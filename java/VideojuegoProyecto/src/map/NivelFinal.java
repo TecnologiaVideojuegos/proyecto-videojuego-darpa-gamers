@@ -42,6 +42,7 @@ public class NivelFinal extends BasicGameState{
             map = new TiledMap("./res/mapas/NivelFinal/layout_tmx/escena_1.tmx","./res/mapas/NivelFinal/resources_tsx");
             musica = new Music("./res/audio/music/calm.ogg");
             mapa.cargarNombres();
+            /*
             if(mapa.getNombres().size() == 0){
                 mapa.meterNombre(new Info_Jugador(j));
                 mapa.guardarNombre();
@@ -52,7 +53,7 @@ public class NivelFinal extends BasicGameState{
                         mapa.guardarNombre();
                         break;    
                 }
-            }
+            }*/
         }catch(SlickException ex){}
         musica.loop();
     }
