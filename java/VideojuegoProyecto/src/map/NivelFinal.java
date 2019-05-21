@@ -12,6 +12,7 @@ import graphic.Historia;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import location.Punto;
+import menu.MenuCreditsGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.tiled.TiledMap;
@@ -28,14 +29,14 @@ public class NivelFinal extends BasicGameState{
     private Music musica;
     private DatosNivel datos;
     private Jugador j;
-   
+   private long timer;
     
     //Historia 
     private Historia historia_final;
 
     
      public NivelFinal(String nombre) throws SlickException {
-        
+        timer = 0;
         historia_final = new Historia(new Punto(300,200),10000, new Image("./res/grafico/historia/Dialogo_final.png"));
         try{
             map = new TiledMap("./res/mapas/NivelFinal/layout_tmx/escena_1.tmx","./res/mapas/NivelFinal/resources_tsx");
@@ -72,6 +73,7 @@ public class NivelFinal extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         this.historia_final.controlHistoria(delta);
+        controlFin(delta, game, container);
     }
     
     @Override
@@ -84,6 +86,20 @@ public class NivelFinal extends BasicGameState{
     @Override
     public int getID() {
         return 4;
+    }
+    
+    public void controlFin(int delta, StateBasedGame game, GameContainer x){
+        
+            this.timer += delta ;
+            
+           
+            if( this.timer > 30000){
+                //Ir a creditos 
+                game.addState(new MenuCreditsGame(x));                    
+                game.enterState(-7);
+                
+            }
+        }
     }
     
 }
