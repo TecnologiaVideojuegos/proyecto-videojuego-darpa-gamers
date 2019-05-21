@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## Referencias y recursos utilizados
+## Problemas encontrados y soluciones
 
 Aquí vamos vamos a exponer todos los problemas que se han dado en la etapas de desarrollo del proyecto.
 
