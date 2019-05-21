@@ -54,7 +54,7 @@ public class MenuCreditsGame extends BasicGameState implements ComponentListener
             case 0:
                 //Salir
                 estado = -1;
-                game.enterState(-3);
+                game.enterState(0);
                 break;
             default:
                 break;
