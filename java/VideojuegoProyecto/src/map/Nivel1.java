@@ -8,6 +8,7 @@ package map;
 import characters.*;
 import data_level.DatosNivel;
 import exception_serialization.AlmacenarAvatar;
+import graphic.Historia;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,9 +59,7 @@ public class Nivel1 extends BasicGameState{
     private Music music;
     
     //Historia lvl1
-    private Image sprite_historia;
-    private long timer_historia;
-    private boolean estado_historia;
+    private Historia historia1;
     
     
     
@@ -74,9 +73,7 @@ public class Nivel1 extends BasicGameState{
      */
     public Nivel1(String nombre) throws SlickException{
         //Historia
-        this.estado_historia = true;
-        this.timer_historia = 0;
-        this.sprite_historia = new Image("./res/grafico/historia/Dialogo1.png");
+        this.historia1 = new Historia(new Punto(100,546), 8000, new Image("./res/grafico/historia/Dialogo1.png"));
         
         datos.datosNivel1();
         j = mapa.cargarDatos(1).get(nombre).devolverJugador(datos);
@@ -128,7 +125,7 @@ public class Nivel1 extends BasicGameState{
         }  
         
         //Historia
-        this.imprimirHistoria();
+        this.historia1.imprimirHistoria();
         
         //HUD e inventario
         j.getInventario().imprimirImagenInfoPociones();   
@@ -145,7 +142,7 @@ public class Nivel1 extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         reloj+= delta;
-        this.controlHistoria(delta);
+        this.historia1.controlHistoria(delta);
         menu.gestionarMenuPausa(entrada, container, game,music);
         if(!menu.isGameOver()){
             if(!menu.isPausa()){
@@ -180,37 +177,5 @@ public class Nivel1 extends BasicGameState{
         return 1;
     }
     
-    /**
-     * 
-     * Metodo para imprimir la historia 
-     * 
-     */
-    public void imprimirHistoria(){
-        
-        if(this.estado_historia){
-            this.sprite_historia.draw(100.0f, 546.0f);
-        }
-    
-    }
-    
-    /**
-     * 
-     * Metodo para controlar la historia del nivel
-     * 
-     * @param delta tiempo desde el último update
-     */
-    public void controlHistoria(int delta){
-        
-        if(this.estado_historia){
-            
-            this.timer_historia += delta ;
-            
-           
-            if( this.timer_historia > 8000){
-                this.estado_historia = false;
-                
-            }
-        }
-    }
        
 }
