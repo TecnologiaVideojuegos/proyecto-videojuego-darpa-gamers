@@ -80,7 +80,6 @@ public class Nivel3 extends BasicGameState{
         menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
         j.getHud().iniciarJugador(j.getHp());   
-        System.out.println(j.getHud().getNumCorazonesMin());
         entrada = container.getInput(); 
         musica = new Music("./res/audio/music/musicaNivel3.ogg");
         musica.loop(1.0f,0.5f);

@@ -41,7 +41,7 @@ public class Nivel2 extends BasicGameState{
     private final int[] numObjetos = {1,0,0}; 
     
     //Cantidad de enemigos que tendrá cada escena
-    private final int[] numEnemigos = {4,6,3};
+    private final int[] numEnemigos = {4,5,3};
     
     //Cantidad de cofres que tendrá cada escena
     private final int[] numCofres = {1,4,3};
@@ -91,8 +91,7 @@ public class Nivel2 extends BasicGameState{
         area3S = new Sprite("./res/mapas/resource_png/fondo_negro_1024x320.png",new Punto(0,448));
         menu = new MenuPauseGame(container);
         /*  Daño fijado a 50 en el primer nivel this.getNivelJugador()*50 */
-        j.getHud().iniciarJugador(j.getHp());   
-        System.out.println(j.getHud().getNumCorazonesMin());
+        j.getHud().iniciarJugador(j.getHp());
         entrada = container.getInput(); 
         musica = new Music("./res/audio/music/musicaNivel2.ogg");
         musica.loop(1.0f,0.2f);

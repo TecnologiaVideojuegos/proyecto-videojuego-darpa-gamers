@@ -696,7 +696,8 @@ public class Jugador extends Ente{
      */
     public void finPartida(StateBasedGame game){
         if(this.getHp()<=0){
-            game.enterState(2);
+            System.out.println("MUERTO");
+            game.enterState(0);
         }
     }
     
@@ -721,7 +722,7 @@ public class Jugador extends Ente{
                     
                     //Añadir municion aleatoria y notificar
                     Random random = new Random();
-                    this.varita.addMunicion(random.nextInt(50));
+                    this.varita.addMunicion((random.nextInt(10)+1));
                     this.notif.aniadirNotificacion(this.notif.getImgNotf()[5]);
                     this.anadirExperiencia((int)Math.sqrt((double)mon.get(i).getDanyo()) + 15*this.nivelJugador);
                     mata.play(1.0f,0.5f);
