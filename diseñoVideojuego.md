@@ -40,7 +40,7 @@ en los requerimientos del proyecto a realizar. Entendemos según la investigaci�
 </div>
 <br />
 
-### Historia del peronaje principal
+### Historia del personaje principal
 <div style="text-align: justify">
 El juego comienza con la protagonista despertando en una pesadilla, se encuentra en una casa gigante desconocida, está triste, asustada y confundida. El cuarto en el que está no le es familiar, sin embargo, investigando el lugar se da cuenta de que los objetos que hay desperdigados por los diferentes lugares sí, ¡son sus juguetes!
 </div>
@@ -70,8 +70,8 @@ de la programación será menor, y la demanda de CPU también.
 </div>
 <br />
 <div style="text-align: justify">
-En cuanto a los controles, hemos pensado que al ser un juego orientado a PC, los controles deben poder realizarse unicamente mediante teclado, ya que 
-en el caso de que alguien quiera probar nuestro juego, pero solo disponga de un portatil, permitirle jugar. De esta manera queremos hacer el juego sea lo más
+En cuanto a los controles, hemos pensado que al ser un juego orientado a PC, los controles deben poder realizarse únicamente mediante teclado, ya que 
+en el caso de que alguien quiera probar nuestro juego, pero solo disponga de un pórtatil, permitirle jugar. De esta manera queremos hacer el juego sea lo más
 independiente del hardware posible, para así abrir más el abanico de potenciales jugadores.  
 </div>
 <br />
@@ -90,10 +90,10 @@ inferior de la pantalla. Queremos hacer algo similar al inventario de Minecraft,
 
 <br />
 
-### Musica y gráficos
+### Música y gráficos
 
 <div style="text-align: justify">
-Al ser un grupo no mixto, somos todos estudiantes de ingeniería, y solo dos de nostros tenemos cualidades de diseño gráfico básico, los recursos gráficos se tomarán de paginas de arte libre. Trataremos de crear los sprites basicos como son inventario, HUD, botones, pero los SpritesSheets de los mapas se tomarán de Internet referenciandolo y dando el mérito a los creadores de dichos recursos. De forma completamente análoga con el audio. 
+Al ser un grupo no mixto, somos todos estudiantes de ingeniería, y solo dos de nosotros tenemos cualidades de diseño gráfico básico, los recursos gráficos se tomarán de paginas de arte libre. Trataremos de crear los sprites básicos como son inventario, HUD, botones, pero los SpritesSheets de los mapas se tomarán de Internet referenciandolo y dando el mérito a los creadores de dichos recursos. De forma completamente análoga con el audio. 
 </div>
 <div style="text-align: justify">
 Las herramientas utilizadas para el montaje y edición de los fondos y sprites han sido
